@@ -14,13 +14,12 @@ interface FoodSectionProps {
 export default function FoodSection({ tags, dishes }: FoodSectionProps) {
   const [selectedTagIds, setSelectedTagIds] = useState<string[]>([])
 
-  // 根据选中的标签过滤菜品
+  // 根据选中的标签过滤菜品（AND 交集）：
+  // 当选择了多个标签时，仅展示同时包含所有已选标签的菜品
   const filteredDishes = selectedTagIds.length === 0
     ? dishes
     : dishes.filter(dish =>
-        dish.tags.some(dishTag =>
-          selectedTagIds.includes(dishTag.id)
-        )
+        selectedTagIds.every(tagId => dish.tags.some(t => t.id === tagId))
       )
 
   return (

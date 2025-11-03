@@ -48,7 +48,7 @@ export default function OrderButton({ stores, fallbackUrl }: OrderButtonProps) {
         onClick={handleClick}
         disabled={locating}
       >
-        {locating ? "定位中..." : "Order Now"}
+        Order Now
       </button>
       <StoreSelectionModal
         stores={stores || []}

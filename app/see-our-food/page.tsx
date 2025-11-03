@@ -1,7 +1,6 @@
 // app/see-our-food/page.tsx
 import Hero from "./components/hero";
 import FoodSection from "./components/food-section";
-import LocationIndicator from "./components/location-indicator";
 import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
 import type { Dish, RawDish } from "@/types/types";
@@ -37,6 +36,7 @@ export default async function SeeOurFoodPage() {
       `)
       .eq("is_visible", true)
       .eq("is_available", true)
+  .eq("dish_store.available", true)
       .order("created_at", { ascending: false })
   ]);
 
@@ -47,7 +47,7 @@ export default async function SeeOurFoodPage() {
   }
 
   /* ========== 整合数据 ========== */
-  const dishes: Dish[] = (dishesRaw as RawDish[] | null)?.map((d) => {
+  const dishes: Dish[] = ((dishesRaw as RawDish[] | null) ?? []).map((d) => {
     const imageUrl = d.media_asset?.[0]?.image_url ?? CONSTANTS.DEFAULT_DISH_IMAGE;
     const matchedTags = d.dish_tag
       ?.flatMap((dt) => dt.tag ?? [])
@@ -74,7 +74,14 @@ export default async function SeeOurFoodPage() {
   orderUrl: CONSTANTS.ORDER_URL,
       stores,
     };
-  }) ?? [];
+  }).filter(d => (d.stores?.length ?? 0) > 0);
+
+  // 仅展示被当前可展示菜品实际使用到的标签
+  const activeTagIds = new Set<string>();
+  for (const d of dishes) {
+    for (const t of d.tags) activeTagIds.add(t.id);
+  }
+  const filteredTags = (tags ?? []).filter((t) => activeTagIds.has(t.id));
 
 
   /* ========== 6️⃣ 渲染页面 ========== */
@@ -86,8 +93,8 @@ export default async function SeeOurFoodPage() {
         imageUrl="/images/see-our-food-hero.jpg"
         size="medium"
       />
-      <FoodSection tags={tags ?? []} dishes={dishes} />
-      <LocationIndicator />
+      {/* 根据活跃菜品过滤后的标签传给 FoodSection */}
+      <FoodSection tags={filteredTags} dishes={dishes} />
     </>
   );
 }
