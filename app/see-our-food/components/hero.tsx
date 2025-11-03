@@ -38,11 +38,11 @@ export default function Hero({
       />
 
       {/* 文本区域 */}
-      <div className="relative z-10 flex flex-col justify-center h-full pl-[264px] text-white">
-        <h1 className="font-custom text-[38px] font-semibold leading-[154%] drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)] mb-4 max-w-[900px]">
+      <div className="relative z-10 flex flex-col justify-center h-full pl-[30px] md:pl-[260px] text-white gap-5">
+        <h1 className="text-[38px] font-semibold leading-[154%] max-w-[498px] md:max-w-[684px]">
           {title}
         </h1>
-        <p className="font-custom text-[30px] font-normal leading-[154%] drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)] max-w-[850px]">
+        <p className="text-[30px] font-normal leading-[154%] max-w-[456px] md:max-w-[684px]">
           {description}
         </p>
       </div>

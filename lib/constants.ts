@@ -7,6 +7,9 @@ export const CONSTANTS = {
   // Default values (using online placeholder services)
   DEFAULT_DISH_IMAGE: 'https://source.unsplash.com/800x600/?lobster,seafood',
   DEFAULT_TAG_ICON: 'https://via.placeholder.com/80x80/f0f0f0/666666?text=Tag',
+  // Local ALL tag icons (place your SVGs under public/images/icons/)
+  ALL_TAG_ICON: '/images/icons/tag-all.svg',
+  ALL_TAG_ICON_ACTIVE: '/images/icons/tag-all-active.svg',
   
   // Revalidation
   REVALIDATE_TIME: 60, // seconds
