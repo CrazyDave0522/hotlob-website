@@ -1,6 +1,33 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+
+// Ghoust Solid (实心) - 主字体
+const ghoustSolid = localFont({
+  src: [
+    {
+      path: "../public/fonts/GhoustSolid.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-ghoust-solid",
+  display: "swap",
+});
+
+// Ghoust Outline (空心) - 装饰字体
+const ghoustOutline = localFont({
+  src: [
+    {
+      path: "../public/fonts/GhoustOutline.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-ghoust-outline",
+  display: "swap",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${ghoustSolid.variable} ${ghoustOutline.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
