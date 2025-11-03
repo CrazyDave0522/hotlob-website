@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hotlob - Australian Lobster & Seafood Rolls",
-  description: "Your go-to for quick, convenient, and yummy Australian lobster and seafood rolls. Born and bred in Australia.",
+  title: "Hotlob | Get Rollin' With Us; Fast, Tasty, Brioche Rolls - Australia",
+  description: "Get rollin' with us - Our team at Hotlob are excited to bring our brioche rolls to you! An assorted of options available, check out our menu to find out what we are serving you this week! Keep an eye out for our lobster roll - seasonal menu and subject to change.",
 };
 
 export default function RootLayout({
