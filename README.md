@@ -16,34 +16,39 @@ A modern Next.js website for Hotlob - Australian Lobster & Seafood Rolls.
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - pnpm (recommended) or npm
 
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git clone <your-repo-url>
 cd hotlob-website
 ```
 
 2. Install dependencies
+
 ```bash
 pnpm install
 ```
 
 3. Set up environment variables
+
 ```bash
 cp .env.example .env.local
 ```
 
 Edit `.env.local` and add your Supabase credentials:
+
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
 
 4. Run the development server
+
 ```bash
 pnpm dev
 ```
@@ -86,6 +91,7 @@ types/
 ## Database Schema
 
 The app expects these Supabase tables:
+
 - `dish` - Dish information
 - `tag` - Available tags
 - `media_asset` - Dish images
@@ -109,4 +115,3 @@ Remember to add your environment variables in Vercel's project settings.
 ## License
 
 Private - All rights reserved
-
