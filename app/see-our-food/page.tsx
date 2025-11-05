@@ -15,14 +15,14 @@ export default async function SeeOurFoodPage() {
   ] = await Promise.all([
     supabase
       .from("tag")
-      .select("id, name, icon_url")
+      .select("id, name, icon_url, icon_url_active")
       .order("name"),
     supabase
       .from("dish")
       .select(`
         id, name, description, tier, is_visible, is_available, created_at,
         media_asset ( image_url ),
-        dish_tag ( tag ( id, icon_url ) ),
+        dish_tag ( tag ( id, icon_url, icon_url_active ) ),
         dish_store!inner(
           available,
           uber_url,

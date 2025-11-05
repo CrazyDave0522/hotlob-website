@@ -38,16 +38,11 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
 
   return (
     <div className="w-full bg-white min-h-[116px] flex flex-col justify-center">
-  <div className="flex flex-wrap items-center gap-x-10 gap-y-3 pl-[30px] md:pl-[260px] pr-[30px]">
+  <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 mx-auto w-full max-w-[1920px] px-[30px] md:px-0">
         {/* All 按钮 */}
         <button
           onClick={() => toggleTag('all')}
-          className={`inline-flex items-center h-[46px] px-5 py-3 gap-3 rounded-[30px] transition-all duration-150
-          ${
-            selectedIds.length === 0
-              ? 'bg-[#EA4148] text-white'
-              : 'bg-transparent text-[#1D1E1F] hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148]'
-          } active:scale-95`}
+          className={`tag-button ${selectedIds.length === 0 ? 'tag-button--active' : 'tag-button--inactive'}`}
         >
           {/* ALL 的图标（28x28），支持选中/未选中两套素材 */}
           <Image
@@ -62,20 +57,20 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
         {/* 动态标签按钮 */}
         {visibleTags.map(tag => {
           const isSelected = selectedIds.includes(tag.id)
+          // 根据选中状态选择 icon，有 fallback 逻辑
+          const iconUrl = isSelected 
+            ? (tag.icon_url_active || tag.icon_url || CONSTANTS.DEFAULT_TAG_ICON_ACTIVE)
+            : (tag.icon_url || CONSTANTS.DEFAULT_TAG_ICON)
+          
           return (
             <button
               key={tag.id}
               onClick={() => toggleTag(tag.id)}
-              className={`inline-flex items-center h-[46px] px-5 py-3 gap-3 rounded-[30px] transition-all duration-150
-                ${
-                  isSelected
-                    ? 'bg-[#EA4148] text-white'
-                    : 'bg-transparent text-[#1D1E1F] hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148]'
-                } active:scale-95`}
+              className={`tag-button ${isSelected ? 'tag-button--active' : 'tag-button--inactive'}`}
             >
-              {tag.icon_url && (
+              {iconUrl && (
                 <Image
-                  src={tag.icon_url}
+                  src={iconUrl}
                   alt={tag.name}
                   width={40}
                   height={40}
@@ -91,7 +86,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
         {tags.length > CONSTANTS.MAX_VISIBLE_TAGS && (
           <button
             onClick={() => setShowAll(!showAll)}
-            className="inline-flex items-center justify-center w-[46px] h-[46px] rounded-[30px] text-[#1D1E1F] hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148] active:scale-95 transition-all duration-150"
+            className="tag-button tag-button--inactive w-[46px] h-[46px] justify-center"
           >
             {showAll ? '▲' : '▼'}
           </button>

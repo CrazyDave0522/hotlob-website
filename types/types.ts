@@ -28,12 +28,14 @@ export interface Tag {
   id: string
   name: string
   icon_url: string | null
+  icon_url_active?: string | null  // 选中状态的 icon
 }
 
 // 菜品标签类型（简化版）
 export interface DishTag {
   id: string
   icon_url: string | null
+  icon_url_active?: string | null  // 选中状态的 icon
 }
 
 // 应用中使用的菜品类型

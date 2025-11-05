@@ -43,3 +43,14 @@ body {
 .font-mono {
   font-family: var(--font-geist-mono), monospace;
 }
+
+/* Tag 筛选按钮样式 */
+.tag-button {
+  @apply inline-flex items-center h-[46px] px-5 py-3 gap-3 rounded-[30px] transition-all duration-150 text-[18px] font-normal leading-none;
+}
+.tag-button--active {
+  @apply bg-[#EA4148] text-white;
+}
+.tag-button--inactive {
+  @apply bg-transparent text-[#1D1E1F] hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148] active:scale-95;
+}
