@@ -6,5 +6,5 @@ export default function Loading() {
         <p className="text-lg text-[#86909C]">Get Rolling with Us</p>
       </div>
     </div>
-  )
+  );
 }

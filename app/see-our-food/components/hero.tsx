@@ -1,31 +1,31 @@
 // app/see-our-food/components/hero.tsx
-'use client'
+"use client";
 
-import React from 'react'
-import Image from 'next/image'
+import React from "react";
+import Image from "next/image";
 
 interface HeroProps {
-  title: string
-  description: string
-  imageUrl: string
-  size?: 'large' | 'medium' // large = 820px (Home), medium = 420px (others)
+  title: string;
+  description: string;
+  imageUrl: string;
+  size?: "large" | "medium"; // large = 820px (Home), medium = 420px (others)
 }
 
 export default function Hero({
   title,
   description,
   imageUrl,
-  size = 'medium',
+  size = "medium",
 }: HeroProps) {
-  const heroHeight = size === 'large' ? 'h-[820px]' : 'h-[420px]'
+  const heroHeight = size === "large" ? "h-[820px]" : "h-[420px]";
 
   return (
     <section
       className={`relative w-full overflow-hidden ${heroHeight}`}
       style={{
         backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       {/* 通用透明蒙层 */}
@@ -34,7 +34,7 @@ export default function Hero({
         alt=""
         fill
         priority
-        style={{ objectFit: 'cover' }}
+        style={{ objectFit: "cover" }}
       />
 
       {/* 文本区域 */}
@@ -47,5 +47,5 @@ export default function Hero({
         </p>
       </div>
     </section>
-  )
+  );
 }

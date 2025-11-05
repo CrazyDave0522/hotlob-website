@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
 export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string }
-  reset: () => void
+  error: Error & { digest?: string };
+  reset: () => void;
 }) {
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-[#F9F9F9]">
@@ -15,7 +15,7 @@ export default function Error({
           Something went wrong!
         </h2>
         <p className="text-lg text-[#86909C] mb-6">
-          {error.message || 'Failed to load the menu. Please try again.'}
+          {error.message || "Failed to load the menu. Please try again."}
         </p>
         <button
           onClick={reset}
@@ -25,5 +25,5 @@ export default function Error({
         </button>
       </div>
     </div>
-  )
+  );
 }

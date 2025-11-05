@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 export default function EmptyState() {
   return (
@@ -13,5 +13,5 @@ export default function EmptyState() {
         </p>
       </div>
     </div>
-  )
+  );
 }
