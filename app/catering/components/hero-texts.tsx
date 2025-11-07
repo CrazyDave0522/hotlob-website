@@ -8,7 +8,7 @@ export default function HeroTexts() {
         className="text-[#FFD632] text-center text-[40px] font-semibold leading-normal"
         style={{ fontWeight: 600 }}
       >
-        CATERING
+        The ULTIMATE Catering Pack!
       </h1>
 
       {/* The ULTIMATE picnic set! */}
@@ -16,7 +16,7 @@ export default function HeroTexts() {
         className="text-white text-center text-[40px] font-semibold leading-normal"
         style={{ fontWeight: 600 }}
       >
-        The ULTIMATE picnic set!
+        Leave as what you have
       </h2>
 
       {/* MIX 16 ROLL SET PAX 4-6 with bullet lines */}
