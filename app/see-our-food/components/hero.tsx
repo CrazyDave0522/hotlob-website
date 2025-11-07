@@ -52,7 +52,7 @@ export default function Hero({
       {/* 底部小字说明（可选） */}
       {footerNote && (
         <div className="absolute z-10 bottom-2.5 left-[30px] md:left-[260px]">
-          <p className="text-[#86909C] text-[14px] font-normal leading-none text-left">
+          <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-left">
             {footerNote}
           </p>
         </div>
