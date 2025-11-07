@@ -96,7 +96,7 @@ export default async function SeeOurFoodPage() {
         description={"“You have to try their lobster rolls — they’re addictive. And their other rolls are so good, I want to go back for more.”\n— Google Review ⭐⭐⭐⭐⭐"}
         imageUrl="/images/see-our-food-hero.jpg"
         size="medium"
-        footerNote="Our menu is subject to availability and seasonality."
+        footerNote="Our menu is subject to availability and seasons."
       />
       {/* Disclaimer moved inside Hero via footerNote prop */}
       {/* 根据活跃菜品过滤后的标签传给 FoodSection */}
