@@ -93,12 +93,14 @@ export default async function SeeOurFoodPage() {
     <>
       <Hero
         title="See Our Food"
-        description="Your go-to for quick, convenient, and yummy Australian lobster and seafood rolls. Born and bred in Australia, to bring lobster and seafood rolls closer to you."
+        description={"“You have to try their lobster rolls — they’re addictive. And their other rolls are so good, I want to go back for more.”\n— Google Review ⭐⭐⭐⭐⭐"}
         imageUrl="/images/see-our-food-hero.jpg"
         size="medium"
+        footerNote="Our menu is subject to availability and seasons."
       />
+      {/* Disclaimer moved inside Hero via footerNote prop */}
       {/* 根据活跃菜品过滤后的标签传给 FoodSection */}
-      <FoodSection tags={filteredTags} dishes={dishes} />
+  <FoodSection tags={filteredTags} dishes={dishes} />
     </>
   );
 }
