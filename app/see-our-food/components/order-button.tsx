@@ -53,7 +53,7 @@ export default function OrderButton({ stores, fallbackUrl }: OrderButtonProps) {
   return (
     <>
       <button
-        className="flex w-[200px] h-10 justify-center items-center gap-2.5 rounded-tl-[30px] rounded-tr-[30px] rounded-br-none rounded-bl-[30px] bg-linear-to-r from-[#EA4148] to-[#FFA159] shadow-[3px_3px_0_0_rgba(175,23,23,0.16)] text-white text-[16px] font-normal leading-normal transition-all hover:bg-linear-to-b hover:from-[#FB8225] hover:to-[#D51D24] disabled:opacity-60"
+        className="order-button-base order-button-default"
         onClick={handleClick}
         disabled={locating}
       >
