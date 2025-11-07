@@ -358,7 +358,7 @@ export default function CateringForm() {
             disabled={isSubmitting}
             className="order-button-base order-button-catering"
           >
-            {isSubmitting ? "Submitting..." : "Submit Order"}
+            {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </div>
       </form>
