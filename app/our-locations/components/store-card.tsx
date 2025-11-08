@@ -94,16 +94,16 @@ export default function StoreCard({
       {/* Store Photos */}
       {hasPhotos && (
         <div className="flex items-start gap-[30px]">
-          {photos.map((photo, index) => (
+          {photos.slice(0, 2).map((photo, index) => (
             <div
               key={`${photo.display_order}-${index}`}
-              className="relative w-[140px] h-[120px] rounded-[10px] overflow-hidden bg-gray-100 shrink-0"
+              className="relative w-[196px] h-[164px] rounded-[10px] overflow-hidden bg-gray-100 shrink-0"
             >
               <Image
                 src={photo.photo_url}
                 alt={`${name} - Photo ${index + 1}`}
                 fill
-                sizes="140px"
+                sizes="196px"
                 className="object-cover"
               />
             </div>
