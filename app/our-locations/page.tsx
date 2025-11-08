@@ -78,25 +78,27 @@ export default async function OurLocationsPage() {
         title="Find Hotlob near you"
         description={`We're serving up the rolls everyone's talking about — now in Perth and Melbourne.
 Grab one on your lunch break, between uni lectures, or on your way home.`}
-        imageUrl="/images/our-locations-hero.jpg"
+        imageUrl="/images/our-locations-hero.png"
         backgroundPositionY="60%"
       />
 
-      <div className="container mx-auto px-4 md:px-8 py-12 md:py-16">
-        <div className="space-y-12">
-          {stores?.map((store: Store, index: number) => (
-            <StoreCard
-              key={store.id}
-              name={store.name}
-              street={store.street}
-              suburb={store.suburb}
-              state={store.state}
-              postcode={store.postcode}
-              googleMapsEmbedUrl={store.google_maps_embed_url}
-              photos={photosByStore[store.id] || []}
-              isReversed={index % 2 === 1}
-            />
-          ))}
+      <div className="bg-[url('/images/our-locations-bg-stores.png')] bg-cover bg-center bg-no-repeat">
+        <div className="container mx-auto px-4 md:px-8 py-12 md:py-16">
+          <div className="space-y-12">
+            {stores?.map((store: Store, index: number) => (
+              <StoreCard
+                key={store.id}
+                name={store.name}
+                street={store.street}
+                suburb={store.suburb}
+                state={store.state}
+                postcode={store.postcode}
+                googleMapsEmbedUrl={store.google_maps_embed_url}
+                photos={photosByStore[store.id] || []}
+                isReversed={index % 2 === 1}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
