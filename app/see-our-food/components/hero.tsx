@@ -10,6 +10,7 @@ interface HeroProps {
   imageUrl: string;
   size?: "large" | "medium"; // large = 820px (Home), medium = 420px (others)
   footerNote?: string; // optional small text at the bottom-left inside hero
+  backgroundPositionY?: string; // optional vertical position (default "center")
 }
 
 export default function Hero({
@@ -18,6 +19,7 @@ export default function Hero({
   imageUrl,
   size = "medium",
   footerNote,
+  backgroundPositionY = "center",
 }: HeroProps) {
   const heroHeight = size === "large" ? "h-[820px]" : "h-[420px]";
 
@@ -27,7 +29,7 @@ export default function Hero({
       style={{
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundPosition: `center ${backgroundPositionY}`,
       }}
     >
       {/* 通用透明蒙层 */}
@@ -41,12 +43,20 @@ export default function Hero({
 
       {/* 文本区域 */}
       <div className="relative z-10 flex flex-col justify-center h-full pl-[30px] md:pl-[260px] text-white gap-5">
-        <h1 className="text-[38px] font-semibold leading-[154%] max-w-[498px] md:max-w-[684px]">
+        <h1 
+          className="text-[38px] font-semibold leading-[154%] max-w-[498px] md:max-w-[684px]"
+          style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' }}
+        >
           {title}
         </h1>
-        <p className="text-[30px] font-normal leading-[154%] max-w-[456px] md:max-w-[684px] whitespace-pre-line">
-          {description}
-        </p>
+        <div 
+          className="text-[30px] font-normal leading-[154%] max-w-[456px] md:max-w-[684px] space-y-5"
+          style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' }}
+        >
+          {description.split('\n').map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+        </div>
       </div>
 
       {/* 底部小字说明（可选） */}
