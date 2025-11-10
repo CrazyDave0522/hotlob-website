@@ -87,6 +87,7 @@ types/
 - ✅ Image optimization with Next.js Image
 - ✅ Loading and error states
 - ✅ TypeScript type safety
+- ✅ Location pages with Google Places rating & hours cache (monthly refresh)
 
 ## Database Schema
 
@@ -96,6 +97,96 @@ The app expects these Supabase tables:
 - `tag` - Available tags
 - `media_asset` - Dish images
 - `dish_tag` - Many-to-many relationship
+- `store` - Physical store locations (includes `google_place_id` and optional `google_maps_embed_url`)
+- `store_photos` - Up to 3 photos per store
+- `place_cache` - Cached Google Places details per store (see below)
+
+### Google Places Cache (`place_cache`)
+
+Monthly refreshed snapshot of lightweight Place Details fields:
+
+| Column | Type | Notes |
+| ------ | ---- | ----- |
+| `store_id` | uuid | FK to `store` (unique) |
+| `rating` | numeric(2,1) | e.g. 4.5; null if unavailable |
+| `user_ratings_total` | integer | total reviews count (currently unused in UI) |
+| `opening_hours_weekday_text` | text[] | 7 strings Monday→Sunday from Places API |
+| `refreshed_at` | timestamptz | when we last pulled |
+| `expires_at` | timestamptz | `refreshed_at + 30 days` |
+
+Display logic: we show only today's line (`Today: …`). If hours array missing or malformed we hide the row.
+
+Rating logic: hide the stars if `rating` is null.
+
+### Refresh Flow
+
+Two protected API routes (Authorization: Bearer `CRON_SECRET`):
+
+```
+POST /api/places/refresh            # refresh all stores
+POST /api/places/{storeId}/refresh  # refresh single store
+```
+
+They call Google Place Details with fields:
+
+```
+rating,userRatingCount,regularOpeningHours.weekdayDescriptions
+```
+
+**Important**: Uses **Places API (New)** endpoint:
+- Endpoint: `https://places.googleapis.com/v1/places/{place_id}`
+- Headers: `X-Goog-Api-Key`, `X-Goog-FieldMask`
+- Make sure "Places API (New)" is enabled in Google Cloud Console
+
+Language is forced to `en` for consistency.
+
+### Environment Variables
+
+Add to `.env.local` (or Vercel server env):
+
+```
+GMAPS_API_KEY=your-google-maps-api-key
+CRON_SECRET=super-long-random-string
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key (server only)
+```
+
+Do NOT expose `SUPABASE_SERVICE_ROLE_KEY` or the Google key on the client; only server code imports `serverEnv.ts`.
+
+### Vercel Cron Setup
+
+Configure a monthly cron hitting `/api/places/refresh` with header:
+
+```
+Authorization: Bearer {CRON_SECRET}
+```
+
+Optionally schedule a daily run if you later switch to real-time open/closed logic.
+
+### Edge Cases Covered
+
+- 24 hours: source string like `"Monday: Open 24 hours"` → `Today: Open 24 hours`
+- Closed day: `"Sunday: Closed"` → `Today: Closed`
+- Multiple segments: passed through as returned (comma separated)
+- Missing data: hours row hidden; rating row hidden
+- API failure: previous cache retained until next successful run
+
+### Local Manual Refresh
+
+You can manually refresh a single store with curl (replace placeholders):
+
+```bash
+curl -X POST \
+    -H "Authorization: Bearer $CRON_SECRET" \
+    https://localhost:3000/api/places/<storeId>/refresh
+```
+
+Or all stores:
+
+```bash
+curl -X POST \
+    -H "Authorization: Bearer $CRON_SECRET" \
+    https://localhost:3000/api/places/refresh
+```
 
 ## Scripts
 

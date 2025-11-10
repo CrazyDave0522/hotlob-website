@@ -14,6 +14,8 @@ interface StoreCardProps {
   postcode: string;
   googleMapsEmbedUrl: string | null;
   photos: StorePhoto[];
+  rating?: number | null; // from place_cache.rating
+  openingHoursWeekdayText?: string[]; // 7-day weekday_text from Google Places
   isReversed?: boolean; // true for even-indexed stores (info left, map right)
 }
 
@@ -25,10 +27,25 @@ export default function StoreCard({
   postcode,
   googleMapsEmbedUrl,
   photos,
+  rating = null,
+  openingHoursWeekdayText,
   isReversed = false,
 }: StoreCardProps) {
   const fullAddress = `${street}, ${suburb} ${state} ${postcode}`;
   const hasPhotos = photos.length > 0;
+  
+  // Compute today's hours text on the server (timezone differences are acceptable per requirements)
+  let todayHoursText: string | null = null;
+  if (openingHoursWeekdayText && openingHoursWeekdayText.length >= 7) {
+    const d = new Date().getDay(); // 0=Sun..6=Sat
+    const idx = d === 0 ? 6 : d - 1; // Map to 0=Mon..6=Sun
+    const line = openingHoursWeekdayText[idx] ?? "";
+    const parts = line.split(": ");
+    const text = parts.length > 1 ? parts.slice(1).join(": ") : "";
+    if (text) {
+      todayHoursText = `Today: ${text}`;
+    }
+  }
 
   // Map component
   const mapSection = (
@@ -60,8 +77,10 @@ export default function StoreCard({
         {name}
       </h2>
 
-      {/* Rating Placeholder */}
-      <RatingStars rating={4.5} totalReviews={123} />
+      {/* Rating (hide if null) */}
+      {rating !== null && rating !== undefined && (
+        <RatingStars rating={rating} />
+      )}
 
       {/* Address */}
       <div className="flex items-center gap-3">
@@ -77,19 +96,19 @@ export default function StoreCard({
         </span>
       </div>
 
-      {/* Opening Hours Placeholder */}
-      <div className="flex items-center gap-3">
-        <Image
-          src="/images/icons/clock.svg"
-          alt=""
-          width={20}
-          height={20}
-          className="shrink-0 aspect-square"
-        />
-        <span className="text-[#4E5969] text-lg font-normal leading-normal">
-          Mon-Sun: 11:00 AM - 9:00 PM
-        </span>
-      </div>
+      {/* Opening Hours (today) - hide if missing */}
+      {todayHoursText && (
+        <div className="flex items-center gap-3">
+          <Image
+            src="/images/icons/clock.svg"
+            alt=""
+            width={20}
+            height={20}
+            className="shrink-0 aspect-square"
+          />
+          <span className="text-[#4E5969] text-lg font-normal leading-normal">{todayHoursText}</span>
+        </div>
+      )}
 
       {/* Store Photos */}
       {hasPhotos && (

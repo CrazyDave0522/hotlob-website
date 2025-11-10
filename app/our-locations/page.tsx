@@ -72,6 +72,33 @@ export default async function OurLocationsPage() {
     }
   });
 
+  // Fetch place cache for rating and opening hours (weekday_text)
+  interface PlaceCacheRow {
+    store_id: string;
+    rating: number | string | null;
+    opening_hours_weekday_text: string[] | null;
+  }
+
+  const cacheByStore: Record<string, { rating: number | null; weekdayText: string[] | null }> = {};
+  if (storeIds.length > 0) {
+    const { data: cacheData, error: cacheError } = await supabase
+      .from("place_cache")
+      .select("store_id, rating, opening_hours_weekday_text")
+      .in("store_id", storeIds);
+
+    if (cacheError) {
+      console.error("Error fetching place_cache:", cacheError);
+    }
+
+    (cacheData as PlaceCacheRow[] | null)?.forEach((row) => {
+      const ratingValue = row.rating === null ? null : typeof row.rating === "number" ? row.rating : parseFloat(row.rating);
+      cacheByStore[row.store_id] = {
+        rating: Number.isFinite(ratingValue as number) ? (ratingValue as number) : null,
+        weekdayText: row.opening_hours_weekday_text ?? null,
+      };
+    });
+  }
+
   return (
     <div className="min-h-screen bg-[#F9F9F9]">
       <Hero
@@ -95,6 +122,8 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
                 postcode={store.postcode}
                 googleMapsEmbedUrl={store.google_maps_embed_url}
                 photos={photosByStore[store.id] || []}
+                rating={cacheByStore[store.id]?.rating ?? null}
+                openingHoursWeekdayText={cacheByStore[store.id]?.weekdayText ?? undefined}
                 isReversed={index % 2 === 1}
               />
             ))}

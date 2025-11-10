@@ -20,6 +20,20 @@ export function haversineDistance(lat1: number, lng1: number, lat2: number, lng2
     return R * c;
 }
 
+    // Format a weekday_text array (Google Places) into just today's hours line.
+    // Assumes input Monday..Sunday; returns null if malformed.
+    export function formatTodayHours(weekdayText: string[], date: Date = new Date()): string | null {
+        if (!Array.isArray(weekdayText) || weekdayText.length < 7) return null;
+        const day = date.getDay(); // 0=Sun..6=Sat
+        const idx = day === 0 ? 6 : day - 1; // map to Monday=0..Sunday=6
+        const raw = weekdayText[idx];
+        if (typeof raw !== 'string') return null;
+        const parts = raw.split(': ');
+        const tail = parts.length > 1 ? parts.slice(1).join(': ') : '';
+        if (!tail) return null;
+        return `Today: ${tail}`;
+    }
+
 /**
  * 获取用户地理位置，带超时（默认5秒）
  * @param timeoutMs 超时时间（毫秒）
