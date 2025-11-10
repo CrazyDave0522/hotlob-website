@@ -1,5 +1,6 @@
 // scripts/refresh-places.mjs
-// 测试脚本：获取门店并刷新 Google Places 数据
+// Development tool: List stores and manually test Google Places API refresh
+// Usage: pnpm refresh-places
 
 import { createClient } from '@supabase/supabase-js'
 
@@ -9,39 +10,45 @@ const CRON_SECRET = process.env.CRON_SECRET
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
 
 if (!SUPABASE_URL || !SUPABASE_KEY || !CRON_SECRET) {
-  console.error('❌ 缺少环境变量')
+  console.error('❌ Missing required environment variables')
+  console.error('   Please ensure .env.local contains:')
+  console.error('   - NEXT_PUBLIC_SUPABASE_URL')
+  console.error('   - NEXT_PUBLIC_SUPABASE_ANON_KEY')
+  console.error('   - CRON_SECRET')
   process.exit(1)
 }
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 async function main() {
-  // 1. 获取所有门店
+  console.log('🔍 Hotlob Places Refresh Test Script\n')
+  
+  // 1. Fetch all stores
   const { data: stores, error } = await supabase
     .from('store')
     .select('id, name, google_place_id')
     .order('name')
 
   if (error) {
-    console.error('❌ 查询门店失败:', error)
+    console.error('❌ Failed to query stores:', error)
     return
   }
 
-  console.log(`\n📍 找到 ${stores.length} 个门店:\n`)
+  console.log(`📍 Found ${stores.length} store(s):\n`)
   stores.forEach((s, i) => {
     console.log(`${i + 1}. ${s.name}`)
     console.log(`   ID: ${s.id}`)
-    console.log(`   Place ID: ${s.google_place_id || '(未设置)'}\n`)
+    console.log(`   Place ID: ${s.google_place_id || '(not set)'}\n`)
   })
 
-  // 2. 选择第一个门店测试
+  // 2. Test refresh on first store
   if (stores.length === 0) {
-    console.log('没有门店数据')
+    console.log('⚠️  No stores found in database')
     return
   }
 
   const firstStore = stores[0]
-  console.log(`\n🔄 正在刷新: ${firstStore.name}...`)
+  console.log(`\n🔄 Refreshing: ${firstStore.name}...`)
 
   const url = `${BASE_URL}/api/places/${firstStore.id}/refresh`
   const headers = {
@@ -57,12 +64,12 @@ async function main() {
     const data = await res.json()
     
     if (res.ok) {
-      console.log('✅ 刷新成功:', data)
+      console.log('✅ Refresh successful:', data)
     } else {
-      console.error('❌ 刷新失败:', data)
+      console.error('❌ Refresh failed:', data)
     }
 
-    // 3. 查询缓存结果
+    // 3. Query cache results
     const { data: cache } = await supabase
       .from('place_cache')
       .select('*')
@@ -70,13 +77,15 @@ async function main() {
       .single()
 
     if (cache) {
-      console.log('\n📊 缓存数据:')
-      console.log('  评分:', cache.rating)
-      console.log('  评论数:', cache.user_ratings_total)
-      console.log('  营业时间:', cache.opening_hours_weekday_text)
+      console.log('\n📊 Cache data:')
+      console.log('  Rating:', cache.rating || '(none)')
+      console.log('  Reviews:', cache.user_ratings_total || '(none)')
+      console.log('  Hours:', cache.opening_hours_weekday_text || '(none)')
+    } else {
+      console.log('\n⚠️  No cache data found for this store')
     }
   } catch (e) {
-    console.error('❌ 请求失败:', e.message)
+    console.error('❌ Request failed:', e.message)
   }
 }
 

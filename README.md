@@ -191,11 +191,22 @@ curl -X POST \
 ## Scripts
 
 ```bash
-pnpm dev      # Start development server
-pnpm build    # Build for production
-pnpm start    # Start production server
-pnpm lint     # Run ESLint
+pnpm dev              # Start development server
+pnpm build            # Build for production
+pnpm start            # Start production server
+pnpm lint             # Run ESLint
+pnpm refresh-places   # Test script: list stores and refresh first one
 ```
+
+### Development Tools
+
+**`pnpm refresh-places`** - Manual Google Places refresh helper:
+- Lists all stores with IDs and Place IDs
+- Refreshes the first store as a test
+- Shows cache results (rating, reviews, hours)
+- Useful for debugging API integration
+
+Requires `.env.local` with `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `CRON_SECRET`.
 
 ## Deploy on Vercel
 
