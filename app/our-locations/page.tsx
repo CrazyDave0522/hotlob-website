@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabaseClient";
 import Hero from "@/app/see-our-food/components/hero";
 import StoreCard from "./components/store-card";
+import ReviewsSection from "./components/reviews/ReviewsSection";
 
 interface Store {
   id: string;
@@ -99,6 +100,37 @@ export default async function OurLocationsPage() {
     });
   }
 
+  // Fetch featured curated reviews (global top 10)
+  interface CuratedReviewRow {
+    id: string
+    author_name: string
+    author_photo_url: string | null
+    rating: number
+    review_text: string
+  }
+  let featuredReviews: CuratedReviewRow[] = []
+  {
+    const { data: reviewsData, error: reviewsErr } = await supabase
+      .from('curated_reviews')
+      .select(`
+        id,
+        author_name, 
+        author_photo_url, 
+        rating, 
+        review_text
+      `)
+      .eq('is_featured', true)
+      .order('rating', { ascending: false })
+      .order('review_time', { ascending: false })
+      .limit(10)
+
+    if (reviewsErr) {
+      console.error('Error fetching curated_reviews:', reviewsErr)
+    } else {
+      featuredReviews = (reviewsData || []) as unknown as CuratedReviewRow[]
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[#F9F9F9]">
       <Hero
@@ -130,6 +162,18 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
           </div>
         </div>
       </div>
+
+      {/* Featured Reviews Section */}
+      {featuredReviews.length > 0 && (
+        <ReviewsSection
+          reviews={featuredReviews.map(r => ({
+            author_name: r.author_name,
+            author_photo_url: r.author_photo_url,
+            rating: r.rating,
+            review_text: r.review_text,
+          }))}
+        />
+      )}
     </div>
   );
 }

@@ -84,6 +84,22 @@ async function main() {
     } else {
       console.log('\n⚠️  No cache data found for this store')
     }
+
+    // 4. Query curated reviews diagnostics
+    const { data: allCurated, error: curatedErr } = await supabase
+      .from('curated_reviews')
+      .select('id, store_id, author_name, rating, length:review_text, is_featured, review_time')
+      .order('is_featured', { ascending: false })
+      .order('rating', { ascending: false })
+
+    if (curatedErr) {
+      console.error('❌ Curated reviews query failed:', curatedErr)
+    } else {
+      console.log(`\n📝 Curated reviews total: ${allCurated.length}`)
+      const featured = allCurated.filter(r => r.is_featured)
+      console.log(`⭐ Featured reviews: ${featured.length}`)
+      console.log('First 5 rows:', allCurated.slice(0, 5))
+    }
   } catch (e) {
     console.error('❌ Request failed:', e.message)
   }
