@@ -1,5 +1,10 @@
 // app/our-locations/components/reviews/ReviewCard.tsx
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 import RatingStars from "../rating-stars";
 
 export interface ReviewItem {
@@ -11,6 +16,25 @@ export interface ReviewItem {
 }
 
 export default function ReviewCard({ author_name, author_photo_url, rating, review_text, photos }: ReviewItem) {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  // Convert photo URLs to high-res versions for lightbox using URL parsing
+  const highResPhotos = photos?.map(url => {
+    try {
+      const urlObj = new URL(url);
+      urlObj.searchParams.set('maxWidthPx', '2000');
+      return urlObj.toString();
+    } catch {
+      // Fallback if URL parsing fails
+      return url;
+    }
+  }) || [];
+
+  const handlePhotoClick = (index: number) => {
+    setPhotoIndex(index);
+    setLightboxOpen(true);
+  };
   return (
     <div className="flex items-start gap-[13px] self-stretch">
       {/* Avatar */}
@@ -46,10 +70,18 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
               {photos.map((photoUrl, index) => (
                 <div
                   key={index}
-                  className="relative"
+                  className="relative cursor-pointer transition-opacity hover:opacity-80"
                   style={{
                     width: '212px',
                     height: '141px',
+                  }}
+                  onClick={() => handlePhotoClick(index)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handlePhotoClick(index);
+                    }
                   }}
                 >
                   <Image
@@ -62,6 +94,15 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
                 </div>
               ))}
             </div>
+
+            {/* Lightbox */}
+            <Lightbox
+              open={lightboxOpen}
+              close={() => setLightboxOpen(false)}
+              index={photoIndex}
+              slides={highResPhotos.map(url => ({ src: url }))}
+              carousel={{ finite: true }}
+            />
           </>
         )}
       </div>

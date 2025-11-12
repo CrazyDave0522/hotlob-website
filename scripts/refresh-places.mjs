@@ -50,7 +50,7 @@ async function main() {
   const firstStore = stores[0]
   console.log(`\n🔄 Refreshing: ${firstStore.name}...`)
 
-  const url = `${BASE_URL}/api/places/${firstStore.id}/refresh`
+  const url = `${BASE_URL}/api/stores/${firstStore.id}/refresh`
   const headers = {
     'Authorization': `Bearer ${CRON_SECRET}`,
     'Content-Type': 'application/json'

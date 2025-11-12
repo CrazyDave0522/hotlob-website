@@ -123,8 +123,8 @@ Rating logic: hide the stars if `rating` is null.
 Two protected API routes (Authorization: Bearer `CRON_SECRET`):
 
 ```
-POST /api/places/refresh            # refresh all stores
-POST /api/places/{storeId}/refresh  # refresh single store
+POST /api/stores/refresh            # refresh all stores
+POST /api/stores/{storeId}/refresh  # refresh single store
 ```
 
 They call Google Place Details with fields:
@@ -154,7 +154,7 @@ Do NOT expose `SUPABASE_SERVICE_ROLE_KEY` or the Google key on the client; only 
 
 ### Vercel Cron Setup
 
-Configure a monthly cron hitting `/api/places/refresh` with header:
+Configure a monthly cron hitting `/api/stores/refresh` with header:
 
 ```
 Authorization: Bearer {CRON_SECRET}
@@ -177,7 +177,7 @@ You can manually refresh a single store with curl (replace placeholders):
 ```bash
 curl -X POST \
     -H "Authorization: Bearer $CRON_SECRET" \
-    https://localhost:3000/api/places/<storeId>/refresh
+    https://localhost:3000/api/stores/<storeId>/refresh
 ```
 
 Or all stores:
@@ -185,7 +185,7 @@ Or all stores:
 ```bash
 curl -X POST \
     -H "Authorization: Bearer $CRON_SECRET" \
-    https://localhost:3000/api/places/refresh
+    https://localhost:3000/api/stores/refresh
 ```
 
 ## Scripts

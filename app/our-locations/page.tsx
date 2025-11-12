@@ -131,9 +131,8 @@ export default async function OurLocationsPage() {
         )
       `)
       .eq('is_featured', true)
-      .order('rating', { ascending: false })
-      .order('review_time', { ascending: false })
-      .limit(10)
+      .order('featured_order', { ascending: true })
+      .limit(5)
 
     if (reviewsErr) {
       console.error('Error fetching curated_reviews:', reviewsErr)

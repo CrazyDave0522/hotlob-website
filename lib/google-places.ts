@@ -60,6 +60,8 @@ export interface NormalizedPhoto {
   height: number
   author_name: string
   author_uri: string | null
+  author_uris: string[] // all contributor URIs for this photo
+  author_names: string[] // all attribution display names for this photo
 }
 
 export async function fetchPlaceDetails(placeId: string, apiKey?: string): Promise<PlaceCachePayload> {
@@ -184,9 +186,16 @@ export async function fetchPlacePhotos(placeId: string, apiKey?: string): Promis
   for (const p of photos) {
     if (!p.name) continue
 
-    const author = p.authorAttributions?.[0]
-    const author_name = author?.displayName || 'Unknown'
-    const author_uri = author?.uri || null
+    const attributions = Array.isArray(p.authorAttributions) ? p.authorAttributions : []
+    const primary = attributions[0]
+    const author_name = primary?.displayName || 'Unknown'
+    const author_uri = primary?.uri || null
+    const author_uris = attributions
+      .map(a => a?.uri)
+      .filter((u): u is string => typeof u === 'string' && u.length > 0)
+    const author_names = attributions
+      .map(a => (typeof a?.displayName === 'string' ? a.displayName : ''))
+      .filter(n => n.length > 0)
     const width = p.widthPx || 0
     const height = p.heightPx || 0
 
@@ -200,6 +209,8 @@ export async function fetchPlacePhotos(placeId: string, apiKey?: string): Promis
       height,
       author_name,
       author_uri,
+      author_uris,
+      author_names,
     })
   }
 
