@@ -32,10 +32,34 @@ export interface NormalizedReview {
   google_review_id: string | null
   author_name: string
   author_photo_url: string | null
+  author_uri: string | null // Google Maps contributor URI
   rating: number
   review_text: string
   language: string | null
   review_time_iso: string // ISO string
+}
+
+// Google Places (New) v1 - Photo types
+interface PlacesApiAuthorAttributionPhoto {
+  displayName?: string
+  uri?: string
+  photoUri?: string
+}
+
+interface PlacesApiPhoto {
+  name: string // Resource name like "places/{place_id}/photos/{photo_id}"
+  widthPx?: number
+  heightPx?: number
+  authorAttributions?: PlacesApiAuthorAttributionPhoto[]
+}
+
+export interface NormalizedPhoto {
+  photo_name: string // Google photo resource name
+  photo_url: string // Full URL with maxWidthPx parameter
+  width: number
+  height: number
+  author_name: string
+  author_uri: string | null
 }
 
 export async function fetchPlaceDetails(placeId: string, apiKey?: string): Promise<PlaceCachePayload> {
@@ -110,6 +134,7 @@ export async function fetchPlaceReviews(placeId: string, apiKey?: string): Promi
     const rating = typeof r.rating === 'number' ? r.rating : 0
     const author_name = r.authorAttribution?.displayName || 'Anonymous'
     const author_photo_url = r.authorAttribution?.photoUri || null
+    const author_uri = r.authorAttribution?.uri || null
     const text = r.originalText?.text || r.text?.text || ''
     const language = r.originalText?.languageCode || r.text?.languageCode || null
     const publishIso = r.publishTime ? new Date(r.publishTime).toISOString() : ''
@@ -121,10 +146,60 @@ export async function fetchPlaceReviews(placeId: string, apiKey?: string): Promi
       google_review_id: google_id,
       author_name,
       author_photo_url,
+      author_uri,
       rating: Math.round(rating),
       review_text: text,
       language,
       review_time_iso: publishIso,
+    })
+  }
+
+  return normalized
+}
+
+// Fetch photos for a place. Returns up to 10 photos with author attribution.
+export async function fetchPlacePhotos(placeId: string, apiKey?: string): Promise<NormalizedPhoto[]> {
+  const key = apiKey || getGMapsApiKey()
+  const url = `https://places.googleapis.com/v1/places/${placeId}`
+
+  const res = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Goog-Api-Key': key,
+      'X-Goog-FieldMask': 'photos',
+    },
+  })
+
+  if (!res.ok) {
+    const errorText = await res.text()
+    console.error('Places API (photos) error:', res.status, errorText)
+    return []
+  }
+
+  const data = await res.json()
+  const photos: PlacesApiPhoto[] = Array.isArray(data.photos) ? data.photos : []
+
+  const normalized: NormalizedPhoto[] = []
+  for (const p of photos) {
+    if (!p.name) continue
+
+    const author = p.authorAttributions?.[0]
+    const author_name = author?.displayName || 'Unknown'
+    const author_uri = author?.uri || null
+    const width = p.widthPx || 0
+    const height = p.heightPx || 0
+
+    // Generate photo URL with maxWidthPx=600 for optimal quality
+    const photo_url = `https://places.googleapis.com/v1/${p.name}/media?maxWidthPx=600&key=${key}`
+
+    normalized.push({
+      photo_name: p.name,
+      photo_url,
+      width,
+      height,
+      author_name,
+      author_uri,
     })
   }
 

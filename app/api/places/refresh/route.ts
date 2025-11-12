@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabaseClient'
-import { fetchPlaceDetails, addDays, fetchPlaceReviews, NormalizedReview } from '@/lib/google-places'
+import { fetchPlaceDetails, addDays, fetchPlaceReviews, fetchPlacePhotos, NormalizedReview } from '@/lib/google-places'
 import { getCronSecret } from '@/lib/serverEnv'
 
 function auth(req: NextRequest) {
@@ -67,6 +67,7 @@ export async function POST(req: NextRequest) {
             google_review_id: r.google_review_id,
             author_name: r.author_name,
             author_photo_url: r.author_photo_url,
+            author_uri: r.author_uri,
             rating: r.rating,
             review_text: r.review_text,
             review_time: r.review_time_iso,
@@ -138,6 +139,75 @@ export async function POST(req: NextRequest) {
     await supabase.from('curated_reviews').update({ is_featured: false }).eq('is_featured', true)
     if (idsToFeature.length > 0) {
       await supabase.from('curated_reviews').update({ is_featured: true }).in('id', idsToFeature)
+    }
+
+    // Match photos for featured reviews
+    if (idsToFeature.length > 0) {
+      // Get featured reviews with author_uri
+      const { data: featuredReviews } = await supabase
+        .from('curated_reviews')
+        .select('id, store_id, author_uri')
+        .in('id', idsToFeature)
+
+      if (featuredReviews && featuredReviews.length > 0) {
+        // Get unique store_ids to fetch photos
+        const storeIds = [...new Set(featuredReviews.map(r => r.store_id))]
+        
+        // Fetch photos for each store and match with reviews
+        for (const storeId of storeIds) {
+          const store = stores?.find(s => s.id === storeId)
+          if (!store?.google_place_id) continue
+
+          try {
+            const photos = await fetchPlacePhotos(store.google_place_id)
+            const storeReviews = featuredReviews.filter(r => r.store_id === storeId)
+
+            // Match photos to reviews by author URI (exact match only)
+            for (const review of storeReviews) {
+              if (!review.author_uri) continue // Skip if no URI
+
+              // Normalize URIs for comparison (extract contributor ID)
+              const reviewContribId = review.author_uri.match(/contrib\/(\d+)/)?.[1]
+              if (!reviewContribId) continue
+
+              // Find photos by this author (URI exact match)
+              const matchedPhotos = photos
+                .filter(photo => {
+                  if (!photo.author_uri) return false
+                  const photoContribId = photo.author_uri.match(/contrib\/(\d+)/)?.[1]
+                  return photoContribId === reviewContribId
+                })
+                .slice(0, 5) // Max 5 photos
+
+              if (matchedPhotos.length > 0) {
+                // Delete existing photos for this review
+                await supabase
+                  .from('review_photos')
+                  .delete()
+                  .eq('review_id', review.id)
+
+                // Insert new photos
+                for (let i = 0; i < matchedPhotos.length; i++) {
+                  const photo = matchedPhotos[i]
+                  await supabase.from('review_photos').insert({
+                    review_id: review.id,
+                    photo_name: photo.photo_name,
+                    photo_url: photo.photo_url,
+                    width: photo.width,
+                    height: photo.height,
+                    display_order: i + 1,
+                  })
+                }
+              }
+            }
+
+            // Small delay between stores
+            await new Promise(r => setTimeout(r, 100))
+          } catch (e) {
+            console.error('Photo matching error for store', storeId, e)
+          }
+        }
+      }
     }
   } catch (e) {
     console.error('Global feature selection failed:', e)

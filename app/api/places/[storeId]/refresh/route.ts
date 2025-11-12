@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabaseClient'
-import { fetchPlaceDetails, addDays, fetchPlaceReviews } from '@/lib/google-places'
+import { fetchPlaceDetails, addDays, fetchPlaceReviews, fetchPlacePhotos } from '@/lib/google-places'
 import { getCronSecret } from '@/lib/serverEnv'
 
 function auth(req: NextRequest) {
@@ -64,6 +64,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ sto
           google_review_id: r.google_review_id,
           author_name: r.author_name,
           author_photo_url: r.author_photo_url,
+          author_uri: r.author_uri,
           rating: r.rating,
           review_text: r.review_text,
           review_time: r.review_time_iso,
@@ -100,6 +101,48 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ sto
       await supabase.from('curated_reviews').update({ is_featured: false }).eq('is_featured', true)
       if (top10Ids.length > 0) {
         await supabase.from('curated_reviews').update({ is_featured: true }).in('id', top10Ids)
+        
+        // Match photos for featured reviews
+        const { data: featuredReviews } = await supabase
+          .from('curated_reviews')
+          .select('id, author_uri')
+          .in('id', top10Ids)
+
+        if (featuredReviews && featuredReviews.length > 0) {
+          const photos = await fetchPlacePhotos(store.google_place_id as string)
+
+          for (const review of featuredReviews) {
+            if (!review.author_uri) continue
+
+            // Normalize URIs for comparison (extract contributor ID)
+            const reviewContribId = review.author_uri.match(/contrib\/(\d+)/)?.[1]
+            if (!reviewContribId) continue
+
+            const matchedPhotos = photos
+              .filter(photo => {
+                if (!photo.author_uri) return false
+                const photoContribId = photo.author_uri.match(/contrib\/(\d+)/)?.[1]
+                return photoContribId === reviewContribId
+              })
+              .slice(0, 5)
+
+            if (matchedPhotos.length > 0) {
+              await supabase.from('review_photos').delete().eq('review_id', review.id)
+              
+              for (let i = 0; i < matchedPhotos.length; i++) {
+                const photo = matchedPhotos[i]
+                await supabase.from('review_photos').insert({
+                  review_id: review.id,
+                  photo_name: photo.photo_name,
+                  photo_url: photo.photo_url,
+                  width: photo.width,
+                  height: photo.height,
+                  display_order: i + 1,
+                })
+              }
+            }
+          }
+        }
       }
     } catch (e) {
       console.error('Single-store review refresh failed:', e)

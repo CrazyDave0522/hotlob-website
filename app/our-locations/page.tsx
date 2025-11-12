@@ -100,14 +100,21 @@ export default async function OurLocationsPage() {
     });
   }
 
-  // Fetch featured curated reviews (global top 10)
+  // Fetch featured curated reviews (global top 10) with photos
+  interface ReviewPhotoRow {
+    photo_url: string
+    display_order: number
+  }
+
   interface CuratedReviewRow {
     id: string
     author_name: string
     author_photo_url: string | null
     rating: number
     review_text: string
+    review_photos: ReviewPhotoRow[]
   }
+  
   let featuredReviews: CuratedReviewRow[] = []
   {
     const { data: reviewsData, error: reviewsErr } = await supabase
@@ -117,7 +124,11 @@ export default async function OurLocationsPage() {
         author_name, 
         author_photo_url, 
         rating, 
-        review_text
+        review_text,
+        review_photos (
+          photo_url,
+          display_order
+        )
       `)
       .eq('is_featured', true)
       .order('rating', { ascending: false })
@@ -171,6 +182,9 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
             author_photo_url: r.author_photo_url,
             rating: r.rating,
             review_text: r.review_text,
+            photos: (r.review_photos || [])
+              .sort((a, b) => a.display_order - b.display_order)
+              .map(p => p.photo_url),
           }))}
         />
       )}
