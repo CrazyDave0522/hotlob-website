@@ -1,15 +1,15 @@
 // lib/utils/geo.ts
 
 /**
- * 计算两点间球面距离（单位：米）
- * @param lat1 纬度1
- * @param lng1 经度1
- * @param lat2 纬度2
- * @param lng2 经度2
+ * Calculate spherical distance between two points (unit: meters)
+ * @param lat1 Latitude 1
+ * @param lng1 Longitude 1
+ * @param lat2 Latitude 2
+ * @param lng2 Longitude 2
  */
 export function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
     const toRad = (d: number) => (d * Math.PI) / 180;
-    const R = 6371000; // 地球半径，米
+    const R = 6371000; // Earth radius in meters
     const dLat = toRad(lat2 - lat1);
     const dLng = toRad(lng2 - lng1);
     const a =
@@ -21,13 +21,13 @@ export function haversineDistance(lat1: number, lng1: number, lat2: number, lng2
 }
 
 /**
- * 获取用户地理位置，带超时（默认5秒）
- * @param timeoutMs 超时时间（毫秒）
+ * Get user geolocation with timeout (default 5 seconds)
+ * @param timeoutMs Timeout in milliseconds
  */
 export function getCurrentPositionWithTimeout(timeoutMs = 5000): Promise<GeolocationPosition> {
     return new Promise((resolve, reject) => {
         const timeoutId = setTimeout(() => {
-            reject(new Error('位置请求超时'));
+            reject(new Error('Location request timeout'));
         }, timeoutMs);
         navigator.geolocation.getCurrentPosition(
             (pos) => {

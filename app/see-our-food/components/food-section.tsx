@@ -14,8 +14,8 @@ interface FoodSectionProps {
 export default function FoodSection({ tags, dishes }: FoodSectionProps) {
   const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
 
-  // 根据选中的标签过滤菜品（AND 交集）：
-  // 当选择了多个标签时，仅展示同时包含所有已选标签的菜品
+  // Filter dishes based on selected tags (AND intersection):
+  // When multiple tags are selected, only show dishes that contain all selected tags
   const filteredDishes =
     selectedTagIds.length === 0
       ? dishes

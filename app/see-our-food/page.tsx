@@ -5,10 +5,10 @@ import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
 import type { Dish, RawDish } from "@/types/types";
 
-export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: 重新验证数据
+export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: revalidate data
 
 export default async function SeeOurFoodPage() {
-  /* ========== 拉取标签 和 菜品(含图片/标签) 并行 ========== */
+  /* ========== Fetch tags and dishes (with images/tags) in parallel ========== */
   const [
     { data: tags, error: tagError },
     { data: dishesRaw, error: dishError },
@@ -42,13 +42,13 @@ export default async function SeeOurFoodPage() {
       .order("created_at", { ascending: false }),
   ]);
 
-  if (tagError) console.error("❌ 拉取 tags 失败:", tagError);
+  if (tagError) console.error("❌ Failed to fetch tags:", tagError);
   if (dishError) {
-    console.error("❌ 拉取 dish(含媒体/标签) 失败:", dishError);
+    console.error("❌ Failed to fetch dishes (with media/tags):", dishError);
     console.log("dishesRaw", dishesRaw);
   }
 
-  /* ========== 整合数据 ========== */
+  /* ========== Integrate data ========== */
   const dishes: Dish[] = ((dishesRaw as RawDish[] | null) ?? [])
     .map((d) => {
       const imageUrl =
@@ -56,7 +56,7 @@ export default async function SeeOurFoodPage() {
       const matchedTags =
         d.dish_tag?.flatMap((dt) => dt.tag ?? [])?.filter(Boolean) ?? [];
 
-      // 整理可用门店
+      // Organize available stores
       const stores =
         d.dish_store
           ?.filter((ds) => ds.available && ds.store)
@@ -81,14 +81,14 @@ export default async function SeeOurFoodPage() {
     })
     .filter((d) => (d.stores?.length ?? 0) > 0);
 
-  // 仅展示被当前可展示菜品实际使用到的标签
+  // Only show tags actually used by currently displayable dishes
   const activeTagIds = new Set<string>();
   for (const d of dishes) {
     for (const t of d.tags) activeTagIds.add(t.id);
   }
   const filteredTags = (tags ?? []).filter((t) => activeTagIds.has(t.id));
 
-  /* ========== 6️⃣ 渲染页面 ========== */
+  /* ========== Render page ========== */
   return (
     <>
       <Hero
@@ -99,7 +99,7 @@ export default async function SeeOurFoodPage() {
         footerNote="Our menu is subject to availability and seasons."
       />
       {/* Disclaimer moved inside Hero via footerNote prop */}
-      {/* 根据活跃菜品过滤后的标签传给 FoodSection */}
+      {/* Pass filtered tags based on active dishes to FoodSection */}
   <FoodSection tags={filteredTags} dishes={dishes} />
     </>
   );

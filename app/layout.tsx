@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toast";
 
-// Ghoust Solid (实心) - 主字体
+// Ghoust Solid (filled) - primary font
 const ghoustSolid = localFont({
   src: [
     {
@@ -17,7 +17,7 @@ const ghoustSolid = localFont({
   display: "swap",
 });
 
-// Ghoust Outline (空心) - 装饰字体
+// Ghoust Outline (hollow) - decorative font
 const ghoustOutline = localFont({
   src: [
     {

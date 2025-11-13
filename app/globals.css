@@ -14,7 +14,7 @@
   --font-ghoust-outline: var(--font-ghoust-outline);
 }
 
-/* 强制 light mode - 已禁用 dark mode */
+/* Force light mode - dark mode disabled */
 /* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -28,7 +28,7 @@ body {
   font-family: var(--font-ghoust-solid), var(--font-geist-sans), sans-serif;
 }
 
-/* 字体工具类 - 方便快速切换 */
+/* Font utility classes - for quick switching */
 .font-solid {
   font-family: var(--font-ghoust-solid), var(--font-geist-sans), sans-serif;
 }
@@ -45,7 +45,7 @@ body {
   font-family: var(--font-geist-mono), monospace;
 }
 
-/* 表单输入框 placeholder 样式 */
+/* Form input placeholder styles */
 input::placeholder,
 select::placeholder,
 textarea::placeholder {
@@ -57,7 +57,7 @@ textarea::placeholder {
 }
 
 @layer components {
-  /* Tag 筛选按钮样式 */
+  /* Tag filter button styles */
   .tag-button {
     @apply inline-flex items-center h-[46px] px-5 py-3 gap-3 rounded-[30px] transition-all duration-150 text-[18px] font-normal leading-none;
   }
@@ -68,7 +68,7 @@ textarea::placeholder {
     @apply bg-transparent text-[#1D1E1F] hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148] active:scale-95;
   }
 
-  /* Order Now 按钮基础样式 */
+  /* Order Now button base styles */
   .order-button-base {
     display: flex;
     justify-content: center;
@@ -94,14 +94,14 @@ textarea::placeholder {
     cursor: not-allowed;
   }
 
-  /* Order Button 变体 - 默认尺寸 (See our food 页面) */
+  /* Order Button variant - default size (See our food page) */
   .order-button-default {
     width: 200px;
     height: 40px;
     border-radius: 30px 30px 0 30px;
   }
 
-  /* Order Button 变体 - Catering 页面 */
+  /* Order Button variant - Catering page */
   .order-button-catering {
     width: 300px;
     height: 46px;

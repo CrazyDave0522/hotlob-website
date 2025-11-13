@@ -1,6 +1,6 @@
 // types/types.ts
 
-// 数据库返回的原始菜品数据（如果需要的话）
+// Raw dish data returned from database (if needed)
 export interface RawDish {
   id: string
   name: string
@@ -23,22 +23,22 @@ export interface RawDish {
   }[]
 }
 
-// 标签类型
+// Tag type
 export interface Tag {
   id: string
   name: string
   icon_url: string | null
-  icon_url_active?: string | null  // 选中状态的 icon
+  icon_url_active?: string | null  // Icon for selected state
 }
 
-// 菜品标签类型（简化版）
+// Dish tag type (simplified version)
 export interface DishTag {
   id: string
   icon_url: string | null
-  icon_url_active?: string | null  // 选中状态的 icon
+  icon_url_active?: string | null  // Icon for selected state
 }
 
-// 应用中使用的菜品类型
+// Dish type used in application
 export interface Dish {
   id: string
   name: string

@@ -15,7 +15,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [showAll, setShowAll] = useState(false);
 
-  // 点击 tag 的逻辑
+  // Tag click logic
   const toggleTag = (id: string) => {
     if (id === "all") {
       setSelectedIds([]);
@@ -33,7 +33,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
     onChange?.(updated);
   };
 
-  // 计算要显示的 tag（前 MAX_VISIBLE_TAGS 个 + all）
+  // Calculate tags to display (first MAX_VISIBLE_TAGS + all)
   const visibleTags = showAll
     ? tags
     : tags.slice(0, CONSTANTS.MAX_VISIBLE_TAGS);
@@ -41,7 +41,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
   return (
     <div className="w-full bg-white min-h-[116px] flex flex-col justify-center">
       <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 mx-auto w-full max-w-[1920px] px-[30px] md:px-0">
-        {/* All 按钮 */}
+        {/* All button */}
         <button
           onClick={() => toggleTag("all")}
           className={`tag-button ${
@@ -50,7 +50,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
               : "tag-button--inactive"
           }`}
         >
-          {/* ALL 的图标（28x28），支持选中/未选中两套素材 */}
+          {/* ALL icon (28x28), supports selected/unselected assets */}
           <Image
             src={
               selectedIds.length === 0
@@ -65,10 +65,10 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
           <span className="text-[18px] font-normal leading-none">All</span>
         </button>
 
-        {/* 动态标签按钮 */}
+        {/* Dynamic tag buttons */}
         {visibleTags.map((tag) => {
           const isSelected = selectedIds.includes(tag.id);
-          // 根据选中状态选择 icon，有 fallback 逻辑
+          // Select icon based on selected state, with fallback logic
           const iconUrl = isSelected
             ? tag.icon_url_active ||
               tag.icon_url ||
@@ -99,7 +99,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
           );
         })}
 
-        {/* 展开/收起箭头 */}
+        {/* Expand/collapse arrow */}
         {tags.length > CONSTANTS.MAX_VISIBLE_TAGS && (
           <button
             onClick={() => setShowAll(!showAll)}

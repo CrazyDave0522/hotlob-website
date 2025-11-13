@@ -25,7 +25,7 @@ export default function OrderButton({ stores, fallbackUrl }: OrderButtonProps) {
     try {
       const pos = await getCurrentPositionWithTimeout(5000);
       const { latitude, longitude } = pos.coords;
-      // 计算最近门店
+      // Calculate nearest store
       const sorted = [...stores].sort((a, b) => {
         const d1 =
           a.latitude && a.longitude

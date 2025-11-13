@@ -32,7 +32,7 @@ export default function Hero({
         backgroundPosition: `center ${backgroundPositionY}`,
       }}
     >
-      {/* 通用透明蒙层 */}
+      {/* General transparent overlay */}
       <Image
         src="/images/overlay.png"
         alt=""
@@ -41,7 +41,7 @@ export default function Hero({
         style={{ objectFit: "cover" }}
       />
 
-      {/* 文本区域 */}
+      {/* Text area */}
       <div className="relative z-10 flex flex-col justify-center h-full pl-[30px] md:pl-[260px] text-white gap-5">
         <h1 
           className="text-[38px] font-semibold leading-[154%] max-w-[498px] md:max-w-[684px]"
@@ -59,7 +59,7 @@ export default function Hero({
         </div>
       </div>
 
-      {/* 底部小字说明（可选） */}
+      {/* Footer note (optional) */}
       {footerNote && (
         <div className="absolute z-10 bottom-2.5 left-[30px] md:left-[260px]">
           <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-left">

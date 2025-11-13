@@ -69,7 +69,7 @@ export default function StoreSelectionModal({
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-end bg-black/20">
       <div className="bg-white rounded-tl-2xl rounded-tr-2xl shadow-lg p-6 w-full max-w-sm m-4">
-        <div className="font-semibold text-lg mb-4">选择门店</div>
+        <div className="font-semibold text-lg mb-4">Select Store</div>
         <ul className="space-y-2 max-h-72 overflow-y-auto">
           {sortedStores.map((store) => (
             <li key={store.id}>
@@ -89,7 +89,7 @@ export default function StoreSelectionModal({
           className="mt-4 w-full py-2 rounded bg-gray-200 text-gray-700"
           onClick={onClose}
         >
-          取消
+          Cancel
         </button>
       </div>
     </div>
