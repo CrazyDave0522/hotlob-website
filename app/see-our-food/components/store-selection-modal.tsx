@@ -67,9 +67,9 @@ export default function StoreSelectionModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-end bg-black/20">
-      <div className="bg-white rounded-tl-2xl rounded-tr-2xl shadow-lg p-6 w-full max-w-sm m-4">
-        <div className="font-semibold text-lg mb-4">Select Store</div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20">
+      <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-sm m-4">
+        <div className="font-semibold text-lg mb-4 text-[#1D1E1F] text-center">Select Store</div>
         <ul className="space-y-2 max-h-72 overflow-y-auto">
           {sortedStores.map((store) => (
             <li key={store.id}>
@@ -77,7 +77,7 @@ export default function StoreSelectionModal({
                 href={store.uber_url || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block px-4 py-2 rounded hover:bg-gray-100 text-blue-600 font-medium"
+                className="block px-4 py-2 rounded text-[#1D1E1F] font-medium transition-colors hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148] active:bg-[rgba(234,65,72,0.12)]"
                 onClick={onClose}
               >
                 {store.name}
@@ -86,7 +86,7 @@ export default function StoreSelectionModal({
           ))}
         </ul>
         <button
-          className="mt-4 w-full py-2 rounded bg-gray-200 text-gray-700"
+          className="mt-4 w-full py-2 rounded bg-[#F2F3F5] text-[#1D1E1F] hover:bg-[#E5E6EB] transition-colors"
           onClick={onClose}
         >
           Cancel
