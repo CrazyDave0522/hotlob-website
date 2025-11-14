@@ -16,9 +16,18 @@ export async function generateStaticParams() {
   return data.map((d: { slug: string }) => ({ slug: d.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const { slug } = (await params) as { slug: string };
-  const { data } = await supabase.from("news").select("title,excerpt").eq("slug", slug).limit(1).single();
+  const { data } = await supabase
+    .from("news")
+    .select("title,excerpt")
+    .eq("slug", slug)
+    .limit(1)
+    .single();
   const news = data as NewsDetail | null;
   return {
     title: news ? news.title : "News Detail",
@@ -26,7 +35,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function NewsDetailPage({ params }: { params: { slug: string } }) {
+export default async function NewsDetailPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = (await params) as { slug: string };
   const { data, error } = await supabase
     .from("news")
@@ -42,14 +55,21 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
   return (
     <main className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-3xl font-bold mb-4">{news.title}</h1>
-          <span className="block mb-2 text-xs text-gray-400">{formatAUDate(news.publish_date)}</span>
-          {/* Render full HTML content if present; fall back to excerpt */}
-          {news.content ? (
-            <div className="prose max-w-none text-gray-700 mb-8" dangerouslySetInnerHTML={{ __html: news.content }} />
-          ) : (
-            <div className="text-gray-700 mb-8">{news.excerpt}</div>
-          )}
-      <Link href="/news" className="text-red-600 hover:underline">← Back to News List</Link>
+      <span className="block mb-2 text-xs text-gray-400">
+        {formatAUDate(news.publish_date)}
+      </span>
+      {/* Render full HTML content if present; fall back to excerpt */}
+      {news.content ? (
+        <div
+          className="prose max-w-none text-gray-700 mb-8"
+          dangerouslySetInnerHTML={{ __html: news.content }}
+        />
+      ) : (
+        <div className="text-gray-700 mb-8">{news.excerpt}</div>
+      )}
+      <Link href="/news" className="text-red-600 hover:underline">
+        ← Back to News List
+      </Link>
     </main>
   );
 }
