@@ -22,6 +22,8 @@ export default function NewsListItem({
   return (
     <Link 
       href={`/news/${slug}`}
+      target="_blank"
+      rel="noopener noreferrer"
       className="group flex gap-5 px-5 py-[30px] hover:bg-gray-50 transition-colors cursor-pointer"
     >
       {/* Cover Image */}
