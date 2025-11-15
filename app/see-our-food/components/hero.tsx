@@ -8,10 +8,11 @@ interface HeroProps {
   title: string;
   description: string;
   imageUrl: string;
-  size?: "large" | "medium"; // large = 820px (Home), medium = 420px (others)
+  size?: "home" | "large" | "medium"; // home = 820px, large = 820px, medium = 420px
   footerNote?: string; // optional small text at the bottom-left inside hero
   backgroundPositionY?: string; // optional vertical position (default "center")
   showOverlay?: boolean; // optional overlay toggle (default true)
+  overlayUrl?: string; // optional custom overlay image
 }
 
 export default function Hero({
@@ -22,8 +23,10 @@ export default function Hero({
   footerNote,
   backgroundPositionY = "center",
   showOverlay = true,
+  overlayUrl,
 }: HeroProps) {
-  const heroHeight = size === "large" ? "h-[820px]" : "h-[420px]";
+  // home and large use the same height (820px); medium uses 420px
+  const heroHeight = size === "medium" ? "h-[420px]" : "h-[820px]";
 
   return (
     <section
@@ -37,7 +40,7 @@ export default function Hero({
       {/* General transparent overlay */}
       {showOverlay && (
         <Image
-          src="/images/overlay.png"
+          src={overlayUrl ?? "/images/overlay.png"}
           alt=""
           fill
           priority
