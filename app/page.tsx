@@ -1,4 +1,5 @@
 import Hero from "./see-our-food/components/hero";
+import AboutHotlob from "./components/AboutHotlob";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         overlayUrl="/images/home-overlay.png"
         showOverlay={true}
       />
+      <AboutHotlob />
       {/* More homepage modules to follow... */}
     </main>
   );
