@@ -66,7 +66,7 @@ export default function Hero({
           {title}
         </h1>
         <div 
-          className={`font-normal space-y-5 ${showOverlay ? 'text-[30px] leading-[154%]' : 'text-[20px] leading-normal text-[#999]'}`}
+          className={`font-normal space-y-2 ${showOverlay ? 'text-[30px] leading-[154%]' : 'text-[20px] leading-normal text-[#999]'}`}
           style={{
             maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
             ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
@@ -80,8 +80,11 @@ export default function Hero({
 
       {/* Footer note (optional) */}
       {footerNote && (
-        <div className="absolute z-10 bottom-2.5 left-[30px] md:left-[260px]">
-          <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-left">
+        <div 
+          className="absolute z-10 bottom-2.5 right-0" 
+          style={{ paddingRight: "min(8.333vw, 160px)" }} // 160/1920 = 8.333%, closer to right edge
+        >
+          <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-right">
             {footerNote}
           </p>
         </div>
