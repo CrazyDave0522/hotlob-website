@@ -40,8 +40,9 @@ export default function AboutHotlob() {
 
   return (
     <section
-      className="relative w-full h-[640px] flex flex-col items-center"
+      className="relative w-full flex flex-col items-center"
       style={{
+        height: "min(33.333vw, 640px)", // 640/1920 = 33.333%
         backgroundImage: "url(/images/home-bg-about-hotlob.png)",
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -50,25 +51,28 @@ export default function AboutHotlob() {
       {/* Title */}
       <h2
         className="text-[34px] font-semibold text-[#1D1E1F] text-center leading-normal"
-        style={{ marginTop: 60 }}
+        style={{ marginTop: "min(3.125vw, 60px)" }} // 60/1920
       >
         About Hotlob
       </h2>
 
       {/* Three-column card container */}
       <div
-        className="flex gap-5 shrink-0"
-        style={{ width: 1400, height: 421, marginTop: 40 }}
+        className="flex gap-5 shrink-0 w-[72.917%] mx-auto justify-center" // 1400/1920 = 72.917%
+        style={{ 
+          height: "min(21.927vw, 421px)", // 421/1920 = 21.927%
+          marginTop: "min(2.083vw, 40px)", // 40/1920 = 2.083%
+        }}
       >
         {cards.map((card) => {
           const isExpanded = expandedCard === card.id;
           return (
             <div
               key={card.id}
-              className="shrink-0 relative cursor-pointer overflow-hidden"
+              className="shrink-0 relative cursor-pointer overflow-hidden rounded-[20px]"
               style={{
-                width: isExpanded ? 560 : 400,
-                height: 420,
+                width: isExpanded ? "40%" : "28.571%", // 560/1400=40%, 400/1400=28.571%
+                height: "100%", // Fill parent container height
                 transition: "width 400ms cubic-bezier(0.4, 0, 0.2, 1)",
               }}
               onMouseEnter={() => setExpandedCard(card.id)}
@@ -95,7 +99,7 @@ export default function AboutHotlob() {
               />
 
               {/* Card content */}
-              <div className="absolute inset-0 flex flex-col px-[30px] pt-[60px]">
+              <div className="absolute inset-0 flex flex-col px-[30px]" style={{ paddingTop: "14.286%" }}>
                 <h3
                   className="text-[26px] font-semibold leading-normal mb-5 transition-colors duration-400"
                   style={{ color: isExpanded ? "#FFF" : "#333" }}
