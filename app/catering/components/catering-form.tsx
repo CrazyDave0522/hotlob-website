@@ -187,7 +187,7 @@ export default function CateringForm() {
         onSubmit={handleSubmit}
         className="w-full flex flex-wrap gap-[30px]"
       >
-        {/* Store selection - same width as other inputs (340px max) */}
+        {/* Store selection - full width row, but input matches other fields */}
         <div className="w-full">
           <label
             htmlFor="storeId"
@@ -201,7 +201,8 @@ export default function CateringForm() {
             value={formData.storeId}
             onChange={handleChange}
             required
-            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
+            style={{ width: "calc(50% - 15px)" }}
+            className="flex h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
           >
             <option value="">Select a store</option>
             {stores.map((store) => (
