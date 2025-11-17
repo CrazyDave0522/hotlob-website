@@ -11,9 +11,9 @@ export default function CateringPage() {
         aria-hidden="true"
       />
 
-      {/* Content overlay - constrained to max-width for alignment */}
+      {/* Content overlay - width controlled by layout.tsx max-w-[1920px] wrapper */}
       {/* Height based on background aspect ratio: 1920x1589 desktop, 750x669 mobile */}
-      <div className="relative max-w-[1920px] mx-auto aspect-750/669 md:aspect-1920/1589">
+      <div className="relative w-full mx-auto aspect-750/669 md:aspect-1920/1589">
         {/* Hero texts: CATERING, The ULTIMATE picnic set!, MIX 16 ROLL SET */}
         <HeroTexts />
 
