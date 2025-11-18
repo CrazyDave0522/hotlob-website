@@ -95,11 +95,12 @@ textarea::placeholder {
     cursor: not-allowed;
   }
 
-  /* Order Button variant - default size (See our food page) */
+  /* Order Button variant - default size (See our food page) - Responsive */
   .order-button-default {
-    width: 200px;
-    height: 40px;
+    width: min(10.417vw, 200px); /* 200/1920 = 10.417% */
+    height: min(2.083vw, 40px); /* 40/1920 = 2.083% */
     border-radius: 30px 30px 0 30px;
+    font-size: 16px; /* Fixed font size for readability */
   }
 
   /* Order Button variant - Catering page */
