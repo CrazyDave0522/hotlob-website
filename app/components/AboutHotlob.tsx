@@ -57,7 +57,7 @@ export default function AboutHotlob() {
       {/* Three-column card container */}
       <div
         className="flex gap-5 shrink-0 w-[72.917%] mx-auto justify-center" // 1400/1920 = 72.917%
-        style={{ 
+        style={{
           height: "min(21.927vw, 421px)", // 421/1920 = 21.927%
           marginTop: "min(2.083vw, 40px)", // 40/1920 = 2.083%
         }}
@@ -97,15 +97,15 @@ export default function AboutHotlob() {
               />
 
               {/* Card content */}
-              <div 
-                className="absolute inset-0 flex flex-col px-[30px]" 
+              <div
+                className="absolute inset-0 flex flex-col px-[30px]"
                 style={{ paddingTop: "min(3.125vw, 60px)" }} // 60/1920 = 3.125%
               >
                 <h3
                   className="text-[26px] font-semibold leading-normal transition-colors duration-400"
-                  style={{ 
+                  style={{
                     color: isExpanded ? "#FFF" : "#333",
-                    marginBottom: "min(1.042vw, 20px)" // 20/1920 = 1.042%
+                    marginBottom: "min(1.042vw, 20px)", // 20/1920 = 1.042%
                   }}
                 >
                   {card.title}
