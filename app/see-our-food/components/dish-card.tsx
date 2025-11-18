@@ -105,9 +105,10 @@ export default function DishCard({ dish, priority = false }: DishCardProps) {
 
           {/* Description */}
           <p 
-            className="text-[#86909C] text-left leading-snug overflow-hidden w-full text-[18px]"
+            className="text-[#86909C] text-left leading-snug overflow-hidden w-full"
             style={{ 
-              height: 'min(6.51vw, 125px)' // 125/1920 = 6.51%
+              height: 'min(6.51vw, 125px)', // 125/1920 = 6.51%
+              fontSize: 'clamp(14px, 0.938vw, 18px)' // 14px min, 18px max (18/1920 = 0.938%)
             }}
           >
             {description}
