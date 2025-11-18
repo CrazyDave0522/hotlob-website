@@ -47,19 +47,19 @@ export default function StoreCard({
     }
   }
 
-  // Map component
+  // Map component (proportional: 800/1368 = 58.479%)
   const mapSection = (
-    <div className="w-[800px] h-[340px] shrink-0">
+    <div className="shrink-0" style={{ width: "58.479%", aspectRatio: "800 / 340" }}>
       {googleMapsEmbedUrl ? (
         <iframe
           src={googleMapsEmbedUrl}
-          width="800"
-          height="340"
+          width="100%"
+          height="100%"
           style={{ border: 0 }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          className="rounded-[10px]"
+          className="rounded-[10px] w-full h-full"
         />
       ) : (
         <div className="w-full h-full bg-gray-100 rounded-[10px] flex items-center justify-center">
@@ -69,9 +69,14 @@ export default function StoreCard({
     </div>
   );
 
-  // Store info component
+  // Store info component (proportional: 528/1368 = 38.596%)
+  // Photos: show up to 3 and compute proportional widths inside the info column
+  const photosToShow = photos.slice(0, 3);
+  const photoCount = photosToShow.length;
+  // Photos will use clamp() tied to the 1920px design baseline
+
   const infoSection = (
-    <div className="inline-flex flex-col items-start gap-4 w-[528px]">
+    <div className="inline-flex flex-col items-start gap-4" style={{ width: "38.596%" }}>
       {/* Store Name */}
       <h2 className="text-[#1D1E1F] text-[22px] font-medium uppercase leading-normal">
         {name}
@@ -110,19 +115,23 @@ export default function StoreCard({
         </div>
       )}
 
-      {/* Store Photos */}
-      {hasPhotos && (
-        <div className="flex items-start gap-[30px]">
-          {photos.slice(0, 2).map((photo, index) => (
+      {/* Store Photos (scale with viewport baseline; clamp to prevent collapse) */}
+      {hasPhotos && photoCount > 0 && (
+        <div
+          className="flex items-start"
+          style={{ gap: `clamp(8px, calc((30 / 1920) * 100vw), 30px)` }}
+        >
+          {photosToShow.map((photo, index) => (
             <div
               key={`${photo.display_order}-${index}`}
-              className="relative w-[196px] h-[164px] rounded-[10px] overflow-hidden bg-gray-100 shrink-0 max-w-full"
+              className="relative rounded-[10px] overflow-hidden bg-gray-100 shrink-0"
+              style={{ width: `clamp(64px, calc((140 / 1920) * 100vw), 140px)`, aspectRatio: "140 / 120" }}
             >
               <Image
                 src={photo.photo_url}
                 alt={`${name} - Photo ${index + 1}`}
                 fill
-                sizes="196px"
+                sizes="140px"
                 className="object-cover"
               />
             </div>
@@ -133,7 +142,7 @@ export default function StoreCard({
   );
 
   return (
-    <div className="flex items-start gap-10 mx-auto" style={{ maxWidth: '1368px' }}>
+    <div className="flex items-start" style={{ width: "100%", columnGap: "2.924%" }}>
       {isReversed ? (
         <>
           {infoSection}

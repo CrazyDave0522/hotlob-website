@@ -2,7 +2,7 @@ import Image from "next/image";
 import HeroTexts from "./components/hero-texts";
 import FormTitle from "./components/form-title";
 import CateringForm from "./components/catering-form";
-import { CATERING_LAYOUT } from "./constants";
+// layout constants are in ./constants but not needed here
 
 export default function CateringPage() {
   return (
