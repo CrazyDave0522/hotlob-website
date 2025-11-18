@@ -40,7 +40,8 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
 
   return (
     <div className="w-full bg-white min-h-[116px] flex flex-col justify-center">
-      <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 mx-auto w-full max-w-[1920px] px-[30px] md:px-0">
+      {/* Width controlled by layout.tsx max-w-[1920px] wrapper */}
+      <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 mx-auto w-full px-[30px] md:px-0">
         {/* All button */}
         <button
           onClick={() => toggleTag("all")}

@@ -7,12 +7,17 @@ import OrderButton from "./order-button";
 
 interface DishCardProps {
   dish: Dish;
+  priority?: boolean;
 }
 
-export default function DishCard({ dish }: DishCardProps) {
+export default function DishCard({ dish, priority = false }: DishCardProps) {
   const { name, description, tier, imageUrl, tags, stores } = dish;
   return (
-    <div className="relative w-[332px] h-[480px] bg-white rounded-[20px] shadow-[0_0_20px_rgba(0,0,0,0.12)] transition-all duration-300 hover:h-[590px] hover:shadow-[0_0_20px_rgba(234,65,72,0.20)] overflow-visible group">
+    // Keep fixed sizes - container max-w handles responsive behavior
+    // Card: 332x480px, hover 590px, image 230px (overflows top ~120px)
+    <div 
+      className="relative w-[332px] h-[480px] bg-white rounded-[20px] shadow-[0_0_20px_rgba(0,0,0,0.12)] transition-all duration-300 hover:h-[590px] hover:shadow-[0_0_20px_rgba(234,65,72,0.20)] overflow-visible group"
+    >
       {/* Overall content layout - absolutely positioned at bottom, fixed */}
       <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center px-5 pb-6">
         {/* Dish image - independent element, 20px gap with name when not hovered, moves down 6px to 14px gap on hover */}
@@ -21,6 +26,7 @@ export default function DishCard({ dish }: DishCardProps) {
           alt={name}
           width={230}
           height={230}
+          priority={priority}
           className="rounded-md object-cover mb-5 transition-all duration-300 group-hover:translate-y-1.5 group-hover:mb-3.5"
         />
 

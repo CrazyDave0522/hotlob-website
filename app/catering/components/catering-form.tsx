@@ -7,6 +7,7 @@ import {
   getCurrentPositionWithTimeout,
 } from "@/lib/utils/geo";
 import { useToast } from "@/components/ui/use-toast";
+import { CATERING_LAYOUT } from "../constants";
 
 interface Store {
   id: string;
@@ -173,15 +174,23 @@ export default function CateringForm() {
 
   return (
     <div
-      className="absolute left-[7.2%] bottom-[14%] w-[710px]"
-      style={{ display: "flex", flexWrap: "wrap", gap: "30px" }}
+      className="absolute"
+      style={{
+        left: CATERING_LAYOUT.FORM_LEFT,
+        bottom: CATERING_LAYOUT.FORM_BOTTOM,
+        width: CATERING_LAYOUT.FORM_WIDTH,
+        display: "flex",
+        flexWrap: "wrap",
+        gap: CATERING_LAYOUT.FORM_GAP,
+      }}
     >
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="w-full flex flex-wrap gap-[30px]"
+        className="w-full flex flex-wrap"
+        style={{ gap: CATERING_LAYOUT.FORM_GAP }}
       >
-        {/* Store selection - full width */}
+        {/* Store selection - full width row, but input matches other fields */}
         <div className="w-full">
           <label
             htmlFor="storeId"
@@ -195,7 +204,8 @@ export default function CateringForm() {
             value={formData.storeId}
             onChange={handleChange}
             required
-            className="flex w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
+            style={{ width: CATERING_LAYOUT.INPUT_WIDTH_CALC }}
+            className="flex h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
           >
             <option value="">Select a store</option>
             {stores.map((store) => (
@@ -221,7 +231,7 @@ export default function CateringForm() {
             value={formData.firstName}
             onChange={handleChange}
             required
-            className="flex w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
+            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
             placeholder="Enter first name"
           />
         </div>
@@ -241,7 +251,7 @@ export default function CateringForm() {
             value={formData.lastName}
             onChange={handleChange}
             required
-            className="flex w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
+            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
             placeholder="Enter last name"
           />
         </div>
@@ -261,7 +271,7 @@ export default function CateringForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="flex w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
+            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
             placeholder="your@email.com"
           />
         </div>
@@ -285,7 +295,7 @@ export default function CateringForm() {
               setErrors((prev) => ({ ...prev, phone: error }));
             }}
             required
-            className={`flex w-[340px] h-10 px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent ${
+            className={`flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent ${
               errors.phone ? "border-red-500" : "border-[#CCCFD7]"
             }`}
             placeholder="+61 xxx xxx xxx"
@@ -311,7 +321,7 @@ export default function CateringForm() {
             onChange={handleChange}
             min={getMinCateringDate()}
             required
-            className="flex w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
+            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
           />
           <p className="text-gray-500 text-xs mt-1">
             Orders must be placed at least 2 days in advance
@@ -332,7 +342,7 @@ export default function CateringForm() {
             value={formData.pickupTime}
             onChange={handleChange}
             required
-            className="flex w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
+            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
           >
             <option value="">Select time</option>
             <option value="09:00">09:00 AM</option>
