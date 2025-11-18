@@ -55,31 +55,25 @@ export default async function NewsDetailPage({
   const news = data as NewsDetail;
   return (
     <main className="min-h-screen bg-[#F7F8FA] flex justify-center items-start px-4">
-      <div className="w-[1400px] shrink-0 rounded-md bg-white shadow-[0_0_10px_0_rgba(0,0,0,0.12)] mt-11 mb-[60px]">
-        <h1
-          className="text-[20px] font-medium text-[#1D1E1F] leading-normal text-left"
-          style={{ marginLeft: 30, marginTop: 30 }}
-        >
+      <div className="shrink-0 rounded-md bg-white shadow-[0_0_10px_0_rgba(0,0,0,0.12)] mt-11 mb-[60px]" style={{ width: '72.917%', maxWidth: '1400px' }}>
+        <h1 className="text-[20px] font-medium text-[#1D1E1F] leading-normal text-left ml-[30px] mt-[30px]">
           {news.title}
         </h1>
-        <span
-          className="block text-[12px] font-normal text-[#999] leading-normal"
-          style={{ marginLeft: 30, marginTop: 18 }}
-        >
+        <span className="block text-[12px] font-normal text-[#999] leading-normal ml-[30px] mt-[18px]">
           {formatAUDate(news.publish_date)}
         </span>
-        <div style={{ marginLeft: 30, marginTop: 14, marginBottom: 0 }}>
-          <div className="w-[1340px] h-px shrink-0 bg-[#E1E4E9]" />
+        <div className="ml-[30px] mt-3.5">
+          <div className="h-px shrink-0 bg-[#E1E4E9]" style={{ width: '95.71%' }} />
         </div>
-        <div style={{ marginTop: 20, marginBottom: 0 }} className="flex justify-center items-center">
+        <div className="mt-5 flex justify-center items-center">
           {/* 封面图，假设 news.cover_image_url 有值 */}
           {news.cover_image_url && (
-            <div className="relative w-[900px] h-[420px] shrink-0" style={{ aspectRatio: '15/7', marginBottom: 16 }}>
+            <div className="relative shrink-0 mb-4" style={{ width: '64.286%', aspectRatio: '15/7' }}>
               <Image
                 src={news.cover_image_url}
                 alt={news.title}
                 fill
-                sizes="900px"
+                sizes="(min-width:1400px) 900px, 64.286vw"
                 className="object-cover rounded-md"
                 priority
               />
