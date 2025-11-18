@@ -24,10 +24,8 @@ const cards = [
     title: "🦞 The Hotlob Hits",
     description: `✨ Truffle & Cheese Lobster Roll
 Our signature. Rich truffle sauce, Aussie lobster, and torched parmesan for perfection.
-
 ✨ Lemon & Dill Lobster Roll
 Light but creamy and addictive — fresh Australian lobster tossed with dill mayo and lemon dressing.
-
 ✨ Soft Shell Crab Roll
 Crispy soft-shell crab with Thai green sauce, topped with fresh chilli slices for the perfect balance of crunch and heat.`,
     bgCollapsed: "/images/three-column-cards/card3.png",
@@ -99,19 +97,27 @@ export default function AboutHotlob() {
               />
 
               {/* Card content */}
-              <div className="absolute inset-0 flex flex-col px-[30px]" style={{ paddingTop: "14.286%" }}>
+              <div 
+                className="absolute inset-0 flex flex-col px-[30px]" 
+                style={{ paddingTop: "min(3.125vw, 60px)" }} // 60/1920 = 3.125%
+              >
                 <h3
-                  className="text-[26px] font-semibold leading-normal mb-5 transition-colors duration-400"
-                  style={{ color: isExpanded ? "#FFF" : "#333" }}
+                  className="text-[26px] font-semibold leading-normal transition-colors duration-400"
+                  style={{ 
+                    color: isExpanded ? "#FFF" : "#333",
+                    marginBottom: "min(1.042vw, 20px)" // 20/1920 = 1.042%
+                  }}
                 >
                   {card.title}
                 </h3>
                 <p
-                  className="text-base font-normal leading-6 overflow-hidden text-white whitespace-pre-line"
+                  className="text-base font-normal overflow-hidden text-white whitespace-pre-line"
                   style={{
                     display: "-webkit-box",
                     WebkitLineClamp: 9,
                     WebkitBoxOrient: "vertical",
+                    // 段间距由行高决定：使用响应式行高，1920 下为 24px，小屏更小
+                    lineHeight: "clamp(20px, 1.25vw, 24px)",
                     opacity: isExpanded ? 1 : 0,
                     transition: isExpanded
                       ? "opacity 300ms ease-in 280ms"
