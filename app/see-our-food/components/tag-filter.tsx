@@ -39,7 +39,10 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
     : tags.slice(0, CONSTANTS.MAX_VISIBLE_TAGS);
 
   return (
-    <div className="w-full bg-white min-h-[116px] flex flex-col justify-center">
+    <div 
+      className="w-full bg-white flex flex-col justify-center"
+      style={{ minHeight: "min(6.042vw, 116px)" }}
+    >
       {/* Width controlled by layout.tsx max-w-[1920px] wrapper */}
       <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 mx-auto w-full px-[30px] md:px-0">
         {/* All button */}
