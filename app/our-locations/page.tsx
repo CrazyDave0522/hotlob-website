@@ -152,7 +152,7 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
       />
 
       <div className="bg-[url('/images/our-locations-bg-stores.png')] bg-cover bg-center bg-no-repeat">
-        <div className="container mx-auto px-4 md:px-8 py-12 md:py-16">
+        <div className="container mx-auto py-12 md:py-16">
           <div className="space-y-12">
             {stores?.map((store: Store, index: number) => (
               <StoreCard
