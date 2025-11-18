@@ -116,7 +116,7 @@ export default function StoreCard({
           {photos.slice(0, 2).map((photo, index) => (
             <div
               key={`${photo.display_order}-${index}`}
-              className="relative w-[196px] h-[164px] rounded-[10px] overflow-hidden bg-gray-100 shrink-0"
+              className="relative w-[196px] h-[164px] rounded-[10px] overflow-hidden bg-gray-100 shrink-0 max-w-full"
             >
               <Image
                 src={photo.photo_url}
