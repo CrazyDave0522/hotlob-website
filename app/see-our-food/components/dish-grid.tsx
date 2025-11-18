@@ -13,7 +13,7 @@ export default function DishGrid({ dishes }: DishGridProps) {
       {/* pt-[30px]: distance from tag container bottom to image top */}
       {/* Wrapper container height 600px = 120px(image overflow) + 480px(card) */}
       {/* Gap: 24px (design spec) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 items-end pt-[30px] max-w-[1600px]">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 items-end pt-[30px]" style={{ width: '72.917%', maxWidth: '1400px' }}>
         {dishes.map((dish, index) => (
           <div key={dish.id} className="h-[600px] flex items-end">
             <DishCard dish={dish} priority={index < 4} />
