@@ -56,7 +56,7 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
   return (
     <>
       {/* News List Container */}
-      <div className="w-[1400px] mx-auto bg-white rounded-md shadow-[0_0_10px_0_rgba(0,0,0,0.12)]">
+      <div className="mx-auto bg-white rounded-md shadow-[0_0_10px_0_rgba(0,0,0,0.12)]" style={{ width: '72.917%', maxWidth: '1400px' }}>
         {items.length === 0 ? (
           <div className="py-12 text-center text-gray-500">
             No news available
@@ -86,32 +86,34 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
 
       {/* Load More Button */}
       {hasMore && (
-        <div 
-          onClick={loading ? undefined : loadMore}
-          className="group w-[1400px] h-[50px] mx-auto mt-5 mb-[60px] flex justify-center items-center gap-2.5 rounded-md bg-white shadow-[0_0_6px_0_rgba(0,0,0,0.04)] hover:shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-shadow cursor-pointer disabled:opacity-50"
-        >
-          <div className="flex items-center gap-2.5 text-[#4E5969] text-base font-normal group-hover:text-[#EA4148] transition-colors">
-            {loading ? "Loading..." : "more"}
-            {!loading && (
-              <>
-                <Image
-                  src="/images/icons/arrow-right.svg"
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="shrink-0 group-hover:hidden"
-                  style={{ aspectRatio: '1/1' }}
-                />
-                <Image
-                  src="/images/icons/arrow-right-active.svg"
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="shrink-0 hidden group-hover:block"
-                  style={{ aspectRatio: '1/1' }}
-                />
-              </>
-            )}
+        <div style={{ width: '72.917%', maxWidth: '1400px' }} className="mx-auto pb-[60px]">
+          <div
+            onClick={loading ? undefined : loadMore}
+            className="group h-[50px] mt-5 flex justify-center items-center gap-2.5 rounded-md bg-white shadow-[0_0_6px_0_rgba(0,0,0,0.04)] hover:shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-shadow cursor-pointer disabled:opacity-50"
+          >
+            <div className="flex items-center gap-2.5 text-[#4E5969] text-base font-normal group-hover:text-[#EA4148] transition-colors">
+              {loading ? "Loading..." : "more"}
+              {!loading && (
+                <>
+                  <Image
+                    src="/images/icons/arrow-right.svg"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="shrink-0 group-hover:hidden"
+                    style={{ aspectRatio: '1/1' }}
+                  />
+                  <Image
+                    src="/images/icons/arrow-right-active.svg"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="shrink-0 hidden group-hover:block"
+                    style={{ aspectRatio: '1/1' }}
+                  />
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}
