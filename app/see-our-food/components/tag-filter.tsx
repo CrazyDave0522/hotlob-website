@@ -40,8 +40,8 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
 
   return (
     <div className="w-full bg-white min-h-[116px] flex flex-col justify-center">
-      {/* Centered content width matches site design (1400/1920) */}
-      <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 mx-auto px-[30px] md:px-0" style={{ width: '72.917%', maxWidth: '1400px' }}>
+      {/* Width controlled by layout.tsx max-w-[1920px] wrapper */}
+      <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 mx-auto w-full px-[30px] md:px-0">
         {/* All button */}
         <button
           onClick={() => toggleTag("all")}
