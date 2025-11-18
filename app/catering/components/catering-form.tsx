@@ -7,6 +7,7 @@ import {
   getCurrentPositionWithTimeout,
 } from "@/lib/utils/geo";
 import { useToast } from "@/components/ui/use-toast";
+import { CATERING_LAYOUT } from "../constants";
 
 interface Store {
   id: string;
@@ -173,19 +174,21 @@ export default function CateringForm() {
 
   return (
     <div
-      className="absolute left-[7.2%] bottom-[11%] w-[36.979%]"
+      className="absolute"
       style={{
-        // Use bottom anchor so vertical placement is stable across container heights
-        // Adjusted to 10% to move the form slightly upward from previous 8%
+        left: CATERING_LAYOUT.FORM_LEFT,
+        bottom: CATERING_LAYOUT.FORM_BOTTOM,
+        width: CATERING_LAYOUT.FORM_WIDTH,
         display: "flex",
         flexWrap: "wrap",
-        gap: "30px",
+        gap: CATERING_LAYOUT.FORM_GAP,
       }}
     >
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="w-full flex flex-wrap gap-[30px]"
+        className="w-full flex flex-wrap"
+        style={{ gap: CATERING_LAYOUT.FORM_GAP }}
       >
         {/* Store selection - full width row, but input matches other fields */}
         <div className="w-full">
@@ -201,7 +204,7 @@ export default function CateringForm() {
             value={formData.storeId}
             onChange={handleChange}
             required
-            style={{ width: "calc(50% - 15px)" }}
+            style={{ width: CATERING_LAYOUT.INPUT_WIDTH_CALC }}
             className="flex h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
           >
             <option value="">Select a store</option>

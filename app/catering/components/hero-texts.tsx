@@ -1,8 +1,13 @@
 "use client";
 
+import { CATERING_LAYOUT } from "../constants";
+
 export default function HeroTexts() {
   return (
-    <div className="absolute top-[7.4%] left-0 right-0 flex flex-col items-center gap-4">
+    <div 
+      className="absolute left-0 right-0 flex flex-col items-center gap-4"
+      style={{ top: CATERING_LAYOUT.HERO_TOP }}
+    >
       {/* CATERING */}
       <h1
         className="text-[#FFD632] text-center text-[40px] font-semibold leading-normal"
