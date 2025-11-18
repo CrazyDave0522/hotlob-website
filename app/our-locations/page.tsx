@@ -152,8 +152,9 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
       />
 
       <div className="bg-[url('/images/our-locations-bg-stores.png')] bg-cover bg-center bg-no-repeat">
-        <div className="container mx-auto px-4 md:px-8 py-12 md:py-16">
-          <div className="space-y-12">
+        <div className="py-12 md:py-16">
+          <div className="mx-auto" style={{ width: '72.917%', maxWidth: '1400px' }}>
+            <div className="space-y-12">
             {stores?.map((store: Store, index: number) => (
               <StoreCard
                 key={store.id}
@@ -169,6 +170,7 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
                 isReversed={index % 2 === 1}
               />
             ))}
+            </div>
           </div>
         </div>
       </div>

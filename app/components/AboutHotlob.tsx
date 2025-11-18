@@ -1,0 +1,131 @@
+"use client";
+
+import { useState } from "react";
+
+const cards = [
+  {
+    id: 1,
+    title: "A quick bite that feels like a treat",
+    description:
+      "Hotlob takes the premium lobster roll experience and makes it fun, fast, and affordable. Now, our takeaway rolls bring big flavour in a small brioche —  the perfect grab-and-go roll that fits any craving or budget.",
+    bgCollapsed: "/images/three-column-cards/card1.png",
+    bgExpanded: "/images/three-column-cards/card1-active.png",
+  },
+  {
+    id: 2,
+    title: "Our Story",
+    description:
+      "Born from our original restaurant, The Lobster Pier (est. 2018 in WA), we wanted everyone to enjoy Aussie lobster without the fine-dining price tag.",
+    bgCollapsed: "/images/three-column-cards/card2.png",
+    bgExpanded: "/images/three-column-cards/card2-active.png",
+  },
+  {
+    id: 3,
+    title: "🦞 The Hotlob Hits",
+    description: `✨ Truffle & Cheese Lobster Roll
+Our signature. Rich truffle sauce, Aussie lobster, and torched parmesan for perfection.
+
+✨ Lemon & Dill Lobster Roll
+Light but creamy and addictive — fresh Australian lobster tossed with dill mayo and lemon dressing.
+
+✨ Soft Shell Crab Roll
+Crispy soft-shell crab with Thai green sauce, topped with fresh chilli slices for the perfect balance of crunch and heat.`,
+    bgCollapsed: "/images/three-column-cards/card3.png",
+    bgExpanded: "/images/three-column-cards/card3-active.png",
+  },
+];
+
+export default function AboutHotlob() {
+  const [expandedCard, setExpandedCard] = useState<number>(1); // Default: card 1 expanded
+
+  return (
+    <section
+      className="relative w-full flex flex-col items-center"
+      style={{
+        height: "min(33.333vw, 640px)", // 640/1920 = 33.333%
+        backgroundImage: "url(/images/home-bg-about-hotlob.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Title */}
+      <h2
+        className="text-[34px] font-semibold text-[#1D1E1F] text-center leading-normal"
+        style={{ marginTop: "min(3.125vw, 60px)" }} // 60/1920
+      >
+        About Hotlob
+      </h2>
+
+      {/* Three-column card container */}
+      <div
+        className="flex gap-5 shrink-0 w-[72.917%] mx-auto justify-center" // 1400/1920 = 72.917%
+        style={{ 
+          height: "min(21.927vw, 421px)", // 421/1920 = 21.927%
+          marginTop: "min(2.083vw, 40px)", // 40/1920 = 2.083%
+        }}
+      >
+        {cards.map((card) => {
+          const isExpanded = expandedCard === card.id;
+          return (
+            <div
+              key={card.id}
+              className="shrink-0 relative cursor-pointer overflow-hidden rounded-[20px]"
+              style={{
+                width: isExpanded ? "40%" : "28.571%", // 560/1400=40%, 400/1400=28.571%
+                height: "100%", // Fill parent container height
+                transition: "width 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+              onMouseEnter={() => setExpandedCard(card.id)}
+              onClick={() => setExpandedCard(card.id)}
+            >
+              {/* Background images with crossfade effect */}
+              <div
+                className="absolute inset-0 transition-opacity duration-400"
+                style={{
+                  backgroundImage: `url(${card.bgCollapsed})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  opacity: isExpanded ? 0 : 1,
+                }}
+              />
+              <div
+                className="absolute inset-0 transition-opacity duration-400"
+                style={{
+                  backgroundImage: `url(${card.bgExpanded})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  opacity: isExpanded ? 1 : 0,
+                }}
+              />
+
+              {/* Card content */}
+              <div className="absolute inset-0 flex flex-col px-[30px]" style={{ paddingTop: "14.286%" }}>
+                <h3
+                  className="text-[26px] font-semibold leading-normal mb-5 transition-colors duration-400"
+                  style={{ color: isExpanded ? "#FFF" : "#333" }}
+                >
+                  {card.title}
+                </h3>
+                <p
+                  className="text-base font-normal leading-6 overflow-hidden text-white whitespace-pre-line"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 9,
+                    WebkitBoxOrient: "vertical",
+                    opacity: isExpanded ? 1 : 0,
+                    transition: isExpanded
+                      ? "opacity 300ms ease-in 280ms"
+                      : "opacity 200ms ease-out",
+                    pointerEvents: isExpanded ? "auto" : "none",
+                  }}
+                >
+                  {card.description}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}

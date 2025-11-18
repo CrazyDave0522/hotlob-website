@@ -8,10 +8,11 @@ interface HeroProps {
   title: string;
   description: string;
   imageUrl: string;
-  size?: "large" | "medium"; // large = 820px (Home), medium = 420px (others)
+  size?: "home" | "large" | "medium"; // home = 820px, large = 820px, medium = 420px
   footerNote?: string; // optional small text at the bottom-left inside hero
   backgroundPositionY?: string; // optional vertical position (default "center")
   showOverlay?: boolean; // optional overlay toggle (default true)
+  overlayUrl?: string; // optional custom overlay image
 }
 
 export default function Hero({
@@ -22,13 +23,18 @@ export default function Hero({
   footerNote,
   backgroundPositionY = "center",
   showOverlay = true,
+  overlayUrl,
 }: HeroProps) {
-  const heroHeight = size === "large" ? "h-[820px]" : "h-[420px]";
+  // home and large use 820px (42.708vw capped at 820px); medium uses 420px (21.875vw capped at 420px)
+  const heroHeight = size === "medium" 
+    ? "min(21.875vw, 420px)" 
+    : "min(42.708vw, 820px)";
 
   return (
     <section
-      className={`relative w-full overflow-hidden ${heroHeight}`}
+      className="relative w-full overflow-hidden"
       style={{
+        height: heroHeight,
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: "cover",
         backgroundPosition: `center ${backgroundPositionY}`,
@@ -37,7 +43,7 @@ export default function Hero({
       {/* General transparent overlay */}
       {showOverlay && (
         <Image
-          src="/images/overlay.png"
+          src={overlayUrl ?? "/images/overlay.png"}
           alt=""
           fill
           priority
@@ -46,16 +52,25 @@ export default function Hero({
       )}
 
       {/* Text area */}
-      <div className={`relative z-10 flex flex-col justify-center h-full pl-[30px] md:pl-[260px] gap-5 ${showOverlay ? 'text-white' : ''}`}>
+      <div 
+        className={`relative z-10 flex flex-col justify-center h-full gap-5 ${showOverlay ? 'text-white' : ''}`}
+        style={{ paddingLeft: "min(13.542vw, 260px)" }} // 260/1920 = 13.542%
+      >
         <h1 
-          className={`font-semibold max-w-[498px] md:max-w-[684px] ${showOverlay ? 'text-[38px] leading-[154%]' : 'text-[30px] leading-normal text-[#242424]'}`}
-          style={showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {}}
+          className={`font-semibold ${showOverlay ? 'text-[38px] leading-[154%]' : 'text-[30px] leading-normal text-[#242424]'}`}
+          style={{
+            maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
+            ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
+          }}
         >
           {title}
         </h1>
         <div 
-          className={`font-normal max-w-[456px] md:max-w-[684px] space-y-5 ${showOverlay ? 'text-[30px] leading-[154%]' : 'text-[20px] leading-normal text-[#999]'}`}
-          style={showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {}}
+          className={`font-normal space-y-2 ${showOverlay ? 'text-[30px] leading-[154%]' : 'text-[20px] leading-normal text-[#999]'}`}
+          style={{
+            maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
+            ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
+          }}
         >
           {description.split('\n').map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
@@ -65,8 +80,11 @@ export default function Hero({
 
       {/* Footer note (optional) */}
       {footerNote && (
-        <div className="absolute z-10 bottom-2.5 left-[30px] md:left-[260px]">
-          <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-left">
+        <div 
+          className="absolute z-10 bottom-2.5 right-0" 
+          style={{ paddingRight: "min(8.333vw, 160px)" }} // 160/1920 = 8.333%, closer to right edge
+        >
+          <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-right">
             {footerNote}
           </p>
         </div>
