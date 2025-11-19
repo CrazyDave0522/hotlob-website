@@ -63,7 +63,7 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
         onClick={() => router.push("/see-our-food")}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="flex flex-col items-center mt-10 transition-colors duration-200"
+        className="flex flex-col items-center mt-12 transition-colors duration-200"
         style={{ gap: 10 }}
       >
         <div
