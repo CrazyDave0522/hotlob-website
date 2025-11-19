@@ -13,30 +13,31 @@ interface SeeOurFoodSectionProps {
 export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
   const router = useRouter();
   const [hovered, setHovered] = useState(false);
-  // 只展示前4个
+  // Display only the first 4 dishes
   const topDishes = dishes.slice(0, 4);
 
   return (
-    <section
-      className="relative w-full flex flex-col items-center"
-      style={{
-        backgroundImage: "url(/images/home-bg-see-our-food.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        height: "min(47.917vw, 920px)", // 920/1920 = 47.917% — increased to fit stacked content
-        flexShrink: 0,
-        paddingBottom: "min(6.25vw, 120px)", // 120/1920
-      }}
-    >
-      {/* 标题 */}
-      <h2
-        className="text-[34px] font-semibold text-[#1D1E1F] text-center leading-normal"
-        style={{ marginTop: "min(3.125vw, 60px)" }} // 60/1920
-      >
-        See our food
-      </h2>
-      {/* 菜品卡片区域 */}
+    <section className="relative w-full" style={{ display: 'block', backgroundColor: '#FDF7F0' }}>
+      {/* use Next/Image so the image sets the section height and isn't side-cropped; content overlays absolutely */}
+      <Image
+        src="/images/home-bg-see-our-food.png"
+        alt="See our food background"
+        width={1920}
+        height={920}
+        className="w-full h-auto"
+        priority
+        style={{ aspectRatio: '1920/920', display: 'block' }}
+      />
+
+      <div style={{ position: "absolute", top: 0, left: 0, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        {/* Title */}
+        <h2
+          className="text-[34px] font-semibold text-[#1D1E1F] text-center leading-normal"
+          style={{ marginTop: "min(3.125vw, 60px)" }} // 60/1920
+        >
+          See our food
+        </h2>
+      {/* Dish cards section */}
       <div
         className="flex gap-6 w-[72.917%] mx-auto justify-center"
         style={{
@@ -54,8 +55,7 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
           </div>
         ))}
       </div>
-      {/* more 按钮 */}
-      {/* more 按钮 - 圆形图标上方，文字在下方，间距 10px */}
+      {/* More button - icon on top, text below, 10px gap */}
       {
         // use hover state to switch icon/backgorund reliably
       }
@@ -97,6 +97,7 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
           More
         </span>
       </button>
+      </div>
     </section>
   );
 }

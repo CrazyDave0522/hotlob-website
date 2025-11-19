@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const cards = [
   {
@@ -37,22 +38,26 @@ export default function AboutHotlob() {
   const [expandedCard, setExpandedCard] = useState<number>(1); // Default: card 1 expanded
 
   return (
-    <section
-      className="relative w-full flex flex-col items-center"
-      style={{
-        height: "min(33.333vw, 640px)", // 640/1920 = 33.333%
-        backgroundImage: "url(/images/home-bg-about-hotlob.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* Title */}
-      <h2
-        className="text-[34px] font-semibold text-[#1D1E1F] text-center leading-normal"
-        style={{ marginTop: "min(3.125vw, 60px)" }} // 60/1920
-      >
-        About Hotlob
-      </h2>
+    <section className="relative w-full" style={{ display: 'block' }}>
+      {/* Background image sets section height; content overlays absolutely */}
+      <Image
+        src="/images/home-bg-about-hotlob.png"
+        alt="About Hotlob background"
+        width={1920}
+        height={640}
+        className="w-full h-auto"
+        priority
+        style={{ aspectRatio: '1920/640', display: 'block' }}
+      />
+
+      <div style={{ position: "absolute", top: 0, left: 0, width: "100%" }}>
+        {/* Title */}
+        <h2
+          className="text-[34px] font-semibold text-[#1D1E1F] text-center leading-normal"
+          style={{ marginTop: "min(3.125vw, 60px)" }} // 60/1920
+        >
+          About Hotlob
+        </h2>
 
       {/* Three-column card container */}
       <div
@@ -131,6 +136,7 @@ export default function AboutHotlob() {
             </div>
           );
         })}
+      </div>
       </div>
     </section>
   );

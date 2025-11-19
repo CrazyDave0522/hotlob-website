@@ -1,14 +1,16 @@
 import Hero from "./see-our-food/components/hero";
 import AboutHotlob from "./components/AboutHotlob";
 import SeeOurFoodSection from "./components/SeeOurFoodSection";
+import CateringSection from "./components/CateringSection";
 import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
 import type { Dish, RawDish } from "@/types/types";
+import Image from "next/image";
 
 export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: revalidate data
 
 export default async function Home() {
-  // 从数据库获取菜品数据（复用 see-our-food 页面的查询逻辑）
+  // Fetch dish data from database (reusing see-our-food page query logic)
   const { data: dishesRaw, error: dishError } = await supabase
     .from("dish")
     .select(
@@ -37,7 +39,7 @@ export default async function Home() {
     console.error("❌ Failed to fetch dishes for home page:", dishError);
   }
 
-  // 数据处理：整合菜品信息
+  // Data processing: consolidate dish information
   const dishes: Dish[] = ((dishesRaw as RawDish[] | null) ?? [])
     .map((d) => {
       const imageUrl =
@@ -45,7 +47,7 @@ export default async function Home() {
       const matchedTags =
         d.dish_tag?.flatMap((dt) => dt.tag ?? [])?.filter(Boolean) ?? [];
 
-      // 整理可用门店
+      // Compile available stores
       const stores =
         d.dish_store
           ?.filter((ds) => ds.available && ds.store)
@@ -84,6 +86,19 @@ export default async function Home() {
       />
       <AboutHotlob />
       <SeeOurFoodSection dishes={dishes} />
+      {/* Curve background section */}
+      <section className="relative w-full" style={{ display: 'block', backgroundColor: '#FDF7F0' }}>
+        <Image
+          src="/images/home-bg-curve.png"
+          alt="Curve background"
+          width={1920}
+          height={109}
+          className="w-full h-auto"
+          priority
+          style={{ aspectRatio: '1920/109', display: 'block' }}
+        />
+      </section>
+      <CateringSection />
       {/* More homepage modules to follow... */}
     </main>
   );
