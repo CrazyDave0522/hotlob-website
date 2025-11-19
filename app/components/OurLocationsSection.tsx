@@ -6,7 +6,9 @@ interface OurLocationsSectionProps {
   stores: StoreWithData[];
 }
 
-export default function OurLocationsSection({ stores }: OurLocationsSectionProps) {
+export default function OurLocationsSection({
+  stores,
+}: OurLocationsSectionProps) {
   // Display top 2 stores
   const topStores = stores.slice(0, 2);
 
@@ -24,22 +26,25 @@ export default function OurLocationsSection({ stores }: OurLocationsSectionProps
       />
 
       {/* Content overlay */}
-      <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+        }}
+      >
         {/* Title with icon */}
         <div
           className="flex items-center"
           style={{
-            marginLeft: "260px",
-            marginTop: "60px",
-            gap: "36px",
+            marginLeft: "min(13.542vw, 260px)", // 260/1920
+            marginTop: "min(3.125vw, 60px)", // 60/1920
+            gap: "min(1.875vw, 36px)", // 36/1920
           }}
         >
-          <Image
-            src="/images/icons/store.svg"
-            alt=""
-            width={40}
-            height={40}
-          />
+          <Image src="/images/icons/store.svg" alt="" width={40} height={40} />
           <h2 className="text-[34px] font-semibold text-[#1D1E1F] leading-normal">
             Our Locations
           </h2>
@@ -49,16 +54,16 @@ export default function OurLocationsSection({ stores }: OurLocationsSectionProps
         <div
           className="flex items-center"
           style={{
-            marginTop: "50px",
-            marginLeft: "260px",
-            gap: "42px",
+            marginTop: "min(2.604vw, 50px)", // 50/1920
+            marginLeft: "min(13.542vw, 260px)",
+            gap: "min(2.188vw, 42px)", // 42/1920
           }}
         >
           {/* Stores list container */}
           <div
             className="flex flex-col items-start"
             style={{
-              width: "690px",
+              width: "min(35.938vw, 690px)", // 690/1920
             }}
           >
             {topStores.map((store) => (
@@ -80,7 +85,7 @@ export default function OurLocationsSection({ stores }: OurLocationsSectionProps
           <div
             className="relative shrink-0"
             style={{
-              width: "663px", // 1920 - 265 - 42 - 690 - 260 = 663
+              width: "min(34.531vw, 663px)", // 663/1920
             }}
           >
             <Image

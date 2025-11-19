@@ -44,7 +44,7 @@ export default function HomeStoreItem({
     <div
       className="flex justify-between items-center"
       style={{
-        padding: "20px",
+        padding: "min(1.042vw, 20px)", // 20/1920
         alignSelf: "stretch",
         borderTop: "1px solid #B9B7B7",
         borderBottom: "1px solid #B9B7B7",
@@ -54,9 +54,9 @@ export default function HomeStoreItem({
       <div
         className="relative shrink-0 bg-gray-100 overflow-hidden"
         style={{
-          width: "220px",
-          height: "160px",
-          borderRadius: "10px",
+          width: "min(11.458vw, 220px)", // 220/1920
+          height: "min(8.333vw, 160px)", // 160/1920
+          borderRadius: "min(0.521vw, 10px)", // 10/1920
         }}
       >
         {firstPhoto ? (
@@ -75,9 +75,9 @@ export default function HomeStoreItem({
       </div>
 
       {/* Store info (right) */}
-      <div className="inline-flex flex-col items-start gap-4" style={{ marginLeft: "20px", flex: 1 }}>
+      <div className="inline-flex flex-col items-start gap-4" style={{ marginLeft: "min(1.042vw, 20px)", flex: 1 }}>
         {/* Store Name */}
-        <h3 className="text-[#1D1E1F] text-[22px] font-medium uppercase leading-normal">
+        <h3 className="text-[#1D1E1F] font-medium uppercase leading-normal" style={{ fontSize: "min(1.146vw, 22px)" }}>
           {name}
         </h3>
 
@@ -87,7 +87,7 @@ export default function HomeStoreItem({
         )}
 
         {/* Address */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center" style={{ gap: "min(0.833vw, 16px)" }}>
           <Image
             src="/images/icons/landmark.svg"
             alt=""
@@ -95,14 +95,14 @@ export default function HomeStoreItem({
             height={20}
             className="shrink-0 aspect-square"
           />
-          <span className="text-[#4E5969] text-lg font-normal leading-normal">
+          <span className="text-[#4E5969] font-normal leading-normal" style={{ fontSize: "min(0.938vw, 18px)" }}>
             {fullAddress}
           </span>
         </div>
 
         {/* Opening Hours (today) */}
         {todayHoursText && (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center" style={{ gap: "min(0.833vw, 16px)" }}>
             <Image
               src="/images/icons/clock.svg"
               alt=""
@@ -110,7 +110,7 @@ export default function HomeStoreItem({
               height={20}
               className="shrink-0 aspect-square"
             />
-            <span className="text-[#4E5969] text-lg font-normal leading-normal">
+            <span className="text-[#4E5969] font-normal leading-normal" style={{ fontSize: "min(0.938vw, 18px)" }}>
               {todayHoursText}
             </span>
           </div>
