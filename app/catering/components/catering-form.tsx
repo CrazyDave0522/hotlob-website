@@ -174,6 +174,7 @@ export default function CateringForm() {
 
   return (
     <div
+      id="catering-form"
       className="absolute"
       style={{
         left: CATERING_LAYOUT.FORM_LEFT,
