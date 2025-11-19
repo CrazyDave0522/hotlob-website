@@ -57,7 +57,7 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
       </div>
       {/* More button - icon on top, text below, 10px gap */}
       {
-        // use hover state to switch icon/backgorund reliably
+        // use hover state to switch icon/background reliably
       }
       <button
         onClick={() => router.push("/see-our-food")}

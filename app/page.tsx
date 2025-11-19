@@ -2,10 +2,12 @@ import Hero from "./see-our-food/components/hero";
 import AboutHotlob from "./components/AboutHotlob";
 import SeeOurFoodSection from "./components/SeeOurFoodSection";
 import CateringSection from "./components/CateringSection";
+import OurLocationsSection from "./components/OurLocationsSection";
 import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
 import type { Dish, RawDish } from "@/types/types";
 import Image from "next/image";
+import { getStores } from "@/lib/getStores";
 
 export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: revalidate data
 
@@ -72,6 +74,9 @@ export default async function Home() {
     })
     .filter((d) => (d.stores?.length ?? 0) > 0);
 
+  // Fetch top 2 stores by rating for Our Locations section
+  const topStores = await getStores(2);
+
   return (
     <main>
       <Hero
@@ -99,6 +104,7 @@ export default async function Home() {
         />
       </section>
       <CateringSection />
+      <OurLocationsSection stores={topStores} />
       {/* More homepage modules to follow... */}
     </main>
   );
