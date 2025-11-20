@@ -70,6 +70,7 @@ export default function CateringSection() {
       >
         <Link
           href="/catering#catering-form"
+          className="transition-colors duration-200 text-[#1D1E1F] hover:text-[#EA4148]"
           style={{
             display: "flex",
             width: "min(10.417vw, 200px)",
@@ -80,7 +81,6 @@ export default function CateringSection() {
             flexShrink: 0,
             borderRadius: "min(1.563vw, 30px)",
             background: "#FFFFFF",
-            color: "#1D1E1F",
             textDecoration: "none",
             boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
             border: "none",
@@ -90,7 +90,7 @@ export default function CateringSection() {
             lineHeight: "normal",
           }}
         >
-          Order online
+          Order Online
         </Link>
       </div>
     </section>

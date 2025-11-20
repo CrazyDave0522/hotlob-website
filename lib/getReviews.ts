@@ -32,22 +32,8 @@ export async function getReviews(
   includePhotos: boolean = false
 ): Promise<ReviewData[]> {
   const selectFields = includePhotos
-    ? `
-      author_name, 
-      author_photo_url, 
-      rating, 
-      review_text,
-      review_photos (
-        photo_url,
-        display_order
-      )
-    `
-    : `
-      author_name, 
-      author_photo_url, 
-      rating, 
-      review_text
-    `;
+    ? ("author_name, author_photo_url, rating, review_text, review_photos (photo_url, display_order)" as const)
+    : ("author_name, author_photo_url, rating, review_text" as const);
 
   let query = supabase
     .from('curated_reviews')
@@ -59,14 +45,14 @@ export async function getReviews(
     query = query.limit(limit);
   }
 
-  const { data, error } = await query;
+  const { data, error } = await query.returns<CuratedReviewRow[]>();
 
   if (error) {
     console.error('Error fetching curated_reviews:', error);
     return [];
   }
 
-  const rawData = (data || []) as CuratedReviewRow[];
+  const rawData = data || [];
 
   // Transform data to include sorted photos if requested
   return rawData.map((r) => ({
