@@ -40,7 +40,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
       containerStyle: {
         position: "absolute" as const,
         right: `${avatarOffset}px`,
-        top: "50%",
+        top: "calc(50% - 30px)",
         transform: "translateY(-50%)",
       },
       avatarStyle: {
@@ -69,7 +69,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
         position: "absolute" as const,
         left: "0px",
         top: "50%",
-        transform: "translateY(-50%)",
+        transform: "translateY(calc(-50% - 20px))",
       },
       avatarStyle: {
         position: "absolute" as const,
