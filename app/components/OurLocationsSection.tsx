@@ -40,68 +40,55 @@ export default function OurLocationsSection({
           left: 0,
           width: "100%",
           height: "100%",
+          paddingLeft: "min(13.542vw, 260px)", // 260/1920
+          paddingRight: "min(13.542vw, 260px)", // 260/1920
+          paddingTop: "min(3.125vw, 60px)", // 60/1920
+          boxSizing: "border-box",
         }}
       >
-        {/* Title with icon */}
-        <div
-          className="flex items-center"
-          style={{
-            marginLeft: "min(13.542vw, 260px)", // 260/1920
-            marginTop: "min(3.125vw, 60px)", // 60/1920
-            gap: "min(1.875vw, 36px)", // 36/1920
-          }}
-        >
-          <Image src="/images/icons/store.svg" alt="" width={40} height={40} />
-          <h2 className="text-[34px] font-semibold text-[#1D1E1F] leading-normal">
-            Our Locations
-          </h2>
-        </div>
+        {/* Main content: left side (title + stores) and right side (review) */}
+        <div className="flex h-full" style={{ gap: "min(2.188vw, 42px)" }}> {/* 42/1920 */}
+          {/* Left side: title and stores list */}
+          <div className="flex flex-col" style={{ width: "min(35.938vw, 690px)" }}>
+            {/* Title with icon */}
+            <div
+              className="flex items-center"
+              style={{
+                marginBottom: "min(2.604vw, 50px)", // 50/1920
+                gap: "min(1.875vw, 36px)", // 36/1920
+              }}
+            >
+              <Image src="/images/icons/store.svg" alt="" width={40} height={40} />
+              <h2 className="text-[34px] font-semibold text-[#1D1E1F] leading-normal">
+                Our Locations
+              </h2>
+            </div>
 
-        {/* Main content: stores list (left) and review (right) */}
-        <div
-          className="flex items-center"
-          style={{
-            marginTop: "min(2.604vw, 50px)", // 50/1920
-            marginLeft: "min(13.542vw, 260px)",
-            gap: "min(2.188vw, 42px)", // 42/1920
-          }}
-        >
-          {/* Stores list container */}
-          <div
-            className="flex flex-col items-start"
-            style={{
-              width: "min(35.938vw, 690px)", // 690/1920
-            }}
-          >
-            {topStores.map((store) => (
-              <HomeStoreItem
-                key={store.id}
-                name={store.name}
-                street={store.street}
-                suburb={store.suburb}
-                state={store.state}
-                postcode={store.postcode}
-                photos={store.photos}
-                rating={store.rating}
-                openingHoursWeekdayText={store.openingHoursWeekdayText}
-              />
-            ))}
+            {/* Stores list */}
+            <div className="flex flex-col items-start">
+              {topStores.map((store) => (
+                <HomeStoreItem
+                  key={store.id}
+                  name={store.name}
+                  street={store.street}
+                  suburb={store.suburb}
+                  state={store.state}
+                  postcode={store.postcode}
+                  photos={store.photos}
+                  rating={store.rating}
+                  openingHoursWeekdayText={store.openingHoursWeekdayText}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Review container */}
-          <div
-            className="relative shrink-0"
-            style={{
-              width: "min(34.531vw, 663px)", // 663/1920
-            }}
-          >
+          {/* Right side: review container - full height, width adapts to aspect ratio */}
+          <div className="flex-1 relative">
             <Image
               src="/images/home-bg-locations-review.png"
               alt="Customer reviews"
-              width={982}
-              height={832}
-              className="w-full h-auto"
-              style={{ aspectRatio: "982/832", display: "block" }}
+              fill
+              className="object-cover"
             />
 
             {/* Review bubbles overlaid on image */}
