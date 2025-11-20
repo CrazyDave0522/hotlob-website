@@ -11,15 +11,15 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
   // Bubble dimensions
   const bubbleWidth = 240;
   const bubbleHeight = 140;
-  
+
   // Avatar dimensions
   const avatarRingSize = 70;
   const avatarSize = 46;
-  
+
   // Position configuration for each location
   // Avatar offset: controls how much of the avatar is outside the bubble
   const avatarOffset = avatarRingSize * 0.6; // 60% outside, 40% overlapped by bubble corner
-  
+
   const positionConfig = {
     top: {
       // Top center, avatar at bottom-left corner of bubble
@@ -82,6 +82,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
   const config = positionConfig[position];
 
   return (
+    // ✅ 整个气泡组件作为hover目标
     <div
       style={{
         ...config.containerStyle,
@@ -89,8 +90,10 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
         height: `${bubbleHeight}px`,
         flexShrink: 0,
       }}
+      className="group transition-shadow duration-300 ease-out group-hover:shadow-xl group-hover:shadow-black/15 group-hover:ring-1 group-hover:ring-white/50"
     >
       {/* Avatar with decorative ring (lower z-index, behind bubble) */}
+      {/* ✅ 头像轻微缩放 */}
       <div
         style={{
           ...config.avatarStyle,
@@ -98,6 +101,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           height: `${avatarRingSize}px`,
           zIndex: 1,
         }}
+        className="transition-transform duration-300 ease-out group-hover:scale-105"
       >
         {/* Decorative ring */}
         <Image
@@ -107,7 +111,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           height={avatarRingSize}
           className="absolute inset-0"
         />
-        
+
         {/* Avatar image centered in ring */}
         {/* SVG ring center is at cx=35, cy=31 (not cy=35), so we need to adjust */}
         <div
@@ -138,6 +142,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
       </div>
 
       {/* Bubble with content (higher z-index, covers avatar) */}
+      {/* ✅ 气泡强力缩放 */}
       <div
         style={{
           position: "relative",
@@ -145,14 +150,15 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           height: "100%",
           zIndex: 2,
         }}
-        className="group"
+        className="transition-transform duration-300 ease-out group-hover:scale-[1.08]"
       >
         {/* Bubble background */}
         <Image
           src="/images/dialog-bubble.svg"
           alt=""
           fill
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+          sizes="240px"
+          className="object-cover"
         />
 
         {/* Content */}
@@ -167,7 +173,6 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
             flexDirection: "column",
             gap: "10px",
           }}
-          className="transition-transform duration-500 ease-out group-hover:scale-110"
         >
           {/* Author name */}
           <div
