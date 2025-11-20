@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toast";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 // Ghoust Solid (filled) - primary font
 const ghoustSolid = localFont({
@@ -59,6 +60,7 @@ export default function RootLayout({
         <div className="mx-auto w-full max-w-[1920px]">
           <Header />
           {children}
+          <Footer />
         </div>
         <Toaster />
       </body>
