@@ -12,6 +12,7 @@ interface HomeStoreItemProps {
   photos: { photo_url: string }[];
   rating: number | null;
   openingHoursWeekdayText: string[] | null;
+  isLast?: boolean;
 }
 
 export default function HomeStoreItem({
@@ -23,6 +24,7 @@ export default function HomeStoreItem({
   photos,
   rating,
   openingHoursWeekdayText,
+  isLast = false,
 }: HomeStoreItemProps) {
   const fullAddress = `${street}, ${suburb} ${state} ${postcode}`;
   const firstPhoto = photos.length > 0 ? photos[0].photo_url : null;
@@ -47,7 +49,7 @@ export default function HomeStoreItem({
         padding: "min(1.042vw, 20px)", // 20/1920
         alignSelf: "stretch",
         borderTop: "1px solid #B9B7B7",
-        borderBottom: "1px solid #B9B7B7",
+        ...(isLast && { borderBottom: "1px solid #B9B7B7" }),
       }}
     >
       {/* Store image (left) */}

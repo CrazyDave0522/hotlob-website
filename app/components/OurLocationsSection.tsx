@@ -66,7 +66,7 @@ export default function OurLocationsSection({
 
             {/* Stores list */}
             <div className="flex flex-col items-start">
-              {topStores.map((store) => (
+              {topStores.map((store, index) => (
                 <HomeStoreItem
                   key={store.id}
                   name={store.name}
@@ -77,6 +77,7 @@ export default function OurLocationsSection({
                   photos={store.photos}
                   rating={store.rating}
                   openingHoursWeekdayText={store.openingHoursWeekdayText}
+                  isLast={index === topStores.length - 1}
                 />
               ))}
             </div>
