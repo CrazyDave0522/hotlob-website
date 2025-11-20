@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FOOTER_LINKS = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy", newTab: true },
+  { label: "Terms & Conditions", href: "/terms", newTab: true },
   { label: "Contact Us", href: "mailto:hello@hotlob.com" },
 ];
 
@@ -70,6 +70,8 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  target={link.newTab ? "_blank" : undefined}
+                  rel={link.newTab ? "noreferrer" : undefined}
                   className="text-[clamp(12px,0.729vw,14px)] font-normal text-white hover:text-[#EA4148]"
                 >
                   {link.label}
