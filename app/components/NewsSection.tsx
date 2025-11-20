@@ -84,11 +84,12 @@ export default function NewsSection({ news }: NewsSectionProps) {
 
       {/* Carousel Container */}
       <div
-        className="relative overflow-hidden mx-auto"
+        className="relative mx-auto"
         style={{
           width: "72.917%", // 1400/1920
           maxWidth: "1400px",
           marginTop: "min(2.083vw, 40px)", // 40/1920
+          overflow: "visible", // allow NewsCard shadow to render outside container
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -147,7 +148,7 @@ export default function NewsSection({ news }: NewsSectionProps) {
       {/* Learn More Button */}
       <button
         onClick={() => router.push("/news")}
-        className="flex justify-center items-center shrink-0 bg-[#EA4148] text-white font-normal transition-opacity hover:opacity-90"
+        className="flex justify-center items-center shrink-0 bg-[#EA4148] text-white font-normal transition-colors duration-200 hover:bg-[#C71E25]"
         style={{
           width: "min(8.333vw, 160px)", // 160/1920
           height: "min(2.083vw, 40px)", // 40/1920
