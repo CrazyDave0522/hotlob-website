@@ -93,14 +93,16 @@ export default async function SeeOurFoodPage() {
     <>
       <Hero
         title="See Our Food"
-        description={"“You have to try their lobster rolls — they’re addictive. And their other rolls are so good, I want to go back for more.”\n— Google Review ⭐⭐⭐⭐⭐"}
+        description={
+          "“You have to try their lobster rolls — they’re addictive. And their other rolls are so good, I want to go back for more.”\n— Google Review ⭐⭐⭐⭐⭐"
+        }
         imageUrl="/images/see-our-food-hero.jpg"
         size="medium"
         footerNote="Our menu is subject to availability and seasons."
       />
       {/* Disclaimer moved inside Hero via footerNote prop */}
       {/* Pass filtered tags based on active dishes to FoodSection */}
-  <FoodSection tags={filteredTags} dishes={dishes} />
+      <FoodSection tags={filteredTags} dishes={dishes} />
     </>
   );
 }
