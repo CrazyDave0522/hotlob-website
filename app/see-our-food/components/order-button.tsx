@@ -5,7 +5,7 @@ import {
   getCurrentPositionWithTimeout,
   haversineDistance,
 } from "@/lib/utils/geo";
-import StoreSelectionModal, { StoreInfo } from "./store-selection-modal";
+import StoreSelectionModal, { StoreInfo } from "@/app/components/StoreSelectionModal";
 
 interface OrderButtonProps {
   stores?: StoreInfo[];

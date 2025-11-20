@@ -78,7 +78,7 @@ export default async function Home() {
     .filter((d) => (d.stores?.length ?? 0) > 0);
 
   // Fetch top 2 stores by rating for Our Locations section
-  const topStores = await getStores(2);
+  const topStores = await getStores({ limit: 2 });
 
   // Fetch top 4 reviews for Our Locations section
   const reviews = await getReviews(4);

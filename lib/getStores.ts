@@ -8,6 +8,9 @@ export interface Store {
   state: string;
   postcode: string;
   google_maps_embed_url: string | null;
+  uber_url?: string | null; // optional: only selected when includeOrderInfo
+  latitude?: number | null; // optional
+  longitude?: number | null; // optional
 }
 
 export interface StorePhoto {
@@ -26,6 +29,9 @@ export interface StoreWithData {
   photos: StorePhoto[];
   rating: number | null;
   openingHoursWeekdayText: string[] | null;
+  uber_url?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
 }
 
 interface PhotoFromDB {
@@ -40,12 +46,16 @@ interface PlaceCacheRow {
   opening_hours_weekday_text: string[] | null;
 }
 
-export async function getStores(limit?: number): Promise<StoreWithData[]> {
+export async function getStores(options?: { limit?: number; includeOrderInfo?: boolean }): Promise<StoreWithData[]> {
+  const { limit, includeOrderInfo } = options || {};
+  const baseFields = "id, name, street, suburb, state, postcode, google_maps_embed_url";
+  const extraFields = includeOrderInfo ? ", uber_url, latitude, longitude" : "";
   // Fetch all stores
   const { data: stores, error } = await supabase
     .from("store")
-    .select("id, name, street, suburb, state, postcode, google_maps_embed_url")
-    .order("name");
+    .select(baseFields + extraFields)
+    .order("name")
+    .returns<Store[]>();
 
   if (error) {
     console.error("Error fetching stores:", error);
@@ -57,7 +67,7 @@ export async function getStores(limit?: number): Promise<StoreWithData[]> {
   }
 
   // Fetch photos for all stores (max 3 per store)
-  const storeIds = stores.map((s: Store) => s.id);
+  const storeIds = stores.map((s) => s.id);
   const { data: photos } = await supabase
     .from("store_photos")
     .select("store_id, photo_url, display_order")
@@ -98,7 +108,7 @@ export async function getStores(limit?: number): Promise<StoreWithData[]> {
   });
 
   // Combine data
-  const storesWithData: StoreWithData[] = stores.map((store: Store) => ({
+  const storesWithData: StoreWithData[] = stores.map((store) => ({
     ...store,
     photos: photosByStore[store.id] || [],
     rating: cacheByStore[store.id]?.rating ?? null,
