@@ -4,7 +4,7 @@ import Link from "next/link";
 const FOOTER_LINKS = [
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms & Conditions", href: "/terms" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Contact Us", href: "mailto:hello@hotlob.com" },
 ];
 
 const SOCIAL_LINKS = [
@@ -53,15 +53,29 @@ export function Footer() {
             className="flex items-center"
             style={{ gap: "min(2.083vw, 40px)" }}
           >
-            {FOOTER_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[clamp(12px,0.729vw,14px)] font-normal text-white hover:text-[#EA4148]"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {FOOTER_LINKS.map((link) => {
+              const isMailto = link.href.startsWith("mailto:");
+              if (isMailto) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-[clamp(12px,0.729vw,14px)] font-normal text-white hover:text-[#EA4148]"
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-[clamp(12px,0.729vw,14px)] font-normal text-white hover:text-[#EA4148]"
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
 
