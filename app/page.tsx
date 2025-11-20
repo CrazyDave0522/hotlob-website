@@ -8,6 +8,7 @@ import { CONSTANTS } from "@/lib/constants";
 import type { Dish, RawDish } from "@/types/types";
 import Image from "next/image";
 import { getStores } from "@/lib/getStores";
+import { getReviews } from "@/lib/getReviews";
 
 export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: revalidate data
 
@@ -77,6 +78,9 @@ export default async function Home() {
   // Fetch top 2 stores by rating for Our Locations section
   const topStores = await getStores(2);
 
+  // Fetch top 4 reviews for Our Locations section
+  const reviews = await getReviews(4);
+
   return (
     <main>
       <Hero
@@ -104,7 +108,7 @@ export default async function Home() {
         />
       </section>
       <CateringSection />
-      <OurLocationsSection stores={topStores} />
+      <OurLocationsSection stores={topStores} reviews={reviews} />
       {/* More homepage modules to follow... */}
     </main>
   );

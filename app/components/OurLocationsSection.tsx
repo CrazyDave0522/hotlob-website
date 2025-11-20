@@ -1,16 +1,23 @@
 import Image from "next/image";
 import HomeStoreItem from "./home-store-item";
+import ReviewBubble from "./ReviewBubble";
 import type { StoreWithData } from "@/lib/getStores";
+import type { ReviewData } from "@/lib/getReviews";
 
 interface OurLocationsSectionProps {
   stores: StoreWithData[];
+  reviews: ReviewData[];
 }
 
 export default function OurLocationsSection({
   stores,
+  reviews,
 }: OurLocationsSectionProps) {
   // Display top 2 stores
   const topStores = stores.slice(0, 2);
+
+  // Get first 4 reviews for bubbles
+  const bubbleReviews = reviews.slice(0, 4);
 
   return (
     <section className="relative w-full" style={{ display: "block" }}>
@@ -96,6 +103,16 @@ export default function OurLocationsSection({
               className="w-full h-auto"
               style={{ aspectRatio: "982/832", display: "block" }}
             />
+
+            {/* Review bubbles overlaid on image */}
+            {bubbleReviews.length >= 4 && (
+              <>
+                <ReviewBubble review={bubbleReviews[0]} position="top" />
+                <ReviewBubble review={bubbleReviews[1]} position="right" />
+                <ReviewBubble review={bubbleReviews[2]} position="bottom" />
+                <ReviewBubble review={bubbleReviews[3]} position="left" />
+              </>
+            )}
           </div>
         </div>
       </div>
