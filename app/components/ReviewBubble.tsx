@@ -8,73 +8,74 @@ interface ReviewBubbleProps {
 }
 
 export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
+  // Helper function for responsive values
+  const responsive = (px: number) => `min(${(px / 1920 * 100).toFixed(3)}vw, ${px}px)`;
+  
   // Bubble dimensions
   const bubbleWidth = 240;
   const bubbleHeight = 140;
-
+  
   // Avatar dimensions
   const avatarRingSize = 70;
-  const avatarSize = 46;
-
-  // Position configuration for each location
+  const avatarSize = 46;  // Position configuration for each location
   // Avatar offset: controls how much of the avatar is outside the bubble
-  const avatarOffset = avatarRingSize * 0.6; // 60% outside, 40% overlapped by bubble corner
+  const avatarOffset = responsive(avatarRingSize * 0.6); // 60% outside, 40% overlapped by bubble corner
 
   const positionConfig = {
     top: {
       // Top center, avatar at bottom-left corner of bubble
       containerStyle: {
         position: "absolute" as const,
-        top: "0px",
+        top: responsive(0),
         left: "50%",
         transform: "translateX(-50%)",
       },
       avatarStyle: {
         position: "absolute" as const,
-        bottom: `-${avatarOffset}px`,
-        left: `-${avatarOffset}px`,
+        bottom: `-${avatarOffset}`,
+        left: `-${avatarOffset}`,
       },
     },
     right: {
       // Right middle, avatar at top-right corner of bubble
       containerStyle: {
         position: "absolute" as const,
-        right: `${avatarOffset}px`,
-        top: "calc(50% - 30px)",
+        right: avatarOffset,
+        top: `calc(50% - ${responsive(30)})`,
         transform: "translateY(-50%)",
       },
       avatarStyle: {
         position: "absolute" as const,
-        top: `-${avatarOffset}px`,
-        right: `-${avatarOffset}px`,
+        top: `-${avatarOffset}`,
+        right: `-${avatarOffset}`,
       },
     },
     bottom: {
       // Bottom center, avatar at top-left corner of bubble
       containerStyle: {
         position: "absolute" as const,
-        bottom: "10px",
+        bottom: responsive(10),
         left: "50%",
         transform: "translateX(-50%)",
       },
       avatarStyle: {
         position: "absolute" as const,
-        top: `-${avatarOffset}px`,
-        left: `-${avatarOffset}px`,
+        top: `-${avatarOffset}`,
+        left: `-${avatarOffset}`,
       },
     },
     left: {
       // Left middle, avatar at bottom-right corner of bubble
       containerStyle: {
         position: "absolute" as const,
-        left: "0px",
+        left: responsive(0),
         top: "50%",
-        transform: "translateY(calc(-50% - 20px))",
+        transform: `translateY(calc(-50% - ${responsive(20)}))`,
       },
       avatarStyle: {
         position: "absolute" as const,
-        bottom: `-${avatarOffset}px`,
-        right: `-${avatarOffset}px`,
+        bottom: `-${avatarOffset}`,
+        right: `-${avatarOffset}`,
       },
     },
   };
@@ -86,19 +87,19 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
     <div
       style={{
         ...config.containerStyle,
-        width: `${bubbleWidth}px`,
-        height: `${bubbleHeight}px`,
+        width: responsive(bubbleWidth),
+        height: responsive(bubbleHeight),
         flexShrink: 0,
       }}
-      className="group transition-shadow duration-300 ease-out group-hover:shadow-xl group-hover:shadow-black/15 group-hover:ring-1 group-hover:ring-white/50"
+      className="group transition-all duration-300 ease-out group-hover:shadow-xl group-hover:shadow-black/15 group-hover:ring-1 group-hover:ring-white/50"
     >
       {/* Avatar with decorative ring (lower z-index, behind bubble) */}
       {/* ✅ 头像轻微缩放 */}
       <div
         style={{
           ...config.avatarStyle,
-          width: `${avatarRingSize}px`,
-          height: `${avatarRingSize}px`,
+          width: responsive(avatarRingSize),
+          height: responsive(avatarRingSize),
           zIndex: 1,
         }}
         className="transition-transform duration-300 ease-out group-hover:scale-105"
@@ -120,8 +121,8 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
             top: "calc(50% - 4px)", // Adjust for ring's cy=31 instead of cy=35
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: `${avatarSize}px`,
-            height: `${avatarSize}px`,
+            width: responsive(avatarSize),
+            height: responsive(avatarSize),
           }}
         >
           {review.author_photo_url ? (
@@ -135,7 +136,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           ) : (
             <div
               className="rounded-full bg-gray-300"
-              style={{ width: `${avatarSize}px`, height: `${avatarSize}px` }}
+              style={{ width: responsive(avatarSize), height: responsive(avatarSize) }}
             />
           )}
         </div>
@@ -157,7 +158,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           src="/images/dialog-bubble.svg"
           alt=""
           fill
-          sizes="240px"
+          sizes="min(12.5vw, 240px)"
           className="object-cover"
         />
 
@@ -165,20 +166,20 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
         <div
           style={{
             position: "absolute",
-            top: "10px",
-            left: "12px",
-            right: "12px",
-            bottom: "14px",
+            top: responsive(10), // 10px responsive
+            left: responsive(12), // 12px responsive
+            right: responsive(12), // 12px responsive
+            bottom: responsive(14), // 14px responsive
             display: "flex",
             flexDirection: "column",
-            gap: "10px",
+            gap: responsive(10), // 10px responsive
           }}
         >
           {/* Author name */}
           <div
             style={{
               color: "#1D1E1F",
-              fontSize: "12px",
+              fontSize: responsive(12), // 12px responsive
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "normal",
@@ -194,7 +195,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           <div
             style={{
               color: "#4E5969",
-              fontSize: "12px",
+              fontSize: responsive(12), // 12px responsive
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "normal",
