@@ -27,33 +27,51 @@ export default function NewsCard({
         href={`/news/${slug}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex w-[1400px] h-[340px] rounded-[20px] bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.05)] hover:shadow-[0_0_30px_0_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden"
+        className="group flex w-full h-full bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.05)] hover:shadow-[0_0_30px_0_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden"
+        style={{
+          borderRadius: "min(1.042vw, 20px)", // 20/1920
+        }}
       >
         {/* Cover Image */}
-        <div className="relative w-[600px] h-[340px] shrink-0 overflow-hidden rounded-l-[20px]">
+        <div
+          className="relative shrink-0 overflow-hidden"
+          style={{
+            width: "42.857%", // 600/1400 保持比例
+            height: "100%",
+            borderRadius: "min(1.042vw, 20px) 0 0 min(1.042vw, 20px)", // 20/1920
+          }}
+        >
           <Image
             src={coverImageUrl}
             alt={title}
             fill
-            sizes="600px"
+            sizes="(max-width: 1920px) 42.857vw, 600px"
             className="object-cover"
           />
         </div>
 
         {/* Content */}
-        <div className="flex-1 flex flex-col p-10">
+        <div
+          className="flex-1 flex flex-col"
+          style={{
+            padding: "min(2.083vw, 40px)", // 40/1920
+          }}
+        >
           {/* Title */}
           <h2
             className="text-[#1D1E1F] font-semibold leading-normal group-hover:text-[#EA4148] transition-colors line-clamp-1"
-            style={{ fontSize: "24px" }}
+            style={{ fontSize: "min(1.25vw, 24px)" }} // 24/1920
           >
             {title}
           </h2>
 
           {/* Excerpt */}
           <p
-            className="text-[#86909C] font-normal leading-normal mt-4 line-clamp-4"
-            style={{ fontSize: "18px" }}
+            className="text-[#86909C] font-normal leading-normal line-clamp-4"
+            style={{
+              fontSize: "min(0.938vw, 18px)", // 18/1920
+              marginTop: "min(0.833vw, 16px)", // 16/1920
+            }}
           >
             {excerpt}
           </p>
@@ -62,7 +80,7 @@ export default function NewsCard({
           <div className="mt-auto">
             <div
               className="text-[#86909C] font-normal leading-normal"
-              style={{ fontSize: "14px" }}
+              style={{ fontSize: "min(0.729vw, 14px)" }} // 14/1920
             >
               {formatAUDate(publishDate)}
             </div>

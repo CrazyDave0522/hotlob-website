@@ -71,56 +71,71 @@ export default function NewsSection({ news }: NewsSectionProps) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        paddingBottom: "60px",
+        paddingBottom: "min(3.125vw, 60px)", // 60/1920
       }}
     >
       {/* Title */}
       <h2
         className="text-[34px] font-semibold text-[#1D1E1F] text-center leading-normal"
-        style={{ marginTop: "60px" }}
+        style={{ marginTop: "min(3.125vw, 60px)" }} // 60/1920
       >
         Hot News
       </h2>
 
       {/* Carousel Container */}
       <div
-        className="relative overflow-hidden"
+        className="relative overflow-hidden mx-auto"
         style={{
-          width: "1400px",
-          height: "340px",
-          marginTop: "40px",
+          width: "72.917%", // 1400/1920
+          maxWidth: "1400px",
+          marginTop: "min(2.083vw, 40px)", // 40/1920
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
+        {/* Aspect ratio wrapper: 340/1400 = 24.286% */}
         <div
-          className="transition-opacity duration-700 ease-in-out"
           style={{
-            opacity: fadeOut ? 0 : 1,
+            position: "relative",
+            width: "100%",
+            paddingBottom: "24.286%", // 340/1400 maintain aspect ratio
           }}
         >
-          <NewsCard
-            slug={news[currentIndex].slug}
-            title={news[currentIndex].title}
-            excerpt={news[currentIndex].excerpt}
-            coverImageUrl={news[currentIndex].coverImageUrl}
-            publishDate={news[currentIndex].publishDate}
-            variant="home"
-          />
+          <div
+            className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+            style={{
+              opacity: fadeOut ? 0 : 1,
+            }}
+          >
+            <NewsCard
+              slug={news[currentIndex].slug}
+              title={news[currentIndex].title}
+              excerpt={news[currentIndex].excerpt}
+              coverImageUrl={news[currentIndex].coverImageUrl}
+              publishDate={news[currentIndex].publishDate}
+              variant="home"
+            />
+          </div>
         </div>
       </div>
 
       {/* Indicators */}
-      <div className="flex items-center gap-3 mt-[30px]">
+      <div
+        className="flex items-center"
+        style={{
+          gap: "min(0.625vw, 12px)", // 12/1920
+          marginTop: "min(1.563vw, 30px)", // 30/1920
+        }}
+      >
         {news.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
             className="transition-all duration-300 cursor-pointer"
             style={{
-              width: currentIndex === index ? "30px" : "8px",
-              height: "8px",
-              borderRadius: "20px",
+              width: currentIndex === index ? "min(1.563vw, 30px)" : "min(0.417vw, 8px)", // 30/1920, 8/1920
+              height: "min(0.417vw, 8px)", // 8/1920
+              borderRadius: "min(1.042vw, 20px)", // 20/1920
               background: currentIndex === index ? "#EA4148" : "#000",
               opacity: currentIndex === index ? 1 : 0.2,
             }}
@@ -132,12 +147,14 @@ export default function NewsSection({ news }: NewsSectionProps) {
       {/* Learn More Button */}
       <button
         onClick={() => router.push("/news")}
-        className="flex justify-center items-center gap-2.5 shrink-0 rounded-[30px] bg-[#EA4148] text-white font-normal transition-opacity hover:opacity-90"
+        className="flex justify-center items-center shrink-0 bg-[#EA4148] text-white font-normal transition-opacity hover:opacity-90"
         style={{
-          width: "160px",
-          height: "40px",
-          fontSize: "16px",
-          marginTop: "60px",
+          width: "min(8.333vw, 160px)", // 160/1920
+          height: "min(2.083vw, 40px)", // 40/1920
+          fontSize: "min(0.833vw, 16px)", // 16/1920
+          borderRadius: "min(1.563vw, 30px)", // 30/1920
+          gap: "min(0.521vw, 10px)", // 10/1920
+          marginTop: "min(3.125vw, 60px)", // 60/1920
         }}
       >
         Learn More
