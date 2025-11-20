@@ -2,6 +2,7 @@ import { supabase } from "../../../lib/supabaseClient";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { formatAUDate } from "../../../lib/utils/formatDate";
+import { ContentPageLayout } from "@/app/components/ContentPageLayout";
 
 type NewsDetail = {
   title: string;
@@ -54,21 +55,17 @@ export default async function NewsDetailPage({
   }
   const news = data as NewsDetail;
   return (
-    <main className="min-h-screen bg-[#F7F8FA] flex justify-center items-start px-4">
-      <div className="shrink-0 rounded-md bg-white shadow-[0_0_10px_0_rgba(0,0,0,0.12)] mt-11 mb-[60px]" style={{ width: '72.917%', maxWidth: '1400px' }}>
-        <h1 className="text-[20px] font-medium text-[#1D1E1F] leading-normal text-left ml-[30px] mt-[30px]">
-          {news.title}
-        </h1>
-        <span className="block text-[12px] font-normal text-[#999] leading-normal ml-[30px] mt-[18px]">
-          {formatAUDate(news.publish_date)}
-        </span>
-        <div className="ml-[30px] mt-3.5">
-          <div className="h-px shrink-0 bg-[#E1E4E9]" style={{ width: '95.71%' }} />
-        </div>
-        <div className="mt-5 flex justify-center items-center">
-          {/* 封面图，假设 news.cover_image_url 有值 */}
-          {news.cover_image_url && (
-            <div className="relative shrink-0 mb-4" style={{ width: '64.286%', aspectRatio: '15/7' }}>
+    <ContentPageLayout
+      title={news.title}
+      subtitle={formatAUDate(news.publish_date)}
+      contentHtml={news.content ?? news.excerpt ?? ""}
+      headerExtras={
+        news.cover_image_url ? (
+          <div className="mt-5 flex justify-center">
+            <div
+              className="relative shrink-0 mb-4"
+              style={{ width: "64.286%", aspectRatio: "15/7" }}
+            >
               <Image
                 src={news.cover_image_url}
                 alt={news.title}
@@ -78,19 +75,9 @@ export default async function NewsDetailPage({
                 priority
               />
             </div>
-          )}
-        </div>
-        {/* Render full HTML content if present; fall back to excerpt */}
-        <div className="px-16 py-12 flex justify-center">
-          <div className="prose-news mb-8">
-            {news.content ? (
-              <div dangerouslySetInnerHTML={{ __html: news.content }} />
-            ) : (
-              <div>{news.excerpt}</div>
-            )}
           </div>
-        </div>
-      </div>
-    </main>
+        ) : undefined
+      }
+    />
   );
 }

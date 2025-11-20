@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toast";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 // Ghoust Solid (filled) - primary font
 const ghoustSolid = localFont({
@@ -55,8 +57,10 @@ export default function RootLayout({
       <body
         className={`${ghoustSolid.variable} ${ghoustOutline.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="w-full max-w-[1920px] mx-auto">
+        <div className="mx-auto w-full max-w-[1920px]">
+          <Header />
           {children}
+          <Footer />
         </div>
         <Toaster />
       </body>

@@ -14,6 +14,7 @@ export default function CateringPage() {
           src="/images/catering-bg.png"
           alt=""
           fill
+          sizes="100vw"
           priority
           className="object-contain object-top hidden md:block"
         />
@@ -22,6 +23,7 @@ export default function CateringPage() {
           src="/images/catering-bg-mobile.png"
           alt=""
           fill
+          sizes="100vw"
           priority
           className="object-contain object-top md:hidden"
         />
