@@ -3,12 +3,14 @@ import AboutHotlob from "./components/AboutHotlob";
 import SeeOurFoodSection from "./components/SeeOurFoodSection";
 import CateringSection from "./components/CateringSection";
 import OurLocationsSection from "./components/OurLocationsSection";
+import NewsSection from "./components/NewsSection";
 import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
 import type { Dish, RawDish } from "@/types/types";
 import Image from "next/image";
 import { getStores } from "@/lib/getStores";
 import { getReviews } from "@/lib/getReviews";
+import { stripHtmlTags, getSmartExcerpt } from "@/lib/utils/stripHtml";
 
 export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: revalidate data
 
@@ -81,6 +83,24 @@ export default async function Home() {
   // Fetch top 4 reviews for Our Locations section
   const reviews = await getReviews(4);
 
+  // Fetch top 6 news items for News section
+  const { data: newsData } = await supabase
+    .from("news")
+    .select("id,title,slug,excerpt,content,cover_image_url,publish_date")
+    .eq("is_published", true)
+    .order("publish_date", { ascending: false })
+    .limit(6);
+
+  const newsItems =
+    newsData?.map((news) => ({
+      id: news.id,
+      title: news.title,
+      slug: news.slug,
+      excerpt: news.excerpt || getSmartExcerpt(stripHtmlTags(news.content)),
+      coverImageUrl: news.cover_image_url,
+      publishDate: news.publish_date,
+    })) ?? [];
+
   return (
     <main>
       <Hero
@@ -109,6 +129,7 @@ export default async function Home() {
       </section>
       <CateringSection />
       <OurLocationsSection stores={topStores} reviews={reviews} />
+      {newsItems.length > 0 && <NewsSection news={newsItems} />}
       {/* More homepage modules to follow... */}
     </main>
   );
