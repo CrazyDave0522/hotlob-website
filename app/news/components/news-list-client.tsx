@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { supabase } from "@/lib/supabaseClient";
 import { stripHtmlTags, getSmartExcerpt } from "@/lib/utils/stripHtml";
-import NewsListItem from "./news-list-item";
+import NewsCard from "./news-card";
 
 type NewsItem = {
   id: string;
@@ -67,12 +67,13 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
             const excerpt = getSmartExcerpt(plainText);
             return (
               <div key={news.id}>
-                <NewsListItem
+                <NewsCard
                   slug={news.slug}
                   title={news.title}
                   excerpt={excerpt}
                   coverImageUrl={news.cover_image_url}
                   publishDate={news.publish_date}
+                  variant="list"
                 />
                 {/* Divider line between items (not after last item) */}
                 {index < items.length - 1 && (
