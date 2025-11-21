@@ -1,5 +1,6 @@
 import Image from "next/image";
 import RatingStars from "./rating-stars";
+import ImageWithLightbox from "@/app/components/ImageWithLightbox";
 
 interface StorePhoto {
   photo_url: string;
@@ -124,15 +125,13 @@ export default function StoreCard({
           {photosToShow.map((photo, index) => (
             <div
               key={`${photo.display_order}-${index}`}
-              className="relative rounded-[10px] overflow-hidden bg-gray-100 shrink-0"
               style={{ width: `clamp(64px, calc((140 / 1920) * 100vw), 140px)`, aspectRatio: "140 / 120" }}
             >
-              <Image
-                src={photo.photo_url}
+              <ImageWithLightbox
+                images={[photo.photo_url]}
                 alt={`${name} - Photo ${index + 1}`}
-                fill
-                sizes="140px"
-                className="object-cover"
+                layout="single"
+                className="w-full h-full rounded-[10px] overflow-hidden bg-gray-100"
               />
             </div>
           ))}

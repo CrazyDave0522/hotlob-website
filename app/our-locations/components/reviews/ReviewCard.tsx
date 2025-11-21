@@ -2,10 +2,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
 import RatingStars from "../rating-stars";
+import ImageWithLightbox from "@/app/components/ImageWithLightbox";
 
 export interface ReviewItem {
   author_name: string;
@@ -16,25 +14,6 @@ export interface ReviewItem {
 }
 
 export default function ReviewCard({ author_name, author_photo_url, rating, review_text, photos }: ReviewItem) {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
-
-  // Convert photo URLs to high-res versions for lightbox using URL parsing
-  const highResPhotos = photos?.map(url => {
-    try {
-      const urlObj = new URL(url);
-      urlObj.searchParams.set('maxWidthPx', '2000');
-      return urlObj.toString();
-    } catch {
-      // Fallback if URL parsing fails
-      return url;
-    }
-  }) || [];
-
-  const handlePhotoClick = (index: number) => {
-    setPhotoIndex(index);
-    setLightboxOpen(true);
-  };
   return (
     <div className="flex items-start gap-[13px] self-stretch">
       {/* Avatar */}
@@ -66,43 +45,24 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
         {photos && photos.length > 0 && (
           <>
             <div className="border-b border-[#E1E4E9]" />
-            <div className="pt-[30px] flex gap-[30px] flex-wrap">
-              {photos.map((photoUrl, index) => (
-                <div
-                  key={index}
-                  className="relative cursor-pointer transition-opacity hover:opacity-80"
-                  style={{
-                    width: '212px',
-                    height: '141px',
-                  }}
-                  onClick={() => handlePhotoClick(index)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      handlePhotoClick(index);
-                    }
-                  }}
-                >
-                  <Image
-                    src={photoUrl}
-                    alt={`Photo ${index + 1} by ${author_name}`}
-                    fill
-                    className="object-cover rounded-[10px]"
-                    sizes="212px"
-                  />
-                </div>
-              ))}
+            <div className="pt-[30px]">
+              <ImageWithLightbox
+                images={photos}
+                alt={`Photo by ${author_name}`}
+                layout="grid"
+                size={{ width: 212, height: 141 }}
+                gridGap="30px"
+                highResTransform={(url) => {
+                  try {
+                    const urlObj = new URL(url);
+                    urlObj.searchParams.set('maxWidthPx', '2000');
+                    return urlObj.toString();
+                  } catch {
+                    return url;
+                  }
+                }}
+              />
             </div>
-
-            {/* Lightbox */}
-            <Lightbox
-              open={lightboxOpen}
-              close={() => setLightboxOpen(false)}
-              index={photoIndex}
-              slides={highResPhotos.map(url => ({ src: url }))}
-              carousel={{ finite: true }}
-            />
           </>
         )}
       </div>

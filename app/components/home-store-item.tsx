@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import RatingStars from "../our-locations/components/rating-stars";
+import ImageWithLightbox from "./ImageWithLightbox";
 
 interface HomeStoreItemProps {
   name: string;
@@ -62,12 +63,11 @@ export default function HomeStoreItem({
         }}
       >
         {firstPhoto ? (
-          <Image
-            src={firstPhoto}
+          <ImageWithLightbox
+            images={[firstPhoto]}
             alt={name}
-            fill
-            sizes="220px"
-            className="object-cover"
+            layout="single"
+            className="w-full h-full"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400">
