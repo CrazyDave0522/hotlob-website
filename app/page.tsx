@@ -6,7 +6,7 @@ import OurLocationsSection from "./components/OurLocationsSection";
 import NewsSection from "./components/NewsSection";
 import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
-import type { Dish, RawDish } from "@/types/types";
+import type { Dish, RawDish, AllergenTag } from "@/types/types";
 import Image from "next/image";
 import { getStoresWithDetails } from "@/lib/getStores";
 import { getReviews } from "@/lib/getReviews";
@@ -20,9 +20,9 @@ export default async function Home() {
     .from("dish")
     .select(
       `
-      id, name, description, tier, is_visible, is_available, created_at,
+      id, name, description, tier, is_visible, is_available, category, created_at,
       media_asset ( image_url ),
-      dish_tag ( tag ( id, icon_url, icon_url_active ) ),
+      dish_allergen ( allergen_tag ( id, icon_url, icon_url_active ) ),
       dish_store!inner(
         available,
         uber_url,
@@ -49,8 +49,8 @@ export default async function Home() {
     .map((d) => {
       const imageUrl =
         d.media_asset?.[0]?.image_url ?? CONSTANTS.DEFAULT_DISH_IMAGE;
-      const matchedTags =
-        d.dish_tag?.flatMap((dt) => dt.tag ?? [])?.filter(Boolean) ?? [];
+      const matchedAllergens =
+        d.dish_allergen?.flatMap((da) => da.allergen_tag ?? [])?.filter(Boolean) ?? [];
 
       // Compile available stores
       const stores =
@@ -70,7 +70,8 @@ export default async function Home() {
         description: d.description,
         tier: d.tier,
         imageUrl,
-        tags: matchedTags,
+        allergens: matchedAllergens,
+        category: d.category,
         orderUrl: CONSTANTS.ORDER_URL,
         stores,
       };

@@ -3,27 +3,27 @@ import Hero from "./components/hero";
 import FoodSection from "./components/food-section";
 import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
-import type { Dish, RawDish } from "@/types/types";
+import type { Dish, RawDish, AllergenTag, CategoryOption } from "@/types/types";
 
 export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: revalidate data
 
 export default async function SeeOurFoodPage() {
-  /* ========== Fetch tags and dishes (with images/tags) in parallel ========== */
+  /* ========== Fetch allergen tags and dishes (with images/allergens/categories) in parallel ========== */
   const [
-    { data: tags, error: tagError },
+    { data: allergenTags, error: tagError },
     { data: dishesRaw, error: dishError },
   ] = await Promise.all([
     supabase
-      .from("tag")
+      .from("allergen_tag")
       .select("id, name, icon_url, icon_url_active")
       .order("name"),
     supabase
       .from("dish")
       .select(
         `
-        id, name, description, tier, is_visible, is_available, created_at,
+        id, name, description, tier, is_visible, is_available, category, created_at,
         media_asset ( image_url ),
-        dish_tag ( tag ( id, icon_url, icon_url_active ) ),
+        dish_allergen ( allergen_tag ( id, icon_url, icon_url_active ) ),
         dish_store!inner(
           available,
           uber_url,
@@ -42,19 +42,22 @@ export default async function SeeOurFoodPage() {
       .order("created_at", { ascending: false }),
   ]);
 
-  if (tagError) console.error("❌ Failed to fetch tags:", tagError);
+  if (tagError) console.error("❌ Failed to fetch allergen tags:", tagError);
   if (dishError) {
-    console.error("❌ Failed to fetch dishes (with media/tags):", dishError);
+    console.error("❌ Failed to fetch dishes (with media/allergens):", dishError);
     console.log("dishesRaw", dishesRaw);
   }
+
+  // Type assertion for allergenTags
+  const typedAllergenTags: AllergenTag[] = allergenTags || [];
 
   /* ========== Integrate data ========== */
   const dishes: Dish[] = ((dishesRaw as RawDish[] | null) ?? [])
     .map((d) => {
       const imageUrl =
         d.media_asset?.[0]?.image_url ?? CONSTANTS.DEFAULT_DISH_IMAGE;
-      const matchedTags =
-        d.dish_tag?.flatMap((dt) => dt.tag ?? [])?.filter(Boolean) ?? [];
+      const matchedAllergens =
+        d.dish_allergen?.flatMap((da) => da.allergen_tag ?? [])?.filter(Boolean) ?? [];
 
       // Organize available stores
       const stores =
@@ -74,19 +77,28 @@ export default async function SeeOurFoodPage() {
         description: d.description,
         tier: d.tier,
         imageUrl,
-        tags: matchedTags,
+        allergens: matchedAllergens,
+        category: d.category,
         orderUrl: CONSTANTS.ORDER_URL,
         stores,
       };
     })
     .filter((d) => (d.stores?.length ?? 0) > 0);
 
-  // Only show tags actually used by currently displayable dishes
-  const activeTagIds = new Set<string>();
+  // Only show allergen tags actually used by currently displayable dishes
+  const activeAllergenIds = new Set<string>();
   for (const d of dishes) {
-    for (const t of d.tags) activeTagIds.add(t.id);
+    for (const a of d.allergens) activeAllergenIds.add(a.id);
   }
-  const filteredTags = (tags ?? []).filter((t) => activeTagIds.has(t.id));
+  const filteredAllergenTags = (typedAllergenTags ?? []).filter((t) => activeAllergenIds.has(t.id));
+
+  // Define category options
+  const categoryOptions: CategoryOption[] = [
+    { id: 'seafood', name: 'Seafood', icon_url: '/images/icons/food-category/fish.svg', icon_url_active: '/images/icons/food-category/fish-active.svg' },
+    { id: 'meat', name: 'Meat', icon_url: '/images/icons/food-category/meat.svg', icon_url_active: '/images/icons/food-category/meat-active.svg' },
+    { id: 'vegetarian', name: 'Vegetarian', icon_url: '/images/icons/food-category/vegetarian.svg', icon_url_active: '/images/icons/food-category/vegetarian-active.svg' },
+    { id: 'dessert', name: 'Dessert', icon_url: '/images/icons/food-category/desert.svg', icon_url_active: '/images/icons/food-category/desert-active.svg' },
+  ];
 
   /* ========== Render page ========== */
   return (
@@ -100,9 +112,8 @@ export default async function SeeOurFoodPage() {
         size="medium"
         footerNote="Our menu is subject to availability and seasons."
       />
-      {/* Disclaimer moved inside Hero via footerNote prop */}
-      {/* Pass filtered tags based on active dishes to FoodSection */}
-      <FoodSection tags={filteredTags} dishes={dishes} />
+      {/* Pass filtered allergen tags and category options to FoodSection */}
+      <FoodSection allergenTags={filteredAllergenTags} categoryOptions={categoryOptions} dishes={dishes} />
     </>
   );
 }

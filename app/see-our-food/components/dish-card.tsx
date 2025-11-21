@@ -11,7 +11,7 @@ interface DishCardProps {
 }
 
 export default function DishCard({ dish, priority = false }: DishCardProps) {
-  const { name, description, tier, imageUrl, tags, stores } = dish;
+  const { name, description, tier, imageUrl, allergens, stores } = dish;
   return (
     // Responsive card: all dimensions scale proportionally with viewport
     // Design base: 332px card (480px height, 590px on hover) in 1920px layout
@@ -64,14 +64,14 @@ export default function DishCard({ dish, priority = false }: DishCardProps) {
             {name}
           </h3>
 
-          {/* Tag icons */}
+          {/* Allergen icons */}
           <div 
             className="flex w-full justify-start"
             style={{ gap: 'min(0.729vw, 14px)' }} // gap-3.5 = 14px
           >
-            {tags.map((tag) => (
+            {allergens.map((allergen) => (
               <div 
-                key={tag.id}
+                key={allergen.id}
                 className="relative"
                 style={{ 
                   width: 'min(2.083vw, 40px)', // 40/1920 = 2.083%
@@ -79,7 +79,7 @@ export default function DishCard({ dish, priority = false }: DishCardProps) {
                 }}
               >
                 <Image
-                  src={tag.icon_url || CONSTANTS.DEFAULT_TAG_ICON}
+                  src={allergen.icon_url || CONSTANTS.DEFAULT_TAG_ICON}
                   alt=""
                   fill
                   className="object-contain"

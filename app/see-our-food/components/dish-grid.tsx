@@ -1,10 +1,11 @@
 "use client";
 
 import DishCard from "./dish-card";
-import { Dish } from "@/types/types";
+import { Dish, AllergenTag } from "@/types/types";
 
 interface DishGridProps {
   dishes: Dish[];
+  allergenTags: AllergenTag[];
 }
 
 export default function DishGrid({ dishes }: DishGridProps) {

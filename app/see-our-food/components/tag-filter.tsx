@@ -3,11 +3,11 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Tag } from "@/types/types";
+import { CategoryOption } from "@/types/types";
 import { CONSTANTS } from "@/lib/constants";
 
 interface TagFilterProps {
-  tags: Tag[];
+  tags: CategoryOption[];
   onChange?: (selectedIds: string[]) => void;
 }
 
