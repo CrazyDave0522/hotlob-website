@@ -65,7 +65,7 @@ export default function ImageWithLightbox({
     return (
       <>
         <div
-          className={`relative cursor-pointer transition-opacity hover:opacity-80 ${className}`}
+          className={`relative cursor-pointer transition-opacity hover:opacity-80 overflow-hidden rounded-[10px] ${className}`}
           style={size ? { width: size.width, height: size.height, ...style } : style}
           onClick={() => handleImageClick(0)}
           role="button"
@@ -79,12 +79,7 @@ export default function ImageWithLightbox({
           <Image
             src={imageUrl}
             alt={alt}
-            {...(size ? {
-              width: size.width,
-              height: size.height
-            } : {
-              fill: true
-            })}
+            fill
             className={`object-cover ${imageClassName}`}
             sizes={size ? `${size.width}px` : "100vw"}
           />
@@ -111,7 +106,7 @@ export default function ImageWithLightbox({
         {displayImages.map((imageUrl, index) => (
           <div
             key={index}
-            className={`relative cursor-pointer transition-opacity hover:opacity-80 ${imageClassName}`}
+            className={`relative cursor-pointer transition-opacity hover:opacity-80 overflow-hidden rounded-[10px] ${imageClassName}`}
             style={size ? { width: size.width, height: size.height, flexShrink: 0 } : {}}
             onClick={() => handleImageClick(index)}
             role="button"
@@ -125,13 +120,8 @@ export default function ImageWithLightbox({
             <Image
               src={imageUrl}
               alt={`${alt} - Photo ${index + 1}`}
-              {...(size ? {
-                width: size.width,
-                height: size.height
-              } : {
-                fill: true
-              })}
-              className="object-cover rounded-[10px]"
+              fill
+              className="object-cover"
               sizes={size ? `${size.width}px` : "100vw"}
             />
           </div>
