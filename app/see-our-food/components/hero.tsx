@@ -132,7 +132,7 @@ export default function Hero({
             className={`font-semibold ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#242424]'}`}
             style={{
               maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
-              fontSize: showOverlay ? 'clamp(24px, 2vw, 38px)' : 'clamp(20px, 1.563vw, 30px)',
+              fontSize: 'clamp(24px, 2vw, 38px)', // 统一标题字号
               ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
             }}
           >
