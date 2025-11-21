@@ -43,7 +43,7 @@ export function Header() {
   return (
     <>
       {/* 移动端导航栏 - 1024px以下显示 */}
-      <header className="sticky top-0 z-50 flex lg:hidden w-full h-[120px] shrink-0 items-center justify-between bg-white px-[30px] shadow-[0_4px_4px_0_rgba(0,0,0,0.10)] max-w-[750px]">
+      <header className="sticky top-0 z-50 flex lg:hidden w-full h-[120px] shrink-0 items-center justify-between bg-white px-[30px] shadow-[0_4px_4px_0_rgba(0,0,0,0.10)]">
         <Link href="/" aria-label="Hotlob home" className="shrink-0">
           <Image
             src="/images/logo.png"

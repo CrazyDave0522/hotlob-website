@@ -11,6 +11,7 @@ interface HeroProps {
   size?: "home" | "large" | "medium"; // home = 820px, large = 820px, medium = 420px
   footerNote?: string; // optional small text at the bottom-left inside hero
   backgroundPositionY?: string; // optional vertical position (default "center")
+  backgroundPositionX?: string; // optional horizontal position (default "center")
   showOverlay?: boolean; // optional overlay toggle (default true)
   overlayUrl?: string; // optional custom overlay image
 }
@@ -22,6 +23,7 @@ export default function Hero({
   size = "medium",
   footerNote,
   backgroundPositionY = "center",
+  backgroundPositionX = "center",
   showOverlay = true,
   overlayUrl,
 }: HeroProps) {
@@ -31,68 +33,137 @@ export default function Hero({
     : "min(42.708vw, 820px)";
 
   return (
-    <section
-      className="relative w-full overflow-hidden"
-      style={{
-        height: heroHeight,
-        paddingTop: "min(4.167vw, 80px)", // Add top padding for sticky header
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: "cover",
-        backgroundPositionX: "center",
-        backgroundPositionY: backgroundPositionY,
-      }}
-    >
-      {/* General transparent overlay */}
-      {showOverlay && (
-        <Image
-          src={overlayUrl ?? "/images/overlay.png"}
-          alt=""
-          fill
-          priority
-          style={{ objectFit: "cover" }}
-        />
-      )}
-
-      {/* Text area */}
-      <div 
-        className={`relative z-10 flex flex-col justify-center h-full gap-5 ${showOverlay ? 'text-white' : ''}`}
-        style={{ paddingLeft: "min(13.542vw, 260px)" }} // 260/1920 = 13.542%
+    <>
+      {/* 移动端Hero - 1024px以下显示 */}
+      <section
+        className="lg:hidden relative w-full h-[420px] overflow-hidden"
+        style={{
+          paddingTop: "120px", // 为sticky header让位
+          backgroundImage: `url(${imageUrl})`,
+          backgroundSize: "cover",
+          backgroundPositionX: backgroundPositionX,
+          backgroundPositionY: backgroundPositionY,
+        }}
       >
-        <h1 
-          className={`font-semibold ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#242424]'}`}
-          style={{
-            maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
-            fontSize: showOverlay ? 'clamp(24px, 2vw, 38px)' : 'clamp(20px, 1.563vw, 30px)',
-            ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
-          }}
-        >
-          {title}
-        </h1>
-        <div 
-          className={`font-normal space-y-2 ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#999]'}`}
-          style={{
-            maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
-            fontSize: showOverlay ? 'clamp(18px, 1.563vw, 30px)' : 'clamp(14px, 1.042vw, 20px)',
-            ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
-          }}
-        >
-          {description.split('\n').map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </div>
-      </div>
+        {/* General transparent overlay */}
+        {showOverlay && (
+          <Image
+            src={overlayUrl ?? "/images/overlay.png"}
+            alt=""
+            fill
+            priority
+            style={{ objectFit: "cover" }}
+          />
+        )}
 
-      {/* Footer note (optional) */}
-      {footerNote && (
+        {/* Text area */}
         <div 
-          className="absolute z-10 bottom-2.5 right-0" 
-          style={{ paddingRight: "min(8.333vw, 160px)" }} // 160/1920 = 8.333%, closer to right edge
+          className="relative z-10 flex flex-col justify-center h-full"
+          style={{ paddingLeft: "30px" }} // 移动端左对齐，固定padding
         >
-          <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-right">
-            {footerNote}
-          </p>
+          <div 
+            className="flex flex-col gap-5 w-[684px]"
+          >
+            <h1 
+              className={`font-semibold leading-[154%] ${showOverlay ? 'text-white' : 'text-[#242424]'}`}
+              style={{
+                fontSize: "38px",
+                ...(showOverlay ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" } : {})
+              }}
+            >
+              {title}
+            </h1>
+            <div 
+              className={`font-normal leading-[154%] space-y-2 ${showOverlay ? 'text-white' : 'text-[#999]'}`}
+              style={{
+                fontSize: "30px",
+                ...(showOverlay ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" } : {})
+              }}
+            >
+              {description.split('\n').map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
         </div>
-      )}
-    </section>
+
+        {/* Footer note (optional) */}
+        {footerNote && (
+          <div 
+            className="absolute z-10 bottom-2.5 right-0" 
+            style={{ paddingRight: "30px" }} // 移动端右边padding
+          >
+            <p className="text-[#C9CDD4] text-[12px] font-normal leading-none text-right">
+              {footerNote}
+            </p>
+          </div>
+        )}
+      </section>
+
+      {/* 桌面端Hero - 1024px及以上显示 */}
+      <section
+        className="hidden lg:block relative w-full overflow-hidden"
+        style={{
+          height: heroHeight,
+          paddingTop: "min(4.167vw, 80px)", // Add top padding for sticky header
+          backgroundImage: `url(${imageUrl})`,
+          backgroundSize: "cover",
+          backgroundPositionX: backgroundPositionX,
+          backgroundPositionY: backgroundPositionY,
+        }}
+      >
+        {/* General transparent overlay */}
+        {showOverlay && (
+          <Image
+            src={overlayUrl ?? "/images/overlay.png"}
+            alt=""
+            fill
+            priority
+            style={{ objectFit: "cover" }}
+          />
+        )}
+
+        {/* Text area */}
+        <div 
+          className={`relative z-10 flex flex-col justify-center h-full gap-5 ${showOverlay ? 'text-white' : ''}`}
+          style={{ paddingLeft: "min(13.542vw, 260px)" }} // 260/1920 = 13.542%
+        >
+          <h1 
+            className={`font-semibold ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#242424]'}`}
+            style={{
+              maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
+              fontSize: showOverlay ? 'clamp(24px, 2vw, 38px)' : 'clamp(20px, 1.563vw, 30px)',
+              ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
+            }}
+          >
+            {title}
+          </h1>
+          <div 
+            className={`font-normal space-y-2 ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#999]'}`}
+            style={{
+              maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
+              fontSize: showOverlay ? 'clamp(18px, 1.563vw, 30px)' : 'clamp(14px, 1.042vw, 20px)',
+              ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
+            }}
+          >
+            {description.split('\n').map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer note (optional) */}
+        {footerNote && (
+          <div 
+            className="absolute z-10 bottom-2.5 right-0" 
+            style={{ paddingRight: "min(8.333vw, 160px)" }} // 160/1920 = 8.333%, closer to right edge
+          >
+            <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-right">
+              {footerNote}
+            </p>
+          </div>
+        )}
+      </section>
+    </>
   );
 }

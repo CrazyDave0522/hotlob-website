@@ -49,6 +49,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key`}
         description="Check out our latest news and stay tuned"
         imageUrl="/images/news-hero.png"
         size="medium"
+        backgroundPositionX="center"
         showOverlay={false}
       />
 
