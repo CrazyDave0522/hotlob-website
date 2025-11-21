@@ -5,6 +5,7 @@ import { Dish } from "@/types/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { SectionTitle } from "./SectionTitle";
 
 interface SeeOurFoodSectionProps {
   dishes: Dish[];
@@ -31,15 +32,7 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
 
       <div style={{ position: "absolute", top: 0, left: 0, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         {/* Title */}
-        <h2
-          className="font-semibold text-[#1D1E1F] text-center leading-normal"
-          style={{ 
-            marginTop: "min(3.125vw, 60px)", // 60/1920
-            fontSize: 'clamp(24px, 1.771vw, 34px)'
-          }}
-        >
-          See our food
-        </h2>
+        <SectionTitle>See our food</SectionTitle>
       {/* Dish cards section */}
       <div
         className="flex gap-6 w-[72.917%] mx-auto justify-center"

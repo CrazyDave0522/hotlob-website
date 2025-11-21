@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import NewsCard from "../news/components/news-card";
+import { SectionTitle } from "./SectionTitle";
 
 type NewsItem = {
   id: string;
@@ -75,15 +76,7 @@ export default function NewsSection({ news }: NewsSectionProps) {
       }}
     >
       {/* Title */}
-      <h2
-        className="font-semibold text-[#1D1E1F] text-center leading-normal"
-        style={{ 
-          marginTop: "min(3.125vw, 60px)", // 60/1920
-          fontSize: 'clamp(24px, 1.771vw, 34px)'
-        }}
-      >
-        Hot News
-      </h2>
+      <SectionTitle>Hot News</SectionTitle>
 
       {/* Carousel Container */}
       <div

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { SectionTitle } from "./SectionTitle";
 
 const cards = [
   {
@@ -52,15 +53,7 @@ export default function AboutHotlob() {
 
       <div style={{ position: "absolute", top: 0, left: 0, width: "100%" }}>
         {/* Title */}
-        <h2
-          className="font-semibold text-[#1D1E1F] text-center leading-normal"
-          style={{ 
-            marginTop: "min(3.125vw, 60px)", // 60/1920
-            fontSize: 'clamp(24px, 1.771vw, 34px)'
-          }}
-        >
-          About Hotlob
-        </h2>
+        <SectionTitle>About Hotlob</SectionTitle>
 
       {/* Three-column card container */}
       <div

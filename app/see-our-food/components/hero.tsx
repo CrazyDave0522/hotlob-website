@@ -142,7 +142,7 @@ export default function Hero({
             className={`font-normal space-y-2 ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#999]'}`}
             style={{
               maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
-              fontSize: showOverlay ? 'clamp(18px, 1.563vw, 30px)' : 'clamp(14px, 1.042vw, 20px)',
+              fontSize: 'clamp(18px, 1.563vw, 30px)', // 统一字号
               ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
             }}
           >

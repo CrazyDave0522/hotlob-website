@@ -1,6 +1,7 @@
 import Image from "next/image";
 import HomeStoreItem from "./home-store-item";
 import ReviewBubble from "./ReviewBubble";
+import { SectionTitle } from "./SectionTitle";
 import type { StoreWithData } from "@/lib/getStores";
 import type { ReviewData } from "@/lib/getReviews";
 
@@ -59,9 +60,7 @@ export default function OurLocationsSection({
               }}
             >
               <Image src="/images/icons/store.svg" alt="" width={40} height={40} />
-              <h2 className="font-semibold text-[#1D1E1F] leading-normal" style={{ fontSize: 'clamp(24px, 1.771vw, 34px)' }}>
-                Our Locations
-              </h2>
+              <SectionTitle className="text-left mt-0 mb-0">Our Locations</SectionTitle>
             </div>
 
             {/* Stores list */}
