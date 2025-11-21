@@ -99,7 +99,7 @@ export function Header() {
 
   return (
     <header
-      className="flex w-full max-w-[1920px] shrink-0 items-center justify-between bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+      className="sticky top-0 z-50 flex w-full max-w-[1920px] shrink-0 items-center justify-between bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
       style={{
         paddingInline: "min(3.125vw, 60px)",
         height: "min(4.167vw, 80px)",

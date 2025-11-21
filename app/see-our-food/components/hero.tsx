@@ -35,9 +35,11 @@ export default function Hero({
       className="relative w-full overflow-hidden"
       style={{
         height: heroHeight,
+        paddingTop: "min(4.167vw, 80px)", // Add top padding for sticky header
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: "cover",
-        backgroundPosition: `center ${backgroundPositionY}`,
+        backgroundPositionX: "center",
+        backgroundPositionY: backgroundPositionY,
       }}
     >
       {/* General transparent overlay */}
