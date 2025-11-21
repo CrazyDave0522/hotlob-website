@@ -59,18 +59,20 @@ export default function Hero({
         style={{ paddingLeft: "min(13.542vw, 260px)" }} // 260/1920 = 13.542%
       >
         <h1 
-          className={`font-semibold ${showOverlay ? 'text-[38px] leading-[154%]' : 'text-[30px] leading-normal text-[#242424]'}`}
+          className={`font-semibold ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#242424]'}`}
           style={{
             maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
+            fontSize: showOverlay ? 'clamp(24px, 2vw, 38px)' : 'clamp(20px, 1.563vw, 30px)',
             ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
           }}
         >
           {title}
         </h1>
         <div 
-          className={`font-normal space-y-2 ${showOverlay ? 'text-[30px] leading-[154%]' : 'text-[20px] leading-normal text-[#999]'}`}
+          className={`font-normal space-y-2 ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#999]'}`}
           style={{
             maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
+            fontSize: showOverlay ? 'clamp(18px, 1.563vw, 30px)' : 'clamp(14px, 1.042vw, 20px)',
             ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
           }}
         >

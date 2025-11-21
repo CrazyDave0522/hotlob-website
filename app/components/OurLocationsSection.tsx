@@ -59,7 +59,7 @@ export default function OurLocationsSection({
               }}
             >
               <Image src="/images/icons/store.svg" alt="" width={40} height={40} />
-              <h2 className="text-[34px] font-semibold text-[#1D1E1F] leading-normal">
+              <h2 className="font-semibold text-[#1D1E1F] leading-normal" style={{ fontSize: 'clamp(24px, 1.771vw, 34px)' }}>
                 Our Locations
               </h2>
             </div>

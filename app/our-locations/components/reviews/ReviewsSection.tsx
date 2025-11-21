@@ -16,7 +16,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
       }}
     >
       <div className="mx-auto flex flex-col items-center" style={{ width: '72.917%', maxWidth: '1400px' }}>
-        <h2 className="text-[32px] font-semibold text-black mb-5">See what people are saying</h2>
+        <h2 className="font-semibold text-black mb-5" style={{ fontSize: 'clamp(22px, 1.667vw, 32px)' }}>See what people are saying</h2>
         <div className="w-full rounded-[20px] bg-white shadow-[0_0_20px_rgba(0,0,0,0.12)] p-[30px] flex flex-col gap-10">
           {reviews.map((r, idx) => (
             <ReviewCard key={idx} {...r} />

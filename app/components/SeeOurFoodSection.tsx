@@ -32,8 +32,11 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
       <div style={{ position: "absolute", top: 0, left: 0, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         {/* Title */}
         <h2
-          className="text-[34px] font-semibold text-[#1D1E1F] text-center leading-normal"
-          style={{ marginTop: "min(3.125vw, 60px)" }} // 60/1920
+          className="font-semibold text-[#1D1E1F] text-center leading-normal"
+          style={{ 
+            marginTop: "min(3.125vw, 60px)", // 60/1920
+            fontSize: 'clamp(24px, 1.771vw, 34px)'
+          }}
         >
           See our food
         </h2>
