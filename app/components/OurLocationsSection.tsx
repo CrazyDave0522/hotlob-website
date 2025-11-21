@@ -53,14 +53,21 @@ export default function OurLocationsSection({
           <div className="flex flex-col" style={{ width: "min(35.938vw, 690px)" }}>
             {/* Title with icon */}
             <div
-              className="flex items-center"
               style={{
                 marginBottom: "min(2.604vw, 50px)", // 50/1920
-                gap: "min(1.875vw, 36px)", // 36/1920
               }}
             >
-              <Image src="/images/icons/store.svg" alt="" width={40} height={40} />
-              <SectionTitle className="text-left mt-0 mb-0">Our Locations</SectionTitle>
+              <SectionTitle
+                className="text-left mt-0 mb-0"
+                icon={{
+                  src: "/images/icons/store.svg",
+                  alt: "Store icon",
+                  width: 40,
+                  height: 40
+                }}
+              >
+                Our Locations
+              </SectionTitle>
             </div>
 
             {/* Stores list */}
