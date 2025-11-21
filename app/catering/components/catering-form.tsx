@@ -7,6 +7,8 @@ import {
   getCurrentPositionWithTimeout,
 } from "@/lib/utils/geo";
 import { useToast } from "@/components/ui/use-toast";
+import { sendCateringOrderEmail } from "@/lib/email";
+import { getStoresBasic } from "@/lib/getStores";
 import { CATERING_LAYOUT } from "../constants";
 
 interface Store {
@@ -60,51 +62,58 @@ export default function CateringForm() {
   // Fetch stores on component mount
   useEffect(() => {
     async function fetchStores() {
-      const { data, error } = await supabase
-        .from("store")
-        .select("id, name, latitude, longitude")
-        .order("name");
+      const storesData = await getStoresBasic({ includeExtendedInfo: true });
 
-      if (error) {
-        console.error("Error fetching stores:", error);
+      if (storesData.length === 0) {
         showError("Failed to load stores. Please refresh the page.");
-      } else if (data) {
-        setStores(data);
+        return;
+      }
 
-        // Try to get user location and select nearest store
-        try {
-          const position = await getCurrentPositionWithTimeout(5000);
-          const userLat = position.coords.latitude;
-          const userLng = position.coords.longitude;
+      // Extract basic store info for the form
+      const basicStores: Store[] = storesData.map((store) => ({
+        id: store.id,
+        name: store.name,
+        latitude: store.latitude || null,
+        longitude: store.longitude || null,
+      }));
 
-          // Find nearest store with valid coordinates
-          let nearestStore: Store | null = null;
-          let minDistance = Infinity;
+      setStores(basicStores);
 
-          data.forEach((store) => {
-            if (store.latitude !== null && store.longitude !== null) {
-              const distance = haversineDistance(
-                userLat,
-                userLng,
-                store.latitude,
-                store.longitude
-              );
-              if (distance < minDistance) {
-                minDistance = distance;
-                nearestStore = store;
-              }
+      // Try to get user location and select nearest store
+      try {
+        const position = await getCurrentPositionWithTimeout(5000);
+        const userLat = position.coords.latitude;
+        const userLng = position.coords.longitude;
+
+        // Find nearest store with valid coordinates
+        let nearestStore: Store | null = null;
+        let minDistance = Infinity;
+
+        basicStores.forEach((store) => {
+          if (store.latitude !== null && store.longitude !== null) {
+            const distance = haversineDistance(
+              userLat,
+              userLng,
+              store.latitude,
+              store.longitude
+            );
+            if (distance < minDistance) {
+              minDistance = distance;
+              nearestStore = store;
             }
-          });
-
-          // Auto-select nearest store if found
-          if (nearestStore) {
-            setFormData((prev) => ({ ...prev, storeId: nearestStore!.id }));
           }
-        } catch (error) {
-          // Show warning if location access is denied or times out
-          console.log("Could not get user location:", error);
-          warning("Could not detect your location. Please select a store manually.");
+        });
+
+        // Auto-select nearest store if found
+        if (nearestStore) {
+          setFormData((prev) => ({ ...prev, storeId: nearestStore!.id }));
         }
+      } catch (error) {
+        // Show warning if location access is denied or times out
+        console.log("Could not get user location:", error);
+        warning(
+          "Could not detect your location. Please select a store manually."
+        );
       }
     }
 
@@ -138,6 +147,33 @@ export default function CateringForm() {
       ]);
 
       if (error) throw error;
+
+      // Get store details for email
+      const allStores = await getStoresBasic({ includeExtendedInfo: true });
+      const storeData = allStores.find(
+        (store) => store.id === formData.storeId
+      );
+
+      if (!storeData?.email) {
+        console.error("Store email not found for store:", formData.storeId);
+        // Don't fail the submission for email issues
+      } else {
+        // Send email notification
+        try {
+          await sendCateringOrderEmail(storeData.email, {
+            storeName: storeData.name,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            cateringDate: formData.cateringDate,
+            pickupTime: formData.pickupTime,
+          });
+        } catch (emailError) {
+          console.error("Error sending email:", emailError);
+          // Don't fail the submission for email issues
+        }
+      }
 
       success("Order submitted successfully! We'll contact you soon.");
 

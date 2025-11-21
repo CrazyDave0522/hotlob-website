@@ -8,7 +8,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
 import type { Dish, RawDish } from "@/types/types";
 import Image from "next/image";
-import { getStores } from "@/lib/getStores";
+import { getStoresWithDetails } from "@/lib/getStores";
 import { getReviews } from "@/lib/getReviews";
 import { stripHtmlTags, getSmartExcerpt } from "@/lib/utils/stripHtml";
 
@@ -78,7 +78,7 @@ export default async function Home() {
     .filter((d) => (d.stores?.length ?? 0) > 0);
 
   // Fetch top 2 stores by rating for Our Locations section
-  const topStores = await getStores({ limit: 2 });
+  const topStores = await getStoresWithDetails({ limit: 2 });
 
   // Fetch top 4 reviews for Our Locations section
   const reviews = await getReviews(4);

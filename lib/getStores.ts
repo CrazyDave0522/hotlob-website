@@ -11,6 +11,7 @@ export interface Store {
   uber_url?: string | null; // optional: only selected when includeOrderInfo
   latitude?: number | null; // optional
   longitude?: number | null; // optional
+  email?: string | null; // optional: only selected when includeOrderInfo
 }
 
 export interface StorePhoto {
@@ -32,6 +33,7 @@ export interface StoreWithData {
   uber_url?: string | null;
   latitude?: number | null;
   longitude?: number | null;
+  email?: string | null;
 }
 
 interface PhotoFromDB {
@@ -46,10 +48,34 @@ interface PlaceCacheRow {
   opening_hours_weekday_text: string[] | null;
 }
 
-export async function getStores(options?: { limit?: number; includeOrderInfo?: boolean }): Promise<StoreWithData[]> {
-  const { limit, includeOrderInfo } = options || {};
+export async function getStoresBasic(options?: { includeExtendedInfo?: boolean; limit?: number }): Promise<Store[]> {
+  const { includeExtendedInfo, limit } = options || {};
   const baseFields = "id, name, street, suburb, state, postcode, google_maps_embed_url";
-  const extraFields = includeOrderInfo ? ", uber_url, latitude, longitude" : "";
+  const extraFields = includeExtendedInfo ? ", uber_url, latitude, longitude, email" : "";
+
+  const query = supabase
+    .from("store")
+    .select(baseFields + extraFields)
+    .order("name");
+
+  if (limit) {
+    query.limit(limit);
+  }
+
+  const { data: stores, error } = await query.returns<Store[]>();
+
+  if (error) {
+    console.error("Error fetching stores:", error);
+    return [];
+  }
+
+  return stores || [];
+}
+
+export async function getStoresWithDetails(options?: { limit?: number }): Promise<StoreWithData[]> {
+  const { limit } = options || {};
+  const baseFields = "id, name, street, suburb, state, postcode, google_maps_embed_url";
+  const extraFields = ", uber_url, latitude, longitude, email"; // Always include extended info for detailed view
   // Fetch all stores
   const { data: stores, error } = await supabase
     .from("store")
@@ -125,4 +151,10 @@ export async function getStores(options?: { limit?: number; includeOrderInfo?: b
 
   // Apply limit if specified
   return limit ? storesWithData.slice(0, limit) : storesWithData;
+}
+
+// Backward compatibility - deprecated, use getStoresBasic or getStoresWithDetails
+export async function getStores(options?: { limit?: number; includeOrderInfo?: boolean }): Promise<StoreWithData[]> {
+  console.warn("getStores is deprecated. Use getStoresBasic for simple queries or getStoresWithDetails for full data.");
+  return getStoresWithDetails(options);
 }

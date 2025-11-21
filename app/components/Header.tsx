@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 // Removed direct ORDER_URL fallback usage; keep constants import only if needed elsewhere.
 import { useState, useCallback } from "react";
 import StoreSelectionModal, { StoreInfo } from "./StoreSelectionModal";
-import { getStores } from "@/lib/getStores";
+import { getStoresBasic } from "@/lib/getStores";
 import { getCurrentPositionWithTimeout, haversineDistance } from "@/lib/utils/geo";
 
 const NAV_ITEMS = [
@@ -50,7 +50,7 @@ export function Header() {
     // Lazy load stores if not loaded yet
     if (!stores) {
       try {
-        const all = await getStores({ includeOrderInfo: true });
+        const all = await getStoresBasic({ includeExtendedInfo: true });
         const simplified: StoreInfo[] = all.map(s => ({
           id: s.id,
           name: s.name,
