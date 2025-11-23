@@ -4,7 +4,7 @@ import DishCard from "../see-our-food/components/dish-card";
 import { Dish } from "@/types/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SectionTitle } from "./SectionTitle";
 
 interface SeeOurFoodSectionProps {
@@ -14,21 +14,45 @@ interface SeeOurFoodSectionProps {
 export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
   const router = useRouter();
   const [hovered, setHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Display only the first 4 dishes
   const topDishes = dishes.slice(0, 4);
 
   return (
     <section className="relative w-full" style={{ display: 'block', backgroundColor: '#FDF7F0' }}>
-      {/* use Next/Image so the image sets the section height and isn't side-cropped; content overlays absolutely */}
-      <Image
-        src="/images/home-bg-see-our-food.png"
-        alt="See our food background"
-        width={1920}
-        height={920}
-        className="w-full h-auto"
-        priority
-        style={{ aspectRatio: '1920/920', display: 'block' }}
-      />
+      {/* Background image - conditionally rendered */}
+      {isMobile ? (
+        <Image
+          src="/images/home-bg-see-our-food-mb.png"
+          alt="See our food background"
+          width={750}
+          height={1500}
+          className="w-full h-auto"
+          priority
+          style={{ aspectRatio: "750/1500", display: 'block' }}
+        />
+      ) : (
+        <Image
+          src="/images/home-bg-see-our-food.png"
+          alt="See our food background"
+          width={1920}
+          height={920}
+          className="w-full h-auto"
+          priority
+          style={{ aspectRatio: '1920/920', display: 'block' }}
+        />
+      )}
 
       <div style={{ position: "absolute", top: 0, left: 0, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         {/* Title */}

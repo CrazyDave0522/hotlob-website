@@ -15,6 +15,9 @@ import { stripHtmlTags, getSmartExcerpt } from "@/lib/utils/stripHtml";
 export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: revalidate data
 
 export default async function Home() {
+  // For now, we'll handle mobile detection on client side
+  // Check if mobile device - simplified approach
+  const isMobile = false; // Will be handled by CSS media queries
   // Fetch dish data from database (reusing see-our-food page query logic)
   const { data: dishesRaw, error: dishError } = await supabase
     .from("dish")
@@ -116,8 +119,8 @@ export default async function Home() {
       />
       <AboutHotlob />
       <SeeOurFoodSection dishes={dishes} />
-      {/* Curve background section */}
-      <section className="relative w-full" style={{ display: 'block', backgroundColor: '#FDF7F0' }}>
+      {/* Curve background section - hidden on mobile */}
+      <section className="relative w-full hidden lg:block" style={{ backgroundColor: '#FDF7F0' }}>
         <Image
           src="/images/home-bg-curve.png"
           alt="Curve background"
