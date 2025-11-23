@@ -28,9 +28,8 @@ export default function Hero({
   overlayUrl,
 }: HeroProps) {
   // home and large use 820px (42.708vw capped at 820px); medium uses 420px (21.875vw capped at 420px)
-  const heroHeight = size === "medium" 
-    ? "min(21.875vw, 420px)" 
-    : "min(42.708vw, 820px)";
+  const heroHeight =
+    size === "medium" ? "min(21.875vw, 420px)" : "min(42.708vw, 820px)";
 
   return (
     <>
@@ -38,7 +37,6 @@ export default function Hero({
       <section
         className="lg:hidden relative w-full h-[420px] overflow-hidden"
         style={{
-          paddingTop: "120px", // 为sticky header让位
           backgroundImage: `url(${imageUrl})`,
           backgroundSize: "cover",
           backgroundPositionX: backgroundPositionX,
@@ -57,30 +55,38 @@ export default function Hero({
         )}
 
         {/* Text area */}
-        <div 
+        <div
           className="relative z-10 flex flex-col justify-center h-full"
           style={{ paddingLeft: "30px" }} // 移动端左对齐，固定padding
         >
-          <div 
-            className="flex flex-col gap-5 w-[684px]"
-          >
-            <h1 
-              className={`font-semibold leading-[154%] ${showOverlay ? 'text-white' : 'text-[#242424]'}`}
+          <div className="flex flex-col gap-5 w-[684px]">
+            <h1
+              className={`font-semibold leading-[154%] ${
+                showOverlay ? "text-white" : "text-[#242424]"
+              }`}
               style={{
-                fontSize: "38px",
-                ...(showOverlay ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" } : {})
+                fontSize: "28px",
+                maxWidth: "500px", // 移动端标题宽度限制，与描述保持一致
+                ...(showOverlay
+                  ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
+                  : {}),
               }}
             >
               {title}
             </h1>
-            <div 
-              className={`font-normal leading-[154%] space-y-2 ${showOverlay ? 'text-white' : 'text-[#999]'}`}
+            <div
+              className={`font-normal leading-[154%] space-y-2 ${
+                showOverlay ? "text-white" : "text-[#999]"
+              }`}
               style={{
-                fontSize: "30px",
-                ...(showOverlay ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" } : {})
+                fontSize: "20px",
+                maxWidth: "500px", // 移动端文字宽度限制，避免占满整个容器
+                ...(showOverlay
+                  ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
+                  : {}),
               }}
             >
-              {description.split('\n').map((paragraph, index) => (
+              {description.split("\n").map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
             </div>
@@ -89,8 +95,8 @@ export default function Hero({
 
         {/* Footer note (optional) */}
         {footerNote && (
-          <div 
-            className="absolute z-10 bottom-2.5 right-0" 
+          <div
+            className="absolute z-10 bottom-2.5 right-0"
             style={{ paddingRight: "30px" }} // 移动端右边padding
           >
             <p className="text-[#C9CDD4] text-[12px] font-normal leading-none text-right">
@@ -105,7 +111,6 @@ export default function Hero({
         className="hidden lg:block relative w-full overflow-hidden"
         style={{
           height: heroHeight,
-          paddingTop: "min(4.167vw, 80px)", // Add top padding for sticky header
           backgroundImage: `url(${imageUrl})`,
           backgroundSize: "cover",
           backgroundPositionX: backgroundPositionX,
@@ -124,29 +129,39 @@ export default function Hero({
         )}
 
         {/* Text area */}
-        <div 
-          className={`relative z-10 flex flex-col justify-center h-full gap-5 ${showOverlay ? 'text-white' : ''}`}
+        <div
+          className={`relative z-10 flex flex-col justify-center h-full gap-5 ${
+            showOverlay ? "text-white" : ""
+          }`}
           style={{ paddingLeft: "min(13.542vw, 260px)" }} // 260/1920 = 13.542%
         >
-          <h1 
-            className={`font-semibold ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#242424]'}`}
+          <h1
+            className={`font-semibold ${
+              showOverlay ? "leading-[154%]" : "leading-normal text-[#242424]"
+            }`}
             style={{
               maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
-              fontSize: 'clamp(24px, 2vw, 38px)', // 统一标题字号
-              ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
+              fontSize: "clamp(24px, 2vw, 38px)", // 统一标题字号
+              ...(showOverlay
+                ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
+                : {}),
             }}
           >
             {title}
           </h1>
-          <div 
-            className={`font-normal space-y-2 ${showOverlay ? 'leading-[154%]' : 'leading-normal text-[#999]'}`}
+          <div
+            className={`font-normal space-y-2 ${
+              showOverlay ? "leading-[154%]" : "leading-normal text-[#999]"
+            }`}
             style={{
               maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
-              fontSize: 'clamp(18px, 1.563vw, 30px)', // 统一字号
-              ...(showOverlay ? { textShadow: '0 2px 4px rgba(0, 0, 0, 0.25)' } : {})
+              fontSize: "clamp(18px, 1.563vw, 30px)", // 统一字号
+              ...(showOverlay
+                ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
+                : {}),
             }}
           >
-            {description.split('\n').map((paragraph, index) => (
+            {description.split("\n").map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>
@@ -154,8 +169,8 @@ export default function Hero({
 
         {/* Footer note (optional) */}
         {footerNote && (
-          <div 
-            className="absolute z-10 bottom-2.5 right-0" 
+          <div
+            className="absolute z-10 bottom-2.5 right-0"
             style={{ paddingRight: "min(8.333vw, 160px)" }} // 160/1920 = 8.333%, closer to right edge
           >
             <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-right">
