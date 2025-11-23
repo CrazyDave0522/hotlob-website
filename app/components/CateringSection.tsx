@@ -2,28 +2,62 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function CateringSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <section className="relative w-full" style={{ display: 'block', backgroundColor: '#D43B41' }}>
-      {/* image in flow sets section height; content is absolutely overlaid so section height = image height */}
-      <Image
-        src="/images/home-bg-catering.png"
-        alt="Catering background"
-        width={1920}
-        height={669}
-        className="w-full h-auto"
-        priority
-        style={{ aspectRatio: "1920/669", display: 'block' }}
-      />
+      {/* Background image - conditionally rendered */}
+      {isMobile ? (
+        <Image
+          src="/images/home-bg-catering-mb.png"
+          alt="Catering background"
+          width={750}
+          height={580}
+          className="w-full h-auto"
+          priority
+          style={{ aspectRatio: "750/580", display: 'block' }}
+        />
+      ) : (
+        <Image
+          src="/images/home-bg-catering.png"
+          alt="Catering background"
+          width={1920}
+          height={669}
+          className="w-full h-auto"
+          priority
+          style={{ aspectRatio: "1920/669", display: 'block' }}
+        />
+      )}
 
       <div
         className="catering-top"
         style={{ position: "absolute", top: 0, left: 0, width: "100%" }}
       >
         <style>{`
-          /* Responsive top spacing: 32px on small screens, 120px on 1920px screens */
-          .catering-top { margin-top: clamp(32px, 2vw + 20px, 120px); }
+          /* Mobile: 108px from top, Desktop: responsive spacing */
+          @media (max-width: 1023px) {
+            .catering-top { margin-top: 108px; }
+            .catering-subtitle { margin-top: 16px; }
+            .catering-content { margin-top: 16px; }
+          }
+          @media (min-width: 1024px) {
+            .catering-top { margin-top: clamp(32px, 2vw + 20px, 120px); }
+            .catering-subtitle { margin-top: 12px; }
+            .catering-content { margin-top: 12px; }
+          }
         `}</style>
         <h1
           className="text-[#FFD632] text-center text-[40px] font-semibold leading-normal"
@@ -33,13 +67,13 @@ export default function CateringSection() {
         </h1>
 
         <h2
-          className="text-white text-center text-[40px] font-semibold leading-normal"
-          style={{ fontWeight: 600, marginTop: 12 }}
+          className="text-white text-center text-[40px] font-semibold leading-normal catering-subtitle"
+          style={{ fontWeight: 600 }}
         >
           Leave as what you have
         </h2>
 
-        <div style={{ marginTop: 12 }}>
+        <div className="catering-content">
           <div
             className="text-white text-center text-[24px] font-normal leading-[52px]"
             style={{
@@ -70,24 +104,25 @@ export default function CateringSection() {
       >
         <Link
           href="/catering#catering-form"
-          className="transition-colors duration-200 text-[#1D1E1F] hover:text-[#EA4148]"
+          className="transition-colors duration-200 text-[#1D1E1F] hover:text-[#EA4148] active:text-[#EA4148]"
           style={{
             display: "flex",
-            width: "min(10.417vw, 200px)",
-            height: "min(2.498vw, 47.956px)",
+            width: isMobile ? "240px" : "min(10.417vw, 200px)",
+            height: isMobile ? "56px" : "min(2.498vw, 47.956px)",
             justifyContent: "center",
             alignItems: "center",
-            gap: "min(0.521vw, 10px)",
+            gap: isMobile ? "10px" : "min(0.521vw, 10px)",
             flexShrink: 0,
-            borderRadius: "min(1.563vw, 30px)",
+            borderRadius: isMobile ? "30px" : "min(1.563vw, 30px)",
             background: "#FFFFFF",
             textDecoration: "none",
             boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
             border: "none",
-            fontSize: "min(1.042vw, 20px)",
+            fontSize: isMobile ? "24px" : "min(1.042vw, 20px)",
             fontStyle: "normal",
             fontWeight: 400,
             lineHeight: "normal",
+            color: "#1D1E1F",
           }}
         >
           Order Online

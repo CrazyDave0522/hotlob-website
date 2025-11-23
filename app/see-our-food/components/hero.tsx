@@ -48,7 +48,7 @@ export default function Hero({
         {/* General transparent overlay */}
         {showOverlay && (
           <Image
-            src={overlayUrl ?? "/images/overlay.png"}
+            src={overlayUrl ?? "/images/overlay-mb.png"}
             alt=""
             fill
             priority
