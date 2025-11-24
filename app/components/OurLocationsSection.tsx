@@ -92,7 +92,7 @@ export default function OurLocationsSection({
                   }}
                 >
                   <SectionTitle
-                    className="text-left mt-0 mb-0"
+                    className="justify-center mt-0 mb-0"
                     icon={{
                       src: "/images/icons/store.svg",
                       alt: "Store icon",
@@ -141,7 +141,7 @@ export default function OurLocationsSection({
                 }}
               >
                 <SectionTitle
-                  className="text-left mt-0 mb-0"
+                  className="justify-start mt-0 mb-0"
                   icon={{
                     src: "/images/icons/store.svg",
                     alt: "Store icon",

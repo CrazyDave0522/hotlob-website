@@ -104,7 +104,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
         height: bubbleHeight,
         flexShrink: 0,
       }}
-      className="group transition-shadow duration-300 ease-out group-hover:shadow-xl group-hover:shadow-black/15 group-hover:ring-1 group-hover:ring-white/50"
+      className={`group transition-shadow duration-300 ease-out ${isMobile ? 'group-active:shadow-xl group-active:shadow-black/15 group-active:ring-1 group-active:ring-white/50' : 'group-hover:shadow-xl group-hover:shadow-black/15 group-hover:ring-1 group-hover:ring-white/50'}`}
     >
       {/* Avatar with decorative ring (lower z-index, behind bubble) */}
       {/* ✅ 头像轻微缩放 */}
@@ -115,7 +115,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           height: avatarRingSize,
           zIndex: 1,
         }}
-        className="transition-transform duration-300 ease-out group-hover:scale-105"
+        className={`transition-transform duration-300 ease-out ${isMobile ? 'group-active:scale-105' : 'group-hover:scale-105'}`}
       >
         {/* Decorative ring */}
         <Image
@@ -168,7 +168,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           height: "100%",
           zIndex: 2,
         }}
-        className="transition-transform duration-300 ease-out group-hover:scale-[1.08]"
+        className={`transition-transform duration-300 ease-out ${isMobile ? 'group-active:scale-[1.08]' : 'group-hover:scale-[1.08]'}`}
       >
         {/* Bubble background */}
         <Image
