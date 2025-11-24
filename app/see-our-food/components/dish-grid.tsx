@@ -24,16 +24,18 @@ export default function DishGrid({ dishes }: DishGridProps) {
 
   return (
     <div 
-      className="w-full flex justify-center bg-[#F9F9F9]"
+      className={`w-full flex justify-center ${isMobile ? '' : 'bg-[#F9F9F9]'}`}
       style={{ paddingBottom: isMobile ? "32px" : "min(3.333vw, 64px)" }} // 64/1920 = 3.333%
     >
       {/* Unified container: responsive width */}
       <div 
-        className="mx-auto px-4"
+        className="mx-auto"
         style={{ 
           width: isMobile ? '100%' : '72.917%', 
           maxWidth: isMobile ? 'none' : '1400px',
-          paddingTop: isMobile ? "20px" : "min(1.563vw, 30px)" // 30/1920 = 1.563%
+          paddingTop: isMobile ? "40px" : "min(1.563vw, 30px)", // 30/1920 = 1.563%
+          paddingLeft: isMobile ? "30px" : "16px",
+          paddingRight: isMobile ? "30px" : "16px"
         }}
       >
         {/* Responsive grid: 2 columns on mobile, 4 on desktop */}
@@ -41,7 +43,7 @@ export default function DishGrid({ dishes }: DishGridProps) {
           className="grid items-end"
           style={{ 
             gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
-            gap: isMobile ? "24px" : "min(1.25vw, 24px)" // Mobile: 24px fixed, Desktop: responsive max 24px
+            gap: isMobile ? "30px" : "min(1.25vw, 24px)" // Mobile: 30px, Desktop: responsive max 24px
           }}
         >
           {dishes.map((dish, index) => (

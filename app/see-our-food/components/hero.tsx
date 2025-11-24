@@ -96,10 +96,10 @@ export default function Hero({
         {/* Footer note (optional) */}
         {footerNote && (
           <div
-            className="absolute z-10 bottom-2.5 right-0"
-            style={{ paddingRight: "30px" }} // 移动端右边padding
+            className="absolute z-10 bottom-2.5 left-0"
+            style={{ paddingLeft: "30px" }} // 移动端左边padding
           >
-            <p className="text-[#C9CDD4] text-[12px] font-normal leading-none text-right">
+            <p className="text-[#C9CDD4] text-[12px] font-normal leading-none text-left">
               {footerNote}
             </p>
           </div>

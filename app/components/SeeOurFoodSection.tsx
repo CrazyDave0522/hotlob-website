@@ -59,10 +59,13 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
         <SectionTitle>See our food</SectionTitle>
       {/* Dish cards section */}
       <div
-        className={isMobile ? "flex flex-wrap gap-4 w-full px-4 justify-center" : "flex gap-6 w-[72.917%] mx-auto justify-center"}
+        className={isMobile ? "flex flex-wrap w-full justify-center" : "flex gap-6 w-[72.917%] mx-auto justify-center"}
         style={{
           marginTop: isMobile ? "0px" : "min(1.042vw, 20px)", // Mobile: 0px, Desktop: responsive max 20px
           maxWidth: isMobile ? "none" : "1400px",
+          gap: isMobile ? "30px" : undefined,
+          paddingLeft: isMobile ? "30px" : undefined,
+          paddingRight: isMobile ? "30px" : undefined
         }}
       >
         {topDishes.map((dish, idx) => (
@@ -70,7 +73,7 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
             key={dish.id}
             className="flex items-end justify-center"
             style={{
-              width: isMobile ? "calc(50% - 8px)" : "25%",
+              width: isMobile ? "calc(50% - 15px)" : "25%",
               minWidth: isMobile ? "160px" : "280px",
               height: isMobile ? "700px" : "min(31.25vw, 600px)", // Increased mobile height to accommodate DishCard default state (590px)
               marginBottom: isMobile ? "16px" : "0"
