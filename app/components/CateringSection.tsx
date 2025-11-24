@@ -104,7 +104,7 @@ export default function CateringSection() {
       >
         <Link
           href="/catering#catering-form"
-          className="transition-all duration-200 text-[#1D1E1F] hover:text-[#EA4148] hover:bg-gray-50 active:text-[#EA4148] active:bg-gray-100 active:scale-95"
+          className={`transition-all duration-200 text-[#1D1E1F] hover:text-[#EA4148] hover:bg-gray-50 active:text-[#EA4148] active:bg-gray-100 active:scale-95 ${isMobile ? 'focus:text-[#EA4148] focus:bg-gray-100 focus:scale-95' : ''}`}
           style={{
             display: "flex",
             width: isMobile ? "240px" : "min(10.417vw, 200px)",
@@ -122,6 +122,8 @@ export default function CateringSection() {
             fontStyle: "normal",
             fontWeight: 400,
             lineHeight: "normal",
+            WebkitTapHighlightColor: isMobile ? "rgba(234, 65, 72, 0.1)" : "transparent",
+            outline: "none",
           }}
         >
           Order Online

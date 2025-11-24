@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import { formatAUDate } from "@/lib/utils/formatDate";
 
 interface NewsCardProps {
@@ -13,6 +14,87 @@ interface NewsCardProps {
   variant?: "home" | "list";
 }
 
+// Mobile layout component (shared between home and list variants)
+function MobileNewsCard({
+  slug,
+  title,
+  excerpt,
+  coverImageUrl,
+  publishDate
+}: Omit<NewsCardProps, 'variant'>) {
+  return (
+    <Link
+      href={`/news/${slug}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex flex-col w-full bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.05)] hover:shadow-[0_0_30px_0_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden"
+      style={{
+        borderRadius: "20px",
+        height: "550px",
+      }}
+    >
+      {/* Cover Image */}
+      <div
+        className="relative overflow-hidden"
+        style={{
+          width: "690px",
+          height: "340px",
+          flexShrink: 0,
+          borderRadius: "20px 20px 0 0",
+        }}
+      >
+        <Image
+          src={coverImageUrl}
+          alt={title}
+          fill
+          sizes="690px"
+          className="object-cover"
+        />
+      </div>
+
+      {/* Content */}
+      <div
+        className="flex flex-col flex-1"
+        style={{
+          padding: "30px 20px 20px 20px",
+        }}
+      >
+        {/* Title */}
+        <h2
+          className="text-[#1D1E1F] font-semibold leading-normal group-hover:text-[#EA4148] transition-colors"
+          style={{
+            fontSize: "24px",
+            marginBottom: "20px",
+          }}
+        >
+          {title}
+        </h2>
+
+        {/* Date */}
+        <div
+          className="text-[#86909C] font-normal leading-normal"
+          style={{
+            fontSize: "14px",
+            marginBottom: "20px",
+          }}
+        >
+          {formatAUDate(publishDate)}
+        </div>
+
+        {/* Excerpt */}
+        <p
+          className="text-[#86909C] font-normal leading-normal line-clamp-3"
+          style={{
+            fontSize: "16px",
+          }}
+        >
+          {excerpt}
+        </p>
+      </div>
+    </Link>
+  );
+}
+
 export default function NewsCard({
   slug,
   title,
@@ -21,7 +103,30 @@ export default function NewsCard({
   publishDate,
   variant = "list",
 }: NewsCardProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   if (variant === "home") {
+    if (isMobile) {
+      return <MobileNewsCard
+        slug={slug}
+        title={title}
+        excerpt={excerpt}
+        coverImageUrl={coverImageUrl}
+        publishDate={publishDate}
+      />;
+    }
+
+    // Desktop: left-right layout
     return (
       <Link
         href={`/news/${slug}`}
@@ -91,6 +196,17 @@ export default function NewsCard({
   }
 
   // List variant (for news page)
+  if (isMobile) {
+    return <MobileNewsCard
+      slug={slug}
+      title={title}
+      excerpt={excerpt}
+      coverImageUrl={coverImageUrl}
+      publishDate={publishDate}
+    />;
+  }
+
+  // Desktop: left-right layout
   return (
     <Link
       href={`/news/${slug}`}
