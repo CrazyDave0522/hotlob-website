@@ -37,10 +37,10 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
           src="/images/home-bg-see-our-food-mb.png"
           alt="See our food background"
           width={750}
-          height={1500}
+          height={1750}
           className="w-full h-auto"
           priority
-          style={{ aspectRatio: "750/1500", display: 'block' }}
+          style={{ aspectRatio: "750/1750", display: 'block' }}
         />
       ) : (
         <Image
@@ -59,17 +59,22 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
         <SectionTitle>See our food</SectionTitle>
       {/* Dish cards section */}
       <div
-        className="flex gap-6 w-[72.917%] mx-auto justify-center"
+        className={isMobile ? "flex flex-wrap gap-4 w-full px-4 justify-center" : "flex gap-6 w-[72.917%] mx-auto justify-center"}
         style={{
-          marginTop: "min(2.083vw, 40px)", // 40/1920
-          maxWidth: "1400px",
+          marginTop: isMobile ? "0px" : "min(1.042vw, 20px)", // Mobile: 0px, Desktop: responsive max 20px
+          maxWidth: isMobile ? "none" : "1400px",
         }}
       >
         {topDishes.map((dish, idx) => (
           <div
             key={dish.id}
             className="flex items-end justify-center"
-            style={{ width: "25%", minWidth: "280px", height: "min(31.25vw, 600px)" }}
+            style={{
+              width: isMobile ? "calc(50% - 8px)" : "25%",
+              minWidth: isMobile ? "160px" : "280px",
+              height: isMobile ? "700px" : "min(31.25vw, 600px)", // Increased mobile height to accommodate DishCard default state (590px)
+              marginBottom: isMobile ? "16px" : "0"
+            }}
           >
             <DishCard dish={dish} priority={idx < 4} />
           </div>
@@ -83,35 +88,35 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
         onClick={() => router.push("/see-our-food")}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="flex flex-col items-center mt-8 transition-colors duration-200"
+        className="flex flex-col items-center mt-8 transition-all duration-200 active:scale-95"
         style={{ gap: 10 }}
       >
         <div
-          className="rounded-full flex items-center justify-center transition-colors duration-200"
+          className="rounded-full flex items-center justify-center transition-colors duration-200 bg-[#FDE4D5]"
           style={{
-            width: 32,
-            height: 32,
+            width: isMobile ? 50 : 32,
+            height: isMobile ? 50 : 32,
             aspectRatio: "1/1",
-            background: hovered ? "rgba(234,65,72,0.10)" : "#F9F9F9",
             boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
           }}
         >
           <Image
             src={hovered ? "/images/icons/arrow-right-active.svg" : "/images/icons/arrow-right.svg"}
             alt="more"
-            width={20}
-            height={20}
+            width={isMobile ? 36 : 20}
+            height={isMobile ? 36 : 20}
             style={{ transition: "filter 0.2s" }}
           />
         </div>
         <span
+          className={`transition-colors duration-200 ${
+            hovered ? "text-[#EA4148]" : "text-[#86909C]"
+          } active:text-[#D32F2F]`}
           style={{
-            color: hovered ? "#EA4148" : "#86909C",
-            fontSize: 16,
+            fontSize: isMobile ? 26 : 16,
             fontStyle: "normal",
             fontWeight: 400,
             lineHeight: "normal",
-            transition: "color 150ms",
           }}
         >
           More
