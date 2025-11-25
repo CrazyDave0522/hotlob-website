@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import HeroTexts from "./components/hero-texts";
 import FormTitle from "./components/form-title";
@@ -5,6 +8,59 @@ import CateringForm from "./components/catering-form";
 // layout constants are in ./constants but not needed here
 
 export default function CateringPage() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div className="relative w-full">
+        {/* Hero section with background */}
+        <div className="relative w-full mx-auto aspect-750/702">
+          <div className="absolute inset-0" aria-hidden="true">
+            <Image
+              src="/images/catering-bg-mb.png"
+              alt=""
+              fill
+              sizes="100vw"
+              priority
+              className="object-contain object-top"
+            />
+          </div>
+          <div className="relative w-full h-full">
+            <HeroTexts isMobile={true} />
+            <FormTitle isMobile={true} />
+          </div>
+        </div>
+
+        {/* Form section with background */}
+        <div className="relative w-full mx-auto aspect-750/1478">
+          <div className="absolute inset-0" aria-hidden="true">
+            <Image
+              src="/images/catering-form-bg-mb.png"
+              alt=""
+              fill
+              sizes="100vw"
+              priority
+              className="object-contain object-top"
+            />
+          </div>
+          <div className="relative w-full h-full">
+            <CateringForm isMobile={true} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full">
       {/* Background images - desktop and mobile with Next.js Image optimization */}

@@ -2,11 +2,15 @@
 
 import { CATERING_LAYOUT } from "../constants";
 
-export default function HeroTexts() {
+interface HeroTextsProps {
+  isMobile?: boolean;
+}
+
+export default function HeroTexts({ isMobile = false }: HeroTextsProps) {
   return (
-    <div 
-      className="absolute left-0 right-0 flex flex-col items-center gap-4"
-      style={{ top: CATERING_LAYOUT.HERO_TOP }}
+    <div
+      className={isMobile ? "flex flex-col items-center gap-4 pt-[108px]" : "absolute left-0 right-0 flex flex-col items-center gap-4"}
+      style={isMobile ? {} : { top: CATERING_LAYOUT.HERO_TOP }}
     >
       {/* CATERING */}
       <h1

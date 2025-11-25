@@ -42,7 +42,11 @@ function validateAustralianPhone(phone: string): string {
   return "Please enter a valid Australian phone number (mobile: 04xx xxx xxx, landline: (0x) xxxx xxxx)";
 }
 
-export default function CateringForm() {
+interface CateringFormProps {
+  isMobile?: boolean;
+}
+
+export default function CateringForm({ isMobile = false }: CateringFormProps) {
   const { success, error: showError, warning } = useToast();
   const [stores, setStores] = useState<Store[]>([]);
   const [formData, setFormData] = useState({
@@ -211,8 +215,8 @@ export default function CateringForm() {
   return (
     <div
       id="catering-form"
-      className="absolute"
-      style={{
+      className={isMobile ? "p-6 flex justify-center" : "absolute"}
+      style={isMobile ? {} : {
         left: CATERING_LAYOUT.FORM_LEFT,
         bottom: CATERING_LAYOUT.FORM_BOTTOM,
         width: CATERING_LAYOUT.FORM_WIDTH,
@@ -224,26 +228,27 @@ export default function CateringForm() {
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="w-full flex flex-wrap"
-        style={{ gap: CATERING_LAYOUT.FORM_GAP }}
+        className={isMobile ? "w-full flex flex-col items-center gap-[30px]" : "w-full flex flex-wrap"}
+        style={isMobile ? {} : { gap: CATERING_LAYOUT.FORM_GAP }}
       >
-        {/* Store selection - full width row, but input matches other fields */}
-        <div className="w-full">
-          <label
-            htmlFor="storeId"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Select a store
-          </label>
-          <select
-            id="storeId"
-            name="storeId"
-            value={formData.storeId}
-            onChange={handleChange}
-            required
-            style={{ width: CATERING_LAYOUT.INPUT_WIDTH_CALC }}
-            className="flex h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
-          >
+        {/* Store selection - full width in mobile */}
+        <div className={isMobile ? "w-full flex justify-center" : "w-full"}>
+          <div className={isMobile ? "w-[630px]" : ""}>
+            <label
+              htmlFor="storeId"
+              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+            >
+              Select a store
+            </label>
+            <select
+              id="storeId"
+              name="storeId"
+              value={formData.storeId}
+              onChange={handleChange}
+              required
+              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+              style={isMobile ? {} : { width: CATERING_LAYOUT.INPUT_WIDTH_CALC }}
+            >
             <option value="">Select a store</option>
             {stores.map((store) => (
               <option key={store.id} value={store.id}>
@@ -251,136 +256,150 @@ export default function CateringForm() {
               </option>
             ))}
           </select>
+          </div>
         </div>
 
-        {/* First name - half width */}
-        <div className="flex-1 min-w-[calc(50%-15px)]">
-          <label
-            htmlFor="firstName"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            First name
-          </label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
-            placeholder="Enter first name"
-          />
+        {/* First name - full width in mobile */}
+        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
+          <div className={isMobile ? "w-[630px]" : ""}>
+            <label
+              htmlFor="firstName"
+              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+            >
+              First name
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+              placeholder="Enter first name"
+            />
+          </div>
         </div>
 
-        {/* Last name - half width */}
-        <div className="flex-1 min-w-[calc(50%-15px)]">
-          <label
-            htmlFor="lastName"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Last name
-          </label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
-            placeholder="Enter last name"
-          />
+        {/* Last name - full width in mobile */}
+        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
+          <div className={isMobile ? "w-[630px]" : ""}>
+            <label
+              htmlFor="lastName"
+              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+            >
+              Last name
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+              placeholder="Enter last name"
+            />
+          </div>
         </div>
 
-        {/* Email - half width */}
-        <div className="flex-1 min-w-[calc(50%-15px)]">
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
-            placeholder="your@email.com"
-          />
+        {/* Email - full width in mobile */}
+        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
+          <div className={isMobile ? "w-[630px]" : ""}>
+            <label
+              htmlFor="email"
+              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+              placeholder="your@email.com"
+            />
+          </div>
         </div>
 
-        {/* Phone - half width */}
-        <div className="flex-1 min-w-[calc(50%-15px)]">
-          <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Phone
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            onBlur={(e) => {
-              const error = validateAustralianPhone(e.target.value);
-              setErrors((prev) => ({ ...prev, phone: error }));
-            }}
-            required
-            className={`flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent ${
-              errors.phone ? "border-red-500" : "border-[#CCCFD7]"
-            }`}
-            placeholder="+61 xxx xxx xxx"
-          />
-          {errors.phone && (
-            <p className="text-red-600 text-sm mt-1">{errors.phone}</p>
-          )}
+        {/* Phone - full width in mobile */}
+        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
+          <div className={isMobile ? "w-[630px]" : ""}>
+            <label
+              htmlFor="phone"
+              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+            >
+              Phone
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              onBlur={(e) => {
+                const error = validateAustralianPhone(e.target.value);
+                setErrors((prev) => ({ ...prev, phone: error }));
+              }}
+              required
+              className={isMobile ? `w-full h-[70px] px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px] ${
+                errors.phone ? "border-red-500" : "border-[#CCCFD7]"
+              }` : `flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent ${
+                errors.phone ? "border-red-500" : "border-[#CCCFD7]"
+              }`}
+              placeholder="+61 xxx xxx xxx"
+            />
+            {errors.phone && (
+              <p className={`text-red-600 ${isMobile ? 'text-[24px]' : 'text-sm'} mt-1`}>{errors.phone}</p>
+            )}
+          </div>
         </div>
 
-        {/* Catering date - half width */}
-        <div className="flex-1 min-w-[calc(50%-15px)]">
-          <label
-            htmlFor="cateringDate"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Catering date
-          </label>
-          <input
-            type="date"
-            id="cateringDate"
-            name="cateringDate"
-            value={formData.cateringDate}
-            onChange={handleChange}
-            min={getMinCateringDate()}
-            required
-            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
-          />
-          <p className="text-gray-500 text-xs mt-1">
-            Orders must be placed at least 2 days in advance
-          </p>
+        {/* Catering date - full width in mobile */}
+        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
+          <div className={isMobile ? "w-[630px]" : ""}>
+            <label
+              htmlFor="cateringDate"
+              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+            >
+              Catering date
+            </label>
+            <input
+              type="date"
+              id="cateringDate"
+              name="cateringDate"
+              value={formData.cateringDate}
+              onChange={handleChange}
+              min={getMinCateringDate()}
+              required
+              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+            />
+            <p className={`text-gray-500 ${isMobile ? 'text-[24px]' : 'text-xs'} mt-1`}>
+              Orders must be placed at least 2 days in advance
+            </p>
+          </div>
         </div>
 
-        {/* Pick up time - half width */}
-        <div className="flex-1 min-w-[calc(50%-15px)]">
-          <label
-            htmlFor="pickupTime"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Pick up time on catering date
-          </label>
-          <select
-            id="pickupTime"
-            name="pickupTime"
-            value={formData.pickupTime}
-            onChange={handleChange}
-            required
-            className="flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
-          >
+        {/* Pick up time - full width in mobile */}
+        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
+          <div className={isMobile ? "w-[630px]" : ""}>
+            <label
+              htmlFor="pickupTime"
+              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+            >
+              Pick up time on catering date
+            </label>
+            <select
+              id="pickupTime"
+              name="pickupTime"
+              value={formData.pickupTime}
+              onChange={handleChange}
+              required
+              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+            >
             <option value="">Select time</option>
             <option value="09:00">09:00 AM</option>
             <option value="10:00">10:00 AM</option>
@@ -396,14 +415,15 @@ export default function CateringForm() {
             <option value="20:00">08:00 PM</option>
             <option value="21:00">09:00 PM</option>
           </select>
+          </div>
         </div>
 
         {/* Submit button */}
-        <div className="w-full flex justify-center mt-2.5">
+        <div className={isMobile ? "w-full flex justify-center mt-4" : "w-full flex justify-center mt-2.5"}>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="order-button-base order-button-catering"
+            className={`order-button-base ${isMobile ? 'order-button-catering-mobile' : 'order-button-catering'}`}
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
