@@ -13,7 +13,7 @@ export interface ReviewItem {
   photos?: string[]; // Array of photo URLs (max 5)
 }
 
-export default function ReviewCard({ author_name, author_photo_url, rating, review_text, photos }: ReviewItem) {
+export default function ReviewCard({ author_name, author_photo_url, rating, review_text, photos, isMobile = false }: ReviewItem & { isMobile?: boolean }) {
   return (
     <div className="flex items-start gap-[13px] self-stretch">
       {/* Avatar */}
@@ -21,23 +21,23 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
         <Image
           src={author_photo_url}
           alt={author_name}
-          width={50}
-          height={50}
+          width={isMobile ? 80 : 50}
+          height={isMobile ? 80 : 50}
           className="rounded-full object-cover shrink-0"
         />
       ) : (
-        <div className="w-[50px] h-[50px] rounded-full bg-gray-300 shrink-0" />
+        <div className={`${isMobile ? 'w-20 h-20' : 'w-[50px] h-[50px]'} rounded-full bg-gray-300 shrink-0`} />
       )}
 
       {/* Content */}
       <div className="flex-1">
-        <span className="text-black text-[20px] font-semibold uppercase">
+        <span className="text-black font-semibold uppercase" style={{ fontSize: isMobile ? '30px' : '20px' }}>
           {author_name}
         </span>
-        <div className="mt-2.5">
-          <RatingStars rating={rating} />
+        <div className={isMobile ? 'mt-3.5' : 'mt-2.5'}>
+          <RatingStars rating={rating} size={isMobile ? "xl" : "large"} />
         </div>
-        <p className="text-[#4E5969] text-[18px] font-normal leading-normal mt-2 pb-[30px]">
+        <p className="text-[#4E5969] font-normal leading-normal" style={{ fontSize: isMobile ? '26px' : '18px', marginTop: isMobile ? '14px' : '8px', paddingBottom: isMobile ? '20px' : '30px' }}>
           {review_text}
         </p>
 
@@ -45,12 +45,12 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
         {photos && photos.length > 0 && (
           <>
             <div className="border-b border-[#E1E4E9]" />
-            <div className="pt-[30px]">
+            <div style={{ paddingTop: isMobile ? '20px' : '30px' }}>
               <ImageWithLightbox
                 images={photos}
                 alt={`Photo by ${author_name}`}
                 layout="grid"
-                size={{ width: 212, height: 141 }}
+                size={isMobile ? { width: 160, height: 120 } : { width: 212, height: 141 }}
                 gridGap="30px"
                 highResTransform={(url) => {
                   try {

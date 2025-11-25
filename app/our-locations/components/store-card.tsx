@@ -18,6 +18,7 @@ interface StoreCardProps {
   rating?: number | null; // from place_cache.rating
   openingHoursWeekdayText?: string[]; // 7-day weekday_text from Google Places
   isReversed?: boolean; // true for even-indexed stores (info left, map right)
+  isMobile?: boolean; // true for mobile layout
 }
 
 export default function StoreCard({
@@ -31,6 +32,7 @@ export default function StoreCard({
   rating = null,
   openingHoursWeekdayText,
   isReversed = false,
+  isMobile = false,
 }: StoreCardProps) {
   const fullAddress = `${street}, ${suburb} ${state} ${postcode}`;
   const hasPhotos = photos.length > 0;
@@ -50,7 +52,7 @@ export default function StoreCard({
 
   // Map component (proportional: 800/1368 = 58.479%)
   const mapSection = (
-    <div className="shrink-0" style={{ width: "58.479%", aspectRatio: "800 / 340" }}>
+    <div className="shrink-0" style={isMobile ? { width: "650px", height: "320px", flexShrink: 0, borderRadius: "20px" } : { width: "58.479%", aspectRatio: "800 / 340" }}>
       {googleMapsEmbedUrl ? (
         <iframe
           src={googleMapsEmbedUrl}
@@ -60,7 +62,7 @@ export default function StoreCard({
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          className="rounded-[10px] w-full h-full"
+          className={isMobile ? "rounded-[20px] w-full h-full" : "rounded-[10px] w-full h-full"}
         />
       ) : (
         <div className="w-full h-full bg-gray-100 rounded-[10px] flex items-center justify-center">
@@ -77,9 +79,9 @@ export default function StoreCard({
   // Photos will use clamp() tied to the 1920px design baseline
 
   const infoSection = (
-    <div className="inline-flex flex-col items-start gap-4" style={{ width: "38.596%" }}>
+    <div className="inline-flex flex-col items-start gap-4" style={isMobile ? { width: "100%" } : { width: "38.596%" }}>
       {/* Store Name */}
-      <h2 className="text-[#1D1E1F] text-[22px] font-medium uppercase leading-normal">
+      <h2 className={`text-[#1D1E1F] ${isMobile ? 'text-[22px]' : 'text-[22px]'} font-medium uppercase leading-normal`}>
         {name}
       </h2>
 
@@ -97,7 +99,7 @@ export default function StoreCard({
           height={20}
           className="shrink-0 aspect-square"
         />
-        <span className="text-[#4E5969] text-lg font-normal leading-normal">
+        <span className={`text-[#4E5969] ${isMobile ? 'text-[18px]' : 'text-lg'} font-normal leading-normal`}>
           {fullAddress}
         </span>
       </div>
@@ -112,7 +114,7 @@ export default function StoreCard({
             height={20}
             className="shrink-0 aspect-square"
           />
-          <span className="text-[#4E5969] text-lg font-normal leading-normal">{todayHoursText}</span>
+          <span className={`text-[#4E5969] ${isMobile ? 'text-[18px]' : 'text-lg'} font-normal leading-normal`}>{todayHoursText}</span>
         </div>
       )}
 
@@ -120,12 +122,12 @@ export default function StoreCard({
       {hasPhotos && photoCount > 0 && (
         <div
           className="flex items-start"
-          style={{ gap: `clamp(8px, calc((30 / 1920) * 100vw), 30px)` }}
+          style={isMobile ? { gap: "12px" } : { gap: `clamp(8px, calc((30 / 1920) * 100vw), 30px)` }}
         >
           {photosToShow.map((photo, index) => (
             <div
               key={`${photo.display_order}-${index}`}
-              style={{ width: `clamp(64px, calc((140 / 1920) * 100vw), 140px)`, aspectRatio: "140 / 120" }}
+              style={isMobile ? { width: "140px", height: "120px" } : { width: `clamp(64px, calc((140 / 1920) * 100vw), 140px)`, aspectRatio: "140 / 120" }}
             >
               <ImageWithLightbox
                 images={[photo.photo_url]}
@@ -141,17 +143,39 @@ export default function StoreCard({
   );
 
   return (
-    <div className="flex items-start" style={{ width: "100%", columnGap: "2.924%" }}>
-      {isReversed ? (
+    <div
+      className={isMobile ? "shrink-0" : "flex items-start"}
+      style={isMobile ? {
+        width: "690px",
+        // height: "730px", // 移除固定高度，让其自适应内容
+        flexShrink: 0,
+        borderRadius: "20px",
+        background: "#FFF",
+        boxShadow: "0 0 20px 0 rgba(0, 0, 0, 0.12)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "30px 20px",
+        gap: "20px"
+      } : { width: "100%", columnGap: "2.924%" }}
+    >
+      {isMobile ? (
         <>
           {infoSection}
           {mapSection}
         </>
       ) : (
-        <>
-          {mapSection}
-          {infoSection}
-        </>
+        isReversed ? (
+          <>
+            {infoSection}
+            {mapSection}
+          </>
+        ) : (
+          <>
+            {mapSection}
+            {infoSection}
+          </>
+        )
       )}
     </div>
   );

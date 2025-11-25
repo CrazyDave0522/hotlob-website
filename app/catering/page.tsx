@@ -24,7 +24,7 @@ export default function CateringPage() {
     return (
       <div className="relative w-full">
         {/* Hero section with background */}
-        <div className="relative w-full mx-auto aspect-750/702">
+        <div className="relative w-full mx-auto aspect-750/830">
           <div className="absolute inset-0" aria-hidden="true">
             <Image
               src="/images/catering-bg-mb.png"
@@ -73,15 +73,6 @@ export default function CateringPage() {
           sizes="100vw"
           priority
           className="object-contain object-top hidden md:block"
-        />
-        {/* Mobile background */}
-        <Image
-          src="/images/catering-bg-mobile.png"
-          alt=""
-          fill
-          sizes="100vw"
-          priority
-          className="object-contain object-top md:hidden"
         />
       </div>
 
