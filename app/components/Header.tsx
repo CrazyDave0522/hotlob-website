@@ -57,7 +57,7 @@ export function Header() {
 
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="flex h-[50px] w-[50px] shrink-0 items-center justify-center"
+          className="button-click flex h-[50px] w-[50px] shrink-0 items-center justify-center"
           aria-label="Toggle mobile menu"
         >
           <Image
@@ -166,7 +166,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`flex items-center justify-center gap-2.5 px-4 py-2.5 text-[48px] font-semibold leading-none transition-colors ${
+              className={`button-click flex items-center justify-center gap-2.5 px-4 py-2.5 text-[48px] font-semibold leading-none transition-colors ${
                 isActive(item.href)
                   ? "rounded-[10px] border-b-4 border-[#EA4148] text-[#EA4148]"
                   : "text-white hover:text-[#EA4148]"

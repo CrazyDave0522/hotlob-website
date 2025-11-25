@@ -67,7 +67,7 @@ export function NavOrderOnlineButton() {
       <button
         onClick={handleOrderClick}
         disabled={locating}
-        className="flex items-center justify-center bg-[#EA4148] text-[clamp(11px,0.677vw,13px)] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#C71E25] disabled:opacity-60"
+        className="button-click flex items-center justify-center bg-[#EA4148] text-[clamp(11px,0.677vw,13px)] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#C71E25] disabled:opacity-60"
         style={{
           width: "min(6.25vw, 120px)",
           height: "min(1.667vw, 32px)",

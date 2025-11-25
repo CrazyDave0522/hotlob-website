@@ -71,7 +71,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
           onMouseDown={() => setPressedButton("all")}
           onMouseUp={() => setPressedButton(null)}
           onMouseLeave={() => setPressedButton(null)}
-          className={`tag-button ${
+          className={`button-click tag-button ${
             selectedIds.length === 0
               ? "tag-button--active"
               : "tag-button--inactive"
@@ -144,7 +144,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
               onMouseDown={() => setPressedButton(tag.id)}
               onMouseUp={() => setPressedButton(null)}
               onMouseLeave={() => setPressedButton(null)}
-              className={`tag-button ${
+              className={`button-click tag-button ${
                 isSelected ? "tag-button--active" : "tag-button--inactive"
               }`}
               style={
@@ -202,7 +202,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
             onMouseDown={() => setPressedButton("showAll")}
             onMouseUp={() => setPressedButton(null)}
             onMouseLeave={() => setPressedButton(null)}
-            className="tag-button tag-button--inactive w-[46px] h-[46px] justify-center"
+            className="button-click tag-button tag-button--inactive w-[46px] h-[46px] justify-center"
             style={
               isMobile
                 ? {

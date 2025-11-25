@@ -105,7 +105,7 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
         <div style={isMobile ? { width: '690px', maxWidth: '690px' } : { width: '72.917%', maxWidth: '1400px' }} className="mx-auto pb-[60px]">
           <div
             onClick={loading ? undefined : loadMore}
-            className="group h-[50px] mt-5 flex justify-center items-center gap-2.5 rounded-md bg-white shadow-[0_0_6px_0_rgba(0,0,0,0.04)] hover:shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-shadow cursor-pointer disabled:opacity-50"
+            className="button-click group h-[50px] mt-5 flex justify-center items-center gap-2.5 rounded-md bg-white shadow-[0_0_6px_0_rgba(0,0,0,0.04)] hover:shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-shadow cursor-pointer disabled:opacity-50"
           >
             <div className="flex items-center gap-2.5 text-[#4E5969] text-base font-normal group-hover:text-[#EA4148] transition-colors">
               {loading ? "Loading..." : "more"}

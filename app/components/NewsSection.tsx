@@ -163,7 +163,7 @@ export default function NewsSection({ news }: NewsSectionProps) {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className="transition-all duration-300 cursor-pointer"
+            className="button-click transition-all duration-300 cursor-pointer"
             style={{
               width: currentIndex === index ? (isMobile ? "30px" : "min(1.563vw, 30px)") : (isMobile ? "8px" : "min(0.417vw, 8px)"), // Mobile: 30px/8px, Desktop: 30/1920, 8/1920
               height: isMobile ? "8px" : "min(0.417vw, 8px)", // Mobile: 8px, Desktop: 8/1920
@@ -179,7 +179,7 @@ export default function NewsSection({ news }: NewsSectionProps) {
       {/* Learn More Button */}
       <button
         onClick={() => router.push("/news")}
-        className={`flex justify-center items-center shrink-0 bg-[#EA4148] text-white font-normal transition-all duration-200 hover:bg-[#C71E25] active:bg-[#C71E25] active:scale-95 ${isMobile ? 'focus:bg-[#C71E25] focus:scale-95' : ''}`}
+        className={`button-click flex justify-center items-center shrink-0 bg-[#EA4148] text-white font-normal transition-all duration-200 hover:bg-[#C71E25] ${isMobile ? '' : ''}`}
         style={{
           padding: isMobile ? "20px 80px" : "0", // Mobile: 20px 80px, Desktop: use Tailwind
           gap: isMobile ? "10px" : "min(0.521vw, 10px)", // Mobile: 10px, Desktop: 10/1920

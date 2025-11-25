@@ -65,7 +65,7 @@ export default function ImageWithLightbox({
     return (
       <>
         <div
-          className={`relative cursor-pointer transition-opacity hover:opacity-80 overflow-hidden rounded-[10px] ${className}`}
+          className={`button-click relative cursor-pointer transition-opacity hover:opacity-80 overflow-hidden rounded-[10px] ${className}`}
           style={size ? { width: size.width, height: size.height, ...style } : style}
           onClick={() => handleImageClick(0)}
           role="button"

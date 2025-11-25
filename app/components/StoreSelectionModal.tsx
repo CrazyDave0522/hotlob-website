@@ -63,7 +63,7 @@ export default function StoreSelectionModal({
                 href={store.uber_url || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block px-4 py-2 rounded text-[#1D1E1F] font-medium transition-colors hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148] active:bg-[rgba(234,65,72,0.12)]"
+                className="button-click block px-4 py-2 rounded text-[#1D1E1F] font-medium transition-colors hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148] active:bg-[rgba(234,65,72,0.12)]"
                 onClick={onClose}
               >
                 {store.name}
@@ -72,7 +72,7 @@ export default function StoreSelectionModal({
           ))}
         </ul>
         <button
-          className="mt-4 w-full py-2 rounded bg-[#F2F3F5] text-[#1D1E1F] hover:bg-[#E5E6EB] transition-colors"
+          className="button-click mt-4 w-full py-2 rounded bg-[#F2F3F5] text-[#1D1E1F] hover:bg-[#E5E6EB] transition-colors"
           onClick={onClose}
         >
           Cancel

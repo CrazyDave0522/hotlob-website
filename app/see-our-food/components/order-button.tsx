@@ -65,7 +65,7 @@ export default function OrderButton({ stores, fallbackUrl }: OrderButtonProps) {
   return (
     <>
       <button
-        className={isMobile ? "" : "order-button-base order-button-default"}
+        className={isMobile ? "button-click" : "button-click order-button-base order-button-default"}
         onClick={handleClick}
         disabled={locating}
         style={isMobile ? {

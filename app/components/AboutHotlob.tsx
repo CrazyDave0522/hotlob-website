@@ -96,7 +96,7 @@ export default function AboutHotlob() {
             return (
               <div
                 key={card.id}
-                className="shrink-0 relative cursor-pointer overflow-hidden rounded-[20px]"
+                className="button-click shrink-0 relative cursor-pointer overflow-hidden rounded-[20px]"
                 style={{
                   width: isExpanded ? "40%" : "28.571%", // 560/1400=40%, 400/1400=28.571%
                   height: "100%", // Fill parent container height
@@ -189,7 +189,7 @@ export default function AboutHotlob() {
               .map((card) => (
                 <div
                   key={card.id}
-                  className="relative cursor-pointer overflow-hidden rounded-[20px]"
+                  className="button-click relative cursor-pointer overflow-hidden rounded-[20px]"
                   style={{
                     width: "690px",
                     height: "300px",
@@ -275,7 +275,7 @@ export default function AboutHotlob() {
               .map((card) => (
                 <div
                   key={card.id}
-                  className="relative cursor-pointer overflow-hidden rounded-[20px]"
+                  className="button-click relative cursor-pointer overflow-hidden rounded-[20px]"
                   style={{
                     width: "330px",
                     height: "300px",

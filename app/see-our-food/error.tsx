@@ -19,7 +19,7 @@ export default function Error({
         </p>
         <button
           onClick={reset}
-          className="px-6 py-3 rounded-full bg-linear-to-r from-[#EA4148] to-[#FFA159] text-white font-medium hover:opacity-90 transition"
+          className="button-click px-6 py-3 rounded-full bg-linear-to-r from-[#EA4148] to-[#FFA159] text-white font-medium hover:opacity-90 transition"
         >
           Try again
         </button>

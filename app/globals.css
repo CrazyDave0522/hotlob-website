@@ -46,6 +46,15 @@ body {
   font-family: var(--font-geist-mono), monospace;
 }
 
+/* Unified button click effect */
+.button-click {
+  transition: transform 0.15s ease-in-out;
+}
+
+.button-click:active {
+  transform: scale(0.98);
+}
+
 /* Form input placeholder styles */
 input::placeholder,
 select::placeholder,
