@@ -4,16 +4,18 @@
 import Image from "next/image";
 import RatingStars from "../rating-stars";
 import ImageWithLightbox from "@/app/components/ImageWithLightbox";
+import { formatAUDate } from "@/lib/utils/formatDate";
 
 export interface ReviewItem {
   author_name: string;
   author_photo_url: string | null;
   rating: number;
   review_text: string;
+  review_time: string;
   photos?: string[]; // Array of photo URLs (max 5)
 }
 
-export default function ReviewCard({ author_name, author_photo_url, rating, review_text, photos, isMobile = false }: ReviewItem & { isMobile?: boolean }) {
+export default function ReviewCard({ author_name, author_photo_url, rating, review_text, review_time, photos, isMobile = false }: ReviewItem & { isMobile?: boolean }) {
   return (
     <div className="flex items-start gap-[13px] self-stretch">
       {/* Avatar */}
@@ -34,10 +36,13 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
         <span className="text-black font-semibold uppercase" style={{ fontSize: isMobile ? '30px' : '20px' }}>
           {author_name}
         </span>
-        <div className={isMobile ? 'mt-3.5' : 'mt-2.5'}>
+        <div className="text-[#86909C] font-normal leading-normal" style={{ fontSize: isMobile ? '18px' : '14px', marginTop: '10px' }}>
+          {formatAUDate(review_time)}
+        </div>
+        <div className={isMobile ? 'mt-3.5' : 'mt-3.5'}>
           <RatingStars rating={rating} size={isMobile ? "xl" : "large"} />
         </div>
-        <p className="text-[#4E5969] font-normal leading-normal" style={{ fontSize: isMobile ? '26px' : '18px', marginTop: isMobile ? '14px' : '8px', paddingBottom: isMobile ? '20px' : '30px' }}>
+        <p className="text-[#4E5969] font-normal leading-normal" style={{ fontSize: isMobile ? '26px' : '18px', marginTop: '14px', paddingBottom: '20px' }}>
           {review_text}
         </p>
 

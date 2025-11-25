@@ -5,6 +5,7 @@ export interface ReviewData {
   author_photo_url: string | null;
   rating: number;
   review_text: string;
+  review_time: string;
   photos?: string[]; // Optional: array of photo URLs
 }
 
@@ -18,6 +19,7 @@ interface CuratedReviewRow {
   author_photo_url: string | null;
   rating: number;
   review_text: string;
+  review_time: string;
   review_photos?: ReviewPhotoRow[];
 }
 
@@ -32,8 +34,8 @@ export async function getReviews(
   includePhotos: boolean = false
 ): Promise<ReviewData[]> {
   const selectFields = includePhotos
-    ? ("author_name, author_photo_url, rating, review_text, review_photos (photo_url, display_order)" as const)
-    : ("author_name, author_photo_url, rating, review_text" as const);
+    ? ("author_name, author_photo_url, rating, review_text, review_time, review_photos (photo_url, display_order)" as const)
+    : ("author_name, author_photo_url, rating, review_text, review_time" as const);
 
   let query = supabase
     .from('curated_reviews')
@@ -60,6 +62,7 @@ export async function getReviews(
     author_photo_url: r.author_photo_url,
     rating: r.rating,
     review_text: r.review_text,
+    review_time: r.review_time,
     ...(includePhotos && {
       photos: (r.review_photos || [])
         .sort((a, b) => a.display_order - b.display_order)

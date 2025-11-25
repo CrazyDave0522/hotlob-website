@@ -27,6 +27,7 @@ interface ReviewItem {
   author_photo_url: string | null;
   rating: number;
   review_text: string;
+  review_time: string;
   photos?: string[];
 }
 

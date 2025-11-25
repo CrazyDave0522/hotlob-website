@@ -164,6 +164,7 @@ textarea::placeholder {
 .prose-news p {
   margin-top: 1em;
   margin-bottom: 1em;
+  text-align: justify;
 }
 
 .prose-news strong,
@@ -182,6 +183,14 @@ textarea::placeholder {
   margin-top: 1em;
   margin-bottom: 1em;
   padding-left: 2em;
+}
+
+.prose-news ul {
+  list-style-type: disc;
+}
+
+.prose-news ol {
+  list-style-type: decimal;
 }
 
 .prose-news li {
@@ -231,4 +240,27 @@ textarea::placeholder {
 .prose-news pre code {
   background-color: transparent;
   padding: 0;
+}
+
+/* Mobile-specific prose styles */
+.prose-news-mobile h1 {
+  font-size: 48px !important;
+}
+
+.prose-news-mobile h2 {
+  font-size: 40px !important;
+}
+
+.prose-news-mobile h3 {
+  font-size: 36px !important;
+}
+
+.prose-news-mobile strong,
+.prose-news-mobile b {
+  font-weight: 600 !important;
+}
+
+.prose-news-mobile em,
+.prose-news-mobile i {
+  font-style: italic !important;
 }

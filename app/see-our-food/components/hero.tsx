@@ -8,6 +8,7 @@ interface HeroProps {
   title: string;
   description: string;
   imageUrl: string;
+  mobileImageUrl?: string; // optional mobile-specific image
   size?: "home" | "large" | "medium"; // home = 820px, large = 820px, medium = 420px
   footerNote?: string; // optional small text at the bottom-left inside hero
   backgroundPositionY?: string; // optional vertical position (default "center")
@@ -20,6 +21,7 @@ export default function Hero({
   title,
   description,
   imageUrl,
+  mobileImageUrl,
   size = "medium",
   footerNote,
   backgroundPositionY = "center",
@@ -37,7 +39,7 @@ export default function Hero({
       <section
         className="lg:hidden relative w-full h-[420px] overflow-hidden"
         style={{
-          backgroundImage: `url(${imageUrl})`,
+          backgroundImage: `url(${mobileImageUrl || imageUrl})`,
           backgroundSize: "cover",
           backgroundPositionX: backgroundPositionX,
           backgroundPositionY: backgroundPositionY,

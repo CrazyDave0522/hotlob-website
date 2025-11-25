@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { supabase } from "@/lib/supabaseClient";
 import { stripHtmlTags, getSmartExcerpt } from "@/lib/utils/stripHtml";
@@ -24,6 +24,17 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
   const [items, setItems] = useState<NewsItem[]>(initialItems);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(initialItems.length === 5);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const loadMore = async () => {
     if (loading || !hasMore) return;
@@ -56,7 +67,7 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
   return (
     <>
       {/* News List Container */}
-      <div className="mx-auto bg-white rounded-md shadow-[0_0_10px_0_rgba(0,0,0,0.12)]" style={{ width: '72.917%', maxWidth: '1400px' }}>
+      <div className={`mx-auto ${isMobile ? '' : 'bg-white'} rounded-md ${isMobile ? '' : 'shadow-[0_0_10px_0_rgba(0,0,0,0.12)]'}`} style={isMobile ? { width: '690px', maxWidth: '690px' } : { width: '72.917%', maxWidth: '1400px' }}>
         {items.length === 0 ? (
           <div className="py-12 text-center text-gray-500">
             No news available
@@ -75,9 +86,13 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
                   publishDate={news.publish_date}
                   variant="list"
                 />
-                {/* Divider line between items (not after last item) */}
-                {index < items.length - 1 && (
+                {/* Divider line between items (not after last item) - desktop only */}
+                {!isMobile && index < items.length - 1 && (
                   <div className="w-full h-px bg-[#E1E4E9]" />
+                )}
+                {/* Mobile spacing between items */}
+                {isMobile && index < items.length - 1 && (
+                  <div style={{ height: '30px' }} />
                 )}
               </div>
             );
@@ -87,7 +102,7 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
 
       {/* Load More Button */}
       {hasMore && (
-        <div style={{ width: '72.917%', maxWidth: '1400px' }} className="mx-auto pb-[60px]">
+        <div style={isMobile ? { width: '690px', maxWidth: '690px' } : { width: '72.917%', maxWidth: '1400px' }} className="mx-auto pb-[60px]">
           <div
             onClick={loading ? undefined : loadMore}
             className="group h-[50px] mt-5 flex justify-center items-center gap-2.5 rounded-md bg-white shadow-[0_0_6px_0_rgba(0,0,0,0.04)] hover:shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-shadow cursor-pointer disabled:opacity-50"

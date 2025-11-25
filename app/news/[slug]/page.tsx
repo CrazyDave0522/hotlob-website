@@ -64,13 +64,13 @@ export default async function NewsDetailPage({
           <div className="mt-5 flex justify-center">
             <div
               className="relative shrink-0 mb-4"
-              style={{ width: "64.286%", aspectRatio: "15/7" }}
+              style={{ width: "690px", height: "320px" }}
             >
               <Image
                 src={news.cover_image_url}
                 alt={news.title}
                 fill
-                sizes="(min-width:1400px) 900px, 64.286vw"
+                sizes="690px"
                 className="object-cover rounded-md"
                 priority
               />

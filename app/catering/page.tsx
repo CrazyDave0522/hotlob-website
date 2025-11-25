@@ -42,7 +42,7 @@ export default function CateringPage() {
         </div>
 
         {/* Form section with background */}
-        <div className="relative w-full mx-auto aspect-750/1478">
+        <div className="relative w-full mx-auto aspect-750/1350">
           <div className="absolute inset-0" aria-hidden="true">
             <Image
               src="/images/catering-form-bg-mb.png"
