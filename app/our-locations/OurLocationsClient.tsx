@@ -63,16 +63,17 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
         className="bg-cover bg-center bg-no-repeat"
         style={isMobile ? {
           background: 'linear-gradient(180deg, #FBF3F3 0%, #FFF 100%)',
-          backgroundImage: 'url(/images/catering-form-bg-mb.png)',
+          backgroundImage: "url('/images/our-locations-bg-stores-mb.png')",
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'top center',
-          backgroundSize: 'auto'
+          backgroundSize: 'cover'
         } : {
-          backgroundImage: "url('/images/our-locations-bg-stores.png')"
+          backgroundImage: "url('/images/our-locations-bg-stores.png')",
+          backgroundSize: 'cover'
         }}
       >
         <div className="py-12 md:py-16">
-          <div className="mx-auto" style={isMobile ? { width: '690px', maxWidth: '690px' } : { width: '72.917%', maxWidth: '1400px' }}>
+          <div className="mx-auto" style={isMobile ? { width: '100%', maxWidth: '690px', padding: '0 16px' } : { width: '72.917%', maxWidth: '1400px' }}>
             <div className={isMobile ? "flex flex-col items-center space-y-12" : "space-y-12"}>
             {storesWithData?.map((store, index: number) => (
               <StoreCard
