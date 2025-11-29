@@ -4,6 +4,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Fluid typography tokens */
+  --fs-xs: clamp(12px, 1.8vw, 14px);
+  --fs-sm: clamp(14px, 2.2vw, 16px);
+  --fs-base: clamp(16px, 2.6vw, 18px);
+  --fs-lg: clamp(18px, 3.2vw, 22px);
+  --space-sm: clamp(8px, 1.2vw, 12px);
+  --space-md: clamp(12px, 1.8vw, 16px);
+  --space-lg: clamp(20px, 2.8vw, 28px);
 }
 
 @theme inline {
@@ -132,6 +140,101 @@ textarea::placeholder {
     transform: scale(0.98);
     box-shadow: 0px 2px 4px rgba(175, 23, 23, 0.3);
   }
+
+  /* Floating order button for mobile */
+  .floating-order-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    padding: 0 20px;
+    border-radius: 14px;
+    background: linear-gradient(90deg, #ea4148 0%, #ffa159 100%);
+    color: #fff;
+    font-weight: 600;
+    font-size: var(--fs-base);
+    box-shadow: 0 6px 16px rgba(234, 65, 72, 0.18);
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Floating button width behavior:
+     - On very small screens (<=375px): full-width minus padding (same as before)
+     - On small/medium phones (<=750px): use fixed width equal to the 375px effective width (keep it visually consistent)
+     - On larger screens keep the existing max width
+  */
+  @media (max-width: 375px) {
+    .floating-order-button {
+      width: calc(100vw - 48px);
+      max-width: none;
+    }
+  }
+
+  @media (min-width: 376px) and (max-width: 750px) {
+    .floating-order-button {
+      /* Use same absolute width as 375px case (375 - 48 = 327px) to avoid oversized button at 750 */
+      width: 327px;
+      max-width: 327px;
+    }
+  }
+
+  @media (min-width: 751px) {
+    .floating-order-button {
+      max-width: 400px;
+    }
+  }
+
+/* Default mobile sizes (mobile header baseline around 750 design) */
+.mobile-header .logo-img {
+  width: 140px !important;
+  height: 116px !important;
+}
+
+.mobile-menu-button {
+  width: 50px;
+  height: 50px;
+}
+
+.mobile-menu-button .menu-img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Compact mobile header & menu overrides for very small screens (<=375px) */
+@media (max-width: 375px) {
+  .mobile-header {
+    height: 64px;
+  }
+
+  .mobile-menu-overlay {
+    top: 64px;
+  }
+
+  .mobile-header .logo-img {
+    width: 120px !important;
+    height: 100px !important;
+  }
+
+  .mobile-menu-inner {
+    margin-top: 48px;
+    gap: 48px;
+  }
+
+  .mobile-menu-inner a {
+    font-size: 28px;
+  }
+
+  .mobile-menu-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mobile-menu-button .menu-img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
 }
 
 /* Custom typography styles for news content */
@@ -253,15 +356,15 @@ textarea::placeholder {
 
 /* Mobile-specific prose styles */
 .prose-news-mobile h1 {
-  font-size: 48px !important;
+  font-size: clamp(20px, 6vw, 32px) !important;
 }
 
 .prose-news-mobile h2 {
-  font-size: 40px !important;
+  font-size: clamp(18px, 5vw, 28px) !important;
 }
 
 .prose-news-mobile h3 {
-  font-size: 36px !important;
+  font-size: clamp(16px, 4vw, 24px) !important;
 }
 
 .prose-news-mobile strong,

@@ -43,7 +43,7 @@ export function Header() {
   return (
     <>
       {/* 移动端导航栏 - 1024px以下显示 */}
-      <header className="sticky top-0 z-50 flex lg:hidden w-full h-[120px] shrink-0 items-center justify-between bg-white px-[30px] shadow-[0_4px_4px_0_rgba(0,0,0,0.10)]">
+      <header className="mobile-header sticky top-0 z-50 flex lg:hidden w-full h-[120px] shrink-0 items-center justify-between bg-white px-5 shadow-[0_2px_4px_0_rgba(0,0,0,0.08)]">
         <Link href="/" aria-label="Hotlob home" className="shrink-0">
           <Image
             src="/images/logo.png"
@@ -51,13 +51,13 @@ export function Header() {
             width={140}
             height={116}
             priority
-            className="h-auto w-auto"
+            className="logo-img h-auto w-auto"
           />
         </Link>
 
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="button-click flex h-[50px] w-[50px] shrink-0 items-center justify-center"
+          className="button-click flex mobile-menu-button shrink-0 items-center justify-center"
           aria-label="Toggle mobile menu"
         >
           <Image
@@ -65,7 +65,7 @@ export function Header() {
             alt="Menu"
             width={50}
             height={50}
-            className="h-full w-full"
+            className="menu-img h-full w-full"
           />
         </button>
       </header>
@@ -150,14 +150,14 @@ export function Header() {
 
       {/* 移动端菜单蒙层 */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden ${
+        className={`mobile-menu-overlay fixed inset-0 z-40 lg:hidden ${
           isMobileMenuOpen ? "flex" : "hidden"
         } items-center justify-center bg-black/90`}
         style={{ top: "120px" }}
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <div
-          className="flex flex-col items-center justify-center gap-[100px]"
+          className="mobile-menu-inner flex flex-col items-center justify-center gap-[100px]"
           style={{ marginTop: "100px" }}
           onClick={(e) => e.stopPropagation()}
         >

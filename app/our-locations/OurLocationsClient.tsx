@@ -62,13 +62,14 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
       <div
         className="bg-cover bg-center bg-no-repeat"
         style={isMobile ? {
-          background: 'linear-gradient(180deg, #FBF3F3 0%, #FFF 100%)',
-          backgroundImage: "url('/images/our-locations-bg-stores-mb.png')",
+          backgroundImage: "linear-gradient(180deg, #FBF3F3 0%, #FFF 100%), url('/images/our-locations-bg-stores-mb.png')",
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'top center',
           backgroundSize: 'cover'
         } : {
           backgroundImage: "url('/images/our-locations-bg-stores.png')",
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
           backgroundSize: 'cover'
         }}
       >
