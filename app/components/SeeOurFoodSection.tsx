@@ -40,6 +40,7 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
           height={1750}
           className="w-full h-auto"
           priority
+          sizes="(max-width:750px) 100vw, 750px"
           style={{ aspectRatio: "750/1750", display: 'block' }}
         />
       ) : (
@@ -50,6 +51,7 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
           height={920}
           className="w-full h-auto"
           priority
+          sizes="(max-width:750px) 100vw, 100vw"
           style={{ aspectRatio: '1920/920', display: 'block' }}
         />
       )}

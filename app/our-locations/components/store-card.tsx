@@ -127,7 +127,7 @@ export default function StoreCard({
           {photosToShow.map((photo, index) => (
             <div
               key={`${photo.display_order}-${index}`}
-              style={isMobile ? { width: "140px", height: "120px" } : { width: `clamp(64px, calc((140 / 1920) * 100vw), 140px)`, aspectRatio: "140 / 120" }}
+              style={isMobile ? { width: "calc((140 / 750) * 100vw)", height: "calc((120 / 750) * 100vw)", maxWidth: "140px", maxHeight: "120px" } : { width: `clamp(64px, calc((140 / 1920) * 100vw), 140px)`, aspectRatio: "140 / 120" }}
             >
               <ImageWithLightbox
                 images={[photo.photo_url]}

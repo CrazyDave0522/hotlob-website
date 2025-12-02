@@ -4,6 +4,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Design baseline for mobile scaling (in px) */
+  --design-base: 750;
   /* Fluid typography tokens */
   --fs-xs: clamp(12px, 1.8vw, 14px);
   --fs-sm: clamp(14px, 2.2vw, 16px);
@@ -184,55 +186,49 @@ textarea::placeholder {
     }
   }
 
+/* Floating order button scales relative to 750 baseline (design width) */
+.floating-order-button {
+  width: clamp(280px, calc((327 / var(--design-base)) * 100vw), 327px);
+  height: 52px; /* keep comfortable touch height */
+}
+
 /* Default mobile sizes (mobile header baseline around 750 design) */
-.mobile-header .logo-img {
-  width: 140px !important;
-  height: 116px !important;
+
+/* Mobile header & controls scale according to the 750px design baseline */
+.mobile-header {
+  /* min 64px, fluid between small screens and baseline, max 120px at design width */
+  height: clamp(64px, calc((120 / var(--design-base)) * 100vw), 120px);
+}
+
+.mobile-header .logo-wrapper {
+  /* width scales proportionally with header, no minimum constraint */
+  width: calc((140 / var(--design-base)) * 100vw);
+  max-width: 140px;
+  aspect-ratio: 140 / 116;
+  position: relative;
 }
 
 .mobile-menu-button {
-  width: 50px;
-  height: 50px;
+  /* scales proportionally with header, no minimum constraint */
+  width: calc((50 / var(--design-base)) * 100vw);
+  height: calc((50 / var(--design-base)) * 100vw);
+  max-width: 50px;
+  max-height: 50px;
 }
 
 .mobile-menu-button .menu-img {
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  height: 100%;
 }
 
-/* Compact mobile header & menu overrides for very small screens (<=375px) */
-@media (max-width: 375px) {
-  .mobile-header {
-    height: 64px;
-  }
+/* Default mobile menu overlay/inner spacing matching the 120px header */
+.mobile-menu-overlay {
+  top: 120px;
+}
 
-  .mobile-menu-overlay {
-    top: 64px;
-  }
-
-  .mobile-header .logo-img {
-    width: 120px !important;
-    height: 100px !important;
-  }
-
-  .mobile-menu-inner {
-    margin-top: 48px;
-    gap: 48px;
-  }
-
-  .mobile-menu-inner a {
-    font-size: 28px;
-  }
-
-  .mobile-menu-button {
-    width: 40px;
-    height: 40px;
-  }
-
-  .mobile-menu-button .menu-img {
-    width: 40px;
-    height: 40px;
-  }
+.mobile-menu-inner {
+  margin-top: 100px;
+  gap: 100px;
 }
 
 }

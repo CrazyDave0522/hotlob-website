@@ -128,6 +128,7 @@ export default async function Home() {
           height={109}
           className="w-full h-auto"
           priority
+          sizes="100vw"
           style={{ aspectRatio: '1920/109', display: 'block' }}
         />
       </section>

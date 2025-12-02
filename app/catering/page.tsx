@@ -30,7 +30,7 @@ export default function CateringPage() {
               src="/images/catering-bg-mb.png"
               alt=""
               fill
-              sizes="100vw"
+              sizes="(max-width:750px) 100vw, 750px"
               priority
               className="object-contain object-top"
             />
@@ -48,7 +48,7 @@ export default function CateringPage() {
               src="/images/catering-form-bg-mb.png"
               alt=""
               fill
-              sizes="100vw"
+              sizes="(max-width:750px) 100vw, 750px"
               priority
               className="object-contain object-top"
             />
@@ -70,7 +70,7 @@ export default function CateringPage() {
           src="/images/catering-bg.png"
           alt=""
           fill
-          sizes="100vw"
+          sizes="(max-width:750px) 100vw, 1920px"
           priority
           className="object-contain object-top hidden md:block"
         />

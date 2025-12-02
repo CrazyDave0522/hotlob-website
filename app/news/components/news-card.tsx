@@ -47,7 +47,7 @@ function MobileNewsCard({
           src={coverImageUrl}
           alt={title}
           fill
-          sizes="690px"
+          sizes="(max-width:750px) calc((690 / 750) * 100vw), 690px"
           className="object-cover"
         />
       </div>

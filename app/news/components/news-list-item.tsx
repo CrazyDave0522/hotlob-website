@@ -32,7 +32,7 @@ export default function NewsListItem({
           src={coverImageUrl}
           alt={title}
           fill
-          sizes="280px"
+          sizes="(max-width:750px) calc((280 / 750) * 100vw), 280px"
           className="object-cover"
         />
       </div>

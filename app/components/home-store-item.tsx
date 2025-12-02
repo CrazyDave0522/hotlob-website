@@ -88,8 +88,10 @@ export default function HomeStoreItem({
       <div
         className="relative shrink-0 bg-gray-100 overflow-hidden"
         style={{
-          width: isMobile ? "220px" : "min(11.458vw, 220px)", // Mobile: 220px fixed, Desktop: responsive max 220px
-          height: isMobile ? "160px" : "min(8.333vw, 160px)", // Mobile: 160px fixed, Desktop: responsive max 160px
+          width: isMobile ? "calc((220 / 750) * 100vw)" : "min(11.458vw, 220px)", // Mobile: scales with 750 baseline, Desktop: responsive max 220px
+          height: isMobile ? "calc((160 / 750) * 100vw)" : "min(8.333vw, 160px)", // Mobile: scales with 750 baseline, Desktop: responsive max 160px
+          maxWidth: isMobile ? "220px" : undefined,
+          maxHeight: isMobile ? "160px" : undefined,
           borderRadius: "min(0.521vw, 10px)", // 10/1920
         }}
       >
@@ -99,6 +101,7 @@ export default function HomeStoreItem({
             alt={name}
             layout="single"
             className="w-full h-full"
+            size={{ width: 220, height: 160 }}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400">

@@ -70,7 +70,7 @@ export default async function NewsDetailPage({
                 src={news.cover_image_url}
                 alt={news.title}
                 fill
-                sizes="690px"
+                sizes="(max-width:750px) calc((690 / 750) * 100vw), 690px"
                 className="object-cover rounded-md"
                 priority
               />

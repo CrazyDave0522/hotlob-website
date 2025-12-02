@@ -43,16 +43,18 @@ export function Header() {
   return (
     <>
       {/* 移动端导航栏 - 1024px以下显示 */}
-      <header className="mobile-header sticky top-0 z-50 flex lg:hidden w-full h-[120px] shrink-0 items-center justify-between bg-white px-5 shadow-[0_2px_4px_0_rgba(0,0,0,0.08)]">
+      <header className="mobile-header sticky top-0 z-50 flex lg:hidden w-full shrink-0 items-center justify-between bg-white px-5 shadow-[0_2px_4px_0_rgba(0,0,0,0.08)]">
         <Link href="/" aria-label="Hotlob home" className="shrink-0">
-          <Image
-            src="/images/logo.png"
-            alt="Hotlob logo"
-            width={140}
-            height={116}
-            priority
-            className="logo-img h-auto w-auto"
-          />
+          <div className="logo-wrapper relative">
+            <Image
+              src="/images/logo.png"
+              alt="Hotlob logo"
+              fill
+              priority
+              className="logo-img object-contain"
+              sizes="(max-width:750px) calc((140 / 750) * 100vw), 140px"
+            />
+          </div>
         </Link>
 
         <button
@@ -153,12 +155,10 @@ export function Header() {
         className={`mobile-menu-overlay fixed inset-0 z-40 lg:hidden ${
           isMobileMenuOpen ? "flex" : "hidden"
         } items-center justify-center bg-black/90`}
-        style={{ top: "120px" }}
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <div
           className="mobile-menu-inner flex flex-col items-center justify-center gap-[100px]"
-          style={{ marginTop: "100px" }}
           onClick={(e) => e.stopPropagation()}
         >
           {NAV_ITEMS.map((item) => (

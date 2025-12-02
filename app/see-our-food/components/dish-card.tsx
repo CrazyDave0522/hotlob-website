@@ -57,8 +57,10 @@ export default function DishCard({ dish, priority = false }: DishCardProps) {
         <div
           className="relative rounded-md overflow-hidden transition-all duration-300 group-hover:translate-y-1.5"
           style={{
-            width: isMobile ? "230px" : "min(11.979vw, 230px)", // Mobile: fixed 230px, Desktop: responsive
-            height: isMobile ? "230px" : "min(11.979vw, 230px)",
+            width: isMobile ? "calc((230 / 750) * 100vw)" : "min(11.979vw, 230px)", // Mobile: scales with 750 baseline, Desktop: responsive
+            height: isMobile ? "calc((230 / 750) * 100vw)" : "min(11.979vw, 230px)",
+            maxWidth: isMobile ? "230px" : undefined,
+            maxHeight: isMobile ? "230px" : undefined,
             marginBottom: isMobile ? "20px" : "min(1.042vw, 20px)", // mb-5
           }}
         >
@@ -68,7 +70,7 @@ export default function DishCard({ dish, priority = false }: DishCardProps) {
             fill
             priority={priority}
             className="object-cover"
-            sizes="(max-width: 1920px) 11.979vw, 230px"
+            sizes="(max-width:750px) calc((230 / 750) * 100vw), 230px"
           />
         </div>
 

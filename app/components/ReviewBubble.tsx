@@ -175,7 +175,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           src="/images/dialog-bubble.svg"
           alt=""
           fill
-          sizes="240px"
+          sizes="(max-width:750px) calc((240 / 750) * 100vw), 240px"
           className="object-cover"
         />
 

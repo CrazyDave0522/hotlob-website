@@ -28,6 +28,7 @@ export default function CateringSection() {
           height={580}
           className="w-full h-auto"
           priority
+          sizes="(max-width:750px) 100vw, 750px"
           style={{ aspectRatio: "750/580", display: 'block' }}
         />
       ) : (
@@ -38,6 +39,7 @@ export default function CateringSection() {
           height={669}
           className="w-full h-auto"
           priority
+          sizes="(max-width:750px) 100vw, 100vw"
           style={{ aspectRatio: "1920/669", display: 'block' }}
         />
       )}
