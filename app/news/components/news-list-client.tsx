@@ -56,7 +56,9 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
   return (
     <>
       {/* News List Container */}
-      <div className="mx-auto w-[690px] max-w-full md:w-[72.917%] md:max-w-[1400px] md:bg-white rounded-md md:shadow-[0_0_10px_0_rgba(0,0,0,0.12)]">
+      <div
+        className="mx-auto news-list-wrapper md:w-[72.917%] md:max-w-[1400px] md:bg-white rounded-md md:shadow-[0_0_10px_0_rgba(0,0,0,0.12)]"
+      >
         {items.length === 0 ? (
           <div className="py-12 text-center text-gray-500">
             No news available
@@ -87,10 +89,19 @@ export default function NewsListClient({ initialItems }: NewsListClientProps) {
 
       {/* Load More Button */}
       {hasMore && (
-        <div className="mx-auto pb-[60px] w-[690px] max-w-full md:w-[72.917%] md:max-w-[1400px]">
+        <div
+          className="mx-auto news-list-loadmore-wrapper md:w-[72.917%] md:max-w-[1400px]"
+          style={{
+            paddingBottom: "clamp(30px, calc(60 / 750 * 100vw), 60px)",
+          }}
+        >
           <div
             onClick={loading ? undefined : loadMore}
-            className="button-click group h-[50px] mt-5 flex justify-center items-center gap-2.5 rounded-md bg-white shadow-[0_0_6px_0_rgba(0,0,0,0.04)] hover:shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-shadow cursor-pointer disabled:opacity-50"
+            className="button-click group flex justify-center items-center gap-2.5 rounded-md bg-white shadow-[0_0_6px_0_rgba(0,0,0,0.04)] hover:shadow-[0_0_10px_0_rgba(0,0,0,0.15)] transition-shadow cursor-pointer disabled:opacity-50"
+            style={{
+              height: "clamp(40px, calc(50 / 750 * 100vw), 50px)",
+              marginTop: "clamp(10px, calc(20 / 750 * 100vw), 20px)",
+            }}
           >
             <div className="flex items-center gap-2.5 text-[#4E5969] text-base font-normal group-hover:text-[#EA4148] transition-colors">
               {loading ? "Loading..." : "more"}

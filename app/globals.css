@@ -852,6 +852,17 @@ textarea::placeholder {
   }
 
   /* Our Locations Section - mobile-first */
+    /* News list page wrappers - mobile-first widths */
+    .news-list-wrapper,
+    .news-list-loadmore-wrapper {
+      width: clamp(345px, calc(690 / 750 * 100vw), 690px);
+    }
+    @media (min-width: 1024px) {
+      .news-list-wrapper,
+      .news-list-loadmore-wrapper {
+        width: auto;
+      }
+    }
   .our-locations-section {
     position: relative;
     width: 100%;
