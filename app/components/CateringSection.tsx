@@ -2,47 +2,29 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 
 export default function CateringSection() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   return (
-    <section className="relative w-full" style={{ display: 'block', backgroundColor: '#D43B41' }}>
-      {/* Background image - conditionally rendered */}
-      {isMobile ? (
-        <Image
-          src="/images/home-bg-catering-mb.png"
-          alt="Catering background"
-          width={750}
-          height={580}
-          className="w-full h-auto"
-          priority
-          sizes="(max-width:750px) 100vw, 750px"
-          style={{ aspectRatio: "750/580", display: 'block' }}
-        />
-      ) : (
-        <Image
-          src="/images/home-bg-catering.png"
-          alt="Catering background"
-          width={1920}
-          height={669}
-          className="w-full h-auto"
-          priority
-          sizes="(max-width:750px) 100vw, 100vw"
-          style={{ aspectRatio: "1920/669", display: 'block' }}
-        />
-      )}
+    <section className="catering-section relative w-full">
+      <Image
+        src="/images/home-bg-catering-mb.png"
+        alt="Catering background"
+        width={750}
+        height={580}
+        className="catering-bg-mobile w-full h-auto"
+        priority
+        sizes="(max-width:750px) 100vw, 750px"
+      />
+      <Image
+        src="/images/home-bg-catering.png"
+        alt="Catering background"
+        width={1920}
+        height={669}
+        className="catering-bg-desktop w-full h-auto"
+        priority
+        sizes="(max-width:1023px) 0vw, 100vw"
+      />
 
       <div
         className="catering-top"
@@ -93,40 +75,10 @@ export default function CateringSection() {
         </div>
       </div>
 
-      {/* Button positioned independently at bottom */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "clamp(15px, 3.9vw - 5px, 70px)",
-          left: 0,
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <div className="catering-button-wrapper">
         <Link
           href="/catering#catering-form"
-          className={`transition-all duration-200 text-[#1D1E1F] hover:text-[#EA4148] hover:bg-gray-50 active:text-[#EA4148] active:bg-gray-100 active:scale-95 ${isMobile ? 'focus:text-[#EA4148] focus:bg-gray-100 focus:scale-95' : ''}`}
-          style={{
-            display: "flex",
-            width: isMobile ? "240px" : "min(10.417vw, 200px)",
-            height: isMobile ? "56px" : "min(2.498vw, 47.956px)",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: isMobile ? "10px" : "min(0.521vw, 10px)",
-            flexShrink: 0,
-            borderRadius: isMobile ? "30px" : "min(1.563vw, 30px)",
-            background: "#FFFFFF",
-            textDecoration: "none",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-            border: "none",
-            fontSize: isMobile ? "24px" : "min(1.042vw, 20px)",
-            fontStyle: "normal",
-            fontWeight: 400,
-            lineHeight: "normal",
-            WebkitTapHighlightColor: isMobile ? "rgba(234, 65, 72, 0.1)" : "transparent",
-            outline: "none",
-          }}
+          className="catering-order-btn transition-all duration-200 text-[#1D1E1F] hover:text-[#EA4148] hover:bg-gray-50 active:text-[#EA4148] active:bg-gray-100 active:scale-95 focus:text-[#EA4148] focus:bg-gray-100 focus:scale-95 md:focus:scale-100 md:focus:bg-transparent md:focus:text-[#1D1E1F]"
         >
           Order Online
         </Link>

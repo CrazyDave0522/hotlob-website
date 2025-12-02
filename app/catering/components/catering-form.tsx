@@ -42,11 +42,7 @@ function validateAustralianPhone(phone: string): string {
   return "Please enter a valid Australian phone number (mobile: 04xx xxx xxx, landline: (0x) xxxx xxxx)";
 }
 
-interface CateringFormProps {
-  isMobile?: boolean;
-}
-
-export default function CateringForm({ isMobile = false }: CateringFormProps) {
+export default function CateringForm() {
   const { success, error: showError, warning } = useToast();
   const [stores, setStores] = useState<Store[]>([]);
   const [formData, setFormData] = useState({
@@ -215,29 +211,19 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
   return (
     <div
       id="catering-form"
-      className={isMobile ? "p-6 flex justify-center" : "absolute"}
-      style={isMobile ? {} : {
-        left: CATERING_LAYOUT.FORM_LEFT,
-        bottom: CATERING_LAYOUT.FORM_BOTTOM,
-        width: CATERING_LAYOUT.FORM_WIDTH,
-        display: "flex",
-        flexWrap: "wrap",
-        gap: CATERING_LAYOUT.FORM_GAP,
-      }}
+      className="catering-form-container"
     >
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className={isMobile ? "w-full flex flex-col items-center gap-[30px]" : "w-full flex flex-wrap"}
-        style={isMobile ? {} : { gap: CATERING_LAYOUT.FORM_GAP }}
+        className="w-full flex flex-col gap-[30px] md:flex-row md:flex-wrap md:items-start md:justify-start"
       >
         {/* Store selection - full width in mobile */}
-        <div className={isMobile ? "w-full flex justify-center" : "w-full"}>
-          <div className={isMobile ? "w-[630px]" : ""}>
+        <div className="w-full md:block">
+          <div className="w-full">
             <label
               htmlFor="storeId"
-              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
-            >
+              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1">
               Select a store
             </label>
             <select
@@ -246,8 +232,8 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
               value={formData.storeId}
               onChange={handleChange}
               required
-              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
-              style={isMobile ? {} : { width: CATERING_LAYOUT.INPUT_WIDTH_CALC }}
+              className="w-full md:h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base"
+              style={{ width: 'var(--store-select-width, 100%)', height: 'calc((70 / 750) * 100vw)' }}
             >
             <option value="">Select a store</option>
             {stores.map((store) => (
@@ -260,11 +246,11 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
         </div>
 
         {/* First name - full width in mobile */}
-        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
-          <div className={isMobile ? "w-[630px]" : ""}>
+        <div className="w-full md:w-auto md:flex-1 md:min-w-[calc(50%-15px)]">
+          <div className="w-full md:w-full">
             <label
               htmlFor="firstName"
-              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
             >
               First name
             </label>
@@ -275,18 +261,19 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
               value={formData.firstName}
               onChange={handleChange}
               required
-              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base placeholder:text-[24px] md:placeholder:text-base"
+              style={{ height: 'calc((70 / 750) * 100vw)' }}
               placeholder="Enter first name"
             />
           </div>
         </div>
 
         {/* Last name - full width in mobile */}
-        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
-          <div className={isMobile ? "w-[630px]" : ""}>
+        <div className="w-full md:w-auto md:flex-1 md:min-w-[calc(50%-15px)]">
+          <div className="w-full md:w-full">
             <label
               htmlFor="lastName"
-              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
             >
               Last name
             </label>
@@ -297,18 +284,19 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
               value={formData.lastName}
               onChange={handleChange}
               required
-              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base placeholder:text-[24px] md:placeholder:text-base"
+              style={{ height: 'calc((70 / 750) * 100vw)' }}
               placeholder="Enter last name"
             />
           </div>
         </div>
 
         {/* Email - full width in mobile */}
-        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
-          <div className={isMobile ? "w-[630px]" : ""}>
+        <div className="w-full md:w-auto md:flex-1 md:min-w-[calc(50%-15px)]">
+          <div className="w-full md:w-full">
             <label
               htmlFor="email"
-              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
             >
               Email
             </label>
@@ -319,18 +307,19 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
               value={formData.email}
               onChange={handleChange}
               required
-              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base placeholder:text-[24px] md:placeholder:text-base"
+              style={{ height: 'calc((70 / 750) * 100vw)' }}
               placeholder="your@email.com"
             />
           </div>
         </div>
 
         {/* Phone - full width in mobile */}
-        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
-          <div className={isMobile ? "w-[630px]" : ""}>
+        <div className="w-full md:w-auto md:flex-1 md:min-w-[calc(50%-15px)]">
+          <div className="w-full md:w-full">
             <label
               htmlFor="phone"
-              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
             >
               Phone
             </label>
@@ -345,25 +334,24 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
                 setErrors((prev) => ({ ...prev, phone: error }));
               }}
               required
-              className={isMobile ? `w-full h-[70px] px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px] ${
-                errors.phone ? "border-red-500" : "border-[#CCCFD7]"
-              }` : `flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent ${
+              className={`w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base placeholder:text-[24px] md:placeholder:text-base ${
                 errors.phone ? "border-red-500" : "border-[#CCCFD7]"
               }`}
+              style={{ height: 'calc((70 / 750) * 100vw)' }}
               placeholder="+61 xxx xxx xxx"
             />
             {errors.phone && (
-              <p className={`text-red-600 ${isMobile ? 'text-[24px]' : 'text-sm'} mt-1`}>{errors.phone}</p>
+              <p className="text-red-600 text-[24px] md:text-sm mt-1">{errors.phone}</p>
             )}
           </div>
         </div>
 
         {/* Catering date - full width in mobile */}
-        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
-          <div className={isMobile ? "w-[630px]" : ""}>
+        <div className="w-full md:w-auto md:flex-1 md:min-w-[calc(50%-15px)]">
+          <div className="w-full md:w-full">
             <label
               htmlFor="cateringDate"
-              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
             >
               Catering date
             </label>
@@ -375,20 +363,21 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
               onChange={handleChange}
               min={getMinCateringDate()}
               required
-              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] placeholder:text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base"
+              style={{ height: 'calc((70 / 750) * 100vw)' }}
             />
-            <p className={`text-gray-500 ${isMobile ? 'text-[24px]' : 'text-xs'} mt-1`}>
+            <p className="text-gray-500 text-[24px] md:text-xs mt-1">
               Orders must be placed at least 2 days in advance
             </p>
           </div>
         </div>
 
         {/* Pick up time - full width in mobile */}
-        <div className={isMobile ? "w-full flex justify-center" : "flex-1 min-w-[calc(50%-15px)]"}>
-          <div className={isMobile ? "w-[630px]" : ""}>
+        <div className="w-full md:w-auto md:flex-1 md:min-w-[calc(50%-15px)]">
+          <div className="w-full md:w-full">
             <label
               htmlFor="pickupTime"
-              className={`block ${isMobile ? 'text-[26px]' : 'text-sm'} font-medium text-gray-700 mb-1`}
+              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
             >
               Pick up time on catering date
             </label>
@@ -398,7 +387,8 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
               value={formData.pickupTime}
               onChange={handleChange}
               required
-              className={isMobile ? "w-full h-[70px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px]" : "flex w-full max-w-[340px] h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"}
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base"
+              style={{ height: 'calc((70 / 750) * 100vw)' }}
             >
             <option value="">Select time</option>
             <option value="09:00">09:00 AM</option>
@@ -419,11 +409,11 @@ export default function CateringForm({ isMobile = false }: CateringFormProps) {
         </div>
 
         {/* Submit button */}
-        <div className={isMobile ? "w-full flex justify-center mt-4" : "w-full flex justify-center mt-2.5"}>
+        <div className="w-full flex justify-center mt-4 md:mt-2.5">
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`order-button-base ${isMobile ? 'order-button-catering-mobile' : 'order-button-catering'}`}
+            className="order-button-base w-[600px] h-20 rounded-[40px] text-[34px] md:w-[300px] md:h-[46px] md:rounded-[30px] md:text-base"
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>

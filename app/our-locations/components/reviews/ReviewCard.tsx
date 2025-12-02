@@ -15,7 +15,7 @@ export interface ReviewItem {
   photos?: string[]; // Array of photo URLs (max 5)
 }
 
-export default function ReviewCard({ author_name, author_photo_url, rating, review_text, review_time, photos, isMobile = false }: ReviewItem & { isMobile?: boolean }) {
+export default function ReviewCard({ author_name, author_photo_url, rating, review_text, review_time, photos }: ReviewItem) {
   return (
     <div className="flex items-start gap-[13px] self-stretch">
       {/* Avatar */}
@@ -23,26 +23,26 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
         <Image
           src={author_photo_url}
           alt={author_name}
-          width={isMobile ? 80 : 50}
-          height={isMobile ? 80 : 50}
-          className="rounded-full object-cover shrink-0"
+          width={80}
+          height={80}
+          className="review-card-avatar"
         />
       ) : (
-        <div className={`${isMobile ? 'w-20 h-20' : 'w-[50px] h-[50px]'} rounded-full bg-gray-300 shrink-0`} />
+        <div className="review-card-avatar-placeholder" />
       )}
 
       {/* Content */}
       <div className="flex-1">
-        <span className="text-black font-semibold uppercase" style={{ fontSize: isMobile ? '30px' : '20px' }}>
+        <span className="review-card-author">
           {author_name}
         </span>
-        <div className="text-[#86909C] font-normal leading-normal" style={{ fontSize: isMobile ? '18px' : '14px', marginTop: '10px' }}>
+        <div className="review-card-date">
           {formatAUDate(review_time)}
         </div>
-        <div className={isMobile ? 'mt-3.5' : 'mt-3.5'}>
-          <RatingStars rating={rating} size={isMobile ? "xl" : "large"} />
+        <div className="mt-3.5">
+          <RatingStars rating={rating} size="responsive" />
         </div>
-        <p className="text-[#4E5969] font-normal leading-normal" style={{ fontSize: isMobile ? '26px' : '18px', marginTop: '14px', paddingBottom: '20px' }}>
+        <p className="review-card-text">
           {review_text}
         </p>
 
@@ -50,12 +50,12 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
         {photos && photos.length > 0 && (
           <>
             <div className="border-b border-[#E1E4E9]" />
-            <div style={{ paddingTop: isMobile ? '20px' : '30px' }}>
+            <div className="review-card-photos">
               <ImageWithLightbox
                 images={photos}
                 alt={`Photo by ${author_name}`}
                 layout="grid"
-                size={isMobile ? { width: 160, height: 120 } : { width: 212, height: 141 }}
+                size="responsive"
                 gridGap="30px"
                 highResTransform={(url) => {
                   try {

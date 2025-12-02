@@ -2,7 +2,7 @@ import Image from "next/image";
 
 interface RatingStarsProps {
   rating: number; // e.g., 4.5
-  size?: "small" | "large" | "xl"; // small for home page bubbles, large for our-locations, xl for mobile reviews
+  size?: "small" | "large" | "xl" | "responsive"; // responsive for mobile xl / desktop large
 }
 
 export default function RatingStars({ rating, size = "large" }: RatingStarsProps) {
@@ -10,9 +10,10 @@ export default function RatingStars({ rating, size = "large" }: RatingStarsProps
   const hasHalfStar = rating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-  const starSize = size === "small" ? 12 : size === "xl" ? 28 : 18;
-  const fontSize = size === "small" ? "text-[12px]" : size === "xl" ? "text-[22px]" : "text-[16px]";
-  const gap = size === "small" ? "gap-[4px]" : size === "xl" ? "gap-[7px]" : "gap-[7px]";
+  const starSize = size === "small" ? 12 : size === "xl" ? 28 : size === "responsive" ? 28 : 18;
+  const fontSize = size === "small" ? "text-[12px]" : size === "xl" ? "text-[22px]" : size === "responsive" ? "text-[28px] md:text-[18px]" : "text-[16px]";
+  const gap = size === "small" ? "gap-[4px]" : size === "xl" ? "gap-[7px]" : size === "responsive" ? "gap-[7px]" : "gap-[7px]";
+  const starClass = size === "responsive" ? "rating-star-responsive" : "aspect-square";
 
   return (
     <div className={`flex items-center ${gap}`}>
@@ -24,7 +25,7 @@ export default function RatingStars({ rating, size = "large" }: RatingStarsProps
           alt=""
           width={starSize}
           height={starSize}
-          className="aspect-square"
+          className={starClass}
           aria-hidden="true"
         />
       ))}
@@ -36,7 +37,7 @@ export default function RatingStars({ rating, size = "large" }: RatingStarsProps
           alt=""
           width={starSize}
           height={starSize}
-          className="aspect-square"
+          className={starClass}
           aria-hidden="true"
         />
       )}
@@ -49,7 +50,7 @@ export default function RatingStars({ rating, size = "large" }: RatingStarsProps
           alt=""
           width={starSize}
           height={starSize}
-          className="aspect-square"
+          className={starClass}
           aria-hidden="true"
         />
       ))}

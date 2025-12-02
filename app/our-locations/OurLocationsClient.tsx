@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Hero from "@/app/see-our-food/components/hero";
 import StoreCard from "./components/store-card";
 import ReviewsSection from "./components/reviews/ReviewsSection";
@@ -37,18 +36,6 @@ interface OurLocationsClientProps {
 }
 
 export default function OurLocationsClient({ storesWithData, featuredReviews }: OurLocationsClientProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   return (
     <div className="min-h-screen bg-[#F9F9F9]">
       <Hero
@@ -59,23 +46,10 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
         backgroundPositionY="60%"
       />
 
-      <div
-        className="bg-cover bg-center bg-no-repeat"
-        style={isMobile ? {
-          backgroundImage: "linear-gradient(180deg, #FBF3F3 0%, #FFF 100%), url('/images/our-locations-bg-stores-mb.png')",
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'top center',
-          backgroundSize: 'cover'
-        } : {
-          backgroundImage: "url('/images/our-locations-bg-stores.png')",
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover'
-        }}
-      >
+      <div className="our-locations-stores-bg">
         <div className="py-12 md:py-16">
-          <div className="mx-auto" style={isMobile ? { width: '100%', maxWidth: '690px', padding: '0 16px' } : { width: '72.917%', maxWidth: '1400px' }}>
-            <div className={isMobile ? "flex flex-col items-center space-y-12" : "space-y-12"}>
+          <div className="mx-auto w-full max-w-[690px] px-4 md:w-[72.917%] md:max-w-[1400px] md:px-0">
+            <div className="flex flex-col items-center space-y-12 md:block md:space-y-12">
             {storesWithData?.map((store, index: number) => (
               <StoreCard
                 key={store.id}
@@ -89,7 +63,6 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
                 rating={store.rating}
                 openingHoursWeekdayText={store.openingHoursWeekdayText ?? undefined}
                 isReversed={index % 2 === 1}
-                isMobile={isMobile}
               />
             ))}
             </div>
@@ -99,7 +72,7 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
 
       {/* Featured Reviews Section */}
       {featuredReviews.length > 0 && (
-        <ReviewsSection reviews={featuredReviews} isMobile={isMobile} />
+        <ReviewsSection reviews={featuredReviews} />
       )}
     </div>
   );

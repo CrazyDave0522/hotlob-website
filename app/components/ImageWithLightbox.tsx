@@ -12,7 +12,7 @@ interface ImageWithLightboxProps {
   style?: React.CSSProperties;
   layout?: 'single' | 'grid'; // 单张 or 网格布局
   maxImages?: number; // 最多显示几张图片
-  size?: { width: number; height: number }; // 图片尺寸
+  size?: { width: number; height: number } | "responsive"; // 图片尺寸或响应式
   highResTransform?: (url: string) => string; // 高分辨率转换函数
   gridGap?: string; // 网格布局时的间距
   imageClassName?: string; // 图片的额外类名
@@ -62,11 +62,15 @@ export default function ImageWithLightbox({
   // 单张图片布局
   if (layout === 'single' || displayImages.length === 1) {
     const imageUrl = displayImages[0];
+    const isResponsive = size === "responsive";
+    const sizeStyle = isResponsive ? {} : (size ? { width: size.width, height: size.height } : {});
+    const sizeClass = isResponsive ? "review-card-photo" : "";
+    
     return (
       <>
         <div
-          className={`button-click relative cursor-pointer transition-opacity hover:opacity-80 overflow-hidden rounded-[10px] ${className}`}
-          style={size ? { width: size.width, height: size.height, ...style } : style}
+          className={`button-click relative cursor-pointer transition-opacity hover:opacity-80 overflow-hidden rounded-[10px] ${className} ${sizeClass}`}
+          style={{ ...sizeStyle, ...style }}
           onClick={() => handleImageClick(0)}
           role="button"
           tabIndex={0}
@@ -81,7 +85,7 @@ export default function ImageWithLightbox({
             alt={alt}
             fill
             className={`object-cover ${imageClassName}`}
-            sizes={size ? `${size.width}px` : "100vw"}
+            sizes={size && typeof size !== 'string' ? `${size.width}px` : "100vw"}
           />
         </div>
 
@@ -97,6 +101,10 @@ export default function ImageWithLightbox({
   }
 
   // 网格布局（多张图片）
+  const isResponsive = size === "responsive";
+  const sizeStyle = isResponsive ? {} : (size ? { width: size.width, height: size.height, flexShrink: 0 } : {});
+  const sizeClass = isResponsive ? "review-card-photo" : "";
+  
   return (
     <>
       <div
@@ -106,8 +114,8 @@ export default function ImageWithLightbox({
         {displayImages.map((imageUrl, index) => (
           <div
             key={index}
-            className={`relative cursor-pointer transition-opacity hover:opacity-80 overflow-hidden rounded-[10px] ${imageClassName}`}
-            style={size ? { width: size.width, height: size.height, flexShrink: 0 } : {}}
+            className={`relative cursor-pointer transition-opacity hover:opacity-80 overflow-hidden rounded-[10px] ${imageClassName} ${sizeClass}`}
+            style={sizeStyle}
             onClick={() => handleImageClick(index)}
             role="button"
             tabIndex={0}
@@ -122,7 +130,7 @@ export default function ImageWithLightbox({
               alt={`${alt} - Photo ${index + 1}`}
               fill
               className="object-cover"
-              sizes={size ? `${size.width}px` : "100vw"}
+              sizes={size && typeof size !== 'string' ? `${size.width}px` : "100vw"}
             />
           </div>
         ))}

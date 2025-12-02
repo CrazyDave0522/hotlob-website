@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import TagFilter from "./tag-filter";
 import DishGrid from "./dish-grid";
 import EmptyState from "./empty-state";
@@ -14,17 +14,7 @@ interface FoodSectionProps {
 
 export default function FoodSection({ allergenTags, categoryOptions, dishes }: FoodSectionProps) {
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  // Responsive handled purely via CSS media queries
 
   // Filter dishes based on selected categories (OR union):
   // When multiple categories are selected, show dishes that match any of the selected categories
@@ -36,15 +26,7 @@ export default function FoodSection({ allergenTags, categoryOptions, dishes }: F
         );
 
   return (
-    <div
-      style={isMobile ? {
-        backgroundColor: '#F7F8FA',
-        backgroundImage: 'url(/images/see-our-food-bg-mb.png)',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'top center',
-        backgroundSize: 'auto'
-      } : {}}
-    >
+    <div className="food-section">
       <TagFilter tags={categoryOptions} onChange={setSelectedCategoryIds} />
       {filteredDishes.length > 0 ? (
         <DishGrid dishes={filteredDishes} allergenTags={allergenTags} />

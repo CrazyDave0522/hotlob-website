@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
 const FOOTER_LINKS = [
   { label: "Privacy Policy", href: "/privacy", newTab: true },
@@ -24,24 +23,12 @@ const SOCIAL_LINKS = [
 ];
 
 export function Footer() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  if (isMobile) {
-    // Mobile layout
-    return (
-      <footer className="flex w-full flex-col items-center bg-[#1F1F1C] py-5">
+  return (
+    <footer className="footer-container">
+      {/* Mobile layout: stacked vertically */}
+      <div className="lg:hidden w-full flex flex-col items-center">
         {/* Logo */}
-        <div className="mb-[30px]">
+        <div className="footer-logo-wrapper">
           <Image
             src="/images/logo.png"
             alt="Hotlob logo"
@@ -52,10 +39,7 @@ export function Footer() {
         </div>
 
         {/* Footer Links */}
-        <div
-          className="mb-5 flex flex-row items-center justify-center"
-          style={{ gap: "70px" }}
-        >
+        <div className="footer-links">
           {FOOTER_LINKS.map((link) => {
             const isMailto = link.href.startsWith("mailto:");
             if (isMailto) {
@@ -63,7 +47,7 @@ export function Footer() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-[24px] font-normal text-white hover:text-[#EA4148]"
+                  className="footer-link"
                 >
                   {link.label}
                 </a>
@@ -75,7 +59,7 @@ export function Footer() {
                 href={link.href}
                 target={link.newTab ? "_blank" : undefined}
                 rel={link.newTab ? "noreferrer" : undefined}
-                className="text-[24px] font-normal text-white hover:text-[#EA4148]"
+                className="footer-link"
               >
                 {link.label}
               </Link>
@@ -84,16 +68,16 @@ export function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="mb-2.5 h-px w-screen bg-[#FFFFFF33]"></div>
+        <div className="footer-divider"></div>
 
         {/* Copyright */}
-        <div className="mb-5 text-center text-[24px] font-normal text-white">
+        <div className="footer-copyright">
           <p>©2020 by Ocean Food Group Pty Ltd.</p>
           <p>All Rights Reserved.</p>
         </div>
 
         {/* Social Icons */}
-        <div className="flex items-center" style={{ gap: "20px" }}>
+        <div className="footer-social">
           {SOCIAL_LINKS.map((link) => (
             <a
               key={link.name}
@@ -108,36 +92,18 @@ export function Footer() {
                 alt={`${link.name} icon`}
                 width={48}
                 height={48}
-                className="h-auto w-auto"
+                className="footer-social-icon"
               />
             </a>
           ))}
         </div>
-      </footer>
-    );
-  }
+      </div>
 
-  // Desktop layout
-  return (
-    <footer
-      className="mx-auto flex w-full max-w-[1920px] flex-col items-start bg-[#1F1F1C]"
-      style={{
-        padding: "min(1.042vw, 20px) min(13.542vw, 260px)",
-        gap: "min(1.042vw, 20px)",
-      }}
-    >
-      <div
-        className="flex w-full flex-col items-center"
-        style={{ gap: "min(1.042vw, 20px)" }}
-      >
-        <div
-          className="flex w-full items-center justify-center"
-          style={{ gap: "min(4.688vw, 90px)" }}
-        >
-          <div
-            className="relative"
-            style={{ width: "min(10vw, 192px)", height: "min(5.833vw, 112px)" }}
-          >
+      {/* Desktop layout: horizontal structure */}
+      <div className="hidden lg:flex w-full flex-col" style={{ gap: "min(1.042vw, 20px)" }}>
+        {/* Top row: Logo + Links */}
+        <div className="flex w-full items-center justify-center" style={{ gap: "min(4.688vw, 90px)" }}>
+          <div className="relative" style={{ width: "min(10vw, 192px)", height: "min(5.833vw, 112px)" }}>
             <Image
               src="/images/logo.png"
               alt="Hotlob logo"
@@ -146,10 +112,7 @@ export function Footer() {
               className="object-contain"
             />
           </div>
-          <div
-            className="flex items-center"
-            style={{ gap: "min(2.083vw, 40px)" }}
-          >
+          <div className="flex items-center" style={{ gap: "min(2.083vw, 40px)" }}>
             {FOOTER_LINKS.map((link) => {
               const isMailto = link.href.startsWith("mailto:");
               if (isMailto) {
@@ -157,7 +120,7 @@ export function Footer() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="text-[clamp(12px,0.729vw,14px)] font-normal text-white hover:text-[#EA4148]"
+                    className="footer-link"
                   >
                     {link.label}
                   </a>
@@ -169,7 +132,7 @@ export function Footer() {
                   href={link.href}
                   target={link.newTab ? "_blank" : undefined}
                   rel={link.newTab ? "noreferrer" : undefined}
-                  className="text-[clamp(12px,0.729vw,14px)] font-normal text-white hover:text-[#EA4148]"
+                  className="footer-link"
                 >
                   {link.label}
                 </Link>
@@ -178,17 +141,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div
-          className="flex w-full items-center justify-between border-t border-[#FFFFFF33]"
-          style={{ padding: "min(0.521vw, 10px) 0" }}
-        >
+        {/* Bottom row: Copyright + Social Icons */}
+        <div className="flex w-full items-center justify-between border-t border-[#FFFFFF33]" style={{ paddingTop: "min(0.521vw, 10px)" }}>
           <p className="text-[clamp(12px,0.729vw,14px)] font-normal text-white">
             ©2020 by Ocean Food Group Pty Ltd. All Rights Reserved.
           </p>
-          <div
-            className="flex items-start"
-            style={{ gap: "min(1.042vw, 20px)" }}
-          >
+          <div className="flex items-center" style={{ gap: "min(1.042vw, 20px)" }}>
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.name}

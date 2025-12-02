@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { SectionTitle } from "./SectionTitle";
 
@@ -37,43 +37,12 @@ Crispy soft-shell crab with Thai green sauce, topped with fresh chilli slices fo
 
 export default function AboutHotlob() {
   const [expandedCard, setExpandedCard] = useState<number>(1); // Default: card 1 expanded
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   return (
-    <section className="relative w-full">
-      {/* Background image - conditionally rendered */}
-      {isMobile ? (
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url(/images/home-bg-about-hotlob-mb.png)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            zIndex: -1,
-          }}
-        />
-      ) : (
-        <Image
-          src="/images/home-bg-about-hotlob.png"
-          alt="About Hotlob background"
-          width={1920}
-          height={640}
-          className="w-full h-auto"
-          priority
-          style={{ aspectRatio: "1920/640", display: "block" }}
-        />
-      )}
+    <section className="about-hotlob-section relative w-full">
+      {/* Background images: render both with responsive visibility */}
+      {/* Unified responsive background handled via CSS media queries */}
+      <div className="about-hotlob-bg absolute inset-0" aria-hidden="true" />
 
       {/* Desktop content - absolute positioned */}
       <div
@@ -206,11 +175,7 @@ export default function AboutHotlob() {
                   <div
                     className="absolute inset-0"
                     style={{
-                      backgroundImage: `url(${
-                        isMobile
-                          ? card.bgExpanded.replace(".png", "-mb.png")
-                          : card.bgExpanded
-                      })`,
+                      backgroundImage: `url(${card.bgExpanded.replace(".png", "-mb.png")})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
@@ -290,11 +255,7 @@ export default function AboutHotlob() {
                   <div
                     className="absolute inset-0"
                     style={{
-                      backgroundImage: `url(${
-                        isMobile
-                          ? card.bgCollapsed.replace(".png", "-mb.png")
-                          : card.bgCollapsed
-                      })`,
+                      backgroundImage: `url(${card.bgCollapsed.replace(".png", "-mb.png")})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}

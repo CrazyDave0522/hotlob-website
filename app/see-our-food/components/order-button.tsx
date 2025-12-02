@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   getCurrentPositionWithTimeout,
   haversineDistance,
@@ -15,18 +15,7 @@ interface OrderButtonProps {
 export default function OrderButton({ stores, fallbackUrl }: OrderButtonProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [locating, setLocating] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const handleClick = async () => {
     if (!stores || stores.length === 0) {
@@ -64,29 +53,32 @@ export default function OrderButton({ stores, fallbackUrl }: OrderButtonProps) {
 
   return (
     <>
+      {/* Mobile button */}
       <button
-        className={isMobile ? "button-click" : "button-click order-button-base order-button-default"}
+        className="button-click order-button-mobile md:hidden"
         onClick={handleClick}
         disabled={locating}
-        style={isMobile ? {
-          display: 'flex',
-          width: '200px',
-          padding: '6px 0',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '10px',
+        style={{
           background: locating ? 'rgba(234, 65, 72, 0.6)' : (isPressed ? 'linear-gradient(180deg, #fb8225 0%, #d51d24 100%)' : 'linear-gradient(90deg, #ea4148 0%, #ffa159 100%)'),
           boxShadow: isPressed ? '5px 5px 0 0 rgba(175, 23, 23, 0.24)' : '3px 3px 0 0 rgba(175, 23, 23, 0.16)',
-          borderRadius: '30px 30px 0 30px',
-          border: 'none',
           cursor: locating ? 'not-allowed' : 'pointer',
-          transition: 'all 0.15s',
-          color: '#FFF',
-          fontSize: '24px',
-          fontStyle: 'normal',
-          fontWeight: 400,
-          lineHeight: 'normal'
-        } : {}}
+        }}
+        onMouseDown={() => setIsPressed(true)}
+        onMouseUp={() => setIsPressed(false)}
+        onMouseLeave={() => setIsPressed(false)}
+      >
+        Order Now
+      </button>
+      {/* Desktop button */}
+      <button
+        className="button-click order-button-base order-button-default hidden md:flex"
+        onClick={handleClick}
+        disabled={locating}
+        style={{
+          background: locating ? 'rgba(234, 65, 72, 0.6)' : (isPressed ? 'linear-gradient(180deg, #fb8225 0%, #d51d24 100%)' : 'linear-gradient(90deg, #ea4148 0%, #ffa159 100%)'),
+          boxShadow: isPressed ? '5px 5px 0 0 rgba(175, 23, 23, 0.24)' : '3px 3px 0 0 rgba(175, 23, 23, 0.16)',
+          cursor: locating ? 'not-allowed' : 'pointer',
+        }}
         onMouseDown={() => setIsPressed(true)}
         onMouseUp={() => setIsPressed(false)}
         onMouseLeave={() => setIsPressed(false)}
