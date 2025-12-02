@@ -6,16 +6,16 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 interface ImageWithLightboxProps {
-  images: string[]; // 图片 URL 数组
+  images: string[]; // Image URL array
   alt?: string;
   className?: string;
   style?: React.CSSProperties;
-  layout?: 'single' | 'grid'; // 单张 or 网格布局
-  maxImages?: number; // 最多显示几张图片
-  size?: { width: number; height: number } | "responsive"; // 图片尺寸或响应式
-  highResTransform?: (url: string) => string; // 高分辨率转换函数
-  gridGap?: string; // 网格布局时的间距
-  imageClassName?: string; // 图片的额外类名
+  layout?: 'single' | 'grid'; // single or grid layout
+  maxImages?: number; // maximum number of images to display
+  size?: { width: number; height: number } | "responsive"; // fixed size or responsive
+  highResTransform?: (url: string) => string; // high-res URL transformer
+  gridGap?: string; // grid gap
+  imageClassName?: string; // additional image className
 }
 
 export default function ImageWithLightbox({
@@ -33,18 +33,18 @@ export default function ImageWithLightbox({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
-  // 如果没有图片，返回空
+  // Return null if there are no images
   if (!images || images.length === 0) return null;
 
-  // 限制显示的图片数量
+  // Limit the number of displayed images
   const displayImages = maxImages ? images.slice(0, maxImages) : images;
 
-  // 转换高分辨率图片
+  // Transform to high-resolution image URLs
   const highResImages = images.map(url => {
     if (highResTransform) {
       return highResTransform(url);
     }
-    // 默认高分辨率转换（针对 Google Places API）
+    // Default high-res transform (for Google Places API)
     try {
       const urlObj = new URL(url);
       urlObj.searchParams.set('maxWidthPx', '2000');
@@ -59,7 +59,7 @@ export default function ImageWithLightbox({
     setLightboxOpen(true);
   };
 
-  // 单张图片布局
+  // Single image layout
   if (layout === 'single' || displayImages.length === 1) {
     const imageUrl = displayImages[0];
     const isResponsive = size === "responsive";
@@ -100,7 +100,7 @@ export default function ImageWithLightbox({
     );
   }
 
-  // 网格布局（多张图片）
+  // Grid layout (multiple images)
   const isResponsive = size === "responsive";
   const sizeStyle = isResponsive ? {} : (size ? { width: size.width, height: size.height, flexShrink: 0 } : {});
   const sizeClass = isResponsive ? "review-card-photo" : "";

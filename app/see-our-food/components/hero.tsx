@@ -35,10 +35,11 @@ export default function Hero({
 
   return (
     <>
-      {/* 移动端Hero - 1024px以下显示 */}
+      {/* Mobile Hero — visible below 1024px */}
       <section
-        className="lg:hidden relative w-full h-[420px] overflow-hidden"
+        className="lg:hidden relative w-full overflow-hidden"
         style={{
+          height: "clamp(210px, calc(420/750*100vw), 420px)",
           backgroundImage: `url(${mobileImageUrl || imageUrl})`,
           backgroundSize: "cover",
           backgroundPositionX: backgroundPositionX,
@@ -59,16 +60,16 @@ export default function Hero({
         {/* Text area */}
         <div
           className="relative z-10 flex flex-col justify-center h-full"
-          style={{ paddingLeft: "30px" }} // 移动端左对齐，固定padding
+          style={{ paddingLeft: "calc(30/750*100vw)" }} // Left aligned on mobile with responsive padding
         >
-          <div className="flex flex-col gap-5 w-[684px]">
+          <div className="flex flex-col gap-5" style={{ maxWidth: "calc(684/750*100vw)" }}>
             <h1
               className={`font-semibold leading-[154%] ${
                 showOverlay ? "text-white" : "text-[#242424]"
               }`}
               style={{
-                fontSize: "28px",
-                maxWidth: "500px", // 移动端标题宽度限制，与描述保持一致
+                fontSize: "clamp(22px, calc(28/750*100vw), 28px)",
+                maxWidth: "calc(500/750*100vw)", // Mobile title width cap matches description
                 ...(showOverlay
                   ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
                   : {}),
@@ -81,8 +82,8 @@ export default function Hero({
                 showOverlay ? "text-white" : "text-[#999]"
               }`}
               style={{
-                fontSize: "20px",
-                maxWidth: "500px", // 移动端文字宽度限制，避免占满整个容器
+                fontSize: "clamp(16px, calc(20/750*100vw), 20px)",
+                maxWidth: "calc(500/750*100vw)", // Mobile text width cap to avoid full-width paragraphs
                 ...(showOverlay
                   ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
                   : {}),
@@ -99,7 +100,7 @@ export default function Hero({
         {footerNote && (
           <div
             className="absolute z-10 bottom-2.5 left-0"
-            style={{ paddingLeft: "30px" }} // 移动端左边padding
+            style={{ paddingLeft: "calc(30/750*100vw)" }} // Mobile left padding
           >
             <p className="text-[#C9CDD4] text-[12px] font-normal leading-none text-left">
               {footerNote}
@@ -108,7 +109,7 @@ export default function Hero({
         )}
       </section>
 
-      {/* 桌面端Hero - 1024px及以上显示 */}
+      {/* Desktop Hero — visible at 1024px and above */}
       <section
         className="hidden lg:block relative w-full overflow-hidden"
         style={{
@@ -143,7 +144,7 @@ export default function Hero({
             }`}
             style={{
               maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
-              fontSize: "clamp(24px, 2vw, 38px)", // 统一标题字号
+              fontSize: "clamp(24px, 2vw, 38px)", // Unified title font size
               ...(showOverlay
                 ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
                 : {}),
@@ -157,7 +158,7 @@ export default function Hero({
             }`}
             style={{
               maxWidth: "min(35.625vw, 684px)", // 684/1920 = 35.625%
-              fontSize: "clamp(18px, 1.563vw, 30px)", // 统一字号
+              fontSize: "clamp(18px, 1.563vw, 30px)", // Unified body font size
               ...(showOverlay
                 ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
                 : {}),

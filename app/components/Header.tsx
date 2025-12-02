@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // Removed direct ORDER_URL fallback usage; keep constants import only if needed elsewhere.
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavOrderOnlineButton } from "./NavOrderOnlineButton";
 
 const NAV_ITEMS = [
@@ -32,6 +32,20 @@ export function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Disable body scroll when the mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    // Cleanup: restore body scroll on unmount
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
   const isActive = (href: string) => {
     if (href === "/") {
       return pathname === "/";
@@ -42,7 +56,7 @@ export function Header() {
 
   return (
     <>
-      {/* 移动端导航栏 - 1024px以下显示 */}
+      {/* Mobile header - visible below 1024px */}
       <header className="mobile-header sticky top-0 z-50 flex lg:hidden w-full shrink-0 items-center justify-between bg-white px-5 shadow-[0_2px_4px_0_rgba(0,0,0,0.08)]">
         <Link href="/" aria-label="Hotlob home" className="shrink-0">
           <div className="logo-wrapper relative">
@@ -72,7 +86,7 @@ export function Header() {
         </button>
       </header>
 
-      {/* 桌面端导航栏 - 1024px及以上显示 */}
+      {/* Desktop header - visible at 1024px and above */}
       <header
         className="sticky top-0 z-50 hidden lg:flex w-full max-w-[1920px] shrink-0 items-center justify-between bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
         style={{
@@ -150,15 +164,21 @@ export function Header() {
         </div>
       </header>
 
-      {/* 移动端菜单蒙层 */}
+      {/* Mobile menu overlay */}
       <div
         className={`mobile-menu-overlay fixed inset-0 z-40 lg:hidden ${
           isMobileMenuOpen ? "flex" : "hidden"
-        } items-center justify-center bg-black/90`}
+        } flex-col bg-black/90 overflow-y-auto`}
+        style={{
+          // paddingTop = responsive header height + responsive top margin for the menu items
+          // 375px: 64 + 50 = 114; 750px: 120 + 100 = 220
+          paddingTop: "clamp(114px, calc(220/750*100vw), 220px)",
+          paddingBottom: "clamp(25px, calc(50/750*100vw), 50px)",
+        }}
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <div
-          className="mobile-menu-inner flex flex-col items-center justify-center gap-[100px]"
+          className="mobile-menu-inner flex flex-col items-center"
           onClick={(e) => e.stopPropagation()}
         >
           {NAV_ITEMS.map((item) => (
@@ -166,7 +186,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`button-click flex items-center justify-center gap-2.5 px-4 py-2.5 text-[48px] font-semibold leading-none transition-colors ${
+              className={`button-click flex items-center justify-center gap-2.5 px-4 py-2.5 mobile-menu-item font-semibold leading-none transition-colors ${
                 isActive(item.href)
                   ? "rounded-[10px] border-b-4 border-[#EA4148] text-[#EA4148]"
                   : "text-white hover:text-[#EA4148]"

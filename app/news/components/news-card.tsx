@@ -30,15 +30,15 @@ function MobileNewsCard({
       className="group flex flex-col w-full bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.05)] hover:shadow-[0_0_30px_0_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden"
       style={{
         borderRadius: "20px",
-        height: "550px",
+        height: "clamp(275px, calc(550 / 750 * 100vw), 550px)",
       }}
     >
       {/* Cover Image */}
       <div
         className="relative overflow-hidden"
         style={{
-          width: "690px",
-          height: "340px",
+          width: "clamp(345px, calc(690 / 750 * 100vw), 690px)",
+          height: "clamp(170px, calc(340 / 750 * 100vw), 340px)",
           flexShrink: 0,
           borderRadius: "20px 20px 0 0",
         }}
@@ -56,15 +56,14 @@ function MobileNewsCard({
       <div
         className="flex flex-col flex-1"
         style={{
-          padding: "30px 20px 20px 20px",
+          padding: "clamp(15px, calc(30 / 750 * 100vw), 30px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px)",
         }}
       >
         {/* Title */}
         <h2
-          className="text-[#1D1E1F] font-semibold leading-normal group-hover:text-[#EA4148] transition-colors"
+          className="news-card-title-mobile text-[#1D1E1F] font-semibold leading-normal group-hover:text-[#EA4148] transition-colors"
           style={{
-            fontSize: "24px",
-            marginBottom: "20px",
+            marginBottom: "clamp(10px, calc(20 / 750 * 100vw), 20px)",
           }}
         >
           {title}
@@ -72,10 +71,9 @@ function MobileNewsCard({
 
         {/* Date */}
         <div
-          className="text-[#86909C] font-normal leading-normal"
+          className="news-card-date-mobile text-[#86909C] font-normal leading-normal"
           style={{
-            fontSize: "14px",
-            marginBottom: "20px",
+            marginBottom: "clamp(10px, calc(20 / 750 * 100vw), 20px)",
           }}
         >
           {formatAUDate(publishDate)}
@@ -83,10 +81,7 @@ function MobileNewsCard({
 
         {/* Excerpt */}
         <p
-          className="text-[#86909C] font-normal leading-normal line-clamp-3"
-          style={{
-            fontSize: "16px",
-          }}
+          className="news-card-excerpt-mobile text-[#86909C] font-normal leading-normal line-clamp-3"
         >
           {excerpt}
         </p>

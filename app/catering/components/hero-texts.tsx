@@ -7,7 +7,7 @@ export default function HeroTexts() {
     <div className="flex flex-col items-center gap-4 pt-[108px] md:absolute md:left-0 md:right-0 md:pt-0" style={{ top: CATERING_LAYOUT.HERO_TOP }}>
       {/* CATERING */}
       <h1
-        className="text-[#FFD632] text-center text-[40px] font-semibold leading-normal"
+        className="catering-hero-title text-[#FFD632] text-center font-semibold leading-normal"
         style={{ fontWeight: 600 }}
       >
         The ULTIMATE Catering Pack!
@@ -15,14 +15,14 @@ export default function HeroTexts() {
 
       {/* The ULTIMATE picnic set! */}
       <h2
-        className="text-white text-center text-[40px] font-semibold leading-normal"
+        className="catering-hero-subtitle text-white text-center font-semibold leading-normal"
         style={{ fontWeight: 600 }}
       >
         Leave as what you have
       </h2>
 
       {/* MIX 16 ROLL SET PAX 4-6 with bullet lines */}
-      <div className="text-white text-left text-[24px] font-normal leading-[52px]">
+      <div className="catering-hero-desc text-white text-left font-normal leading-[52px]">
         <p className="font-semibold">MIX 16 ROLL SET PAX 4-6</p>
         <p>6 x Lobster Roll</p>
         <p>5 x Soft Shell Crab Roll</p>

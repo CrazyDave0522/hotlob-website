@@ -77,7 +77,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
   const config = positionConfig[position];
 
   return (
-    // ✅ 整个气泡组件作为hover目标
+    // Entire bubble acts as the hover target
     <div
       style={{
         ...config.containerStyle,
@@ -88,7 +88,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
       className="group transition-shadow duration-300 ease-out group-hover:shadow-xl group-hover:shadow-black/15 group-hover:ring-1 group-hover:ring-white/50"
     >
       {/* Avatar with decorative ring (lower z-index, behind bubble) */}
-      {/* ✅ 头像轻微缩放 */}
+      {/* Subtle avatar scale on hover */}
       <div
         style={{
           ...config.avatarStyle,
@@ -139,7 +139,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
       </div>
 
       {/* Bubble with content (higher z-index, covers avatar) */}
-      {/* ✅ 气泡强力缩放 */}
+      {/* Stronger bubble scale on hover */}
       <div
         style={{
           position: "relative",

@@ -35,6 +35,10 @@ export function Footer() {
             width={192}
             height={112}
             className="object-contain"
+            style={{
+              width: "clamp(96px, calc(192/750*100vw), 192px)",
+              height: "clamp(56px, calc(112/750*100vw), 112px)"
+            }}
           />
         </div>
 

@@ -100,10 +100,12 @@ export default function AboutHotlob() {
                   style={{ paddingTop: "min(3.125vw, 60px)" }} // 60/1920 = 3.125%
                 >
                   <h3
-                    className="text-[26px] font-semibold leading-normal transition-colors duration-400"
+                    className="about-hotlob-tab-text font-semibold leading-normal transition-colors duration-400"
                     style={{
                       color: isExpanded ? "#FFF" : "#333",
                       marginBottom: "min(1.042vw, 20px)", // 20/1920 = 1.042%
+                      fontSize: isExpanded ? "clamp(21px, 1.35vw, 26px)" : "clamp(20px, 1.25vw, 24px)",
+                      transition: "color 400ms, font-size 400ms",
                     }}
                   >
                     {card.title}
@@ -112,14 +114,16 @@ export default function AboutHotlob() {
                     className="text-base font-normal overflow-hidden text-white whitespace-pre-line"
                     style={{
                       display: "-webkit-box",
-                      WebkitLineClamp: 9,
+                      WebkitLineClamp: 10,
                       WebkitBoxOrient: "vertical",
-                      // 段间距由行高决定：使用响应式行高，1920 下为 24px，小屏更小
-                      lineHeight: "clamp(20px, 1.25vw, 24px)",
+                      // Spacing between paragraphs is controlled by line-height.
+                      // At 1920px it's 24px; it scales down on smaller screens.
+                      lineHeight: isExpanded ? "clamp(21px, 1.35vw, 26px)" : "clamp(20px, 1.25vw, 24px)",
+                      fontSize: isExpanded ? "clamp(17px, 1.04vw, 20px)" : "clamp(16px, 0.94vw, 18px)",
                       opacity: isExpanded ? 1 : 0,
                       transition: isExpanded
-                        ? "opacity 300ms ease-in 280ms"
-                        : "opacity 200ms ease-out",
+                        ? "opacity 300ms ease-in 280ms, font-size 400ms, line-height 400ms"
+                        : "opacity 200ms ease-out, font-size 400ms, line-height 400ms",
                       pointerEvents: isExpanded ? "auto" : "none",
                     }}
                   >
@@ -135,15 +139,14 @@ export default function AboutHotlob() {
       {/* Mobile content - natural flow to expand section height */}
       <div className="lg:hidden relative z-10 px-4 pb-8 pt-4">
         {/* Title */}
-        <div className="mb-8 -mt-6">
-          <SectionTitle>About Hotlob</SectionTitle>
-        </div>
+        <SectionTitle>About Hotlob</SectionTitle>
 
         {/* Mobile: Two-row card layout */}
         <div
           className="flex flex-col items-center justify-end"
           style={{
-            gap: "20px", // 两行卡片的上下间距
+            // Vertical gap between the two card rows
+            gap: "clamp(10px, calc(20/750*100vw), 20px)",
           }}
         >
           {/* First row: Active card takes full width */}
@@ -155,16 +158,18 @@ export default function AboutHotlob() {
           >
             {cards
               .filter((card) => expandedCard === card.id)
-              .map((card) => (
+              .map((card) => {
+                const isActive = true; // Expanded card is considered active
+                return (
                 <div
                   key={card.id}
                   className="button-click relative cursor-pointer overflow-hidden rounded-[20px]"
                   style={{
-                    width: "690px",
-                    height: "300px",
+                    width: "clamp(345px, calc(690/750*100vw), 690px)",
+                    height: "clamp(150px, calc(300/750*100vw), 300px)",
                     flexShrink: 0,
                     maxWidth: "100%",
-                    margin: "0 30px", // 左右边距30px
+                    margin: "0 clamp(15px, calc(30/750*100vw), 30px)", // Horizontal side margins
                     transition: "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
                     transform: "scale(1)",
                     transformOrigin: "center",
@@ -185,53 +190,59 @@ export default function AboutHotlob() {
                   <div
                     className="absolute inset-0 flex flex-col"
                     style={{
-                      paddingTop: "40px",
-                      paddingLeft: "20px",
-                      paddingRight: "20px",
-                      paddingBottom: "40px",
+                      paddingTop: "clamp(20px, calc(40/750*100vw), 40px)",
+                      paddingLeft: "clamp(10px, calc(20/750*100vw), 20px)",
+                      paddingRight: "clamp(10px, calc(20/750*100vw), 20px)",
+                      paddingBottom: "clamp(10px, calc(20/750*100vw), 20px)",
                       transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
                       opacity: 1,
                       transform: "translateY(0px)",
                     }}
                   >
                     <h3
+                      className="about-hotlob-card-title"
                       style={{
                         color: "#FFF",
-                        fontSize: "24px",
                         fontStyle: "normal",
                         fontWeight: 600,
                         lineHeight: "normal",
-                        marginBottom: "20px",
+                        marginBottom: "clamp(10px, calc(20/750*100vw), 20px)",
+                        fontSize: isActive ? "clamp(15px, calc(26/750*100vw), 26px)" : "clamp(14px, calc(24/750*100vw), 24px)",
+                        transition: "font-size 400ms cubic-bezier(0.34, 1.56, 0.64, 1)",
                       }}
                     >
                       {card.title}
                     </h3>
                     <p
+                      className="about-hotlob-card-desc"
                       style={{
                         color: "#FFF",
-                        fontSize: "16px",
                         fontStyle: "normal",
                         fontWeight: 400,
-                        lineHeight: "24px", // 150%
+                        lineHeight: "clamp(12px, calc(24/750*100vw), 24px)",
+                        fontSize: isActive ? "clamp(13px, calc(20/750*100vw), 20px)" : "clamp(12px, calc(18/750*100vw), 18px)",
                         overflow: "hidden",
                         display: "-webkit-box",
-                        WebkitLineClamp: 8,
+                        WebkitLineClamp: 7,
                         WebkitBoxOrient: "vertical",
                         whiteSpace: "pre-line",
+                        transition: "font-size 400ms cubic-bezier(0.34, 1.56, 0.64, 1)",
                       }}
                     >
                       {card.description}
                     </p>
                   </div>
                 </div>
-              ))}
+                );
+              })}
           </div>
 
           {/* Second row: Two inactive cards side by side */}
           <div
             className="flex justify-center"
             style={{
-              gap: "30px", // 左右间距30px
+              // Horizontal gap between inactive cards
+              gap: "clamp(15px, calc(30/750*100vw), 30px)",
               transition: "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
             }}
           >
@@ -242,8 +253,8 @@ export default function AboutHotlob() {
                   key={card.id}
                   className="button-click relative cursor-pointer overflow-hidden rounded-[20px]"
                   style={{
-                    width: "330px",
-                    height: "300px",
+                    width: "clamp(165px, calc(330/750*100vw), 330px)",
+                    height: "clamp(150px, calc(300/750*100vw), 300px)",
                     flexShrink: 0,
                     transition: "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
                     transform: "scale(1)",
@@ -265,10 +276,10 @@ export default function AboutHotlob() {
                   <div
                     className="absolute inset-0 flex flex-col"
                     style={{
-                      paddingTop: "40px",
-                      paddingLeft: "20px",
-                      paddingRight: "20px",
-                      paddingBottom: "40px",
+                      paddingTop: "clamp(20px, calc(40/750*100vw), 40px)",
+                      paddingLeft: "clamp(10px, calc(20/750*100vw), 20px)",
+                      paddingRight: "clamp(10px, calc(20/750*100vw), 20px)",
+                      paddingBottom: "clamp(10px, calc(20/750*100vw), 20px)",
                       transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
                       opacity: 1,
                       transform: "translateY(0px)",
@@ -277,27 +288,31 @@ export default function AboutHotlob() {
                     <h3
                       style={{
                         color: "#333",
-                        fontSize: "24px",
                         fontStyle: "normal",
                         fontWeight: 600,
                         lineHeight: "normal",
-                        marginBottom: "20px",
+                        marginBottom: "clamp(10px, calc(20/750*100vw), 20px)",
+                        fontSize: "clamp(14px, calc(24/750*100vw), 24px)",
+                        transition: "font-size 400ms cubic-bezier(0.34, 1.56, 0.64, 1)",
                       }}
+                      className="about-hotlob-card-title"
                     >
                       {card.title}
                     </h3>
                     <p
+                      className="about-hotlob-card-desc"
                       style={{
                         color: "#4E5969",
-                        fontSize: "16px",
                         fontStyle: "normal",
                         fontWeight: 400,
-                        lineHeight: "24px", // 150%
+                        lineHeight: "clamp(12px, calc(24/750*100vw), 24px)",
+                        fontSize: "clamp(12px, calc(18/750*100vw), 18px)",
                         overflow: "hidden",
                         display: "-webkit-box",
-                        WebkitLineClamp: 6,
+                        WebkitLineClamp: 7,
                         WebkitBoxOrient: "vertical",
-                        whiteSpace: "pre-line"
+                        whiteSpace: "pre-line",
+                        transition: "font-size 400ms cubic-bezier(0.34, 1.56, 0.64, 1)",
                       }}
                     >
                       {card.description}

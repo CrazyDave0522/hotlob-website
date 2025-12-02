@@ -44,14 +44,14 @@ export default function CateringSection() {
           }
         `}</style>
         <h1
-          className="text-[#FFD632] text-center text-[40px] font-semibold leading-normal"
+          className="catering-section-title text-[#FFD632] text-center font-semibold leading-normal"
           style={{ fontWeight: 600 }}
         >
           The ULTIMATE Catering Pack!
         </h1>
 
         <h2
-          className="text-white text-center text-[40px] font-semibold leading-normal catering-subtitle"
+          className="catering-section-title text-white text-center font-semibold leading-normal catering-subtitle"
           style={{ fontWeight: 600 }}
         >
           Leave as what you have

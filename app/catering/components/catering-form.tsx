@@ -223,7 +223,7 @@ export default function CateringForm() {
           <div className="w-full">
             <label
               htmlFor="storeId"
-              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1">
+              className="catering-form-label block font-medium text-gray-700 mb-1">
               Select a store
             </label>
             <select
@@ -232,7 +232,7 @@ export default function CateringForm() {
               value={formData.storeId}
               onChange={handleChange}
               required
-              className="w-full md:h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base"
+              className="catering-form-select w-full md:h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
               style={{ width: 'var(--store-select-width, 100%)', height: 'calc((70 / 750) * 100vw)' }}
             >
             <option value="">Select a store</option>
@@ -250,7 +250,7 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="firstName"
-              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700 mb-1"
             >
               First name
             </label>
@@ -261,7 +261,7 @@ export default function CateringForm() {
               value={formData.firstName}
               onChange={handleChange}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base placeholder:text-[24px] md:placeholder:text-base"
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
               style={{ height: 'calc((70 / 750) * 100vw)' }}
               placeholder="Enter first name"
             />
@@ -273,7 +273,7 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="lastName"
-              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700 mb-1"
             >
               Last name
             </label>
@@ -284,7 +284,7 @@ export default function CateringForm() {
               value={formData.lastName}
               onChange={handleChange}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base placeholder:text-[24px] md:placeholder:text-base"
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
               style={{ height: 'calc((70 / 750) * 100vw)' }}
               placeholder="Enter last name"
             />
@@ -296,7 +296,7 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="email"
-              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700 mb-1"
             >
               Email
             </label>
@@ -307,7 +307,7 @@ export default function CateringForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base placeholder:text-[24px] md:placeholder:text-base"
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
               style={{ height: 'calc((70 / 750) * 100vw)' }}
               placeholder="your@email.com"
             />
@@ -319,7 +319,7 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="phone"
-              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700 mb-1"
             >
               Phone
             </label>
@@ -334,14 +334,14 @@ export default function CateringForm() {
                 setErrors((prev) => ({ ...prev, phone: error }));
               }}
               required
-              className={`w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base placeholder:text-[24px] md:placeholder:text-base ${
+              className={`w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input ${
                 errors.phone ? "border-red-500" : "border-[#CCCFD7]"
               }`}
               style={{ height: 'calc((70 / 750) * 100vw)' }}
               placeholder="+61 xxx xxx xxx"
             />
             {errors.phone && (
-              <p className="text-red-600 text-[24px] md:text-sm mt-1">{errors.phone}</p>
+              <p className="catering-form-error text-red-600 mt-1">{errors.phone}</p>
             )}
           </div>
         </div>
@@ -351,7 +351,7 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="cateringDate"
-              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700 mb-1"
             >
               Catering date
             </label>
@@ -366,7 +366,7 @@ export default function CateringForm() {
               className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base"
               style={{ height: 'calc((70 / 750) * 100vw)' }}
             />
-            <p className="text-gray-500 text-[24px] md:text-xs mt-1">
+            <p className="catering-form-hint text-gray-500 mt-1">
               Orders must be placed at least 2 days in advance
             </p>
           </div>
@@ -377,7 +377,7 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="pickupTime"
-              className="block text-[26px] md:text-sm font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700 mb-1"
             >
               Pick up time on catering date
             </label>
@@ -413,7 +413,7 @@ export default function CateringForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="order-button-base w-[600px] h-20 rounded-[40px] text-[34px] md:w-[300px] md:h-[46px] md:rounded-[30px] md:text-base"
+            className="catering-form-submit order-button-base w-[600px] h-20 rounded-[40px] md:w-[300px] md:h-[46px] md:rounded-[30px]"
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>

@@ -56,7 +56,6 @@ export default function OurLocationsSection({
             <div className="our-locations-stores-mobile-inner">
               <div className="our-locations-title-mobile">
                 <SectionTitle
-                  className="justify-center mt-0 mb-0"
                   icon={{
                     src: "/images/icons/store.svg",
                     alt: "Store icon",
@@ -92,7 +91,7 @@ export default function OurLocationsSection({
           <div className="our-locations-stores-desktop">
             <div className="our-locations-title-desktop">
               <SectionTitle
-                className="justify-start mt-0 mb-0"
+                className="justify-start"
                 icon={{
                   src: "/images/icons/store.svg",
                   alt: "Store icon",
