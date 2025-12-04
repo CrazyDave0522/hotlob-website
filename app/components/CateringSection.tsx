@@ -31,11 +31,11 @@ export default function CateringSection() {
         style={{ position: "absolute", top: 0, left: 0, width: "100%" }}
       >
         <style>{`
-          /* Mobile: 108px from top, Desktop: responsive spacing */
+          /* Mobile: clamp margin-top, Desktop: responsive spacing */
           @media (max-width: 1023px) {
-            .catering-top { margin-top: 108px; }
-            .catering-subtitle { margin-top: 16px; }
-            .catering-content { margin-top: 16px; }
+            .catering-top { margin-top: clamp(32px, calc(108 / 750 * 100vw), 108px); }
+            .catering-subtitle { margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px); }
+            .catering-content { margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px); }
           }
           @media (min-width: 1024px) {
             .catering-top { margin-top: clamp(32px, 2vw + 20px, 120px); }
@@ -59,18 +59,25 @@ export default function CateringSection() {
 
         <div className="catering-content">
           <div
-            className="text-white text-center text-[24px] font-normal leading-[52px]"
+            className="text-white text-center font-normal"
             style={{
               width: "72.917%",
               maxWidth: 1400,
               marginLeft: "auto",
               marginRight: "auto",
+              fontSize: "clamp(14px, calc(24 / 750 * 100vw), 24px)",
+              lineHeight: "clamp(26px, calc(52 / 750 * 100vw), 52px)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <p className="font-semibold">MIX 16 ROLL SET PAX 4-6</p>
-            <p>6 x Lobster Roll</p>
-            <p>5 x Soft Shell Crab Roll</p>
-            <p>5 x Prawn Roll</p>
+            <div style={{ textAlign: "left" }}>
+              <p className="font-semibold">MIX 16 ROLL SET PAX 4-6</p>
+              <p>6 x Lobster Roll</p>
+              <p>5 x Soft Shell Crab Roll</p>
+              <p>5 x Prawn Roll</p>
+            </div>
           </div>
         </div>
       </div>

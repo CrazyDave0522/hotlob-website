@@ -42,7 +42,10 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
   return (
     <div
       className="w-full flex flex-col justify-center bg-transparent md:bg-white"
-      style={{ minHeight: "min(6.042vw, 116px)", paddingTop: "40px" }}
+      style={{ 
+        minHeight: "min(6.042vw, 116px)", 
+        paddingTop: "clamp(20px, calc(40 / 750 * 100vw), 40px)" 
+      }}
     >
       <style jsx>{`
         @media (min-width: 768px) {
@@ -53,7 +56,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
       `}</style>
       {/* Width controlled by layout.tsx max-w-[1920px] wrapper */}
       <div
-        className="flex flex-wrap items-center justify-center gap-[12px_20px] md:gap-[12px_40px] mx-auto w-full px-[30px] md:px-0"
+        className="flex flex-wrap items-center justify-center tag-filter-container tag-filter-group md:tag-filter-group-desktop mx-auto w-full"
       >
         {/* All button */}
         <button
@@ -61,7 +64,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
           onMouseDown={() => setPressedButton("all")}
           onMouseUp={() => setPressedButton(null)}
           onMouseLeave={() => setPressedButton(null)}
-          className={`button-click tag-button ${
+          className={`button-click tag-button tag-button-all ${
             selectedIds.length === 0
               ? "tag-button--active"
               : "tag-button--inactive"
@@ -84,9 +87,9 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
             alt="All"
             width={50}
             height={50}
-            className="w-[50px] h-[50px] md:w-7 md:h-7"
+            className="tag-button-icon object-contain"
           />
-          <span className="text-[26px] md:text-[18px] font-normal leading-none">All</span>
+          <span className="tag-button-text font-normal leading-none">All</span>
         </button>
 
         {/* Dynamic tag buttons */}
@@ -106,7 +109,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
               onMouseDown={() => setPressedButton(tag.id)}
               onMouseUp={() => setPressedButton(null)}
               onMouseLeave={() => setPressedButton(null)}
-              className={`button-click tag-button ${
+              className={`button-click tag-button tag-button-item ${
                 isSelected ? "tag-button--active" : "tag-button--inactive"
               }`}
               style={{
@@ -122,10 +125,10 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
                   alt={tag.name}
                   width={50}
                   height={50}
-                  className="object-contain w-[50px] h-[50px] md:w-10 md:h-10"
+                  className="tag-button-icon object-contain"
                 />
               )}
-              <span className="text-[26px] md:text-[18px] font-normal leading-none">
+              <span className="tag-button-text font-normal leading-none">
                 {tag.name}
               </span>
             </button>

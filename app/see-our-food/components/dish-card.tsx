@@ -23,8 +23,7 @@ export default function DishCard({ dish, priority = false }: DishCardProps) {
     <div className="dish-card dish-card-height relative w-full bg-white rounded-[20px] shadow-[0_0_20px_rgba(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,65,72,0.20)] overflow-visible group">
       {/* Overall content layout - absolutely positioned at bottom */}
       <div
-        className="absolute bottom-0 left-0 right-0 flex flex-col items-center"
-        style={{ padding: "0 20px 24px" }}
+        className="absolute bottom-0 left-0 right-0 flex flex-col items-center dish-card-inner"
       >
         {/* Dish image - responsive size */}
         <div className="dish-card-image relative rounded-md overflow-hidden transition-all duration-300 group-hover:translate-y-1.5">

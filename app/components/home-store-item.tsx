@@ -55,12 +55,8 @@ export default function HomeStoreItem({
     >
       {/* Store image (left) */}
       <div
-        className="relative shrink-0 bg-gray-100 overflow-hidden"
+        className="relative shrink-0 bg-gray-100 overflow-hidden home-store-image"
         style={{
-          width: "calc((220 / 750) * 100vw)",
-          height: "calc((160 / 750) * 100vw)",
-          maxWidth: "220px",
-          maxHeight: "160px",
           borderRadius: "min(0.521vw, 10px)", // 10/1920
         }}
       >
@@ -70,7 +66,6 @@ export default function HomeStoreItem({
             alt={name}
             layout="single"
             className="w-full h-full"
-            size={{ width: 220, height: 160 }}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400">
