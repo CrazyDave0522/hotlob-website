@@ -32,6 +32,12 @@ export default function FloatingOrderButton() {
         userLocation={userLoc}
         open={modalOpen}
         onClose={() => setModalOpen(false)}
+        onStoreSelect={(store) => {
+          if (store.uber_url) {
+            window.open(store.uber_url, "_blank");
+          }
+          setModalOpen(false);
+        }}
       />
     </>
   );

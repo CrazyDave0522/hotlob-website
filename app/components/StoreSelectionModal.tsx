@@ -8,6 +8,7 @@ export interface StoreInfo {
   uber_url?: string | null;
   latitude?: number | null;
   longitude?: number | null;
+  email?: string | null;
 }
 
 interface StoreSelectionModalProps {
@@ -15,6 +16,7 @@ interface StoreSelectionModalProps {
   userLocation?: { lat: number; lng: number } | null;
   open: boolean;
   onClose: () => void;
+  onStoreSelect: (store: StoreInfo) => void;
 }
 
 export default function StoreSelectionModal({
@@ -22,6 +24,7 @@ export default function StoreSelectionModal({
   userLocation,
   open,
   onClose,
+  onStoreSelect,
 }: StoreSelectionModalProps) {
   const sortedStores = [...stores];
   if (userLocation) {
@@ -59,15 +62,12 @@ export default function StoreSelectionModal({
         <ul className="space-y-2 max-h-72 overflow-y-auto">
           {sortedStores.map((store) => (
             <li key={store.id}>
-              <a
-                href={store.uber_url || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="button-click block px-4 py-2 rounded text-[#1D1E1F] font-medium transition-colors hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148] active:bg-[rgba(234,65,72,0.12)]"
-                onClick={onClose}
+              <button
+                className="button-click block w-full text-left px-4 py-2 rounded text-[#1D1E1F] font-medium transition-colors hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148] active:bg-[rgba(234,65,72,0.12)]"
+                onClick={() => onStoreSelect(store)}
               >
                 {store.name}
-              </a>
+              </button>
             </li>
           ))}
         </ul>

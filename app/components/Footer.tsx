@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import StoreSelectionModal, { type StoreInfo } from "./StoreSelectionModal";
+import { getStoresBasic } from "@/lib/getStores";
 
 const FOOTER_LINKS = [
   { label: "Privacy Policy", href: "/privacy", newTab: true },
   { label: "Terms & Conditions", href: "/terms", newTab: true },
-  { label: "Contact Us", href: "mailto:hello@hotlob.com" },
+  { label: "Contact Us", action: "contact" },
 ];
 
 const SOCIAL_LINKS = [
@@ -23,6 +26,27 @@ const SOCIAL_LINKS = [
 ];
 
 export function Footer() {
+  const [storeModalOpen, setStoreModalOpen] = useState(false);
+  const [stores, setStores] = useState<StoreInfo[]>([]);
+
+  useEffect(() => {
+    const fetchStores = async () => {
+      const storesData = await getStoresBasic({ includeExtendedInfo: true });
+      setStores(storesData as StoreInfo[]);
+    };
+    fetchStores();
+  }, []);
+
+  const handleContactUsClick = () => {
+    setStoreModalOpen(true);
+  };
+
+  const handleStoreSelect = (store: StoreInfo) => {
+    if (store.email) {
+      window.location.href = `mailto:${store.email}`;
+    }
+    setStoreModalOpen(false);
+  };
   return (
     <footer className="footer-container">
       {/* Mobile layout: stacked vertically */}
@@ -45,27 +69,27 @@ export function Footer() {
         {/* Footer Links */}
         <div className="footer-links">
           {FOOTER_LINKS.map((link) => {
-            const isMailto = link.href.startsWith("mailto:");
-            if (isMailto) {
+            if ("action" in link && link.action === "contact") {
               return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="footer-link"
+                <button
+                  key="contact-us"
+                  onClick={handleContactUsClick}
+                  className="footer-link bg-none border-none cursor-pointer"
                 >
                   {link.label}
-                </a>
+                </button>
               );
             }
+            const linkObj = link as { label: string; href: string; newTab?: boolean };
             return (
               <Link
-                key={link.href}
-                href={link.href}
-                target={link.newTab ? "_blank" : undefined}
-                rel={link.newTab ? "noreferrer" : undefined}
+                key={linkObj.href}
+                href={linkObj.href}
+                target={linkObj.newTab ? "_blank" : undefined}
+                rel={linkObj.newTab ? "noreferrer" : undefined}
                 className="footer-link"
               >
-                {link.label}
+                {linkObj.label}
               </Link>
             );
           })}
@@ -118,27 +142,27 @@ export function Footer() {
           </div>
           <div className="flex items-center" style={{ gap: "min(2.083vw, 40px)" }}>
             {FOOTER_LINKS.map((link) => {
-              const isMailto = link.href.startsWith("mailto:");
-              if (isMailto) {
+              if ("action" in link && link.action === "contact") {
                 return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="footer-link"
+                  <button
+                    key="contact-us"
+                    onClick={handleContactUsClick}
+                    className="footer-link bg-none border-none cursor-pointer"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 );
               }
+              const linkObj = link as { label: string; href: string; newTab?: boolean };
               return (
                 <Link
-                  key={link.href}
-                  href={link.href}
-                  target={link.newTab ? "_blank" : undefined}
-                  rel={link.newTab ? "noreferrer" : undefined}
+                  key={linkObj.href}
+                  href={linkObj.href}
+                  target={linkObj.newTab ? "_blank" : undefined}
+                  rel={linkObj.newTab ? "noreferrer" : undefined}
                   className="footer-link"
                 >
-                  {link.label}
+                  {linkObj.label}
                 </Link>
               );
             })}
@@ -173,6 +197,14 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Store Selection Modal for Contact Us */}
+      <StoreSelectionModal
+        stores={stores}
+        open={storeModalOpen}
+        onClose={() => setStoreModalOpen(false)}
+        onStoreSelect={handleStoreSelect}
+      />
     </footer>
   );
 }

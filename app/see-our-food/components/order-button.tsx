@@ -89,6 +89,12 @@ export default function OrderButton({ stores, fallbackUrl }: OrderButtonProps) {
         stores={stores || []}
         open={modalOpen}
         onClose={() => setModalOpen(false)}
+        onStoreSelect={(store) => {
+          if (store.uber_url) {
+            window.open(store.uber_url, "_blank");
+          }
+          setModalOpen(false);
+        }}
       />
     </>
   );
