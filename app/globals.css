@@ -1897,6 +1897,22 @@ textarea::placeholder {
   font-size: var(--mobile-fs-3xl);
 }
 
+.catering-content-text {
+  font-size: clamp(14px, calc(24 / 750 * 100vw), 24px);
+  line-height: clamp(26px, calc(52 / 750 * 100vw), 52px);
+}
+
+@media (min-width: 1024px) {
+  .catering-section-title {
+    font-size: clamp(20px, calc(40 / 1920 * 100vw), 40px);
+    line-height: normal;
+  }
+  .catering-content-text {
+    font-size: clamp(12px, calc(24 / 1920 * 100vw), 24px);
+    line-height: clamp(26px, calc(52 / 1920 * 100vw), 52px);
+  }
+}
+
 /* Review Bubble - Desktop responsive (1920 baseline) */
 @media (min-width: 1024px) {
   .review-bubble {

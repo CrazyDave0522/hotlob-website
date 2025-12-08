@@ -59,14 +59,12 @@ export default function CateringSection() {
 
         <div className="catering-content">
           <div
-            className="text-white text-center font-normal"
+            className="catering-content-text text-white text-center font-normal"
             style={{
               width: "72.917%",
               maxWidth: 1400,
               marginLeft: "auto",
               marginRight: "auto",
-              fontSize: "clamp(14px, calc(24 / 750 * 100vw), 24px)",
-              lineHeight: "clamp(26px, calc(52 / 750 * 100vw), 52px)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
