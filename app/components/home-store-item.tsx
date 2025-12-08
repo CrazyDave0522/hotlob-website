@@ -15,6 +15,7 @@ interface HomeStoreItemProps {
   openingHoursWeekdayText: string[] | null;
   isLast?: boolean;
   index?: number;
+  uber_url?: string | null;
 }
 
 export default function HomeStoreItem({
@@ -28,6 +29,7 @@ export default function HomeStoreItem({
   openingHoursWeekdayText,
   isLast = false,
   index = 0,
+  uber_url,
 }: HomeStoreItemProps) {
   // Responsive handled purely via CSS media queries (mobile-first)
 
@@ -47,11 +49,20 @@ export default function HomeStoreItem({
     }
   }
 
+  const handleStoreClick = () => {
+    if (uber_url) {
+      window.open(uber_url, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <div
       className={`home-store-item flex justify-between items-center ${
         isLast ? "last-item" : ""
-      } ${index === 0 ? "first-item" : ""} ${index === 1 ? "second-item" : ""}`}
+      } ${index === 0 ? "first-item" : ""} ${index === 1 ? "second-item" : ""} ${
+        uber_url ? "cursor-pointer hover:opacity-80 transition-opacity" : ""
+      }`}
+      onClick={handleStoreClick}
     >
       {/* Store image (left) */}
       <div
@@ -74,8 +85,8 @@ export default function HomeStoreItem({
         )}
       </div>
 
-      {/* Store info (right) */}
-      <div className="home-store-item-info inline-flex flex-col items-start">
+      {/* Store info (center) */}
+      <div className="home-store-item-info inline-flex flex-col items-start flex-1">
         {/* Store Name */}
         <h3 className="home-store-item-title text-[#1D1E1F] font-medium uppercase leading-normal">
           {name}
@@ -116,6 +127,19 @@ export default function HomeStoreItem({
           </div>
         )}
       </div>
+
+      {/* Arrow icon (right) - only show if uber_url exists */}
+      {uber_url && (
+        <div className="shrink-0 ml-4">
+          <Image
+            src="/images/icons/angle-right-black.svg"
+            alt=""
+            width={32}
+            height={32}
+            className="home-store-item-arrow"
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -440,6 +440,11 @@ textarea::placeholder {
     max-height: clamp(120px, calc((160 / 750) * 100vw), 160px);
   }
 
+  .home-store-item-arrow {
+    width: clamp(16px, calc(32 / 750 * 100vw), 32px);
+    height: clamp(16px, calc(32 / 750 * 100vw), 32px);
+  }
+
   @media (min-width: 1024px) {
     /* Desktop: border-top on all items, border-bottom on last item */
     .home-store-item {
@@ -473,6 +478,10 @@ textarea::placeholder {
       height: clamp(106.67px, (160 / 1920) * 100vw, 160px);
       max-width: clamp(146.67px, (220 / 1920) * 100vw, 220px);
       max-height: clamp(106.67px, (160 / 1920) * 100vw, 160px);
+    }
+    .home-store-item-arrow {
+      width: 32px;
+      height: 32px;
     }
   }
 
