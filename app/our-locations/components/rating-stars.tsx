@@ -2,7 +2,7 @@ import Image from "next/image";
 
 interface RatingStarsProps {
   rating: number; // e.g., 4.5
-  size?: "small" | "large" | "xl" | "responsive"; // responsive for mobile xl / desktop large
+  size?: "small" | "large" | "xl" | "responsive" | "fixed"; // fixed for store card (18px @ 750px, no scaling)
 }
 
 export default function RatingStars({ rating, size = "large" }: RatingStarsProps) {
@@ -10,10 +10,11 @@ export default function RatingStars({ rating, size = "large" }: RatingStarsProps
   const hasHalfStar = rating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-  const starSize = size === "small" ? 12 : size === "xl" ? 28 : size === "responsive" ? 28 : 18;
-  const fontSize = size === "small" ? "text-[12px]" : size === "xl" ? "text-[22px]" : size === "responsive" ? "text-[28px] md:text-[18px]" : "text-[16px]";
-  const gap = size === "small" ? "gap-[4px]" : size === "xl" ? "gap-[7px]" : size === "responsive" ? "gap-[7px]" : "gap-[7px]";
-  const starClass = size === "responsive" ? "rating-star-responsive" : "aspect-square";
+  // For size="large" (used in home-store-item), use responsive scaling from 750px baseline
+  const starSize = size === "small" ? 12 : size === "xl" ? 28 : size === "responsive" ? 28 : size === "fixed" ? 18 : size === "large" ? 18 : 18;
+  const fontSize = size === "small" ? "text-[12px]" : size === "xl" ? "text-[22px]" : size === "responsive" ? "responsive-review-rating-text" : size === "fixed" ? "text-[16px]" : size === "large" ? "responsive-rating-text" : "text-[16px]";
+  const gap = size === "small" ? "gap-[4px]" : size === "xl" ? "gap-[7px]" : size === "responsive" ? "gap-[7px]" : size === "fixed" ? "gap-[8px]" : size === "large" ? "responsive-rating-gap" : "gap-[7px]";
+  const starClass = size === "responsive" ? "rating-star-responsive" : size === "fixed" ? "aspect-square" : size === "large" ? "rating-star-large" : "aspect-square";
 
   return (
     <div className={`flex items-center ${gap}`}>

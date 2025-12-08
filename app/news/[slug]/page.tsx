@@ -64,7 +64,7 @@ export default async function NewsDetailPage({
           <div className="mt-5 flex justify-center">
             <div
               className="relative shrink-0 mb-4"
-              style={{ width: "690px", height: "320px" }}
+              style={{ width: "clamp(345px, calc(690/750*100vw), 690px)", height: "clamp(160px, calc(320/750*100vw), 320px)" }}
             >
               <Image
                 src={news.cover_image_url}

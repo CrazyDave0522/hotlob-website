@@ -47,9 +47,8 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
       />
 
       <div className="our-locations-stores-bg">
-        <div className="py-12 md:py-16">
-          <div className="mx-auto w-full max-w-[690px] px-4 md:w-[72.917%] md:max-w-[1400px] md:px-0">
-            <div className="flex flex-col items-center space-y-12 md:block md:space-y-12">
+        <div className="mx-auto w-full max-w-[690px] px-4 md:w-[72.917%] md:max-w-[1400px] md:px-0">
+          <div className="flex flex-col items-center md:block">
             {storesWithData?.map((store, index: number) => (
               <StoreCard
                 key={store.id}
@@ -65,7 +64,6 @@ Grab one on your lunch break, between uni lectures, or on your way home.`}
                 isReversed={index % 2 === 1}
               />
             ))}
-            </div>
           </div>
         </div>
       </div>

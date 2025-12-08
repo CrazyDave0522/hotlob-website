@@ -26,16 +26,14 @@ export default function OurLocationsSection({
   return (
     <section className="our-locations-section">
       {/* Mobile background - rotated */}
-      <div className="our-locations-bg-mobile-wrapper">
-        <Image
-          src="/images/home-bg-locations.png"
-          alt="Our locations background"
-          width={750}
-          height={2000}
-          className="our-locations-bg-mobile"
-          priority
-        />
-      </div>
+      <Image
+        src="/images/home-bg-locations.png"
+        alt="Our locations background"
+        width={750}
+        height={2000}
+        className="our-locations-bg-mobile"
+        priority
+      />
       
       {/* Desktop background */}
       <Image
@@ -49,63 +47,64 @@ export default function OurLocationsSection({
 
       {/* Content overlay */}
       <div className="our-locations-overlay">
-        <SectionTitle
-          icon={{
-            src: "/images/icons/store.svg",
-            alt: "Store icon",
-            width: 32,
-            height: 32
-          }}
-        >
+        {/* Mobile: Keep original vertical layout */}
+        <SectionTitle className="lg:hidden">
           Our Locations
         </SectionTitle>
 
         <div className="our-locations-main">
-        {/* Mobile stores section */}
-        <div className="our-locations-stores-mobile">
-          <div className="our-locations-stores-mobile-inner">
-            <div className="our-locations-stores-list-mobile">
-              {topStores.map((store, index) => (
-                <HomeStoreItem
-                  key={store.id}
-                  name={store.name}
-                  street={store.street}
-                  suburb={store.suburb}
-                  state={store.state}
-                  postcode={store.postcode}
-                  photos={store.photos}
-                  rating={store.rating}
-                  openingHoursWeekdayText={store.openingHoursWeekdayText}
-                  isLast={index === topStores.length - 1}
-                  index={index}
-                />
-              ))}
+          {/* Desktop left container: Title + Stores */}
+          <div className="our-locations-left">
+            <SectionTitle className="hidden lg:block">
+              Our Locations
+            </SectionTitle>
+
+            {/* Mobile stores section */}
+            <div className="our-locations-stores-mobile">
+              <div className="our-locations-stores-mobile-inner">
+                <div className="our-locations-stores-list-mobile">
+                  {topStores.map((store, index) => (
+                    <HomeStoreItem
+                      key={store.id}
+                      name={store.name}
+                      street={store.street}
+                      suburb={store.suburb}
+                      state={store.state}
+                      postcode={store.postcode}
+                      photos={store.photos}
+                      rating={store.rating}
+                      openingHoursWeekdayText={store.openingHoursWeekdayText}
+                      isLast={index === topStores.length - 1}
+                      index={index}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop stores section */}
+            <div className="our-locations-stores-desktop">
+              <div className="flex flex-col items-start">
+                {topStores.map((store, index) => (
+                  <HomeStoreItem
+                    key={store.id}
+                    name={store.name}
+                    street={store.street}
+                    suburb={store.suburb}
+                    state={store.state}
+                    postcode={store.postcode}
+                    photos={store.photos}
+                    rating={store.rating}
+                    openingHoursWeekdayText={store.openingHoursWeekdayText}
+                    isLast={index === topStores.length - 1}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Desktop stores section */}
-        <div className="our-locations-stores-desktop">
-          <div className="flex flex-col items-start">
-            {topStores.map((store, index) => (
-              <HomeStoreItem
-                key={store.id}
-                name={store.name}
-                street={store.street}
-                suburb={store.suburb}
-                state={store.state}
-                postcode={store.postcode}
-                photos={store.photos}
-                rating={store.rating}
-                openingHoursWeekdayText={store.openingHoursWeekdayText}
-                isLast={index === topStores.length - 1}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Reviews section */}
-        <div className="our-locations-reviews">
+          {/* Reviews section */}
+          <div className="our-locations-reviews">
           {/* Mobile review image */}
           <Image
             src="/images/home-bg-locations-review-mb.png"

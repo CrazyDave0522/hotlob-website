@@ -17,7 +17,7 @@ export interface ReviewItem {
 
 export default function ReviewCard({ author_name, author_photo_url, rating, review_text, review_time, photos }: ReviewItem) {
   return (
-    <div className="flex items-start gap-[13px] self-stretch">
+    <div className="flex items-start self-stretch" style={{ gap: "clamp(6.5px, calc(13/750*100vw), 13px)" }}>
       {/* Avatar */}
       {author_photo_url ? (
         <Image
@@ -39,7 +39,7 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
         <div className="review-card-date">
           {formatAUDate(review_time)}
         </div>
-        <div className="mt-3.5">
+        <div style={{ marginTop: "clamp(7px, calc(14/750*100vw), 14px)" }}>
           <RatingStars rating={rating} size="responsive" />
         </div>
         <p className="review-card-text">

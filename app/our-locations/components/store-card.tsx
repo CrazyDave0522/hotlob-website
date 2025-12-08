@@ -50,7 +50,13 @@ export default function StoreCard({
 
   // Map component (proportional: 800/1368 = 58.479%)
   const mapSection = (
-    <div className="shrink-0 w-[650px] h-80 md:w-[58.479%] md:h-auto md:aspect-800/340">
+    <div 
+      className="store-card-map shrink-0"
+      style={{ 
+        width: 'clamp(325px, calc(650/750*100vw), 650px)',
+        height: 'clamp(160px, calc(320/750*100vw), 320px)'
+      }}
+    >
       {googleMapsEmbedUrl ? (
         <iframe
           src={googleMapsEmbedUrl}
@@ -85,7 +91,7 @@ export default function StoreCard({
 
       {/* Rating (hide if null) */}
       {rating !== null && rating !== undefined && (
-        <RatingStars rating={rating} />
+        <RatingStars rating={rating} size="fixed" />
       )}
 
       {/* Address */}
@@ -138,24 +144,27 @@ export default function StoreCard({
   );
 
   return (
-    <div className="store-card-container">
-      <div className="md:hidden">
+    <>
+      <div className={`store-card-container flex flex-col md:flex-row md:items-start w-full ${isReversed ? 'store-card-reversed' : ''}`} style={{ gap: "clamp(10px, calc(20/750*100vw), 20px)" }}>
         {infoSection}
         {mapSection}
       </div>
-      <div className="hidden md:flex md:items-start md:w-full md:gap-[2.924%]">
-        {isReversed ? (
-          <>
-            {infoSection}
-            {mapSection}
-          </>
-        ) : (
-          <>
-            {mapSection}
-            {infoSection}
-          </>
-        )}
-      </div>
-    </div>
+      <style jsx global>{`
+        @media (min-width: 768px) {
+          .store-card-reversed {
+            flex-direction: row-reverse;
+          }
+        }
+        @media (min-width: 1024px) {
+          .store-card-container {
+            gap: clamp(20px, calc(40/1920*100vw), 40px) !important;
+          }
+          .store-card-map {
+            width: clamp(400px, calc(800/1920*100vw), 800px) !important;
+            height: clamp(170px, calc(340/1920*100vw), 340px) !important;
+          }
+        }
+      `}</style>
+    </>
   );
 }

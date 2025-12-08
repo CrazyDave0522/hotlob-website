@@ -17,11 +17,11 @@ export function ContentPageLayout({ title, subtitle, contentHtml, headerExtras }
           {title}
         </h1>
         {subtitle && (
-          <div className="content-page-meta mt-[18px] font-normal leading-normal text-[#999]">
+          <div className="content-page-meta mt-[clamp(9px,calc(18/750*100vw),18px)] font-normal leading-normal text-[#999]">
             {subtitle}
           </div>
         )}
-        <div className="mt-3.5 md:ml-[30px]">
+        <div className="mt-[clamp(1.75px,calc(3.5/750*100vw),3.5px)] md:ml-[30px]">
           <div className="h-px shrink-0 bg-[#E1E4E9] w-full md:w-[95.71%]" />
         </div>
         {headerExtras}

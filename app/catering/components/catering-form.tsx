@@ -216,14 +216,17 @@ export default function CateringForm() {
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="w-full flex flex-col gap-[30px] md:flex-row md:flex-wrap md:items-start md:justify-start"
+        className="w-full flex flex-col md:flex-row md:flex-wrap md:items-start md:justify-start"
+        style={{ gap: "clamp(15px, calc(30/750*100vw), 30px)" }}
       >
         {/* Store selection - full width in mobile */}
         <div className="w-full md:block">
           <div className="w-full">
             <label
               htmlFor="storeId"
-              className="catering-form-label block font-medium text-gray-700 mb-1">
+              className="catering-form-label block font-medium text-gray-700"
+              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
+            >
               Select a store
             </label>
             <select
@@ -233,7 +236,7 @@ export default function CateringForm() {
               onChange={handleChange}
               required
               className="catering-form-select w-full md:h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
-              style={{ width: 'var(--store-select-width, 100%)', height: 'calc((70 / 750) * 100vw)' }}
+              style={{ width: 'var(--store-select-width, 100%)', height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
             >
             <option value="">Select a store</option>
             {stores.map((store) => (
@@ -250,7 +253,8 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="firstName"
-              className="catering-form-label block font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700"
+              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               First name
             </label>
@@ -262,7 +266,7 @@ export default function CateringForm() {
               onChange={handleChange}
               required
               className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
-              style={{ height: 'calc((70 / 750) * 100vw)' }}
+              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
               placeholder="Enter first name"
             />
           </div>
@@ -273,7 +277,8 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="lastName"
-              className="catering-form-label block font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700"
+              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Last name
             </label>
@@ -285,7 +290,7 @@ export default function CateringForm() {
               onChange={handleChange}
               required
               className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
-              style={{ height: 'calc((70 / 750) * 100vw)' }}
+              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
               placeholder="Enter last name"
             />
           </div>
@@ -296,7 +301,8 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="email"
-              className="catering-form-label block font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700"
+              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Email
             </label>
@@ -308,7 +314,7 @@ export default function CateringForm() {
               onChange={handleChange}
               required
               className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
-              style={{ height: 'calc((70 / 750) * 100vw)' }}
+              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
               placeholder="your@email.com"
             />
           </div>
@@ -319,7 +325,8 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="phone"
-              className="catering-form-label block font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700"
+              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Phone
             </label>
@@ -337,7 +344,7 @@ export default function CateringForm() {
               className={`w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input ${
                 errors.phone ? "border-red-500" : "border-[#CCCFD7]"
               }`}
-              style={{ height: 'calc((70 / 750) * 100vw)' }}
+              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
               placeholder="+61 xxx xxx xxx"
             />
             {errors.phone && (
@@ -351,7 +358,8 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="cateringDate"
-              className="catering-form-label block font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700"
+              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Catering date
             </label>
@@ -363,8 +371,8 @@ export default function CateringForm() {
               onChange={handleChange}
               min={getMinCateringDate()}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base"
-              style={{ height: 'calc((70 / 750) * 100vw)' }}
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
+              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
             />
             <p className="catering-form-hint text-gray-500 mt-1">
               Orders must be placed at least 2 days in advance
@@ -377,7 +385,8 @@ export default function CateringForm() {
           <div className="w-full md:w-full">
             <label
               htmlFor="pickupTime"
-              className="catering-form-label block font-medium text-gray-700 mb-1"
+              className="catering-form-label block font-medium text-gray-700"
+              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Pick up time on catering date
             </label>
@@ -387,8 +396,8 @@ export default function CateringForm() {
               value={formData.pickupTime}
               onChange={handleChange}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent text-[24px] md:text-base"
-              style={{ height: 'calc((70 / 750) * 100vw)' }}
+              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-select"
+              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
             >
             <option value="">Select time</option>
             <option value="09:00">09:00 AM</option>
@@ -409,16 +418,26 @@ export default function CateringForm() {
         </div>
 
         {/* Submit button */}
-        <div className="w-full flex justify-center mt-4 md:mt-2.5">
+        <div className="w-full flex justify-center" style={{ marginTop: "clamp(20px, calc(40/750*100vw), 40px)" }}>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="catering-form-submit order-button-base w-[600px] h-20 rounded-[40px] md:w-[300px] md:h-[46px] md:rounded-[30px]"
+            className="catering-form-submit order-button-base rounded-[40px] md:rounded-[30px]"
+            style={{ width: "clamp(280px, calc(600/750*100vw), 600px)", height: "clamp(40px, calc(80/750*100vw), 80px)", fontSize: "clamp(17px, calc(34/750*100vw), 34px)" }}
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </div>
       </form>
+      <style jsx>{`
+        @media (min-width: 1024px) {
+          button.catering-form-submit {
+            width: clamp(150px, calc(300/1920*100vw), 300px) !important;
+            height: clamp(23px, calc(46/1920*100vw), 46px) !important;
+            font-size: clamp(9px, calc(18/1920*100vw), 18px) !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
