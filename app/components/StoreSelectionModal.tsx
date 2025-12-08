@@ -6,6 +6,7 @@ export interface StoreInfo {
   id: string;
   name: string;
   uber_url?: string | null;
+  google_url?: string | null;
   latitude?: number | null;
   longitude?: number | null;
   email?: string | null;

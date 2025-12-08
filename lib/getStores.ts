@@ -9,6 +9,7 @@ export interface Store {
   postcode: string;
   google_maps_embed_url: string | null;
   uber_url?: string | null; // optional: only selected when includeOrderInfo
+  google_url?: string | null; // optional: only selected when includeOrderInfo
   latitude?: number | null; // optional
   longitude?: number | null; // optional
   email?: string | null; // optional: only selected when includeOrderInfo
@@ -31,6 +32,7 @@ export interface StoreWithData {
   rating: number | null;
   openingHoursWeekdayText: string[] | null;
   uber_url?: string | null;
+  google_url?: string | null;
   latitude?: number | null;
   longitude?: number | null;
   email?: string | null;
@@ -51,7 +53,7 @@ interface PlaceCacheRow {
 export async function getStoresBasic(options?: { includeExtendedInfo?: boolean; limit?: number }): Promise<Store[]> {
   const { includeExtendedInfo, limit } = options || {};
   const baseFields = "id, name, street, suburb, state, postcode, google_maps_embed_url";
-  const extraFields = includeExtendedInfo ? ", uber_url, latitude, longitude, email" : "";
+  const extraFields = includeExtendedInfo ? ", uber_url, google_url, latitude, longitude, email" : "";
 
   const query = supabase
     .from("store")
@@ -75,7 +77,7 @@ export async function getStoresBasic(options?: { includeExtendedInfo?: boolean; 
 export async function getStoresWithDetails(options?: { limit?: number }): Promise<StoreWithData[]> {
   const { limit } = options || {};
   const baseFields = "id, name, street, suburb, state, postcode, google_maps_embed_url";
-  const extraFields = ", uber_url, latitude, longitude, email"; // Always include extended info for detailed view
+  const extraFields = ", uber_url, google_url, latitude, longitude, email"; // Always include extended info for detailed view
   // Fetch all stores
   const { data: stores, error } = await supabase
     .from("store")

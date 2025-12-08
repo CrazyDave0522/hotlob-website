@@ -15,7 +15,7 @@ interface HomeStoreItemProps {
   openingHoursWeekdayText: string[] | null;
   isLast?: boolean;
   index?: number;
-  uber_url?: string | null;
+  google_url?: string | null;
 }
 
 export default function HomeStoreItem({
@@ -29,7 +29,7 @@ export default function HomeStoreItem({
   openingHoursWeekdayText,
   isLast = false,
   index = 0,
-  uber_url,
+  google_url,
 }: HomeStoreItemProps) {
   // Responsive handled purely via CSS media queries (mobile-first)
 
@@ -50,8 +50,8 @@ export default function HomeStoreItem({
   }
 
   const handleStoreClick = () => {
-    if (uber_url) {
-      window.open(uber_url, "_blank", "noopener,noreferrer");
+    if (google_url) {
+      window.open(google_url, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -60,7 +60,7 @@ export default function HomeStoreItem({
       className={`home-store-item flex justify-between items-center ${
         isLast ? "last-item" : ""
       } ${index === 0 ? "first-item" : ""} ${index === 1 ? "second-item" : ""} ${
-        uber_url ? "cursor-pointer hover:opacity-80 transition-opacity" : ""
+        google_url ? "cursor-pointer hover:opacity-80 transition-opacity" : ""
       }`}
       onClick={handleStoreClick}
     >
@@ -128,8 +128,8 @@ export default function HomeStoreItem({
         )}
       </div>
 
-      {/* Arrow icon (right) - only show if uber_url exists */}
-      {uber_url && (
+      {/* Arrow icon (right) - only show if google_url exists */}
+      {google_url && (
         <div className="shrink-0 ml-4">
           <Image
             src="/images/icons/angle-right-black.svg"

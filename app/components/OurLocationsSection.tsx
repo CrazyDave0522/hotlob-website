@@ -66,7 +66,7 @@ export default function OurLocationsSection({
                       openingHoursWeekdayText={store.openingHoursWeekdayText}
                       isLast={index === topStores.length - 1}
                       index={index}
-                      uber_url={store.uber_url}
+                      google_url={store.google_url}
                     />
                   ))}
                 </div>
@@ -88,7 +88,7 @@ export default function OurLocationsSection({
                     rating={store.rating}
                     openingHoursWeekdayText={store.openingHoursWeekdayText}
                     isLast={index === topStores.length - 1}
-                    uber_url={store.uber_url}
+                    google_url={store.google_url}
                   />
                 ))}
               </div>
