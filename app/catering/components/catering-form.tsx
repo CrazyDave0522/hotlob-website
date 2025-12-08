@@ -112,7 +112,12 @@ export default function CateringForm() {
         // Show warning if location access is denied or times out
         console.log("Could not get user location:", error);
         warning(
-          "Could not detect your location. Please select a store manually."
+          "Could not detect your location. Please select a store manually.",
+          {
+            key: "catering-location-warning",
+            dedupeMs: 2000,
+            replace: true,
+          }
         );
       }
     }

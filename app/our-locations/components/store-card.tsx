@@ -83,48 +83,73 @@ export default function StoreCard({
   // Photos will use clamp() tied to the 1920px design baseline
 
   const infoSection = (
-    <div className="inline-flex flex-col items-start gap-4 w-full md:w-[38.596%]">
+    <div 
+      className="inline-flex flex-col items-start w-full md:w-[38.596%]"
+      style={{ gap: 'clamp(8px, calc(16/750*100vw), 16px)' }}
+    >
       {/* Store Name */}
-      <h2 className="text-[#1D1E1F] text-[22px] font-medium uppercase leading-normal">
+      <h2 
+        className="text-[#1D1E1F] font-medium uppercase leading-normal"
+        style={{ fontSize: 'clamp(11px, calc(22/750*100vw), 22px)' }}
+      >
         {name}
       </h2>
 
       {/* Rating (hide if null) */}
       {rating !== null && rating !== undefined && (
-        <RatingStars rating={rating} size="fixed" />
+        <RatingStars rating={rating} variant="store-info" />
       )}
 
       {/* Address */}
-      <div className="flex items-center gap-3">
+      <div 
+        className="flex items-center"
+        style={{ gap: 'clamp(6px, calc(12/750*100vw), 12px)' }}
+      >
         <Image
           src="/images/icons/landmark.svg"
           alt=""
           width={20}
           height={20}
           className="shrink-0 aspect-square"
+          style={{ width: 'clamp(10px, calc(20/750*100vw), 20px)', height: 'clamp(10px, calc(20/750*100vw), 20px)' }}
         />
-        <span className="text-[#4E5969] text-[18px] md:text-lg font-normal leading-normal">
+        <span 
+          className="text-[#4E5969] font-normal leading-normal"
+          style={{ fontSize: 'clamp(9px, calc(18/750*100vw), 18px)' }}
+        >
           {fullAddress}
         </span>
       </div>
 
       {/* Opening Hours (today) - hide if missing */}
       {todayHoursText && (
-        <div className="flex items-center gap-3">
+        <div 
+          className="flex items-center"
+          style={{ gap: 'clamp(6px, calc(12/750*100vw), 12px)' }}
+        >
           <Image
             src="/images/icons/clock.svg"
             alt=""
             width={20}
             height={20}
             className="shrink-0 aspect-square"
+            style={{ width: 'clamp(10px, calc(20/750*100vw), 20px)', height: 'clamp(10px, calc(20/750*100vw), 20px)' }}
           />
-          <span className="text-[#4E5969] text-[18px] md:text-lg font-normal leading-normal">{todayHoursText}</span>
+          <span 
+            className="text-[#4E5969] font-normal leading-normal"
+            style={{ fontSize: 'clamp(9px, calc(18/750*100vw), 18px)' }}
+          >
+            {todayHoursText}
+          </span>
         </div>
       )}
 
       {/* Store Photos (scale with viewport baseline; clamp to prevent collapse) */}
       {hasPhotos && photoCount > 0 && (
-        <div className="flex items-start gap-3 md:gap-[clamp(8px,calc((30/1920)*100vw),30px)]">
+        <div 
+          className="flex items-start"
+          style={{ gap: 'clamp(6px, calc(12/750*100vw), 12px)' }}
+        >
           {photosToShow.map((photo, index) => (
             <div
               key={`${photo.display_order}-${index}`}

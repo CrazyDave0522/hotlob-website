@@ -20,21 +20,11 @@ export default function OurLocationsSection({
   // Display top 2 stores
   const topStores = stores.slice(0, 2);
 
-  // Get first 4 reviews for bubbles
-  const bubbleReviews = reviews.slice(0, 4);
+  // Get first 3 reviews for bubbles
+  const bubbleReviews = reviews.slice(0, 3);
 
   return (
     <section className="our-locations-section">
-      {/* Mobile background - rotated */}
-      <Image
-        src="/images/home-bg-locations.png"
-        alt="Our locations background"
-        width={750}
-        height={2000}
-        className="our-locations-bg-mobile"
-        priority
-      />
-      
       {/* Desktop background */}
       <Image
         src="/images/home-bg-locations.png"
@@ -124,15 +114,16 @@ export default function OurLocationsSection({
             className="our-locations-review-desktop"
           />
 
-          {/* Review bubbles overlaid on image */}
-          {bubbleReviews.length >= 4 && (
-            <>
-              <ReviewBubble review={bubbleReviews[0]} position="top" />
-              <ReviewBubble review={bubbleReviews[1]} position="right" />
-              <ReviewBubble review={bubbleReviews[2]} position="bottom" />
-              <ReviewBubble review={bubbleReviews[3]} position="left" />
-            </>
-          )}
+          {/* Review bubbles container with padding */}
+          <div className="our-locations-review-bubbles-container">
+            {bubbleReviews.length >= 3 && (
+              <>
+                <ReviewBubble review={bubbleReviews[0]} position="top" />
+                <ReviewBubble review={bubbleReviews[1]} position="right" />
+                <ReviewBubble review={bubbleReviews[2]} position="bottom" />
+              </>
+            )}
+          </div>
         </div>
         </div>
       </div>

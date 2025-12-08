@@ -83,7 +83,7 @@ export default function HomeStoreItem({
 
         {/* Rating */}
         {rating !== null && rating !== undefined && (
-          <RatingStars rating={rating} />
+          <RatingStars rating={rating} variant="store-info" />
         )}
 
         {/* Address */}

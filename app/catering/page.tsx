@@ -10,7 +10,7 @@ export default function CateringPage() {
   return (
     <div className="relative w-full">
       {/* Mobile Hero section */}
-      <div className="relative w-full mx-auto aspect-750/830 md:hidden">
+      <div className="relative w-full mx-auto aspect-750/830 md:hidden bg-[#D43B41] overflow-hidden">
         <div className="absolute inset-0" aria-hidden="true">
           <Image
             src="/images/catering-bg-mb.png"
@@ -18,7 +18,7 @@ export default function CateringPage() {
             fill
             sizes="(max-width:750px) 100vw, 750px"
             priority
-            className="object-contain object-top"
+            className="object-cover object-top"
           />
         </div>
         <div className="relative w-full h-full">
@@ -28,8 +28,8 @@ export default function CateringPage() {
       </div>
 
       {/* Mobile Form section */}
-      <div 
-        className="relative w-full mx-auto md:hidden"
+      <div
+        className="relative w-full mx-auto md:hidden bg-[#D43B41] overflow-hidden"
         style={{ height: 'clamp(675px, calc(1350/750*100vw), 1350px)' }}
       >
         <div className="absolute inset-0" aria-hidden="true">
@@ -39,7 +39,7 @@ export default function CateringPage() {
             fill
             sizes="(max-width:750px) 100vw, 750px"
             priority
-            className="object-contain object-top"
+            className="object-cover object-top"
           />
         </div>
         <div className="relative w-full h-full">

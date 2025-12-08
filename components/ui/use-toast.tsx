@@ -9,6 +9,16 @@ export interface Toast {
   type: ToastType;
   message: string;
   duration?: number;
+  key?: string;
+}
+
+type ToastInput = number | ToastOptions | undefined;
+
+export interface ToastOptions {
+  duration?: number;
+  key?: string;
+  dedupeMs?: number; // skip showing same-key toasts within this window
+  replace?: boolean; // if true, replace existing same-key toast
 }
 
 interface ToastState {
@@ -16,6 +26,11 @@ interface ToastState {
 }
 
 let toastCounter = 0;
+
+// Track last shown times for deduping
+const lastToastTimeByKey = new Map<string, number>();
+const toastIdByKey = new Map<string, string>();
+const toastKeyById = new Map<string, string>();
 
 const listeners: Array<(toasts: Toast[]) => void> = [];
 const memoryState: ToastState = { toasts: [] };
@@ -29,9 +44,16 @@ function dispatch(action: { type: string; toast?: Toast; toastId?: string }) {
       break;
     case "REMOVE_TOAST":
       if (action.toastId) {
-        memoryState.toasts = memoryState.toasts.filter(
-          (t) => t.id !== action.toastId
-        );
+        const toast = memoryState.toasts.find((t) => t.id === action.toastId);
+        memoryState.toasts = memoryState.toasts.filter((t) => t.id !== action.toastId);
+        if (toast?.key) {
+          // Clean up key mappings so future toasts aren't blocked
+          const mappedId = toastIdByKey.get(toast.key);
+          if (mappedId === action.toastId) {
+            toastIdByKey.delete(toast.key);
+          }
+        }
+        toastKeyById.delete(action.toastId);
       }
       break;
   }
@@ -53,9 +75,35 @@ export function useToast() {
   });
 
   const toast = useCallback(
-    (message: string, type: ToastType = "info", duration: number = 3000) => {
-      const id = `toast-${++toastCounter}-${Date.now()}`;
-      const newToast: Toast = { id, type, message, duration };
+    (message: string, type: ToastType = "info", options?: ToastInput) => {
+      const opts: ToastOptions =
+        typeof options === "number"
+          ? { duration: options }
+          : options ?? {};
+
+      const duration = opts.duration ?? 3000;
+      const key = opts.key ?? `${type}:${message}`;
+      const dedupeMs = opts.dedupeMs ?? 1500;
+      const now = Date.now();
+      const last = lastToastTimeByKey.get(key);
+      const existingId = toastIdByKey.get(key);
+
+      // Deduplicate within the window unless replace is requested
+      if (!opts.replace && last && now - last < dedupeMs) {
+        return existingId ?? key;
+      }
+
+      // Replace existing same-key toast if requested
+      if (opts.replace && existingId) {
+        dispatch({ type: "REMOVE_TOAST", toastId: existingId });
+      }
+
+      const id = `toast-${++toastCounter}-${now}`;
+      const newToast: Toast = { id, type, message, duration, key };
+
+      lastToastTimeByKey.set(key, now);
+      toastIdByKey.set(key, id);
+      toastKeyById.set(id, key);
 
       dispatch({ type: "ADD_TOAST", toast: newToast });
 
@@ -76,22 +124,22 @@ export function useToast() {
   }, []);
 
   const success = useCallback(
-    (message: string, duration?: number) => toast(message, "success", duration),
+    (message: string, options?: ToastInput) => toast(message, "success", options),
     [toast]
   );
 
   const error = useCallback(
-    (message: string, duration?: number) => toast(message, "error", duration),
+    (message: string, options?: ToastInput) => toast(message, "error", options),
     [toast]
   );
 
   const warning = useCallback(
-    (message: string, duration?: number) => toast(message, "warning", duration),
+    (message: string, options?: ToastInput) => toast(message, "warning", options),
     [toast]
   );
 
   const info = useCallback(
-    (message: string, duration?: number) => toast(message, "info", duration),
+    (message: string, options?: ToastInput) => toast(message, "info", options),
     [toast]
   );
 

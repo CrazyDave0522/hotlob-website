@@ -10,38 +10,40 @@ interface ReviewBubbleProps {
 
 export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isCompactMobile, setIsCompactMobile] = useState(false);
 
   useEffect(() => {
-    setIsDesktop(window.innerWidth >= 1024);
+    const checkDesktop = () => {
+      const width = window.innerWidth;
+      setIsDesktop(width >= 1024);
+      setIsCompactMobile(width <= 420);
+    };
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
   }, []);
 
-  // Mobile-first fluid sizes scaled from 750 baseline
-  const bubbleWidth = "clamp(200px, calc((240 / 750) * 100vw), 240px)";
-  const bubbleHeight = "clamp(120px, calc((140 / 750) * 100vw), 140px)";
-  const avatarRingSize = "clamp(60px, calc((70 / 750) * 100vw), 70px)";
-  const avatarSize = "clamp(40px, calc((46 / 750) * 100vw), 46px)";
+  // Responsive sizes: 750px baseline for mobile, seamlessly scale to desktop
+  // Bubble ratio maintained: 300:175
+  const bubbleWidth = "clamp(150px, calc((300 / 750) * 100vw), 300px)";
+  const bubbleHeight = "clamp(87.5px, calc((175 / 750) * 100vw), 175px)";
+  const avatarRingSize = "clamp(35px, calc((70 / 750) * 100vw), 70px)";
+  const avatarSize = "clamp(23px, calc((46 / 750) * 100vw), 46px)";
   
-  // Desktop responsive (1920 baseline)
-  const desktopBubbleWidth = "min(calc((240 / 1920) * 100vw), 240px)";
-  const desktopBubbleHeight = "min(calc((140 / 1920) * 100vw), 140px)";
-  const desktopAvatarRingSize = "min(calc((70 / 1920) * 100vw), 70px)";
-  const desktopAvatarSize = "min(calc((46 / 1920) * 100vw), 46px)";
-  
-  const finalBubbleWidth = isDesktop ? desktopBubbleWidth : bubbleWidth;
-  const finalBubbleHeight = isDesktop ? desktopBubbleHeight : bubbleHeight;
-  const finalAvatarRingSize = isDesktop ? desktopAvatarRingSize : avatarRingSize;
-  const finalAvatarSize = isDesktop ? desktopAvatarSize : avatarSize;
+  const finalBubbleWidth = bubbleWidth;
+  const finalBubbleHeight = bubbleHeight;
+  const finalAvatarRingSize = avatarRingSize;
+  const finalAvatarSize = avatarSize;
   
   const avatarOffset = "calc(" + finalAvatarRingSize + " * 0.6)"; // keep 60% outside overlap
 
   const positionConfig = {
     top: {
-      // Top center, avatar at bottom-left corner of bubble
+      // Top left, avatar at bottom-left corner of bubble, avatar's left edge touches container left
       containerStyle: {
         position: "absolute" as const,
         top: "0",
-        left: "50%",
-        transform: "translateX(-50%)",
+        left: avatarOffset,
       },
       avatarStyle: {
         position: "absolute" as const,
@@ -104,7 +106,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
         height: finalBubbleHeight,
         flexShrink: 0,
       }}
-      className="review-bubble group transition-shadow duration-300 ease-out group-hover:shadow-xl group-hover:shadow-black/15 group-hover:ring-1 group-hover:ring-white/50"
+      className="review-bubble group transition-shadow duration-300 ease-out group-hover:shadow-xl group-hover:shadow-black/15 group-hover:ring-1 group-hover:ring-white/50 group-active:shadow-xl group-active:shadow-black/15 group-active:ring-1 group-active:ring-white/50"
     >
       {/* Avatar with decorative ring (lower z-index, behind bubble) */}
       {/* Subtle avatar scale on hover */}
@@ -115,7 +117,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           height: finalAvatarRingSize,
           zIndex: 1,
         }}
-        className="review-bubble-avatar transition-transform duration-300 ease-out group-hover:scale-105"
+        className="review-bubble-avatar transition-transform duration-300 ease-out group-hover:scale-105 group-active:scale-105"
       >
         {/* Decorative ring */}
         <Image
@@ -166,14 +168,14 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           height: "100%",
           zIndex: 2,
         }}
-        className="transition-transform duration-300 ease-out group-hover:scale-[1.08]"
+        className="transition-transform duration-300 ease-out group-hover:scale-[1.08] group-active:scale-[1.08]"
       >
         {/* Bubble background */}
         <Image
           src="/images/dialog-bubble.svg"
           alt=""
           fill
-          sizes="(max-width:750px) calc((240 / 750) * 100vw), 240px"
+          sizes="(max-width:750px) calc((300 / 750) * 100vw), 300px"
           className="object-cover"
         />
 
@@ -181,10 +183,10 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
         <div
           style={{
             position: "absolute",
-            top: "clamp(6px, calc((10 / 750) * 100vw), 10px)",
-            left: "clamp(5px, calc((8 / 750) * 100vw), 8px)",
-            right: "clamp(5px, calc((8 / 750) * 100vw), 8px)",
-            bottom: "clamp(6px, calc((10 / 750) * 100vw), 10px)",
+            top: "clamp(6px, calc((12 / 750) * 100vw), 12px)",
+            left: "clamp(6px, calc((12 / 750) * 100vw), 12px)",
+            right: "clamp(6px, calc((12 / 750) * 100vw), 12px)",
+            bottom: "clamp(6px, calc((12 / 750) * 100vw), 12px)",
             display: "flex",
             flexDirection: "column",
             gap: "min(0.521vw, 10px)", // 10/1920
@@ -194,7 +196,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           <div
             style={{
               color: "#1D1E1F",
-              fontSize: "clamp(8px, calc((12 / 750) * 100vw), 12px)",
+              fontSize: "clamp(10px, calc((16 / 750) * 100vw), 16px)",
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "normal",
@@ -204,19 +206,19 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           </div>
 
           {/* Rating */}
-          <RatingStars rating={review.rating} size="small" />
+          <RatingStars rating={review.rating} variant="review-bubble" />
 
           {/* Review text (max 4 lines on mobile, 3 on desktop with ellipsis) */}
           <div
             style={{
               color: "#4E5969",
-              fontSize: "clamp(8px, calc((12 / 750) * 100vw), 12px)",
+              fontSize: "clamp(10px, calc((16 / 750) * 100vw), 16px)",
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "normal",
               overflow: "hidden",
               display: "-webkit-box",
-              WebkitLineClamp: 3,
+              WebkitLineClamp: isDesktop ? 3 : isCompactMobile ? 3 : 4,
               WebkitBoxOrient: "vertical",
               textOverflow: "ellipsis",
             }}

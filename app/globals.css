@@ -961,22 +961,8 @@ textarea::placeholder {
     display: flex;
     flex-direction: column;
     height: auto;
-    min-height: clamp(650px, calc(1200 / 750 * 100vw), 1200px);
-  }
-  .our-locations-bg-mobile-wrapper {
-    display: none;
-  }
-  .our-locations-bg-mobile {
-    display: block;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    transform: rotate(90deg);
-    transform-origin: center;
-    z-index: 0;
+    /* Raise the floor to cover the taller mobile layout (e.g., ~731px need at 420px viewport) */
+    min-height: clamp(700px, calc(1350 / 750 * 100vw), 1350px);
   }
   .our-locations-bg-desktop {
     display: none;
@@ -1043,14 +1029,23 @@ textarea::placeholder {
   }
   .our-locations-reviews {
     position: relative;
-    width: clamp(345px, calc(693 / 750 * 100vw), 693px);
+    width: 100vw;
     height: clamp(300px, calc(603 / 750 * 100vw), 603px);
     flex-shrink: 0;
+    margin-left: calc(-1 * clamp(15px, calc(30/750*100vw), 30px));
+    margin-right: calc(-1 * clamp(15px, calc(30/750*100vw), 30px));
   }
   .our-locations-review-mobile {
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+  .our-locations-review-bubbles-container {
+    position: absolute;
+    top: clamp(15px, calc(30/750*100vw), 30px);
+    left: clamp(15px, calc(30/750*100vw), 30px);
+    right: clamp(15px, calc(30/750*100vw), 30px);
+    bottom: clamp(15px, calc(30/750*100vw), 30px);
   }
   .our-locations-review-desktop {
     display: none;
@@ -1060,12 +1055,6 @@ textarea::placeholder {
     .our-locations-section {
       height: auto;
       min-height: 720px;
-    }
-    .our-locations-bg-mobile-wrapper {
-      display: none;
-    }
-    .our-locations-bg-mobile {
-      display: none;
     }
     .our-locations-bg-desktop {
       display: block;
@@ -1119,9 +1108,17 @@ textarea::placeholder {
       flex: 1;
       width: auto;
       height: auto;
+      margin-left: 0;
+      margin-right: 0;
     }
     .our-locations-review-mobile {
       display: none;
+    }
+    .our-locations-review-bubbles-container {
+      top: clamp(15px, calc(30 / 1920 * 100vw), 30px);
+      left: clamp(15px, calc(30 / 1920 * 100vw), 30px);
+      right: clamp(15px, calc(30 / 1920 * 100vw), 30px);
+      bottom: clamp(15px, calc(30 / 1920 * 100vw), 30px);
     }
     .our-locations-review-desktop {
       display: block;
@@ -1630,7 +1627,7 @@ textarea::placeholder {
   font-weight: 400;
   line-height: normal;
   margin-top: clamp(5px, calc(10/750*100vw), 10px);
-  font-size: clamp(9px, calc(18/750*100vw), 18px);
+  font-size: clamp(9px, calc(22/750*100vw), 22px);
 }
 @media (min-width: 768px) {
   .review-card-date {
@@ -1661,20 +1658,97 @@ textarea::placeholder {
   }
 }
 
-/* Rating Stars Responsive */
-.rating-star-responsive {
+/* Rating Stars - Review Bubble Variant */
+.rating-star-bubble {
+  aspect-ratio: 1;
+  width: clamp(6px, calc(12/750*100vw), 12px);
+  height: clamp(6px, calc(12/750*100vw), 12px);
+}
+@media (min-width: 1024px) {
+  .rating-star-bubble {
+    width: clamp(6px, calc(12/1920*100vw), 12px);
+    height: clamp(6px, calc(12/1920*100vw), 12px);
+  }
+}
+
+.rating-text-bubble {
+  font-size: clamp(6px, calc(12/750*100vw), 12px);
+}
+@media (min-width: 1024px) {
+  .rating-text-bubble {
+    font-size: clamp(6px, calc(12/1920*100vw), 12px);
+  }
+}
+
+/* Rating Stars - Review Card Variant (Our Locations) */
+.rating-star-review-card {
   aspect-ratio: 1;
   width: clamp(14px, calc(28/750*100vw), 28px);
   height: clamp(14px, calc(28/750*100vw), 28px);
 }
-@media (min-width: 768px) {
-  .rating-star-responsive {
-    width: clamp(9px, calc(18/1920*100vw), 18px) !important;
-    height: clamp(9px, calc(18/1920*100vw), 18px) !important;
+@media (min-width: 1024px) {
+  .rating-star-review-card {
+    width: clamp(9px, calc(18/1920*100vw), 18px);
+    height: clamp(9px, calc(18/1920*100vw), 18px);
   }
 }
 
-/* Rating stars for large size (home-store-item) - mobile-first responsive */
+.rating-text-review-card {
+  font-size: clamp(11px, calc(22/750*100vw), 22px);
+}
+@media (min-width: 1024px) {
+  .rating-text-review-card {
+    font-size: clamp(8px, calc(16/1920*100vw), 16px);
+  }
+}
+
+/* Rating Stars - Store Info Variant */
+.rating-star-store {
+  aspect-ratio: 1;
+  width: clamp(9px, calc(18/750*100vw), 18px);
+  height: clamp(9px, calc(18/750*100vw), 18px);
+}
+@media (min-width: 1024px) {
+  .rating-star-store {
+    width: clamp(9px, calc(18/1920*100vw), 18px);
+    height: clamp(9px, calc(18/1920*100vw), 18px);
+  }
+}
+
+.rating-text-store {
+  font-size: clamp(8px, calc(16/750*100vw), 16px);
+}
+@media (min-width: 1024px) {
+  .rating-text-store {
+    font-size: clamp(8px, calc(16/1920*100vw), 16px);
+  }
+}
+
+/* Legacy rating styles - kept for backward compatibility */
+.rating-star-responsive {
+  aspect-ratio: 1;
+  width: clamp(8px, calc(28/750*100vw), 28px);
+  height: clamp(8px, calc(28/750*100vw), 28px);
+}
+@media (min-width: 768px) {
+  .rating-star-responsive {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
+
+.rating-star-review-bubble {
+  aspect-ratio: 1;
+  width: clamp(8px, calc(12/750*100vw), 12px);
+  height: clamp(8px, calc(12/750*100vw), 12px);
+}
+@media (min-width: 768px) {
+  .rating-star-review-bubble {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
+
 .rating-star-large {
   aspect-ratio: 1;
   width: clamp(12px, calc(18 / 750 * 100vw), 18px);
@@ -1690,11 +1764,20 @@ textarea::placeholder {
 }
 
 .responsive-review-rating-text {
-  font-size: clamp(14px, calc(28/750*100vw), 28px);
+  font-size: clamp(8px, calc(22/750*100vw), 22px);
 }
 @media (min-width: 768px) {
   .responsive-review-rating-text {
-    font-size: clamp(9px, calc(18/1920*100vw), 18px) !important;
+    font-size: 12px !important;
+  }
+}
+
+.responsive-review-bubble-rating-text {
+  font-size: clamp(8px, calc(12/750*100vw), 12px);
+}
+@media (min-width: 768px) {
+  .responsive-review-bubble-rating-text {
+    font-size: 12px !important;
   }
 }
 
@@ -1803,8 +1886,8 @@ textarea::placeholder {
 /* Review Bubble - Desktop responsive (1920 baseline) */
 @media (min-width: 1024px) {
   .review-bubble {
-    width: min(calc((240 / 1920) * 100vw), 240px) !important;
-    height: min(calc((140 / 1920) * 100vw), 140px) !important;
+    width: min(calc((300 / 1920) * 100vw), 300px) !important;
+    height: min(calc((175 / 1920) * 100vw), 175px) !important;
   }
   .review-bubble-avatar {
     width: min(calc((70 / 1920) * 100vw), 70px) !important;

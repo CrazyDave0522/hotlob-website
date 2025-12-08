@@ -40,7 +40,7 @@ export default function ReviewCard({ author_name, author_photo_url, rating, revi
           {formatAUDate(review_time)}
         </div>
         <div style={{ marginTop: "clamp(7px, calc(14/750*100vw), 14px)" }}>
-          <RatingStars rating={rating} size="responsive" />
+          <RatingStars rating={rating} variant="review-card" />
         </div>
         <p className="review-card-text">
           {review_text}
