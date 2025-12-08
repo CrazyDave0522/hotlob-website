@@ -35,47 +35,22 @@ export default function OurLocationsSection({
         priority
       />
 
-      {/* Content overlay */}
-      <div className="our-locations-overlay">
-        {/* Mobile: Keep original vertical layout */}
-        <SectionTitle className="lg:hidden">
-          Our Locations
-        </SectionTitle>
+      {/* Mobile: Keep original vertical layout */}
+      <SectionTitle className="lg:hidden">
+        Our Locations
+      </SectionTitle>
 
-        <div className="our-locations-main">
-          {/* Desktop left container: Title + Stores */}
-          <div className="our-locations-left">
-            <SectionTitle className="hidden lg:block">
-              Our Locations
-            </SectionTitle>
+      <div className="our-locations-main">
+        {/* Desktop left container: Title + Stores */}
+        <div className="our-locations-left">
+          <SectionTitle className="hidden lg:block">
+            Our Locations
+          </SectionTitle>
 
-            {/* Mobile stores section */}
-            <div className="our-locations-stores-mobile">
-              <div className="our-locations-stores-mobile-inner">
-                <div className="our-locations-stores-list-mobile">
-                  {topStores.map((store, index) => (
-                    <HomeStoreItem
-                      key={store.id}
-                      name={store.name}
-                      street={store.street}
-                      suburb={store.suburb}
-                      state={store.state}
-                      postcode={store.postcode}
-                      photos={store.photos}
-                      rating={store.rating}
-                      openingHoursWeekdayText={store.openingHoursWeekdayText}
-                      isLast={index === topStores.length - 1}
-                      index={index}
-                      google_url={store.google_url}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Desktop stores section */}
-            <div className="our-locations-stores-desktop">
-              <div className="flex flex-col items-start">
+          {/* Mobile stores section */}
+          <div className="our-locations-stores-mobile">
+            <div className="our-locations-stores-mobile-inner">
+              <div className="our-locations-stores-list-mobile">
                 {topStores.map((store, index) => (
                   <HomeStoreItem
                     key={store.id}
@@ -88,6 +63,7 @@ export default function OurLocationsSection({
                     rating={store.rating}
                     openingHoursWeekdayText={store.openingHoursWeekdayText}
                     isLast={index === topStores.length - 1}
+                    index={index}
                     google_url={store.google_url}
                   />
                 ))}
@@ -95,8 +71,30 @@ export default function OurLocationsSection({
             </div>
           </div>
 
-          {/* Reviews section */}
-          <div className="our-locations-reviews">
+          {/* Desktop stores section */}
+          <div className="our-locations-stores-desktop">
+            <div className="flex flex-col items-start">
+              {topStores.map((store, index) => (
+                <HomeStoreItem
+                  key={store.id}
+                  name={store.name}
+                  street={store.street}
+                  suburb={store.suburb}
+                  state={store.state}
+                  postcode={store.postcode}
+                  photos={store.photos}
+                  rating={store.rating}
+                  openingHoursWeekdayText={store.openingHoursWeekdayText}
+                  isLast={index === topStores.length - 1}
+                  google_url={store.google_url}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Reviews section */}
+        <div className="our-locations-reviews">
           {/* Mobile review image */}
           <Image
             src="/images/home-bg-locations-review-mb.png"
@@ -112,7 +110,9 @@ export default function OurLocationsSection({
             src="/images/home-bg-locations-review.png"
             alt="Customer reviews"
             fill
-            sizes="(max-width:1023px) 0vw, (max-width:1200px) 50vw, 40vw"
+            sizes={
+              "(max-width:1023px) 100vw, (min-width:1024px) calc(min(710px, 100vw - (min(13.542vw, 260px) + min(35.938vw, 690px) + min(2.188vw, 42px) + min(13.542vw, 260px))))"
+            }
             className="our-locations-review-desktop"
           />
 
@@ -126,7 +126,6 @@ export default function OurLocationsSection({
               </>
             )}
           </div>
-        </div>
         </div>
       </div>
     </section>

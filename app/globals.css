@@ -429,6 +429,14 @@ textarea::placeholder {
   .home-store-item-row {
     gap: clamp(6px, calc(12 / 750 * 100vw), 12px);
   }
+  /* Make address / opening-hours icons responsive (mobile-first) */
+  .home-store-item-row img,
+  .home-store-item-row .object-contain,
+  .home-store-item-row .aspect-square {
+    width: clamp(12px, calc(24 / 750 * 100vw), 20px);
+    height: clamp(12px, calc(24 / 750 * 100vw), 20px);
+    min-width: 0; /* allow shrink-to-fit */
+  }
   .home-store-item-text {
     font-size: var(--mobile-fs-xs);
   }
@@ -482,6 +490,12 @@ textarea::placeholder {
     .home-store-item-arrow {
       width: 32px;
       height: 32px;
+    }
+    .home-store-item-row img,
+    .home-store-item-row .object-contain,
+    .home-store-item-row .aspect-square {
+      width: 20px;
+      height: 20px;
     }
   }
 
@@ -898,8 +912,8 @@ textarea::placeholder {
   }
   .news-arrow-mobile {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: clamp(16px, calc((24 / 750) * 100vw), 24px);
+    height: clamp(16px, calc((24 / 750) * 100vw), 24px);
   }
   .news-arrow-desktop {
     display: none;
@@ -988,19 +1002,6 @@ textarea::placeholder {
     display: none;
   }
 
-  /* Our Locations overlay container */
-  .our-locations-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    z-index: 9;
-  }
-
   /* Our Locations content - mobile */
   .our-locations-main {
     display: flex;
@@ -1009,6 +1010,8 @@ textarea::placeholder {
     gap: clamp(24px, calc(40 / 750 * 100vw), 40px);
     width: 100%;
     padding: 0 clamp(15px, calc(30/750*100vw), 30px);
+    position: relative;
+    z-index: 2;
   }
   .our-locations-left {
     display: contents;
@@ -1039,6 +1042,7 @@ textarea::placeholder {
   .our-locations-reviews {
     position: relative;
     width: 100vw;
+    /* Mobile default: match the mobile background image full displayed height (750 -> 826) */
     height: clamp(300px, calc(603 / 750 * 100vw), 603px);
     flex-shrink: 0;
     margin-left: calc(-1 * clamp(15px, calc(30/750*100vw), 30px));
@@ -1060,10 +1064,27 @@ textarea::placeholder {
     display: none;
   }
 
+  /* Force mobile reviews container to match full mobile BG image height (intrinsic 826px at design width 750px) */
+  @media (max-width: 750px) {
+    .our-locations-reviews {
+      /* scale 826px height proportionally to current viewport width */
+      height: calc((826 / 750) * 100vw) !important;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .our-locations-review-bubbles-container {
+      /* keep the existing padding but relative to the container that now matches image */
+      top: clamp(15px, calc(30/750*100vw), 30px);
+      left: clamp(15px, calc(30/750*100vw), 30px);
+      right: clamp(15px, calc(30/750*100vw), 30px);
+      bottom: clamp(15px, calc(30/750*100vw), 30px);
+    }
+  }
+
   @media (min-width: 1024px) {
     .our-locations-section {
       height: auto;
-      min-height: 720px;
+      min-height: clamp(416px, calc(832 / 1920 * 100vw), 832px);
     }
     .our-locations-bg-desktop {
       display: block;
@@ -1077,15 +1098,6 @@ textarea::placeholder {
     }
     .our-locations-title {
       display: none;
-    }
-    .our-locations-overlay {
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
-      gap: 0;
-      z-index: 10;
-      padding: 0 min(13.542vw, 260px);
     }
     .our-locations-left {
       display: flex;
@@ -1101,7 +1113,9 @@ textarea::placeholder {
       align-items: stretch;
       gap: min(2.188vw, 42px);
       width: 100%;
-      padding: 0;
+      /* Restore desktop side padding so central content width is 1400px at 1920px */
+      padding: 0 min(13.542vw, 260px);
+      position: relative;
     }
     .our-locations-stores-mobile {
       display: none;
@@ -1114,11 +1128,32 @@ textarea::placeholder {
     .our-locations-title-desktop {
     }
     .our-locations-reviews {
-      flex: 1;
-      width: auto;
-      height: auto;
-      margin-left: 0;
-      margin-right: 0;
+      position: absolute;
+      top: 0;
+      /* Prevent overlap: pin both left and right so container stays within content area */
+      /* Anchor to the right side of the content area so reviews sit right-aligned */
+      left: auto;
+      right: min(13.542vw, 260px);
+      /* Ensure we don't keep the mobile `width: 100vw` (which causes overflow) */
+      /* Responsive width between 1024 and 1920: allow it to shrink but cap at 710px */
+      /* Minimum practical width chosen as 360px to keep bubble layout usable */
+      /* Subtract main side paddings + left column + gap + right padding so the review
+         container fits inside the central content area across widths */
+      width: clamp(
+        320px,
+        calc(
+          100vw - (
+            min(13.542vw, 260px) + /* main left padding */
+            min(35.938vw, 690px) + /* left column width */
+            min(2.188vw, 42px) +   /* gap between columns */
+            min(13.542vw, 260px)   /* main right padding */
+          )
+        ),
+        710px
+      );
+      box-sizing: border-box;
+      height: clamp(416px, calc(832 / 1920 * 100vw), 832px);
+      margin: 0;
     }
     .our-locations-review-mobile {
       display: none;
@@ -1795,6 +1830,36 @@ textarea::placeholder {
   }
 }
 
+/* Review bubble base visual styles (replace SVG background with CSS) */
+.review-bubble {
+  position: relative; /* create stacking context for pseudo-element */
+}
+
+/* Visual surface for the bubble placed above the avatar but below content */
+.review-bubble::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 6px 6px 0 6px;
+  background: rgba(255, 255, 255, 0.50);
+  box-shadow: 0 4px 4px 0 rgba(95, 65, 65, 0.20);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 2; /* above avatar (z=1) but below content (z=3) */
+  pointer-events: none;
+}
+
+/* Make avatar's hover/active transform weaker than the bubble's so bubble feels stronger */
+.review-bubble-avatar {
+  transition: transform 300ms ease-out;
+  z-index: 1; /* ensure avatar is below bubble surface */
+}
+.review-bubble:hover .review-bubble-avatar,
+.review-bubble:active .review-bubble-avatar {
+  /* Slight counter-scale so net avatar scale < bubble scale */
+  transform: scale(0.98);
+}
+
 /* Review Card Photo Responsive */
 .review-card-photo {
   width: clamp(80px, calc(160/750*100vw), 160px);
@@ -1910,17 +1975,5 @@ textarea::placeholder {
   .catering-content-text {
     font-size: clamp(12px, calc(24 / 1920 * 100vw), 24px);
     line-height: clamp(26px, calc(52 / 1920 * 100vw), 52px);
-  }
-}
-
-/* Review Bubble - Desktop responsive (1920 baseline) */
-@media (min-width: 1024px) {
-  .review-bubble {
-    width: min(calc((300 / 1920) * 100vw), 300px) !important;
-    height: min(calc((175 / 1920) * 100vw), 175px) !important;
-  }
-  .review-bubble-avatar {
-    width: min(calc((70 / 1920) * 100vw), 70px) !important;
-    height: min(calc((70 / 1920) * 100vw), 70px) !important;
   }
 }
