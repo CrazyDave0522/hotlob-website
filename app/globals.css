@@ -1303,8 +1303,9 @@ textarea::placeholder {
 @media (min-width: 768px) {
   .catering-form-container {
     position: absolute;
-    left: 7.2%;
-    bottom: 11%;
+    top: calc(45% + clamp(72px, calc(92 / 1440 * 100vw), 122px));
+    left: calc(260 / 1920 * 100vw);
+    bottom: auto;
     width: 36.979%;
     padding: 0;
     display: flex;
