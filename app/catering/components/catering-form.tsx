@@ -243,10 +243,62 @@ export default function CateringForm() {
       }
     }
 
+    // If pickupTime changed and the selected value isn't in availableSlots, adjust to nearest slot
+    if (name === "pickupTime") {
+      if (value && !availableSlots.includes(value)) {
+        const nearest = getNearestSlot(value, availableSlots);
+        if (nearest) {
+          setFormData((prev) => ({ ...prev, pickupTime: nearest }));
+          warning?.(`Selected time not available. Adjusted to ${formatSlotForDisplay(nearest)}.`, {
+            key: "pickup-time-adjust",
+            dedupeMs: 2000,
+            replace: true,
+          });
+          return;
+        } else {
+          // No available slots
+          setFormData((prev) => ({ ...prev, pickupTime: "" }));
+          warning?.("No available pickup slots for the selected date.", {
+            key: "pickup-time-none",
+            dedupeMs: 2000,
+            replace: true,
+          });
+          return;
+        }
+      }
+    }
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+  };
+
+  // Helper: format "HH:mm" -> human friendly (12h) e.g. 9:30 AM
+  const formatSlotForDisplay = (slot: string) => {
+    const [hh, mm] = slot.split(":").map(Number);
+    const isAM = hh < 12;
+    const displayHour = hh % 12 === 0 ? 12 : hh % 12;
+    return `${displayHour}:${String(mm).padStart(2, "0")} ${isAM ? "AM" : "PM"}`;
+  };
+
+  // Helper: find nearest available slot to a given HH:mm value
+  const getNearestSlot = (value: string, slots: string[]) => {
+    if (!value || slots.length === 0) return null;
+    const [h, m] = value.split(":").map(Number);
+    const minutes = h * 60 + m;
+    let best = slots[0];
+    let bestDiff = Math.abs((+slots[0].split(":")[0]) * 60 + (+slots[0].split(":")[1]) - minutes);
+    for (const s of slots) {
+      const [sh, sm] = s.split(":").map(Number);
+      const sMinutes = sh * 60 + sm;
+      const diff = Math.abs(sMinutes - minutes);
+      if (diff < bestDiff) {
+        bestDiff = diff;
+        best = s;
+      }
+    }
+    return best;
   };
 
   // Recompute available slots when storeId or cateringDate changes
@@ -459,25 +511,28 @@ export default function CateringForm() {
             >
               Pick up time on catering date
             </label>
-            {/* Native time input with 30-minute step */}
-            <input
-              type="time"
+            {/* Time select populated from availableSlots (consistent across devices) */}
+            <select
               id="pickupTime"
               name="pickupTime"
               value={formData.pickupTime}
               onChange={handleChange}
               required
-              step={1800}
-              min={availableSlots.length ? availableSlots[0] : undefined}
-              max={availableSlots.length ? availableSlots[availableSlots.length - 1] : undefined}
               className="catering-form-select w-full"
               disabled={availableSlots.length === 0}
-            />
+            >
+              <option value="">Select a time</option>
+              {availableSlots.map((t) => (
+                <option key={t} value={t}>
+                  {formatSlotForDisplay(t)}
+                </option>
+              ))}
+            </select>
             {timeDisabledHint ? (
               <p className="catering-form-hint text-gray-500 mt-1">{timeDisabledHint}</p>
             ) : (
               availableSlots.length > 0 && (
-                <p className="catering-form-hint text-gray-500 mt-1">Available from {availableSlots[0]} to {availableSlots[availableSlots.length - 1]}</p>
+                <p className="catering-form-hint text-gray-500 mt-1">Available from {formatSlotForDisplay(availableSlots[0])} to {formatSlotForDisplay(availableSlots[availableSlots.length - 1])}</p>
               )
             )}
           </div>
