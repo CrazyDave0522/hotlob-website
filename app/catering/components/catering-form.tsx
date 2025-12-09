@@ -135,7 +135,13 @@ export default function CateringForm() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+    // Ensure catering date respects the minimum (defensive - some mobile browsers may not enforce `min`)
+    const minDate = getMinCateringDate();
+    if (formData.cateringDate && formData.cateringDate < minDate) {
+      showError("Catering date must be at least 2 days from today.");
+      setIsSubmitting(false);
+      return;
+    }
     // Final validation before submission
     const phoneError = validateAustralianPhone(formData.phone);
     if (phoneError) {
@@ -221,9 +227,25 @@ export default function CateringForm() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
+    const { name, value } = e.target;
+    // If cateringDate is changed, enforce minimum date client-side (mobile browsers may allow earlier selection)
+    if (name === "cateringDate") {
+      const min = getMinCateringDate();
+      if (value && value < min) {
+        // Adjust to min and warn the user
+        setFormData((prev) => ({ ...prev, [name]: min }));
+        warning?.("Catering date must be at least 2 days from today. Date adjusted.", {
+          key: "catering-date-warning",
+          dedupeMs: 2000,
+          replace: true,
+        });
+        return;
+      }
+    }
+
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
