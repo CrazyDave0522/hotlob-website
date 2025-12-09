@@ -68,7 +68,7 @@ export default function Hero({
                   showOverlay ? "text-white" : "text-[#242424]"
                 }`}
                 style={{
-                  fontSize: "clamp(24px, calc(30/750*100vw), 30px)",
+                  fontSize: "clamp(22px, calc(38/750*100vw), 38px)",
                   maxWidth: "calc(500/750*100vw)", // Mobile title width cap matches description
                   ...(showOverlay
                     ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
@@ -82,7 +82,7 @@ export default function Hero({
                 showOverlay ? "text-white" : "text-[#999]"
               }`}
               style={{
-                fontSize: "clamp(18px, calc(22/750*100vw), 22px)",
+                fontSize: "clamp(16px, calc(30/750*100vw), 30px)",
                 maxWidth: "calc(500/750*100vw)", // Mobile text width cap to avoid full-width paragraphs
                 ...(showOverlay
                   ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
@@ -176,7 +176,7 @@ export default function Hero({
             className="absolute z-10 bottom-2.5 right-0"
             style={{ paddingRight: "min(8.333vw, 160px)" }} // 160/1920 = 8.333%, closer to right edge
           >
-            <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-right">
+            <p className="text-[#C9CDD4] text-[12px] font-normal leading-none text-right">
               {footerNote}
             </p>
           </div>

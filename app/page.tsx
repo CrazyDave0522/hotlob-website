@@ -6,7 +6,7 @@ import OurLocationsSection from "./components/OurLocationsSection";
 import NewsSection from "./components/NewsSection";
 import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
-import type { Dish, RawDish, AllergenTag } from "@/types/types";
+import type { Dish, RawDish } from "@/types/types";
 import Image from "next/image";
 import { getStoresWithDetails } from "@/lib/getStores";
 import { getReviews } from "@/lib/getReviews";
@@ -50,7 +50,9 @@ export default async function Home() {
       const imageUrl =
         d.media_asset?.[0]?.image_url ?? CONSTANTS.DEFAULT_DISH_IMAGE;
       const matchedAllergens =
-        d.dish_allergen?.flatMap((da) => da.allergen_tag ?? [])?.filter(Boolean) ?? [];
+        d.dish_allergen
+          ?.flatMap((da) => da.allergen_tag ?? [])
+          ?.filter(Boolean) ?? [];
 
       // Compile available stores
       const stores =
@@ -117,7 +119,10 @@ export default async function Home() {
       <AboutHotlob />
       <SeeOurFoodSection dishes={dishes} />
       {/* Curve background section - hidden on mobile */}
-      <section className="relative w-full hidden lg:block" style={{ backgroundColor: '#FDF7F0' }}>
+      <section
+        className="relative w-full hidden lg:block"
+        style={{ backgroundColor: "#FDF7F0" }}
+      >
         <Image
           src="/images/home-bg-curve.png"
           alt="Curve background"
@@ -126,7 +131,7 @@ export default async function Home() {
           className="w-full h-auto"
           priority
           sizes="100vw"
-          style={{ aspectRatio: '1920/109', display: 'block' }}
+          style={{ aspectRatio: "1920/109", display: "block" }}
         />
       </section>
       <CateringSection />

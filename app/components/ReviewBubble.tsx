@@ -17,23 +17,23 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
       setIsDesktop(width >= 1024);
     };
     checkDesktop();
-    window.addEventListener('resize', checkDesktop);
-    return () => window.removeEventListener('resize', checkDesktop);
+    window.addEventListener("resize", checkDesktop);
+    return () => window.removeEventListener("resize", checkDesktop);
   }, []);
 
   // Responsive sizes: mobile based on 750px, desktop 1024+ based on 1920px
   const isMobile = !isDesktop;
-  const bubbleWidth = isMobile 
-    ? "clamp(210px, calc((440 / 750) * 100vw), 440px)" 
+  const bubbleWidth = isMobile
+    ? "clamp(210px, calc((440 / 750) * 100vw), 440px)"
     : "clamp(224px, calc((440 / 1920) * 100vw), 440px)";
-  const bubbleHeight = isMobile 
-    ? "clamp(80px, calc((220 / 750) * 100vw), 220px)" 
+  const bubbleHeight = isMobile
+    ? "clamp(80px, calc((220 / 750) * 100vw), 220px)"
     : "clamp(85px, calc((220 / 1920) * 100vw), 220px)";
-  const avatarRingSize = isMobile 
-    ? "clamp(42px, calc((84 / 750) * 100vw), 84px)" 
+  const avatarRingSize = isMobile
+    ? "clamp(42px, calc((84 / 750) * 100vw), 84px)"
     : "clamp(45px, calc((84 / 1920) * 100vw), 84px)";
-  const avatarSize = isMobile 
-    ? "clamp(28px, calc((56 / 750) * 100vw), 56px)" 
+  const avatarSize = isMobile
+    ? "clamp(28px, calc((56 / 750) * 100vw), 56px)"
     : "clamp(30px, calc((56 / 1920) * 100vw), 56px)";
 
   const finalBubbleWidth = bubbleWidth;
@@ -194,8 +194,8 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           <div
             style={{
               color: "#1D1E1F",
-              fontSize: isMobile 
-                ? "clamp(12px, calc((22 / 750) * 100vw), 22px)" 
+              fontSize: isMobile
+                ? "clamp(11px, calc((22 / 750) * 100vw), 22px)"
                 : "clamp(11px, calc((20 / 1920) * 100vw), 20px)",
               fontStyle: "normal",
               fontWeight: 400,
@@ -212,8 +212,8 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           <div
             style={{
               color: "#4E5969",
-              fontSize: isMobile 
-                ? "clamp(12px, calc((22 / 750) * 100vw), 22px)" 
+              fontSize: isMobile
+                ? "clamp(11px, calc((22 / 750) * 100vw), 22px)"
                 : "clamp(11px, calc((20 / 1920) * 100vw), 20px)",
               fontStyle: "normal",
               fontWeight: 400,

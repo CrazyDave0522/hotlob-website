@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
 import { formatAUDate } from "@/lib/utils/formatDate";
 
 interface NewsCardProps {
@@ -20,8 +19,8 @@ function MobileNewsCard({
   title,
   excerpt,
   coverImageUrl,
-  publishDate
-}: Omit<NewsCardProps, 'variant'>) {
+  publishDate,
+}: Omit<NewsCardProps, "variant">) {
   return (
     <Link
       href={`/news/${slug}`}
@@ -30,7 +29,7 @@ function MobileNewsCard({
       className="group flex flex-col w-full bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.05)] hover:shadow-[0_0_30px_0_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden"
       style={{
         borderRadius: "20px",
-        height: "clamp(275px, calc(550 / 750 * 100vw), 550px)",
+        height: "clamp(345px, calc(690 / 750 * 100vw), 690px)",
       }}
     >
       {/* Cover Image */}
@@ -56,7 +55,8 @@ function MobileNewsCard({
       <div
         className="flex flex-col flex-1"
         style={{
-          padding: "clamp(15px, calc(30 / 750 * 100vw), 30px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px)",
+          padding:
+            "clamp(15px, calc(30 / 750 * 100vw), 30px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px)",
         }}
       >
         {/* Title */}
@@ -80,9 +80,7 @@ function MobileNewsCard({
         </div>
 
         {/* Excerpt */}
-        <p
-          className="news-card-excerpt-mobile text-[#86909C] font-normal leading-normal line-clamp-3"
-        >
+        <p className="news-card-excerpt-mobile text-[#86909C] font-normal leading-normal line-clamp-3">
           {excerpt}
         </p>
       </div>
@@ -120,7 +118,10 @@ export default function NewsCard({
             target="_blank"
             rel="noopener noreferrer"
             className="group block w-full h-full bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.05)] hover:shadow-[0_0_30px_0_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden"
-            style={{ borderRadius: "min(1.042vw, 20px)", border: "1px solid #E1E4E9" }}
+            style={{
+              borderRadius: "min(1.042vw, 20px)",
+              border: "1px solid #E1E4E9",
+            }}
           >
             <div className="flex w-full h-full">
               {/* Cover Image */}

@@ -110,7 +110,7 @@ export function Header() {
         </Link>
 
         <nav
-          className="ml-auto mr-auto flex flex-1 items-center justify-center text-[clamp(14px,0.938vw,18px)] font-semibold"
+          className="ml-auto mr-auto flex flex-1 items-center justify-center text-[clamp(14px,1.042vw,20px)] font-semibold"
           style={{ gap: "min(4.167vw, 80px)" }}
         >
           {NAV_ITEMS.map((item) => (

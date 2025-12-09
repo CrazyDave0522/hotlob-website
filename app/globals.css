@@ -30,7 +30,7 @@
     28px
   ); /* 26px@750 -> 13px@375 */
   --mobile-fs-xl: clamp(
-    16px,
+    15px,
     calc((30 / 750) * 100vw),
     30px
   ); /* 28px@750 -> 14px@375 */
@@ -40,9 +40,9 @@
     36px
   ); /* 34px@750 -> 17px@375 */
   --mobile-fs-3xl: clamp(
-    22px,
-    calc((42 / 750) * 100vw),
-    42px
+    20px,
+    calc((40 / 750) * 100vw),
+    40px
   ); /* 40px@750 -> 20px@375 */
   --mobile-fs-4xl: clamp(
     26px,
@@ -226,7 +226,11 @@ textarea::placeholder {
 
   /* Tag button text size (mobile-first) */
   .tag-button span {
-    font-size: clamp(19px, calc(32 / 750 * 100vw), 32px);
+    font-size: clamp(
+      14px,
+      calc(26 / 750 * 100vw),
+      26px
+    ); /* 750 baseline: filter button text -> 26 */
     font-weight: 400;
     line-height: normal;
   }
@@ -282,7 +286,7 @@ textarea::placeholder {
     border: none;
     transition: all 0.15s;
     color: #fff;
-    font-size: clamp(16px, calc(28 / 750 * 100vw), 28px);
+    font-size: clamp(14px, calc(28 / 750 * 100vw), 28px);
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -535,11 +539,19 @@ textarea::placeholder {
   .dish-card-tier {
     width: clamp(80px, calc(130 / 750 * 100vw), 130px);
     height: clamp(24px, calc(34 / 750 * 100vw), 34px);
-    font-size: clamp(18px, calc(28 / 750 * 100vw), 28px);
+    font-size: clamp(
+      13px,
+      calc(26 / 750 * 100vw),
+      26px
+    ); /* 750 baseline: tier -> 26 */
   }
   .dish-card-description {
     height: clamp(68px, calc(136 / 750 * 100vw), 136px);
-    font-size: clamp(17px, calc(30 / 750 * 100vw), 30px);
+    font-size: clamp(
+      13px,
+      calc(26 / 750 * 100vw),
+      26px
+    ); /* 750 baseline: dish description -> 26 */
     color: #86909c;
   }
   .dish-card-order-wrapper {
@@ -744,7 +756,7 @@ textarea::placeholder {
     display: none;
   }
   .see-our-food-more-text {
-    font-size: clamp(16px, calc(28 / 750 * 100vw), 28px);
+    font-size: clamp(14px, calc(28 / 750 * 100vw), 28px);
     font-weight: 400;
     line-height: normal;
     transition: all 0.2s;
@@ -852,11 +864,15 @@ textarea::placeholder {
   .news-section {
     position: relative;
     width: 100%;
-    height: clamp(486px, calc(972 / 750 * 100vw), 972px);
+    /* Allow the section to grow if its content (e.g., Learn More button) needs more space.
+       Using min-height instead of a fixed height prevents child content from being visually
+       cut off and avoids overlap with subsequent siblings such as the footer. */
+    min-height: clamp(540px, calc(1080 / 750 * 100vw), 1080px);
     background: linear-gradient(180deg, #fbf3f3 0%, #fff 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* Add mobile bottom padding so the Learn More button isn't flush to the section edge */
     padding-bottom: 0;
   }
   .news-carousel-container {
@@ -925,6 +941,9 @@ textarea::placeholder {
     .news-section {
       width: auto;
       height: auto;
+      /* Desktop: ensure the news section has a 1920px-baseline minimum height of 610px.
+         Use a responsive min-height that scales with viewport but caps at 610px. */
+      min-height: min(calc(610 / 1920 * 100vw), 610px);
       padding-bottom: min(3.125vw, 60px);
     }
     .news-carousel-container {
@@ -1416,8 +1435,8 @@ textarea::placeholder {
   color: #1d1e1f;
   font-style: normal;
   font-weight: 400;
-  /* Mobile (750 baseline) */
-  font-size: clamp(20px, calc((30 / 750) * 100vw), 30px);
+  /* Mobile (750 baseline) - label max 28 */
+  font-size: clamp(18px, calc((28 / 750) * 100vw), 28px);
   line-height: normal;
 }
 .catering-form-input,
@@ -1438,8 +1457,8 @@ textarea::placeholder {
 .catering-form-input::placeholder,
 .catering-form-select::placeholder {
   color: #919aa5;
-  /* Mobile placeholder size */
-  font-size: clamp(18px, calc((28 / 750) * 100vw), 28px);
+  /* Mobile placeholder size - max 24 */
+  font-size: clamp(12px, calc((24 / 750) * 100vw), 24px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -1448,7 +1467,8 @@ textarea::placeholder {
   font-size: clamp(14px, calc(18 / 750 * 100vw), 18px);
 }
 .catering-form-hint {
-  font-size: clamp(12px, calc(16 / 750 * 100vw), 16px);
+  /* Mobile hint size - max 24 */
+  font-size: clamp(12px, calc((24 / 750) * 100vw), 24px);
 }
 .catering-form-submit {
   font-size: clamp(19px, calc(36 / 750 * 100vw), 36px);
@@ -1932,7 +1952,7 @@ textarea::placeholder {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 6px 6px 0 6px;
+  border-radius: 6px 6px 6px 6px;
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 4px 0 rgba(95, 65, 65, 0.2);
   backdrop-filter: blur(2px);
@@ -1972,7 +1992,11 @@ textarea::placeholder {
   line-height: normal;
   text-transform: uppercase;
   text-align: center;
-  font-size: var(--mobile-fs-2xl);
+  font-size: clamp(
+    22px,
+    calc(42 / 750 * 100vw),
+    42px
+  ); /* 750 baseline: section title -> 42 */
   margin: 0;
 }
 /* Section title spacing */
@@ -2024,13 +2048,25 @@ textarea::placeholder {
 
 /* News Card */
 .news-card-title-mobile {
-  font-size: var(--mobile-fs-base);
+  font-size: clamp(
+    19px,
+    calc(38 / 750 * 100vw),
+    38px
+  ); /* 750 baseline: news title -> 38 */
 }
 .news-card-date-mobile {
-  font-size: var(--mobile-fs-xs);
+  font-size: clamp(
+    15px,
+    calc(30 / 750 * 100vw),
+    30px
+  ); /* 750 baseline: news date -> 30 */
 }
 .news-card-excerpt-mobile {
-  font-size: var(--mobile-fs-xs);
+  font-size: clamp(
+    16px,
+    calc(32 / 750 * 100vw),
+    32px
+  ); /* 750 baseline: news excerpt -> 32 */
 }
 
 /* AboutHotlob */
@@ -2055,7 +2091,7 @@ textarea::placeholder {
 }
 
 .catering-content-text {
-  font-size: clamp(16px, calc(26 / 750 * 100vw), 26px);
+  font-size: clamp(12px, calc(24 / 750 * 100vw), 24px);
   line-height: clamp(26px, calc(52 / 750 * 100vw), 52px);
 }
 

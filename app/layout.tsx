@@ -44,7 +44,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Hotlob | Get Rollin' With Us; Fast, Tasty, Brioche Rolls - Australia",
-  description: "Get rollin' with us - Our team at Hotlob are excited to bring our brioche rolls to you! An assorted of options available, check out our menu to find out what we are serving you this week! Keep an eye out for our lobster roll - seasonal menu and subject to change.",
+  description:
+    "Get rollin' with us - Our team at Hotlob are excited to bring our brioche rolls to you! An assorted of options available, check out our menu to find out what we are serving you this week! Keep an eye out for our lobster roll - seasonal menu and subject to change.",
 };
 
 export default function RootLayout({
