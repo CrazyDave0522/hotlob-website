@@ -7,6 +7,7 @@ A modern Next.js website for Hotlob - Australian Lobster & Seafood Rolls.
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
+ - **Testing**: Vitest
 - **Database**: Supabase
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
