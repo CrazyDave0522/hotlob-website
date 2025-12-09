@@ -90,7 +90,7 @@ export default function StoreCard({
       {/* Store Name */}
       <h2 
         className="text-[#1D1E1F] font-medium uppercase leading-normal"
-        style={{ fontSize: 'clamp(11px, calc(22/750*100vw), 22px)' }}
+        style={{ fontSize: 'clamp(13px, calc(24/750*100vw), 24px)' }}
       >
         {name}
       </h2>
@@ -115,7 +115,7 @@ export default function StoreCard({
         />
         <span 
           className="text-[#4E5969] font-normal leading-normal"
-          style={{ fontSize: 'clamp(9px, calc(18/750*100vw), 18px)' }}
+          style={{ fontSize: 'clamp(11px, calc(20/750*100vw), 20px)' }}
         >
           {fullAddress}
         </span>

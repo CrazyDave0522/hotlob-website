@@ -195,7 +195,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
             style={{
               color: "#1D1E1F",
               fontSize: isMobile 
-                ? "clamp(10px, calc((20 / 750) * 100vw), 20px)" 
+                ? "clamp(12px, calc((22 / 750) * 100vw), 22px)" 
                 : "clamp(11px, calc((20 / 1920) * 100vw), 20px)",
               fontStyle: "normal",
               fontWeight: 400,
@@ -213,7 +213,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
             style={{
               color: "#4E5969",
               fontSize: isMobile 
-                ? "clamp(10px, calc((20 / 750) * 100vw), 20px)" 
+                ? "clamp(12px, calc((22 / 750) * 100vw), 22px)" 
                 : "clamp(11px, calc((20 / 1920) * 100vw), 20px)",
               fontStyle: "normal",
               fontWeight: 400,

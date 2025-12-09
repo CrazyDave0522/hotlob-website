@@ -10,44 +10,44 @@
   /* Mobile-first responsive typography (based on 750px baseline) */
   /* Using clamp to prevent too small on very small screens and too large on 750+ */
   --mobile-fs-xs: clamp(
-    9px,
-    calc((18 / 750) * 100vw),
-    18px
+    11px,
+    calc((20 / 750) * 100vw),
+    20px
   ); /* 18px@750 -> 9px@375 */
   --mobile-fs-sm: clamp(
-    11px,
-    calc((22 / 750) * 100vw),
-    22px
-  ); /* 22px@750 -> 11px@375 */
-  --mobile-fs-base: clamp(
-    12px,
+    13px,
     calc((24 / 750) * 100vw),
     24px
-  ); /* 24px@750 -> 12px@375 */
-  --mobile-fs-lg: clamp(
-    13px,
+  ); /* 22px@750 -> 11px@375 */
+  --mobile-fs-base: clamp(
+    14px,
     calc((26 / 750) * 100vw),
     26px
-  ); /* 26px@750 -> 13px@375 */
-  --mobile-fs-xl: clamp(
-    14px,
+  ); /* 24px@750 -> 12px@375 */
+  --mobile-fs-lg: clamp(
+    15px,
     calc((28 / 750) * 100vw),
     28px
+  ); /* 26px@750 -> 13px@375 */
+  --mobile-fs-xl: clamp(
+    16px,
+    calc((30 / 750) * 100vw),
+    30px
   ); /* 28px@750 -> 14px@375 */
   --mobile-fs-2xl: clamp(
-    17px,
-    calc((34 / 750) * 100vw),
-    34px
+    19px,
+    calc((36 / 750) * 100vw),
+    36px
   ); /* 34px@750 -> 17px@375 */
   --mobile-fs-3xl: clamp(
-    20px,
-    calc((40 / 750) * 100vw),
-    40px
+    22px,
+    calc((42 / 750) * 100vw),
+    42px
   ); /* 40px@750 -> 20px@375 */
   --mobile-fs-4xl: clamp(
-    24px,
-    calc((48 / 750) * 100vw),
-    48px
+    26px,
+    calc((50 / 750) * 100vw),
+    50px
   ); /* 48px@750 -> 24px@375 */
 
   /* Mobile spacing (based on 750px baseline) */
@@ -142,7 +142,8 @@ textarea::placeholder {
   .tag-button {
     @apply inline-flex items-center transition-all duration-150 font-normal leading-none;
     flex-direction: column;
-    padding: clamp(6px, calc(12 / 750 * 100vw), 12px) clamp(8px, calc(20 / 750 * 100vw), 20px);
+    padding: clamp(6px, calc(12 / 750 * 100vw), 12px)
+      clamp(8px, calc(20 / 750 * 100vw), 20px);
     gap: clamp(2px, calc(6 / 750 * 100vw), 6px);
     min-width: clamp(52px, calc(116 / 750 * 100vw), 116px);
     height: auto;
@@ -154,7 +155,8 @@ textarea::placeholder {
 
   /* Tag filter group gaps (row and column) responsive on mobile; desktop preserved */
   .tag-filter-group {
-    gap: clamp(8px, calc(12 / 750 * 100vw), 12px) clamp(8px, calc(20 / 750 * 100vw), 20px);
+    gap: clamp(8px, calc(12 / 750 * 100vw), 12px)
+      clamp(8px, calc(20 / 750 * 100vw), 20px);
   }
 
   @media (min-width: 768px) {
@@ -224,7 +226,7 @@ textarea::placeholder {
 
   /* Tag button text size (mobile-first) */
   .tag-button span {
-    font-size: clamp(13px, calc(26 / 750 * 100vw), 26px);
+    font-size: clamp(19px, calc(32 / 750 * 100vw), 32px);
     font-weight: 400;
     line-height: normal;
   }
@@ -280,7 +282,7 @@ textarea::placeholder {
     border: none;
     transition: all 0.15s;
     color: #fff;
-    font-size: clamp(12px, calc(24 / 750 * 100vw), 24px);
+    font-size: clamp(16px, calc(28 / 750 * 100vw), 28px);
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -533,11 +535,11 @@ textarea::placeholder {
   .dish-card-tier {
     width: clamp(80px, calc(130 / 750 * 100vw), 130px);
     height: clamp(24px, calc(34 / 750 * 100vw), 34px);
-    font-size: clamp(14px, calc(24 / 750 * 100vw), 24px);
+    font-size: clamp(18px, calc(28 / 750 * 100vw), 28px);
   }
   .dish-card-description {
     height: clamp(68px, calc(136 / 750 * 100vw), 136px);
-    font-size: clamp(13px, calc(26 / 750 * 100vw), 26px);
+    font-size: clamp(17px, calc(30 / 750 * 100vw), 30px);
     color: #86909c;
   }
   .dish-card-order-wrapper {
@@ -742,7 +744,7 @@ textarea::placeholder {
     display: none;
   }
   .see-our-food-more-text {
-    font-size: clamp(14px, calc(26 / 750 * 100vw), 26px);
+    font-size: clamp(16px, calc(28 / 750 * 100vw), 28px);
     font-weight: 400;
     line-height: normal;
     transition: all 0.2s;
@@ -821,7 +823,7 @@ textarea::placeholder {
     text-decoration: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     border: none;
-    font-size: clamp(14px, calc(24 / 750 * 100vw), 24px);
+    font-size: clamp(16px, calc(26 / 750 * 100vw), 26px);
     font-weight: 400;
     line-height: normal;
     -webkit-tap-highlight-color: rgba(234, 65, 72, 0.1);
@@ -899,7 +901,7 @@ textarea::placeholder {
     gap: clamp(6px, calc(10 / 750 * 100vw), 10px);
     width: auto;
     height: auto;
-    font-size: clamp(13px, calc(26 / 750 * 100vw), 26px);
+    font-size: clamp(15px, calc(28 / 750 * 100vw), 28px);
     border-radius: clamp(15px, calc(30 / 750 * 100vw), 30px);
     margin-top: clamp(15px, calc(30 / 750 * 100vw), 30px);
     font-style: normal;
@@ -967,17 +969,17 @@ textarea::placeholder {
   }
 
   /* Our Locations Section - mobile-first */
-    /* News list page wrappers - mobile-first widths */
+  /* News list page wrappers - mobile-first widths */
+  .news-list-wrapper,
+  .news-list-loadmore-wrapper {
+    width: clamp(345px, calc(690 / 750 * 100vw), 690px);
+  }
+  @media (min-width: 1024px) {
     .news-list-wrapper,
     .news-list-loadmore-wrapper {
-      width: clamp(345px, calc(690 / 750 * 100vw), 690px);
+      width: auto;
     }
-    @media (min-width: 1024px) {
-      .news-list-wrapper,
-      .news-list-loadmore-wrapper {
-        width: auto;
-      }
-    }
+  }
   .our-locations-section {
     position: relative;
     width: 100%;
@@ -1009,7 +1011,7 @@ textarea::placeholder {
     align-items: center;
     gap: clamp(24px, calc(40 / 750 * 100vw), 40px);
     width: 100%;
-    padding: 0 clamp(15px, calc(30/750*100vw), 30px);
+    padding: 0 clamp(15px, calc(30 / 750 * 100vw), 30px);
     position: relative;
     z-index: 2;
   }
@@ -1045,8 +1047,8 @@ textarea::placeholder {
     /* Mobile default: match the mobile background image full displayed height (750 -> 826) */
     height: clamp(300px, calc(603 / 750 * 100vw), 603px);
     flex-shrink: 0;
-    margin-left: calc(-1 * clamp(15px, calc(30/750*100vw), 30px));
-    margin-right: calc(-1 * clamp(15px, calc(30/750*100vw), 30px));
+    margin-left: calc(-1 * clamp(15px, calc(30 / 750 * 100vw), 30px));
+    margin-right: calc(-1 * clamp(15px, calc(30 / 750 * 100vw), 30px));
   }
   .our-locations-review-mobile {
     width: 100%;
@@ -1055,10 +1057,10 @@ textarea::placeholder {
   }
   .our-locations-review-bubbles-container {
     position: absolute;
-    top: clamp(15px, calc(30/750*100vw), 30px);
-    left: clamp(15px, calc(30/750*100vw), 30px);
-    right: clamp(15px, calc(30/750*100vw), 30px);
-    bottom: clamp(15px, calc(30/750*100vw), 30px);
+    top: clamp(15px, calc(30 / 750 * 100vw), 30px);
+    left: clamp(15px, calc(30 / 750 * 100vw), 30px);
+    right: clamp(15px, calc(30 / 750 * 100vw), 30px);
+    bottom: clamp(15px, calc(30 / 750 * 100vw), 30px);
   }
   .our-locations-review-desktop {
     display: none;
@@ -1074,10 +1076,10 @@ textarea::placeholder {
     }
     .our-locations-review-bubbles-container {
       /* keep the existing padding but relative to the container that now matches image */
-      top: clamp(15px, calc(30/750*100vw), 30px);
-      left: clamp(15px, calc(30/750*100vw), 30px);
-      right: clamp(15px, calc(30/750*100vw), 30px);
-      bottom: clamp(15px, calc(30/750*100vw), 30px);
+      top: clamp(15px, calc(30 / 750 * 100vw), 30px);
+      left: clamp(15px, calc(30 / 750 * 100vw), 30px);
+      right: clamp(15px, calc(30 / 750 * 100vw), 30px);
+      bottom: clamp(15px, calc(30 / 750 * 100vw), 30px);
     }
   }
 
@@ -1142,12 +1144,13 @@ textarea::placeholder {
       width: clamp(
         320px,
         calc(
-          100vw - (
-            min(13.542vw, 260px) + /* main left padding */
-            min(35.938vw, 690px) + /* left column width */
-            min(2.188vw, 42px) +   /* gap between columns */
-            min(13.542vw, 260px)   /* main right padding */
-          )
+          100vw -
+            (
+              min(13.542vw, 260px) + /* main left padding */
+                min(35.938vw, 690px) + /* left column width */
+                min(2.188vw, 42px) + /* gap between columns */
+                min(13.542vw, 260px) /* main right padding */
+            )
         ),
         710px
       );
@@ -1333,7 +1336,8 @@ textarea::placeholder {
 /* Catering Form Container */
 .catering-form-container {
   width: 100%;
-  padding: clamp(16px, calc(24 / 750 * 100vw), 24px) clamp(30px, calc(60 / 750 * 100vw), 60px);
+  padding: clamp(16px, calc(24 / 750 * 100vw), 24px)
+    clamp(30px, calc(60 / 750 * 100vw), 60px);
 }
 @media (min-width: 768px) {
   .catering-form-container {
@@ -1384,19 +1388,19 @@ textarea::placeholder {
 
 /* Catering Typography */
 .catering-hero-title {
-  font-size: clamp(28px, calc(40 / 750 * 100vw), 40px);
+  font-size: clamp(30px, calc(42 / 750 * 100vw), 42px);
 }
 .catering-hero-subtitle {
-  font-size: clamp(20px, calc(28 / 750 * 100vw), 28px);
+  font-size: clamp(22px, calc(30 / 750 * 100vw), 30px);
 }
 .catering-hero-desc {
-  font-size: clamp(12px, calc(24 / 750 * 100vw), 24px);
+  font-size: clamp(14px, calc(26 / 750 * 100vw), 26px);
 }
 .catering-form-title {
-  font-size: clamp(20px, calc(28 / 750 * 100vw), 28px);
+  font-size: clamp(22px, calc(30 / 750 * 100vw), 30px);
 }
 .catering-form-desc {
-  font-size: clamp(10px, calc(14 / 750 * 100vw), 14px);
+  font-size: clamp(12px, calc(16 / 750 * 100vw), 16px);
 }
 @media (min-width: 768px) {
   .catering-form-title {
@@ -1409,19 +1413,19 @@ textarea::placeholder {
 
 /* Catering Form Labels and Inputs */
 .catering-form-label {
-  color: #1D1E1F;
+  color: #1d1e1f;
   font-style: normal;
   font-weight: 400;
   /* Mobile (750 baseline) */
-  font-size: clamp(16px, calc((26 / 750) * 100vw), 26px);
+  font-size: clamp(20px, calc((30 / 750) * 100vw), 30px);
   line-height: normal;
 }
 .catering-form-input,
 .catering-form-select {
   display: flex;
   align-items: center;
-  background: #FFF;
-  border: 1px solid #CCCFD7;
+  background: #fff;
+  border: 1px solid #cccfd7;
   /* Mobile (750 baseline) */
   width: clamp(280px, calc((630 / 750) * 100vw), 630px);
   height: clamp(40px, calc((70 / 750) * 100vw), 70px);
@@ -1433,21 +1437,21 @@ textarea::placeholder {
 }
 .catering-form-input::placeholder,
 .catering-form-select::placeholder {
-  color: #919AA5;
+  color: #919aa5;
   /* Mobile placeholder size */
-  font-size: clamp(14px, calc((24 / 750) * 100vw), 24px);
+  font-size: clamp(18px, calc((28 / 750) * 100vw), 28px);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 .catering-form-error {
-  font-size: clamp(12px, calc(16 / 750 * 100vw), 16px);
+  font-size: clamp(14px, calc(18 / 750 * 100vw), 18px);
 }
 .catering-form-hint {
-  font-size: clamp(10px, calc(14 / 750 * 100vw), 14px);
+  font-size: clamp(12px, calc(16 / 750 * 100vw), 16px);
 }
 .catering-form-submit {
-  font-size: clamp(17px, calc(34 / 750 * 100vw), 34px);
+  font-size: clamp(19px, calc(36 / 750 * 100vw), 36px);
 }
 @media (min-width: 768px) {
   .catering-form-label {
@@ -1475,7 +1479,7 @@ textarea::placeholder {
 /* Desktop (1024px+) overrides based on 1920 baseline */
 @media (min-width: 1024px) {
   .catering-form-label {
-    color: #1D1E1F;
+    color: #1d1e1f;
     font-size: 16px;
     line-height: 22px; /* 137.5% */
   }
@@ -1485,22 +1489,22 @@ textarea::placeholder {
     /* Desktop (1920 baseline) */
     display: flex;
     align-items: center;
-     /* Desktop fluid width using 1920 baseline = 340px.
+    /* Desktop fluid width using 1920 baseline = 340px.
        Calc: preferred = (340 / 1920) * 100vw. Clamp to sensible min/max. */
     /* reduce min width so at 1024px it isn't too wide */
     width: clamp(180px, calc((340 / 1920) * 100vw), 340px);
     height: 40px;
     padding: 0 10px;
     border-radius: 4px;
-    border: 1px solid #CCCFD7;
-    background: #FFF;
+    border: 1px solid #cccfd7;
+    background: #fff;
     font-size: 14px;
     box-sizing: border-box;
   }
 
   .catering-form-input::placeholder,
   .catering-form-select::placeholder {
-    color: #919AA5;
+    color: #919aa5;
     font-size: 14px;
     line-height: 22px; /* 157.143% */
   }
@@ -1575,15 +1579,16 @@ textarea::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: clamp(15px, calc(30/750*100vw), 30px) clamp(10px, calc(20/750*100vw), 20px);
+  padding: clamp(15px, calc(30 / 750 * 100vw), 30px)
+    clamp(10px, calc(20 / 750 * 100vw), 20px);
   gap: 20px;
-  margin-bottom: clamp(15px, calc(30/750*100vw), 30px);
+  margin-bottom: clamp(15px, calc(30 / 750 * 100vw), 30px);
 }
 .store-card-container:first-child {
-  margin-top: clamp(15px, calc(30/750*100vw), 30px);
+  margin-top: clamp(15px, calc(30 / 750 * 100vw), 30px);
 }
 .store-card-container:last-child {
-  margin-bottom: clamp(15px, calc(30/750*100vw), 30px);
+  margin-bottom: clamp(15px, calc(30 / 750 * 100vw), 30px);
 }
 @media (min-width: 768px) {
   .store-card-container {
@@ -1594,13 +1599,13 @@ textarea::placeholder {
     box-shadow: none;
     gap: 0;
     flex-direction: row;
-    margin-bottom: clamp(20px, calc(40/1920*100vw), 40px);
+    margin-bottom: clamp(20px, calc(40 / 1920 * 100vw), 40px);
   }
   .store-card-container:first-child {
-    margin-top: clamp(20px, calc(40/1920*100vw), 40px);
+    margin-top: clamp(20px, calc(40 / 1920 * 100vw), 40px);
   }
   .store-card-container:last-child {
-    margin-bottom: clamp(20px, calc(40/1920*100vw), 40px);
+    margin-bottom: clamp(20px, calc(40 / 1920 * 100vw), 40px);
   }
 }
 
@@ -1651,7 +1656,7 @@ textarea::placeholder {
 }
 
 .footer-link {
-  font-size: clamp(16px, calc(24 / 750 * 100vw), 24px);
+  font-size: clamp(18px, calc(26 / 750 * 100vw), 26px);
   font-weight: 400;
   color: white;
   text-decoration: none;
@@ -1674,7 +1679,7 @@ textarea::placeholder {
 
 .footer-copyright {
   text-align: center;
-  font-size: clamp(16px, calc(24 / 750 * 100vw), 24px);
+  font-size: clamp(18px, calc(26 / 750 * 100vw), 26px);
   font-weight: 400;
   color: white;
   margin-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
@@ -1719,30 +1724,30 @@ textarea::placeholder {
 
 /* Review Card */
 .review-card-avatar {
-  width: clamp(40px, calc(80/750*100vw), 80px);
-  height: clamp(40px, calc(80/750*100vw), 80px);
+  width: clamp(40px, calc(80 / 750 * 100vw), 80px);
+  height: clamp(40px, calc(80 / 750 * 100vw), 80px);
   border-radius: 9999px;
   object-fit: cover;
   flex-shrink: 0;
 }
 @media (min-width: 768px) {
   .review-card-avatar {
-    width: clamp(25px, calc(50/1920*100vw), 50px) !important;
-    height: clamp(25px, calc(50/1920*100vw), 50px) !important;
+    width: clamp(25px, calc(50 / 1920 * 100vw), 50px) !important;
+    height: clamp(25px, calc(50 / 1920 * 100vw), 50px) !important;
   }
 }
 
 .review-card-avatar-placeholder {
-  width: clamp(40px, calc(80/750*100vw), 80px);
-  height: clamp(40px, calc(80/750*100vw), 80px);
+  width: clamp(40px, calc(80 / 750 * 100vw), 80px);
+  height: clamp(40px, calc(80 / 750 * 100vw), 80px);
   border-radius: 9999px;
   background: #d1d5db;
   flex-shrink: 0;
 }
 @media (min-width: 768px) {
   .review-card-avatar-placeholder {
-    width: clamp(25px, calc(50/1920*100vw), 50px) !important;
-    height: clamp(25px, calc(50/1920*100vw), 50px) !important;
+    width: clamp(25px, calc(50 / 1920 * 100vw), 50px) !important;
+    height: clamp(25px, calc(50 / 1920 * 100vw), 50px) !important;
   }
 }
 
@@ -1750,11 +1755,11 @@ textarea::placeholder {
   color: black;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: clamp(15px, calc(30/750*100vw), 30px);
+  font-size: clamp(17px, calc(32 / 750 * 100vw), 32px);
 }
 @media (min-width: 768px) {
   .review-card-author {
-    font-size: clamp(10px, calc(20/1920*100vw), 20px) !important;
+    font-size: clamp(10px, calc(20 / 1920 * 100vw), 20px) !important;
   }
 }
 
@@ -1762,12 +1767,12 @@ textarea::placeholder {
   color: #86909c;
   font-weight: 400;
   line-height: normal;
-  margin-top: clamp(5px, calc(10/750*100vw), 10px);
-  font-size: clamp(9px, calc(22/750*100vw), 22px);
+  margin-top: clamp(5px, calc(10 / 750 * 100vw), 10px);
+  font-size: clamp(11px, calc(24 / 750 * 100vw), 24px);
 }
 @media (min-width: 768px) {
   .review-card-date {
-    font-size: clamp(8px, calc(16/1920*100vw), 16px) !important;
+    font-size: clamp(8px, calc(16 / 1920 * 100vw), 16px) !important;
   }
 }
 
@@ -1775,96 +1780,96 @@ textarea::placeholder {
   color: #4e5969;
   font-weight: 400;
   line-height: normal;
-  margin-top: clamp(7px, calc(14/750*100vw), 14px);
-  padding-bottom: clamp(10px, calc(20/750*100vw), 20px);
-  font-size: clamp(13px, calc(26/750*100vw), 26px);
+  margin-top: clamp(7px, calc(14 / 750 * 100vw), 14px);
+  padding-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
+  font-size: clamp(15px, calc(28 / 750 * 100vw), 28px);
 }
 @media (min-width: 768px) {
   .review-card-text {
-    font-size: clamp(9px, calc(18/1920*100vw), 18px) !important;
+    font-size: clamp(9px, calc(18 / 1920 * 100vw), 18px) !important;
   }
 }
 
 .review-card-photos {
-  padding-top: clamp(10px, calc(20/750*100vw), 20px);
+  padding-top: clamp(10px, calc(20 / 750 * 100vw), 20px);
 }
 @media (min-width: 768px) {
   .review-card-photos {
-    padding-top: clamp(15px, calc(30/1920*100vw), 30px) !important;
+    padding-top: clamp(15px, calc(30 / 1920 * 100vw), 30px) !important;
   }
 }
 
 /* Rating Stars - Review Bubble Variant */
 .rating-star-bubble {
   aspect-ratio: 1;
-  width: clamp(6px, calc(12/750*100vw), 12px);
-  height: clamp(6px, calc(12/750*100vw), 12px);
+  width: clamp(6px, calc(12 / 750 * 100vw), 12px);
+  height: clamp(6px, calc(12 / 750 * 100vw), 12px);
 }
 @media (min-width: 1024px) {
   .rating-star-bubble {
-    width: clamp(6px, calc(12/1920*100vw), 12px);
-    height: clamp(6px, calc(12/1920*100vw), 12px);
+    width: clamp(6px, calc(12 / 1920 * 100vw), 12px);
+    height: clamp(6px, calc(12 / 1920 * 100vw), 12px);
   }
 }
 
 .rating-text-bubble {
-  font-size: clamp(6px, calc(12/750*100vw), 12px);
+  font-size: clamp(8px, calc(14 / 750 * 100vw), 14px);
 }
 @media (min-width: 1024px) {
   .rating-text-bubble {
-    font-size: clamp(6px, calc(12/1920*100vw), 12px);
+    font-size: clamp(6px, calc(12 / 1920 * 100vw), 12px);
   }
 }
 
 /* Rating Stars - Review Card Variant (Our Locations) */
 .rating-star-review-card {
   aspect-ratio: 1;
-  width: clamp(14px, calc(28/750*100vw), 28px);
-  height: clamp(14px, calc(28/750*100vw), 28px);
+  width: clamp(14px, calc(28 / 750 * 100vw), 28px);
+  height: clamp(14px, calc(28 / 750 * 100vw), 28px);
 }
 @media (min-width: 1024px) {
   .rating-star-review-card {
-    width: clamp(9px, calc(18/1920*100vw), 18px);
-    height: clamp(9px, calc(18/1920*100vw), 18px);
+    width: clamp(9px, calc(18 / 1920 * 100vw), 18px);
+    height: clamp(9px, calc(18 / 1920 * 100vw), 18px);
   }
 }
 
 .rating-text-review-card {
-  font-size: clamp(11px, calc(22/750*100vw), 22px);
+  font-size: clamp(13px, calc(24 / 750 * 100vw), 24px);
 }
 @media (min-width: 1024px) {
   .rating-text-review-card {
-    font-size: clamp(8px, calc(16/1920*100vw), 16px);
+    font-size: clamp(8px, calc(16 / 1920 * 100vw), 16px);
   }
 }
 
 /* Rating Stars - Store Info Variant */
 .rating-star-store {
   aspect-ratio: 1;
-  width: clamp(9px, calc(18/750*100vw), 18px);
-  height: clamp(9px, calc(18/750*100vw), 18px);
+  width: clamp(9px, calc(18 / 750 * 100vw), 18px);
+  height: clamp(9px, calc(18 / 750 * 100vw), 18px);
 }
 @media (min-width: 1024px) {
   .rating-star-store {
-    width: clamp(9px, calc(18/1920*100vw), 18px);
-    height: clamp(9px, calc(18/1920*100vw), 18px);
+    width: clamp(9px, calc(18 / 1920 * 100vw), 18px);
+    height: clamp(9px, calc(18 / 1920 * 100vw), 18px);
   }
 }
 
 .rating-text-store {
-  font-size: clamp(8px, calc(16/750*100vw), 16px);
+  font-size: clamp(10px, calc(18 / 750 * 100vw), 18px);
 }
 @media (min-width: 1024px) {
   .rating-text-store {
-    font-size: clamp(8px, calc(16/1920*100vw), 16px);
+    font-size: clamp(8px, calc(16 / 1920 * 100vw), 16px);
   }
 }
 
 /* Legacy rating styles - kept for backward compatibility */
 .rating-star-responsive {
   aspect-ratio: 1;
-  width: clamp(8px, calc(28/750*100vw), 28px);
-  height: clamp(8px, calc(28/750*100vw), 28px);
+  width: clamp(8px, calc(28 / 750 * 100vw), 28px);
+  height: clamp(8px, calc(28 / 750 * 100vw), 28px);
 }
 @media (min-width: 768px) {
   .rating-star-responsive {
@@ -1875,8 +1880,8 @@ textarea::placeholder {
 
 .rating-star-review-bubble {
   aspect-ratio: 1;
-  width: clamp(8px, calc(12/750*100vw), 12px);
-  height: clamp(8px, calc(12/750*100vw), 12px);
+  width: clamp(8px, calc(12 / 750 * 100vw), 12px);
+  height: clamp(8px, calc(12 / 750 * 100vw), 12px);
 }
 @media (min-width: 768px) {
   .rating-star-review-bubble {
@@ -1896,11 +1901,11 @@ textarea::placeholder {
 }
 
 .responsive-rating-text {
-  font-size: clamp(10px, calc(16 / 750 * 100vw), 16px);
+  font-size: clamp(12px, calc(18 / 750 * 100vw), 18px);
 }
 
 .responsive-review-rating-text {
-  font-size: clamp(8px, calc(22/750*100vw), 22px);
+  font-size: clamp(10px, calc(24 / 750 * 100vw), 24px);
 }
 @media (min-width: 768px) {
   .responsive-review-rating-text {
@@ -1909,7 +1914,7 @@ textarea::placeholder {
 }
 
 .responsive-review-bubble-rating-text {
-  font-size: clamp(8px, calc(12/750*100vw), 12px);
+  font-size: clamp(10px, calc(14 / 750 * 100vw), 14px);
 }
 @media (min-width: 768px) {
   .responsive-review-bubble-rating-text {
@@ -1928,8 +1933,8 @@ textarea::placeholder {
   position: absolute;
   inset: 0;
   border-radius: 6px 6px 0 6px;
-  background: rgba(255, 255, 255, 0.50);
-  box-shadow: 0 4px 4px 0 rgba(95, 65, 65, 0.20);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 4px 0 rgba(95, 65, 65, 0.2);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   z-index: 2; /* above avatar (z=1) but below content (z=3) */
@@ -1949,14 +1954,14 @@ textarea::placeholder {
 
 /* Review Card Photo Responsive */
 .review-card-photo {
-  width: clamp(80px, calc(160/750*100vw), 160px);
-  height: clamp(60px, calc(120/750*100vw), 120px);
+  width: clamp(80px, calc(160 / 750 * 100vw), 160px);
+  height: clamp(60px, calc(120 / 750 * 100vw), 120px);
   flex-shrink: 0;
 }
 @media (min-width: 768px) {
   .review-card-photo {
-    width: clamp(106px, calc(212/1920*100vw), 212px) !important;
-    height: clamp(70.5px, calc(141/1920*100vw), 141px) !important;
+    width: clamp(106px, calc(212 / 1920 * 100vw), 212px) !important;
+    height: clamp(70.5px, calc(141 / 1920 * 100vw), 141px) !important;
   }
 }
 
@@ -2000,20 +2005,20 @@ textarea::placeholder {
   font-size: var(--mobile-fs-base);
 }
 .content-page-body {
-  font-size: clamp(16px, calc((32 / 750) * 100vw), 32px);
+  font-size: clamp(20px, calc((36 / 750) * 100vw), 36px);
 }
 @media (min-width: 768px) {
   .content-page-title {
-    font-size: clamp(10px, calc(20/1920*100vw), 20px);
-    margin-top: clamp(15px, calc(30/1920*100vw), 30px);
-    margin-left: clamp(15px, calc(30/1920*100vw), 30px);
+    font-size: clamp(10px, calc(20 / 1920 * 100vw), 20px);
+    margin-top: clamp(15px, calc(30 / 1920 * 100vw), 30px);
+    margin-left: clamp(15px, calc(30 / 1920 * 100vw), 30px);
   }
   .content-page-meta {
-    font-size: clamp(6px, calc(12/1920*100vw), 12px);
-    margin-left: clamp(15px, calc(30/1920*100vw), 30px);
+    font-size: clamp(6px, calc(12 / 1920 * 100vw), 12px);
+    margin-left: clamp(15px, calc(30 / 1920 * 100vw), 30px);
   }
   .content-page-body {
-    font-size: clamp(8px, calc(16/1920*100vw), 16px);
+    font-size: clamp(8px, calc(16 / 1920 * 100vw), 16px);
   }
 }
 
@@ -2038,10 +2043,10 @@ textarea::placeholder {
   }
 }
 .about-hotlob-card-title {
-  font-size: clamp(18px, calc(24/750*100vw), 24px);
+  font-size: clamp(20px, calc(26 / 750 * 100vw), 26px);
 }
 .about-hotlob-card-desc {
-  font-size: clamp(15px, calc(18/750*100vw), 18px);
+  font-size: clamp(17px, calc(20 / 750 * 100vw), 20px);
 }
 
 /* CateringSection */
@@ -2050,7 +2055,7 @@ textarea::placeholder {
 }
 
 .catering-content-text {
-  font-size: clamp(14px, calc(24 / 750 * 100vw), 24px);
+  font-size: clamp(16px, calc(26 / 750 * 100vw), 26px);
   line-height: clamp(26px, calc(52 / 750 * 100vw), 52px);
 }
 

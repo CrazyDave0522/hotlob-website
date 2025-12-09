@@ -65,15 +65,15 @@ export default function Hero({
           <div className="flex flex-col gap-5" style={{ maxWidth: "calc(684/750*100vw)" }}>
             <h1
               className={`font-semibold leading-[154%] ${
-                showOverlay ? "text-white" : "text-[#242424]"
-              }`}
-              style={{
-                fontSize: "clamp(22px, calc(28/750*100vw), 28px)",
-                maxWidth: "calc(500/750*100vw)", // Mobile title width cap matches description
-                ...(showOverlay
-                  ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
-                  : {}),
-              }}
+                  showOverlay ? "text-white" : "text-[#242424]"
+                }`}
+                style={{
+                  fontSize: "clamp(24px, calc(30/750*100vw), 30px)",
+                  maxWidth: "calc(500/750*100vw)", // Mobile title width cap matches description
+                  ...(showOverlay
+                    ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
+                    : {}),
+                }}
             >
               {title}
             </h1>
@@ -82,7 +82,7 @@ export default function Hero({
                 showOverlay ? "text-white" : "text-[#999]"
               }`}
               style={{
-                fontSize: "clamp(16px, calc(20/750*100vw), 20px)",
+                fontSize: "clamp(18px, calc(22/750*100vw), 22px)",
                 maxWidth: "calc(500/750*100vw)", // Mobile text width cap to avoid full-width paragraphs
                 ...(showOverlay
                   ? { textShadow: "0 2px 4px rgba(0, 0, 0, 0.25)" }
@@ -102,7 +102,7 @@ export default function Hero({
             className="absolute z-10 bottom-2.5 left-0"
             style={{ paddingLeft: "calc(30/750*100vw)" }} // Mobile left padding
           >
-            <p className="text-[#C9CDD4] text-[12px] font-normal leading-none text-left">
+            <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-left">
               {footerNote}
             </p>
           </div>

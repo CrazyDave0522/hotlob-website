@@ -544,7 +544,7 @@ export default function CateringForm() {
             type="submit"
             disabled={isSubmitting}
             className="catering-form-submit order-button-base rounded-[40px] md:rounded-[30px]"
-            style={{ width: "clamp(280px, calc(600/750*100vw), 600px)", height: "clamp(40px, calc(80/750*100vw), 80px)", fontSize: "clamp(17px, calc(34/750*100vw), 34px)" }}
+            style={{ width: "clamp(280px, calc(600/750*100vw), 600px)", height: "clamp(40px, calc(80/750*100vw), 80px)", fontSize: "clamp(19px, calc(36/750*100vw), 36px)" }}
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
