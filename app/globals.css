@@ -1409,15 +1409,36 @@ textarea::placeholder {
 
 /* Catering Form Labels and Inputs */
 .catering-form-label {
-  font-size: clamp(12px, calc(20 / 750 * 100vw), 20px);
+  color: #1D1E1F;
+  font-style: normal;
+  font-weight: 400;
+  /* Mobile (750 baseline) */
+  font-size: clamp(16px, calc((26 / 750) * 100vw), 26px);
+  line-height: normal;
 }
 .catering-form-input,
 .catering-form-select {
-  font-size: clamp(12px, calc(16 / 750 * 100vw), 16px);
+  display: flex;
+  align-items: center;
+  background: #FFF;
+  border: 1px solid #CCCFD7;
+  /* Mobile (750 baseline) */
+  width: clamp(280px, calc((630 / 750) * 100vw), 630px);
+  height: clamp(40px, calc((70 / 750) * 100vw), 70px);
+  padding: 0 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
 }
 .catering-form-input::placeholder,
 .catering-form-select::placeholder {
-  font-size: clamp(12px, calc(16 / 750 * 100vw), 16px);
+  color: #919AA5;
+  /* Mobile placeholder size */
+  font-size: clamp(14px, calc((24 / 750) * 100vw), 24px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .catering-form-error {
   font-size: clamp(12px, calc(16 / 750 * 100vw), 16px);
@@ -1451,6 +1472,56 @@ textarea::placeholder {
   }
 }
 
+/* Desktop (1024px+) overrides based on 1920 baseline */
+@media (min-width: 1024px) {
+  .catering-form-label {
+    color: #1D1E1F;
+    font-size: 16px;
+    line-height: 22px; /* 137.5% */
+  }
+
+  .catering-form-input,
+  .catering-form-select {
+    /* Desktop (1920 baseline) */
+    display: flex;
+    align-items: center;
+     /* Desktop fluid width using 1920 baseline = 340px.
+       Calc: preferred = (340 / 1920) * 100vw. Clamp to sensible min/max. */
+    /* reduce min width so at 1024px it isn't too wide */
+    width: clamp(180px, calc((340 / 1920) * 100vw), 340px);
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: 1px solid #CCCFD7;
+    background: #FFF;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .catering-form-input::placeholder,
+  .catering-form-select::placeholder {
+    color: #919AA5;
+    font-size: 14px;
+    line-height: 22px; /* 157.143% */
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Ensure time input/select matches other desktop inputs */
+  .catering-form-select {
+    height: 40px !important;
+    padding-left: 0.625rem; /* match px-2.5 */
+    padding-right: 0.625rem;
+    font-size: min(0.833vw, 16px);
+    box-sizing: border-box;
+  }
+
+  /* Align native time input's inner text vertically */
+  input[type="time"].catering-form-select {
+    line-height: normal;
+  }
+}
+
 .catering-form-container form {
   gap: clamp(15px, calc(30 / 750 * 100vw), 30px);
 }
@@ -1458,6 +1529,22 @@ textarea::placeholder {
   .catering-form-container form {
     gap: 30px;
   }
+}
+
+/* Visually indicate disabled state for catering selects */
+.catering-form-select:disabled,
+.catering-form-select[disabled] {
+  opacity: 0.6;
+  background: #f3f4f6; /* light gray */
+  color: #6b7280; /* muted text */
+  cursor: not-allowed;
+  border-color: #d1d5db;
+}
+
+/* Ensure focus ring doesn't show for disabled inputs */
+.catering-form-select:disabled:focus {
+  box-shadow: none;
+  outline: none;
 }
 
 /* Our Locations Section */

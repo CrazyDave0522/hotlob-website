@@ -8,22 +8,26 @@ import {
 } from "@/lib/utils/geo";
 import { useToast } from "@/components/ui/use-toast";
 import { sendCateringOrderEmail } from "@/lib/email";
-import { getStoresBasic } from "@/lib/getStores";
-import { CATERING_LAYOUT } from "../constants";
+import { getStoresWithDetails, StoreWithData } from "@/lib/getStores";
+import { parseOpeningHoursArray, generateSlotsForRanges } from "@/lib/parseOpeningHours";
 
 interface Store {
   id: string;
   name: string;
   latitude: number | null;
   longitude: number | null;
+  openingHoursWeekdayText?: string[] | null;
 }
 
-// Calculate minimum date (2 days from today)
+// Calculate minimum date (2 days from today) using local timezone
 function getMinCateringDate(): string {
   const today = new Date();
   const minDate = new Date(today);
   minDate.setDate(minDate.getDate() + 2); // Add 2 days
-  return minDate.toISOString().split("T")[0];
+  const y = minDate.getFullYear();
+  const m = String(minDate.getMonth() + 1).padStart(2, "0");
+  const d = String(minDate.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
 }
 
 // Validate Australian phone number (mobile or landline)
@@ -45,6 +49,8 @@ function validateAustralianPhone(phone: string): string {
 export default function CateringForm() {
   const { success, error: showError, warning } = useToast();
   const [stores, setStores] = useState<Store[]>([]);
+  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+  const [timeDisabledHint, setTimeDisabledHint] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     storeId: "",
     firstName: "",
@@ -62,7 +68,7 @@ export default function CateringForm() {
   // Fetch stores on component mount
   useEffect(() => {
     async function fetchStores() {
-      const storesData = await getStoresBasic({ includeExtendedInfo: true });
+      const storesData = await getStoresWithDetails();
 
       if (storesData.length === 0) {
         showError("Failed to load stores. Please refresh the page.");
@@ -70,11 +76,12 @@ export default function CateringForm() {
       }
 
       // Extract basic store info for the form
-      const basicStores: Store[] = storesData.map((store) => ({
+      const basicStores: Store[] = (storesData as StoreWithData[]).map((store) => ({
         id: store.id,
         name: store.name,
         latitude: store.latitude || null,
         longitude: store.longitude || null,
+        openingHoursWeekdayText: store.openingHoursWeekdayText ?? null,
       }));
 
       setStores(basicStores);
@@ -138,6 +145,15 @@ export default function CateringForm() {
       return;
     }
 
+    // Validate pickupTime against availableSlots
+    if (formData.pickupTime) {
+      if (availableSlots.length > 0 && !availableSlots.includes(formData.pickupTime)) {
+        showError("Selected pickup time is not available for the chosen store/date. Please select a different time.");
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
     try {
       const { error } = await supabase.from("catering_orders").insert([
         {
@@ -154,10 +170,8 @@ export default function CateringForm() {
       if (error) throw error;
 
       // Get store details for email
-      const allStores = await getStoresBasic({ includeExtendedInfo: true });
-      const storeData = allStores.find(
-        (store) => store.id === formData.storeId
-      );
+      const allStores = await getStoresWithDetails();
+      const storeData = (allStores as StoreWithData[]).find((s) => s.id === formData.storeId);
 
       if (!storeData?.email) {
         console.error("Store email not found for store:", formData.storeId);
@@ -213,6 +227,49 @@ export default function CateringForm() {
     }));
   };
 
+  // Recompute available slots when storeId or cateringDate changes
+  useEffect(() => {
+    const { storeId, cateringDate, pickupTime } = formData;
+    // reset hints
+    setTimeDisabledHint(null);
+    if (!storeId || !cateringDate) {
+      setAvailableSlots([]);
+      return;
+    }
+
+    const store = stores.find((s) => s.id === storeId);
+    // get weekday name from date (local)
+    const date = new Date(cateringDate + "T00:00:00");
+    const weekdayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const weekday = weekdayNames[date.getDay()];
+
+    const weekdayText = store?.openingHoursWeekdayText ?? null;
+    const parsed = parseOpeningHoursArray(weekdayText);
+    const ranges = parsed[weekday] ?? [];
+    if (!ranges || ranges.length === 0) {
+      // closed or no data
+      setAvailableSlots([]);
+      setTimeDisabledHint("This store is closed on the selected date");
+      // clear previous selection if any
+      setFormData((prev) => ({ ...prev, pickupTime: "" }));
+      return;
+    }
+
+    const slots = generateSlotsForRanges(ranges, 30);
+    if (!slots || slots.length === 0) {
+      setAvailableSlots([]);
+      setTimeDisabledHint("No available pickup slots for the selected date");
+      setFormData((prev) => ({ ...prev, pickupTime: "" }));
+      return;
+    }
+
+    setAvailableSlots(slots);
+    // if current selected time no longer valid, clear it
+    if (pickupTime && !slots.includes(pickupTime)) {
+      setFormData((prev) => ({ ...prev, pickupTime: "" }));
+    }
+  }, [formData, stores]);
+
   return (
     <div
       id="catering-form"
@@ -230,7 +287,6 @@ export default function CateringForm() {
             <label
               htmlFor="storeId"
               className="catering-form-label block font-medium text-gray-700"
-              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Select a store
             </label>
@@ -240,8 +296,7 @@ export default function CateringForm() {
               value={formData.storeId}
               onChange={handleChange}
               required
-              className="catering-form-select w-full md:h-10 px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent"
-              style={{ width: 'var(--store-select-width, 100%)', height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
+              className="catering-form-select w-full"
             >
             <option value="">Select a store</option>
             {stores.map((store) => (
@@ -259,7 +314,6 @@ export default function CateringForm() {
             <label
               htmlFor="firstName"
               className="catering-form-label block font-medium text-gray-700"
-              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               First name
             </label>
@@ -270,8 +324,7 @@ export default function CateringForm() {
               value={formData.firstName}
               onChange={handleChange}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
-              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
+              className="catering-form-input w-full"
               placeholder="Enter first name"
             />
           </div>
@@ -283,7 +336,6 @@ export default function CateringForm() {
             <label
               htmlFor="lastName"
               className="catering-form-label block font-medium text-gray-700"
-              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Last name
             </label>
@@ -294,8 +346,7 @@ export default function CateringForm() {
               value={formData.lastName}
               onChange={handleChange}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
-              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
+              className="catering-form-input w-full"
               placeholder="Enter last name"
             />
           </div>
@@ -307,7 +358,6 @@ export default function CateringForm() {
             <label
               htmlFor="email"
               className="catering-form-label block font-medium text-gray-700"
-              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Email
             </label>
@@ -318,8 +368,7 @@ export default function CateringForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
-              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
+              className="catering-form-input w-full"
               placeholder="your@email.com"
             />
           </div>
@@ -331,7 +380,6 @@ export default function CateringForm() {
             <label
               htmlFor="phone"
               className="catering-form-label block font-medium text-gray-700"
-              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Phone
             </label>
@@ -346,10 +394,7 @@ export default function CateringForm() {
                 setErrors((prev) => ({ ...prev, phone: error }));
               }}
               required
-              className={`w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input ${
-                errors.phone ? "border-red-500" : "border-[#CCCFD7]"
-              }`}
-              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
+              className={`catering-form-input w-full ${errors.phone ? "border-red-500" : "border-[#CCCFD7]"}`}
               placeholder="+61 xxx xxx xxx"
             />
             {errors.phone && (
@@ -364,7 +409,6 @@ export default function CateringForm() {
             <label
               htmlFor="cateringDate"
               className="catering-form-label block font-medium text-gray-700"
-              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Catering date
             </label>
@@ -376,8 +420,7 @@ export default function CateringForm() {
               onChange={handleChange}
               min={getMinCateringDate()}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-input"
-              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
+              className="catering-form-input w-full"
             />
             <p className="catering-form-hint text-gray-500 mt-1">
               Orders must be placed at least 2 days in advance
@@ -391,34 +434,30 @@ export default function CateringForm() {
             <label
               htmlFor="pickupTime"
               className="catering-form-label block font-medium text-gray-700"
-              style={{ marginBottom: "clamp(4px, calc(8/750*100vw), 8px)" }}
             >
               Pick up time on catering date
             </label>
-            <select
+            {/* Native time input with 30-minute step */}
+            <input
+              type="time"
               id="pickupTime"
               name="pickupTime"
               value={formData.pickupTime}
               onChange={handleChange}
               required
-              className="w-full md:h-10 md:max-w-[340px] px-2.5 items-center rounded-sm border border-[#CCCFD7] bg-white focus:ring-2 focus:ring-[#EA4148] focus:border-transparent catering-form-select"
-              style={{ height: 'clamp(40px, calc(70/750*100vw), 70px)' }}
-            >
-            <option value="">Select time</option>
-            <option value="09:00">09:00 AM</option>
-            <option value="10:00">10:00 AM</option>
-            <option value="11:00">11:00 AM</option>
-            <option value="12:00">12:00 PM</option>
-            <option value="13:00">01:00 PM</option>
-            <option value="14:00">02:00 PM</option>
-            <option value="15:00">03:00 PM</option>
-            <option value="16:00">04:00 PM</option>
-            <option value="17:00">05:00 PM</option>
-            <option value="18:00">06:00 PM</option>
-            <option value="19:00">07:00 PM</option>
-            <option value="20:00">08:00 PM</option>
-            <option value="21:00">09:00 PM</option>
-          </select>
+              step={1800}
+              min={availableSlots.length ? availableSlots[0] : undefined}
+              max={availableSlots.length ? availableSlots[availableSlots.length - 1] : undefined}
+              className="catering-form-select w-full"
+              disabled={availableSlots.length === 0}
+            />
+            {timeDisabledHint ? (
+              <p className="catering-form-hint text-gray-500 mt-1">{timeDisabledHint}</p>
+            ) : (
+              availableSlots.length > 0 && (
+                <p className="catering-form-hint text-gray-500 mt-1">Available from {availableSlots[0]} to {availableSlots[availableSlots.length - 1]}</p>
+              )
+            )}
           </div>
         </div>
 
