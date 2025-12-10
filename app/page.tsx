@@ -1,9 +1,9 @@
-import Hero from "./see-our-food/components/hero";
-import AboutHotlob from "./components/AboutHotlob";
-import SeeOurFoodSection from "./components/SeeOurFoodSection";
-import CateringSection from "./components/CateringSection";
-import OurLocationsSection from "./components/OurLocationsSection";
-import NewsSection from "./components/NewsSection";
+import Hero from "@/app/components/Hero";
+import AboutHotlob from "./home/AboutHotlob";
+import SeeOurFoodSection from "./home/SeeOurFoodSection";
+import CateringSection from "./home/CateringSection";
+import OurLocationsSection from "./home/OurLocationsSection";
+import NewsSection from "./home/NewsSection";
 import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
 import type { Dish, RawDish } from "@/types/types";

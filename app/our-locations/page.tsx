@@ -1,6 +1,3 @@
-import Hero from "@/app/see-our-food/components/hero";
-import StoreCard from "./components/store-card";
-import ReviewsSection from "./components/reviews/ReviewsSection";
 import { getStoresWithDetails } from "@/lib/getStores";
 import { getReviews } from "@/lib/getReviews";
 import OurLocationsClient from "./OurLocationsClient";

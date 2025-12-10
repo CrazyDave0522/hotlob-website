@@ -1,5 +1,5 @@
 import { supabase } from "../../lib/supabaseClient";
-import Hero from "../see-our-food/components/hero";
+import Hero from "@/app/components/Hero";
 import NewsListClient from "./components/news-list-client";
 
 type NewsRow = {

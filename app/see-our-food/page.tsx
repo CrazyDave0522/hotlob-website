@@ -1,5 +1,5 @@
 // app/see-our-food/page.tsx
-import Hero from "./components/hero";
+import Hero from "@/app/components/Hero";
 import FoodSection from "./components/food-section";
 import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";

@@ -27,12 +27,8 @@ function to24Hour(time: string, ampm?: string): string | null {
   return `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
 }
 
-function parseTimeToken(token: string): { time: string; ampm?: string } | null {
-  // match e.g. '10:00 AM' or '10:00AM' or '10:00'
-  const m = token.match(/(\d{1,2}:\d{2})\s*(AM|PM)?/i);
-  if (!m) return null;
-  return { time: m[1], ampm: m[2] };
-}
+// Note: a small helper for token parsing was removed because the main parsing
+// pipeline uses direct regex matches for full ranges. Keep file focused.
 
 export function parseOpeningHoursArray(arr: string[] | null): WeekdayRanges {
   const result: WeekdayRanges = {
@@ -108,4 +104,6 @@ export function generateSlotsForRanges(ranges: TimeRange[], intervalMinutes = 30
   return Array.from(new Set(slots)).sort();
 }
 
-export default { parseOpeningHoursArray, generateSlotsForRanges };
+const OpeningHours = { parseOpeningHoursArray, generateSlotsForRanges };
+
+export default OpeningHours;

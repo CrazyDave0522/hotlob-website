@@ -57,8 +57,9 @@ export function useOrderFlow() {
       } else {
         setModalOpen(true);
       }
-    } catch (err) {
+    } catch (e) {
       // Geolocation failure => open modal for manual selection
+      console.error('Geolocation failed', e);
       setModalOpen(true);
     } finally {
       setLocating(false);
