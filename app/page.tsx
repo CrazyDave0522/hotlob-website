@@ -12,8 +12,6 @@ import { getStoresWithDetails } from "@/lib/getStores";
 import { getReviews } from "@/lib/getReviews";
 import { stripHtmlTags, getSmartExcerpt } from "@/lib/utils/stripHtml";
 
-export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: revalidate data
-
 export default async function Home() {
   // Fetch dish data from database (reusing see-our-food page query logic)
   const { data: dishesRaw, error: dishError } = await supabase

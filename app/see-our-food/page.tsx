@@ -5,8 +5,6 @@ import { supabase } from "@/lib/supabaseClient";
 import { CONSTANTS } from "@/lib/constants";
 import type { Dish, RawDish, AllergenTag, CategoryOption } from "@/types/types";
 
-export const revalidate = CONSTANTS.REVALIDATE_TIME; // ISR: revalidate data
-
 export default async function SeeOurFoodPage() {
   /* ========== Fetch allergen tags and dishes (with images/allergens/categories) in parallel ========== */
   const [
