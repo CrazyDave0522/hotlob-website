@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react"; // only priority prop logic retained
+// no hooks required in this component
 import Image from "next/image";
 import { Dish } from "@/types/types";
 import { CONSTANTS } from "@/lib/constants";

@@ -1,6 +1,6 @@
 "use client";
 
-import Hero from "@/app/see-our-food/components/hero";
+import Hero from "@/app/components/Hero";
 import StoreCard from "./components/store-card";
 import ReviewsSection from "./components/reviews/ReviewsSection";
 

@@ -30,7 +30,7 @@ export default function CateringPage() {
       {/* Mobile Form section */}
       <div
         className="relative w-full mx-auto md:hidden bg-[#D43B41] overflow-hidden"
-        style={{ height: 'clamp(675px, calc(1350/750*100vw), 1350px)' }}
+        style={{ height: 'clamp(760px, calc(1350/750*100vw), 1350px)' }}
       >
         <div className="absolute inset-0" aria-hidden="true">
           <Image
