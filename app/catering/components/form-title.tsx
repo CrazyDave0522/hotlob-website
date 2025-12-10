@@ -18,7 +18,7 @@ export default function FormTitle() {
           fontSize: "clamp(14px, calc(26/750*100vw), 26px)"
         }}
       >
-        Please note that orders need to be placed 48 hours (business days)
+        Please note that orders need to be placed 48 hours (2 business days)
         ahead of pick up day.
       </p>
       <style jsx>{`
