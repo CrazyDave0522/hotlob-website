@@ -12,8 +12,15 @@ export const CONSTANTS = {
     ALL_TAG_ICON: '/images/icons/tag-all.svg',
     ALL_TAG_ICON_ACTIVE: '/images/icons/tag-all-active.svg',
 
-    // Revalidation
-    REVALIDATE_TIME: 60, // seconds
+    // Revalidation (seconds)
+    // Note: App Router route-segment exports (e.g. `export const revalidate`)
+    // must be numeric literals in the corresponding `layout` files so
+    // Next.js can statically validate them. The values used in layouts are
+    // literal numbers; they were previously mirrored here for reference.
+    // These mirrored constants were removed because they cannot be used
+    // directly for route-segment exports. Keep this section if you want a
+    // documented reference for TTLs; it's currently intentionally minimal.
+    REVALIDATE_TIME: 60, // default / fallback
 
     // UI
     MAX_VISIBLE_TAGS: 6,

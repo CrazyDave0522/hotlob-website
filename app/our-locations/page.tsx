@@ -2,8 +2,6 @@ import { getStoresWithDetails } from "@/lib/getStores";
 import { getReviews } from "@/lib/getReviews";
 import OurLocationsClient from "./OurLocationsClient";
 
-export const revalidate = 86400; // 24 hours ISR
-
 export default async function OurLocationsPage() {
   // Fetch all stores with photos and ratings, sorted by rating
   const storesWithData = await getStoresWithDetails();
