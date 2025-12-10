@@ -273,6 +273,21 @@ textarea::placeholder {
     cursor: not-allowed;
   }
 
+  /* Pressed state (keyboard/mouse press) */
+  .order-button-base.pressed,
+  .order-button-mobile.pressed {
+    background: linear-gradient(180deg, #fb8225 0%, #d51d24 100%);
+    box-shadow: 5px 5px 0 0 rgba(175, 23, 23, 0.24);
+    transform: scale(0.98);
+  }
+
+  /* Locating state while geolocation is in progress */
+  .order-button-base.locating,
+  .order-button-mobile.locating {
+    background: rgba(234, 65, 72, 0.6) !important;
+    cursor: not-allowed;
+  }
+
   /* Order button mobile styles */
   .order-button-mobile {
     display: flex;

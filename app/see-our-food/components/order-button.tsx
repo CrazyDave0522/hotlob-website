@@ -55,14 +55,9 @@ export default function OrderButton({ stores, fallbackUrl }: OrderButtonProps) {
     <>
       {/* Mobile button */}
       <button
-        className="button-click order-button-mobile md:hidden"
+        className={`button-click order-button-base order-button-mobile md:hidden ${isPressed ? "pressed" : ""} ${locating ? "locating" : ""}`}
         onClick={handleClick}
         disabled={locating}
-        style={{
-          background: locating ? 'rgba(234, 65, 72, 0.6)' : (isPressed ? 'linear-gradient(180deg, #fb8225 0%, #d51d24 100%)' : 'linear-gradient(90deg, #ea4148 0%, #ffa159 100%)'),
-          boxShadow: isPressed ? '5px 5px 0 0 rgba(175, 23, 23, 0.24)' : '3px 3px 0 0 rgba(175, 23, 23, 0.16)',
-          cursor: locating ? 'not-allowed' : 'pointer',
-        }}
         onMouseDown={() => setIsPressed(true)}
         onMouseUp={() => setIsPressed(false)}
         onMouseLeave={() => setIsPressed(false)}
@@ -71,14 +66,9 @@ export default function OrderButton({ stores, fallbackUrl }: OrderButtonProps) {
       </button>
       {/* Desktop button */}
       <button
-        className="button-click order-button-base order-button-default hidden md:flex"
+        className={`button-click order-button-base order-button-default hidden md:flex ${isPressed ? "pressed" : ""} ${locating ? "locating" : ""}`}
         onClick={handleClick}
         disabled={locating}
-        style={{
-          background: locating ? 'rgba(234, 65, 72, 0.6)' : (isPressed ? 'linear-gradient(180deg, #fb8225 0%, #d51d24 100%)' : 'linear-gradient(90deg, #ea4148 0%, #ffa159 100%)'),
-          boxShadow: isPressed ? '5px 5px 0 0 rgba(175, 23, 23, 0.24)' : '3px 3px 0 0 rgba(175, 23, 23, 0.16)',
-          cursor: locating ? 'not-allowed' : 'pointer',
-        }}
         onMouseDown={() => setIsPressed(true)}
         onMouseUp={() => setIsPressed(false)}
         onMouseLeave={() => setIsPressed(false)}
