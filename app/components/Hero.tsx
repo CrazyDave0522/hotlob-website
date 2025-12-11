@@ -51,7 +51,7 @@ export default function Hero({
             alt=""
             fill
             priority
-            style={{ objectFit: "cover" }}
+            className="object-cover"
           />
         )}
 
@@ -100,7 +100,7 @@ export default function Hero({
             alt=""
             fill
             priority
-            style={{ objectFit: "cover" }}
+            className="object-cover"
           />
         )}
 
