@@ -418,6 +418,41 @@ textarea::placeholder {
     }
   }
 
+    /* News card centralized responsive helpers */
+    .news-card-mobile {
+      border-radius: 20px;
+      height: clamp(345px, calc(690 / 750 * 100vw), 690px);
+    }
+
+    .news-card-cover {
+      width: clamp(345px, calc(690 / 750 * 100vw), 690px);
+      height: clamp(170px, calc(340 / 750 * 100vw), 340px);
+      flex-shrink: 0;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .news-card-content-padding {
+      padding: clamp(15px, calc(30 / 750 * 100vw), 30px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px);
+    }
+
+    .news-card-title-mobile {
+      margin-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
+    }
+
+    .news-card-date-mobile {
+      margin-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
+    }
+
+    .news-card-desktop-image {
+      width: 42.857%;
+      height: 100%;
+      border-radius: min(1.042vw, 20px) 0 0 min(1.042vw, 20px);
+    }
+
+    .news-card-excerpt-desktop-margin {
+      margin-top: min(0.833vw, 16px);
+    }
+
   /* Order Now button base styles */
   .order-button-base {
     display: flex;

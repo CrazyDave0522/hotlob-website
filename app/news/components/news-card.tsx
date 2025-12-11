@@ -27,10 +27,9 @@ function MobileNewsCard({
       target="_blank"
       rel="noopener noreferrer"
       className="group flex flex-col w-full bg-white shadow-[0_0_20px_0_rgba(0,0,0,0.05)] hover:shadow-[0_0_30px_0_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden news-card-mobile"
-      style={{ borderRadius: "20px", height: "clamp(345px, calc(690 / 750 * 100vw), 690px)" }}
     >
       {/* Cover Image */}
-      <div className="relative overflow-hidden news-card-cover" style={{ width: "clamp(345px, calc(690 / 750 * 100vw), 690px)", height: "clamp(170px, calc(340 / 750 * 100vw), 340px)", flexShrink: 0, borderRadius: "20px 20px 0 0" }}>
+      <div className="relative overflow-hidden news-card-cover" >
         <Image
           src={coverImageUrl}
           alt={title}
@@ -41,14 +40,14 @@ function MobileNewsCard({
       </div>
 
       {/* Content */}
-      <div className="flex flex-col flex-1 news-card-content-padding" style={{ padding: "clamp(15px, calc(30 / 750 * 100vw), 30px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px)" }}>
+      <div className="flex flex-col flex-1 news-card-content-padding">
         {/* Title */}
-        <h2 className="news-card-title-mobile text-[#1D1E1F] font-semibold leading-normal group-hover:text-[#EA4148] transition-colors mb-clamp-20" style={{ marginBottom: "clamp(10px, calc(20 / 750 * 100vw), 20px)" }}>
+        <h2 className="news-card-title-mobile text-[#1D1E1F] font-semibold leading-normal group-hover:text-[#EA4148] transition-colors mb-clamp-20">
           {title}
         </h2>
 
         {/* Date */}
-        <div className="news-card-date-mobile text-[#86909C] font-normal leading-normal mb-clamp-20" style={{ marginBottom: "clamp(10px, calc(20 / 750 * 100vw), 20px)" }}>
+        <div className="news-card-date-mobile text-[#86909C] font-normal leading-normal mb-clamp-20">
           {formatAUDate(publishDate)}
         </div>
 
@@ -94,14 +93,7 @@ export default function NewsCard({
           >
             <div className="flex w-full h-full">
               {/* Cover Image */}
-              <div
-                className="relative shrink-0 overflow-hidden"
-                style={{
-                  width: "42.857%",
-                  height: "100%",
-                  borderRadius: "min(1.042vw, 20px) 0 0 min(1.042vw, 20px)",
-                }}
-              >
+                <div className="relative shrink-0 overflow-hidden news-card-desktop-image">
                 <Image
                   src={coverImageUrl}
                   alt={title}
@@ -115,7 +107,7 @@ export default function NewsCard({
                 <h2 className="text-[#1D1E1F] font-semibold leading-normal group-hover:text-[#EA4148] transition-colors line-clamp-1 fs-desktop-24">
                   {title}
                 </h2>
-                <p className="text-[#86909C] font-normal leading-normal line-clamp-4 fs-desktop-18" style={{ marginTop: "min(0.833vw, 16px)" }}>
+                <p className="text-[#86909C] font-normal leading-normal line-clamp-4 fs-desktop-18 news-card-excerpt-desktop-margin">
                   {excerpt}
                 </p>
                 <div className="mt-auto">
