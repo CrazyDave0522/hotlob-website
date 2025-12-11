@@ -51,47 +51,25 @@ function ToastItem({ toast }: { toast: Toast }) {
     };
   }, [toast.duration]);
 
+  const typeClass = `toast--${toast.type}`;
+
   return (
     <div
-      style={{
-        display: "inline-flex",
-        padding: "13px 16px",
-        alignItems: "center",
-        gap: "24px",
-        borderRadius: `${style.radius}px`,
-        background: style.bg,
-        opacity: visible ? 1 : 0,
-        transition: "opacity 0.3s ease",
-        pointerEvents: "auto",
-      }}
+      className={`toast-item ${typeClass} ${visible ? "toast-visible" : ""}`}
+      style={{ background: style.bg, borderRadius: `${style.radius}px` }}
       role="status"
       aria-live={toast.type === "error" ? "assertive" : "polite"}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-        }}
-      >
+      <div className="toast-item-inner">
         <Image
           src={style.icon}
           alt={toast.type}
           width={20}
           height={20}
+          className="toast-icon"
           style={{ flexShrink: 0 }}
         />
-        <span
-          style={{
-            color: "#4E5969",
-            fontSize: "14px",
-            fontStyle: "normal",
-            fontWeight: 400,
-            lineHeight: "22px",
-          }}
-        >
-          {toast.message}
-        </span>
+        <span className="toast-message">{toast.message}</span>
       </div>
     </div>
   );
@@ -102,17 +80,7 @@ export function Toaster() {
 
   return (
     <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "12px",
-        pointerEvents: "none",
-      }}
+      className="toaster-root"
     >
       {toasts.map((toast) => (
         <ToastItem key={toast.id} toast={toast} />
