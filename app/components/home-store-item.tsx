@@ -65,12 +65,7 @@ export default function HomeStoreItem({
       onClick={handleStoreClick}
     >
       {/* Store image (left) */}
-      <div
-        className="relative shrink-0 bg-gray-100 overflow-hidden home-store-image"
-        style={{
-          borderRadius: "min(0.521vw, 10px)", // 10/1920
-        }}
-      >
+      <div className="relative shrink-0 bg-gray-100 overflow-hidden home-store-image">
         {firstPhoto ? (
           <ImageWithLightbox
             images={[firstPhoto]}

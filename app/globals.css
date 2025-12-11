@@ -506,6 +506,12 @@ textarea::placeholder {
       gap: 10px;
     }
 
+    /* Home store item image */
+    .home-store-image {
+      border-radius: min(0.521vw, 10px);
+      overflow: hidden;
+    }
+
     .hero-desktop {
       background-size: cover;
       background-repeat: no-repeat;
