@@ -393,7 +393,29 @@ textarea::placeholder {
     @apply bg-[#EA4148] text-white;
   }
   .tag-button--inactive {
-    @apply bg-transparent text-[#1D1E1F] hover:bg-[rgba(234,65,72,0.08)] hover:text-[#EA4148] active:scale-95;
+    border: 2px solid #FFF;
+    background: rgba(255, 255, 255, 0.60);
+    color: #1D1E1F;
+  }
+
+  /* Pressed state toggled via class when handling mouse/touch presses */
+  .button-pressed {
+    transform: scale(0.95);
+  }
+
+  /* Root wrapper for the tag filter (mobile-first spacing) */
+  .tag-filter-root {
+    min-height: min(6.042vw, 116px);
+    padding-top: clamp(20px, calc(40 / 750 * 100vw), 40px);
+  }
+  @media (min-width: 768px) {
+    .tag-filter-root {
+      padding-top: 0;
+    }
+    /* Desktop: inactive buttons become transparent as in previous behavior */
+    .tag-button--inactive {
+      background: transparent;
+    }
   }
 
   /* Order Now button base styles */
