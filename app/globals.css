@@ -430,6 +430,13 @@ textarea::placeholder {
     color: #1D1E1F;
   }
 
+  /* Nav Order Online button sizing (desktop-fluid with min caps) */
+  .nav-order-button-size {
+    width: min(6.25vw, 120px);
+    height: min(1.667vw, 32px);
+    border-radius: min(1.042vw, 20px);
+  }
+
   /* Pressed state toggled via class when handling mouse/touch presses */
   .button-pressed {
     transform: scale(0.95);
