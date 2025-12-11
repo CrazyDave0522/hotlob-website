@@ -203,6 +203,38 @@
     height: clamp(160px, calc(320/750*100vw), 320px);
   }
 
+  /* Load more / list helpers for news page */
+  .news-list-loadmore-padding {
+    padding-bottom: clamp(30px, calc(60 / 750 * 100vw), 60px);
+  }
+  .news-loadmore-button {
+    height: clamp(40px, calc(50 / 750 * 100vw), 50px);
+    margin-top: clamp(10px, calc(20 / 750 * 100vw), 20px);
+  }
+
+  /* Small utility for enforcing square aspect on images when needed */
+  .sq-aspect {
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Utility to apply native -webkit line-clamp fallback alongside util classes */
+  .line-clamp-3-native {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Footer bottom padding (desktop) */
+  .footer-bottom-padding {
+    padding-top: min(0.521vw, 10px);
+  }
+
+  /* Catering page: mobile form height helper */
+  .catering-form-height {
+    height: clamp(760px, calc(1350/750*100vw), 1350px);
+  }
+
   /* Reviews section centralized styles */
   .reviews-section-bg {
     background: linear-gradient(180deg, #FBF3F3 0%, #FFF 100%);

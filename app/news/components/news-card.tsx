@@ -161,15 +161,7 @@ export default function NewsCard({
               <h2 className="text-xl font-semibold text-gray-900 mb-5 group-hover:text-[#EA4148] transition-colors">
                 {title}
               </h2>
-              <p
-                className="text-[#4E5969] text-base leading-relaxed line-clamp-3"
-                style={{
-                  display: "-webkit-box",
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                }}
-              >
+              <p className="text-[#4E5969] text-base leading-relaxed line-clamp-3 line-clamp-3-native">
                 {excerpt}
               </p>
             </div>

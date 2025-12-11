@@ -166,7 +166,7 @@ export function Footer() {
         </div>
 
         {/* Bottom row: Copyright + Social Icons */}
-        <div className="flex w-full items-center justify-between border-t border-[#FFFFFF33]" style={{ paddingTop: "min(0.521vw, 10px)" }}>
+        <div className="flex w-full items-center justify-between border-t border-[#FFFFFF33] footer-bottom-padding">
           <p className="text-[clamp(12px,0.729vw,14px)] font-normal text-white">
             ©2020 by Ocean Food Group Pty Ltd. All Rights Reserved.
           </p>
