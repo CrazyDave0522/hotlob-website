@@ -56,7 +56,6 @@ function ToastItem({ toast }: { toast: Toast }) {
   return (
     <div
       className={`toast-item ${typeClass} ${visible ? "toast-visible" : ""}`}
-      style={{ background: style.bg, borderRadius: `${style.radius}px` }}
       role="status"
       aria-live={toast.type === "error" ? "assertive" : "polite"}
     >
@@ -67,7 +66,6 @@ function ToastItem({ toast }: { toast: Toast }) {
           width={20}
           height={20}
           className="toast-icon"
-          style={{ flexShrink: 0 }}
         />
         <span className="toast-message">{toast.message}</span>
       </div>

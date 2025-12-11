@@ -437,6 +437,29 @@ textarea::placeholder {
     border-radius: min(1.042vw, 20px);
   }
 
+  /* Toast helpers */
+  .toast-icon {
+    flex-shrink: 0;
+  }
+
+  /* About Hotlob helpers */
+  .about-desktop-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .about-cards-desktop-dim {
+    height: min(21.927vw, 421px); /* 421/1920 = 21.927% */
+    margin-top: min(2.083vw, 40px); /* 40/1920 = 2.083% */
+  }
+  .about-card-content-padding-desktop {
+    padding-top: min(3.125vw, 60px); /* 60/1920 = 3.125% */
+  }
+  .about-card-title-margin {
+    margin-bottom: min(1.042vw, 20px); /* 20/1920 = 1.042% */
+  }
+
   /* Pressed state toggled via class when handling mouse/touch presses */
   .button-pressed {
     transform: scale(0.95);

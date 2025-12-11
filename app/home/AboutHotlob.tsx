@@ -44,20 +44,13 @@ export default function AboutHotlob() {
 			<div className="about-hotlob-bg absolute inset-0" aria-hidden="true" />
 
 			{/* Desktop content - absolute positioned */}
-			<div
-				className="hidden lg:block"
-				style={{ position: "absolute", top: 0, left: 0, width: "100%" }}
-			>
+			<div className="hidden lg:block about-desktop-full">
 				{/* Title */}
 				<SectionTitle>About Hotlob</SectionTitle>
 
 				{/* Desktop: Three-column card container */}
 				<div
-					className="hidden lg:flex gap-5 shrink-0 w-[72.917%] mx-auto justify-center" // 1400/1920 = 72.917%
-					style={{
-						height: "min(21.927vw, 421px)", // 421/1920 = 21.927%
-						marginTop: "min(2.083vw, 40px)", // 40/1920 = 2.083%
-					}}
+					className="hidden lg:flex gap-5 shrink-0 w-[72.917%] mx-auto justify-center about-cards-desktop-dim"
 				>
 					{cards.map((card) => {
 						const isExpanded = expandedCard === card.id;
@@ -95,14 +88,12 @@ export default function AboutHotlob() {
 
 								{/* Card content */}
 								<div
-									className="absolute inset-0 flex flex-col px-[30px]"
-									style={{ paddingTop: "min(3.125vw, 60px)" }} // 60/1920 = 3.125%
+									className="absolute inset-0 flex flex-col px-[30px] about-card-content-padding-desktop"
 								>
 									<h3
-										className="about-hotlob-tab-text font-semibold leading-normal transition-colors duration-400"
+										className="about-hotlob-tab-text font-semibold leading-normal transition-colors duration-400 about-card-title-margin"
 										style={{
 											color: isExpanded ? "#FFF" : "#333",
-											marginBottom: "min(1.042vw, 20px)", // 20/1920 = 1.042%
 											fontSize: isExpanded
 												? "clamp(21px, 1.35vw, 26px)"
 												: "clamp(20px, 1.25vw, 24px)",
@@ -209,11 +200,10 @@ export default function AboutHotlob() {
 											}}
 										>
 											<h3
-												className="about-hotlob-card-title"
+												className="about-hotlob-card-title font-semibold"
 												style={{
 													color: "#FFF",
 													fontStyle: "normal",
-													fontWeight: 600,
 													lineHeight: "normal",
 													marginBottom: "clamp(10px, calc(20/750*100vw), 20px)",
 													fontSize: isActive
