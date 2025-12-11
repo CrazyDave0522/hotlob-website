@@ -1,5 +1,30 @@
 import { supabase } from "./supabaseClient";
 
+// Validate a remote URL with a short request timeout.
+// Some CDNs (including Google Places media) reject or mishandle HEAD requests,
+// which causes false negatives. Use a lightweight GET asking for just the
+// first byte (`Range: bytes=0-0`) and accept 200/206 as evidence the URL is live.
+async function isUrlAlive(url: string, timeoutMs = 3000): Promise<boolean> {
+  try {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeoutMs);
+    const res = await fetch(url, {
+      method: 'GET',
+      signal: controller.signal,
+      cache: 'no-store',
+      // Request only the first byte to avoid downloading full images.
+      headers: { Range: 'bytes=0-0' },
+    } as RequestInit);
+    clearTimeout(id);
+
+    // Treat 200 (OK) and 206 (Partial Content) as alive. `res.ok` covers 200,
+    // but some servers respond with 206 when Range header is honored.
+    return res.ok || res.status === 206;
+  } catch {
+    return false;
+  }
+}
+
 export interface ReviewData {
   author_name: string;
   author_photo_url: string | null;
@@ -56,17 +81,39 @@ export async function getReviews(
 
   const rawData = data || [];
 
-  // Transform data to include sorted photos if requested
+  // Transform data to include sorted photos if requested.
+  // When `includePhotos` is true, validate photo URLs server-side with a short
+  // HEAD request so we don't render broken photo URLs into the server HTML.
+  if (includePhotos) {
+    const results = await Promise.all(
+      rawData.map(async (r) => {
+        const rawPhotos = (r.review_photos || [])
+          .sort((a, b) => a.display_order - b.display_order)
+          .map((p) => p.photo_url);
+
+        // Check each URL with a short timeout; filter out non-200s.
+        const checks = await Promise.all(rawPhotos.map(async (url) => ({ url, ok: await isUrlAlive(url) })));
+        const livePhotos = checks.filter(c => c.ok).map(c => c.url);
+
+        return {
+          author_name: r.author_name,
+          author_photo_url: r.author_photo_url,
+          rating: r.rating,
+          review_text: r.review_text,
+          review_time: r.review_time,
+          photos: livePhotos,
+        };
+      })
+    );
+
+    return results;
+  }
+
   return rawData.map((r) => ({
     author_name: r.author_name,
     author_photo_url: r.author_photo_url,
     rating: r.rating,
     review_text: r.review_text,
     review_time: r.review_time,
-    ...(includePhotos && {
-      photos: (r.review_photos || [])
-        .sort((a, b) => a.display_order - b.display_order)
-        .map((p) => p.photo_url),
-    }),
   }));
 }
