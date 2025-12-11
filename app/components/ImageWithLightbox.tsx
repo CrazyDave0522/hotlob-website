@@ -147,7 +147,8 @@ export default function ImageWithLightbox({
     return idx >= 0 ? highResImages[idx] : url;
   });
 
-  const containerStyle: React.CSSProperties & { gap?: string } = { ...style };
+  // allow gap to be string or number because incoming `style` may use numeric gap
+  const containerStyle: React.CSSProperties & { gap?: string | number } = { ...style };
   if (gridGap !== "10px") {
     // preserve custom gap as inline style
     containerStyle.gap = gridGap;
