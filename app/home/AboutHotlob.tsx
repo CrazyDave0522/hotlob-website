@@ -90,6 +90,13 @@ export default function AboutHotlob() {
 								<div
 									className="absolute inset-0 flex flex-col px-[30px] about-card-content-padding-desktop"
 								>
+									<div
+										className={`absolute inset-0 bg-cover-center`}
+										style={{
+											backgroundImage: `url(${card.bgCollapsed})`,
+											opacity: isExpanded ? 0 : 1,
+										}}
+									/>
 									<h3
 										className="about-hotlob-tab-text font-semibold leading-normal transition-colors duration-400 about-card-title-margin"
 										style={{
@@ -138,20 +145,9 @@ export default function AboutHotlob() {
 				<SectionTitle>About Hotlob</SectionTitle>
 
 				{/* Mobile: Two-row card layout */}
-				<div
-					className="flex flex-col items-center justify-end"
-					style={{
-						// Vertical gap between the two card rows
-						gap: "clamp(10px, calc(20/750*100vw), 20px)",
-					}}
-				>
+				<div className="flex flex-col items-center justify-end about-mobile-rows-gap">
 					{/* First row: Active card takes full width */}
-					<div
-						className="w-full flex justify-center"
-						style={{
-							transition: "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
-						}}
-					>
+					<div className="w-full flex justify-center">
 						{cards
 							.filter((card) => expandedCard === card.id)
 							.map((card) => {
@@ -159,46 +155,22 @@ export default function AboutHotlob() {
 								return (
 									<div
 										key={card.id}
-										className="button-click relative cursor-pointer overflow-hidden rounded-[20px]"
-										style={{
-											width: "clamp(345px, calc(690/750*100vw), 690px)",
-											height: "clamp(150px, calc(300/750*100vw), 300px)",
-											flexShrink: 0,
-											maxWidth: "100%",
-											margin: "0 clamp(15px, calc(30/750*100vw), 30px)", // Horizontal side margins
-											transition: "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
-											transform: "scale(1)",
-											transformOrigin: "center",
-										}}
+										className="button-click relative cursor-pointer overflow-hidden rounded-[20px] about-mobile-active-card"
 										onClick={() => setExpandedCard(card.id)}
 									>
 										{/* Background image */}
 										<div
-											className="absolute inset-0"
+											className="absolute inset-0 bg-cover-center"
 											style={{
 												backgroundImage: `url(${card.bgExpanded.replace(
 													".png",
 													"-mb.png"
 												)})`,
-												backgroundSize: "cover",
-												backgroundPosition: "center",
 											}}
 										/>
 
 										{/* Card content */}
-										<div
-											className="absolute inset-0 flex flex-col"
-											style={{
-												paddingTop: "clamp(20px, calc(40/750*100vw), 40px)",
-												paddingLeft: "clamp(10px, calc(20/750*100vw), 20px)",
-												paddingRight: "clamp(10px, calc(20/750*100vw), 20px)",
-												paddingBottom: "clamp(10px, calc(20/750*100vw), 20px)",
-												transition:
-													"all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
-												opacity: 1,
-												transform: "translateY(0px)",
-											}}
-										>
+										<div className="absolute inset-0 flex flex-col about-mobile-card-content-padding">
 											<h3
 												className="about-hotlob-card-title font-semibold"
 												style={{
