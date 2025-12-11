@@ -58,11 +58,10 @@ export default function StoreCard({
           src={googleMapsEmbedUrl}
           width="100%"
           height="100%"
-          style={{ border: 0 }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          className="rounded-[20px] md:rounded-[10px] w-full h-full"
+          className="rounded-[20px] md:rounded-[10px] w-full h-full border-0"
         />
       ) : (
         <div className="w-full h-full bg-gray-100 rounded-[10px] flex items-center justify-center">

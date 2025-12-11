@@ -720,6 +720,14 @@ textarea::placeholder {
         gap: min(0.521vw, 10px);
       }
 
+      /* Review card helpers */
+      .review-card-root {
+        gap: clamp(6.5px, calc(13/750*100vw), 13px);
+      }
+      .review-card-rating-margin {
+        margin-top: clamp(7px, calc(14/750*100vw), 14px);
+      }
+
       .review-bubble-author {
         color: #1D1E1F;
         font-style: normal;
