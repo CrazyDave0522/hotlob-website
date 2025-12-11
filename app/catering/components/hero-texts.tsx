@@ -6,23 +6,17 @@ export default function HeroTexts() {
   return (
     <div className="flex flex-col items-center gap-2 md:gap-3 pt-[clamp(32px,calc(108/750*100vw),108px)] md:absolute md:left-0 md:right-0 md:pt-0" style={{ top: CATERING_LAYOUT.HERO_TOP }}>
       {/* CATERING */}
-      <h1
-        className="catering-hero-title text-[#FFD632] text-center font-semibold leading-normal"
-        style={{ fontWeight: 600, fontSize: "clamp(30px, calc(42/750*100vw), 42px)" }}
-      >
+      <h1 className="catering-hero-title text-[#FFD632] text-center font-semibold leading-normal">
         The ULTIMATE Catering Pack!
       </h1>
 
       {/* The ULTIMATE picnic set! */}
-      <h2
-        className="catering-hero-subtitle text-white text-center font-semibold leading-normal"
-        style={{ fontWeight: 600, fontSize: "clamp(22px, calc(30/750*100vw), 30px)", marginTop: "clamp(4px, calc(8/750*100vw), 8px)" }}
-      >
+      <h2 className="catering-hero-subtitle text-white text-center font-semibold leading-normal">
         Leave as what you have
       </h2>
 
       {/* MIX 16 ROLL SET PAX 4-6 with bullet lines */}
-      <div className="catering-hero-desc text-white text-left font-normal" style={{ marginTop: "clamp(4px, calc(8/750*100vw), 8px)", fontSize: "clamp(14px, calc(26/750*100vw), 26px)", lineHeight: "clamp(22px, calc(44/750*100vw), 44px)" }}>
+      <div className="catering-hero-desc text-white text-left font-normal">
         <p className="font-semibold">MIX 16 ROLL SET PAX 4-6</p>
         <p>6 x Lobster Roll</p>
         <p>5 x Soft Shell Crab Roll</p>
