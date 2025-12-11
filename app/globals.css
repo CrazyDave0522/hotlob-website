@@ -501,6 +501,11 @@ textarea::placeholder {
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     }
 
+    /* Default gap for image grids in ImageWithLightbox */
+    .image-grid-gap-default {
+      gap: 10px;
+    }
+
     .hero-desktop {
       background-size: cover;
       background-repeat: no-repeat;
