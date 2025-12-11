@@ -453,6 +453,59 @@ textarea::placeholder {
       margin-top: min(0.833vw, 16px);
     }
 
+    /* Hero centralized helpers */
+    .hero-mobile {
+      height: clamp(210px, calc(420/750*100vw), 420px);
+      background-size: cover;
+    }
+
+    .hero-mobile-padding-left {
+      padding-left: calc(30/750*100vw);
+    }
+
+    .hero-content-max-width {
+      max-width: calc(684/750*100vw);
+    }
+
+    .hero-title-mobile-size {
+      font-size: clamp(22px, calc(38/750*100vw), 38px);
+    }
+
+    .hero-body-mobile-size {
+      font-size: clamp(16px, calc(30/750*100vw), 30px);
+    }
+
+    .hero-footer-mobile-padding {
+      padding-left: calc(30/750*100vw);
+    }
+
+    .hero-desktop-padding-left {
+      padding-left: min(13.542vw, 260px);
+    }
+
+    .hero-title-desktop-size {
+      font-size: clamp(24px, 2vw, 38px);
+      max-width: min(35.625vw, 684px);
+    }
+
+    .hero-body-desktop-size {
+      font-size: clamp(18px, 1.563vw, 30px);
+      max-width: min(35.625vw, 684px);
+    }
+
+    .hero-footer-desktop-padding {
+      padding-right: min(8.333vw, 160px);
+    }
+
+    .hero-text-shadow {
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-desktop {
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
   /* Order Now button base styles */
   .order-button-base {
     display: flex;
