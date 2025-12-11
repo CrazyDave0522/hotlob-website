@@ -131,8 +131,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           alt=""
           width={70}
           height={70}
-          style={{ width: "100%", height: "100%" }}
-          className="absolute inset-0"
+          className="absolute inset-0 w-full h-full"
         />
 
         {/* Avatar image centered in ring */}
@@ -153,14 +152,10 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
               alt={review.author_name}
               width={46}
               height={46}
-              style={{ width: "100%", height: "100%" }}
-              className="rounded-full object-cover"
+              className="rounded-full object-cover w-full h-full"
             />
           ) : (
-            <div
-              className="rounded-full bg-gray-300"
-              style={{ width: "100%", height: "100%" }}
-            />
+            <div className="rounded-full bg-gray-300 w-full h-full" />
           )}
         </div>
       </div>
