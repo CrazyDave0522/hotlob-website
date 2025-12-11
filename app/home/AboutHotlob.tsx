@@ -87,16 +87,7 @@ export default function AboutHotlob() {
 								/>
 
 								{/* Card content */}
-								<div
-									className="absolute inset-0 flex flex-col px-[30px] about-card-content-padding-desktop"
-								>
-									<div
-										className={`absolute inset-0 bg-cover-center`}
-										style={{
-											backgroundImage: `url(${card.bgCollapsed})`,
-											opacity: isExpanded ? 0 : 1,
-										}}
-									/>
+								<div className="absolute inset-0 flex flex-col px-[30px] about-card-content-padding-desktop">
 									<h3
 										className="about-hotlob-tab-text font-semibold leading-normal transition-colors duration-400 about-card-title-margin"
 										style={{
