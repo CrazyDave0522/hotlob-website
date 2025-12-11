@@ -88,30 +88,22 @@ export function Header() {
 
       {/* Desktop header - visible at 1024px and above */}
       <header
-        className="sticky top-0 z-50 hidden lg:flex w-full max-w-[1920px] shrink-0 items-center justify-between bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
-        style={{
-          paddingInline: "min(3.125vw, 60px)",
-          height: "min(4.167vw, 80px)",
-        }}
+        className="sticky top-0 z-50 hidden lg:flex w-full max-w-[1920px] shrink-0 items-center justify-between bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] header-desktop"
       >
         <Link href="/" aria-label="Hotlob home" className="shrink-0">
-          <Image
-            src="/images/logo.png"
-            alt="Hotlob logo"
-            width={96}
-            height={79}
-            priority
-            className="h-auto w-auto"
-            style={{
-              width: "min(5vw, 96px)",
-              height: "min(4.115vw, 79px)",
-            }}
-          />
+          <div className="header-logo-wrapper relative">
+            <Image
+              src="/images/logo.png"
+              alt="Hotlob logo"
+              fill
+              priority
+              className="object-contain header-logo-size-img"
+            />
+          </div>
         </Link>
 
         <nav
-          className="ml-auto mr-auto flex flex-1 items-center justify-center text-[clamp(14px,1.042vw,20px)] font-semibold"
-          style={{ gap: "min(4.167vw, 80px)" }}
+          className="ml-auto mr-auto flex flex-1 items-center justify-center text-[clamp(14px,1.042vw,20px)] font-semibold nav-gap-large"
         >
           {NAV_ITEMS.map((item) => (
             <Link
@@ -129,14 +121,8 @@ export function Header() {
           ))}
         </nav>
 
-        <div
-          className="flex items-center"
-          style={{ gap: "min(1.875vw, 36px)" }}
-        >
-          <div
-            className="flex items-center"
-            style={{ gap: "min(1.042vw, 20px)" }}
-          >
+        <div className="flex items-center nav-gap-small">
+          <div className="flex items-center nav-gap-xsmall">
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.name}
@@ -151,11 +137,7 @@ export function Header() {
                   alt={`${link.name} icon`}
                   width={24}
                   height={24}
-                  className="h-auto w-auto"
-                  style={{
-                    width: "min(1.25vw, 24px)",
-                    height: "min(1.25vw, 24px)",
-                  }}
+                  className="h-auto w-auto social-icon-size"
                 />
               </a>
             ))}
@@ -168,13 +150,7 @@ export function Header() {
       <div
         className={`mobile-menu-overlay fixed inset-0 z-40 lg:hidden ${
           isMobileMenuOpen ? "flex" : "hidden"
-        } flex-col bg-black/90 overflow-y-auto`}
-        style={{
-          // paddingTop = responsive header height + responsive top margin for the menu items
-          // 375px: 64 + 50 = 114; 750px: 120 + 100 = 220
-          paddingTop: "clamp(114px, calc(220/750*100vw), 220px)",
-          paddingBottom: "clamp(25px, calc(50/750*100vw), 50px)",
-        }}
+        } flex-col bg-black/90 overflow-y-auto mobile-menu-overlay-padding`}
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <div

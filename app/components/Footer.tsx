@@ -59,10 +59,6 @@ export function Footer() {
             width={192}
             height={112}
             className="object-contain"
-            style={{
-              width: "clamp(96px, calc(192/750*100vw), 192px)",
-              height: "clamp(56px, calc(112/750*100vw), 112px)"
-            }}
           />
         </div>
 
@@ -128,10 +124,10 @@ export function Footer() {
       </div>
 
       {/* Desktop layout: horizontal structure */}
-      <div className="hidden lg:flex w-full flex-col" style={{ gap: "min(1.042vw, 20px)" }}>
+      <div className="hidden lg:flex w-full flex-col footer-gap-medium">
         {/* Top row: Logo + Links */}
-        <div className="flex w-full items-center justify-center" style={{ gap: "min(4.688vw, 90px)" }}>
-          <div className="relative" style={{ width: "min(10vw, 192px)", height: "min(5.833vw, 112px)" }}>
+        <div className="flex w-full items-center justify-center footer-gap-large">
+          <div className="relative footer-logo-size-large">
             <Image
               src="/images/logo.png"
               alt="Hotlob logo"
@@ -140,7 +136,7 @@ export function Footer() {
               className="object-contain"
             />
           </div>
-          <div className="flex items-center" style={{ gap: "min(2.083vw, 40px)" }}>
+          <div className="flex items-center nav-gap-small">
             {FOOTER_LINKS.map((link) => {
               if ("action" in link && link.action === "contact") {
                 return (
@@ -174,7 +170,7 @@ export function Footer() {
           <p className="text-[clamp(12px,0.729vw,14px)] font-normal text-white">
             ©2020 by Ocean Food Group Pty Ltd. All Rights Reserved.
           </p>
-          <div className="flex items-center" style={{ gap: "min(1.042vw, 20px)" }}>
+          <div className="flex items-center footer-gap-medium">
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.name}
@@ -189,8 +185,7 @@ export function Footer() {
                   alt={`${link.name} icon`}
                   width={24}
                   height={24}
-                  className="h-auto w-auto"
-                  style={{ width: "min(1.25vw, 24px)", height: "min(1.25vw, 24px)" }}
+                  className="h-auto w-auto social-icon-size"
                 />
               </a>
             ))}

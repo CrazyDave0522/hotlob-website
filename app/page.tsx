@@ -117,19 +117,15 @@ export default async function Home() {
       <AboutHotlob />
       <SeeOurFoodSection dishes={dishes} />
       {/* Curve background section - hidden on mobile */}
-      <section
-        className="relative w-full hidden lg:block"
-        style={{ backgroundColor: "#FDF7F0" }}
-      >
+      <section className="relative w-full hidden lg:block curve-section-bg">
         <Image
           src="/images/home-bg-curve.png"
           alt="Curve background"
           width={1920}
           height={109}
-          className="w-full h-auto"
+          className="w-full h-auto img-as-block"
           priority
           sizes="100vw"
-          style={{ aspectRatio: "1920/109", display: "block" }}
         />
       </section>
       <CateringSection />
