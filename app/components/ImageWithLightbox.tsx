@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -33,8 +33,19 @@ export default function ImageWithLightbox({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
-  // Return null if there are no images
-  if (!images || images.length === 0) return null;
+  // Visible images state (filters out broken images client-side)
+  // NOTE: will be initialized after displayImages is computed below
+
+  // Helper to generate a sessionStorage key for a photo
+  const photoKey = useCallback((url: string) => {
+    try {
+      return `broken_photo_${encodeURIComponent(url)}`;
+    } catch {
+      return `broken_photo_${String(url)}`;
+    }
+  }, []);
+
+  // (no early return here because hooks must be called in the same order)
 
   // Limit the number of displayed images
   const displayImages = maxImages ? images.slice(0, maxImages) : images;
@@ -54,18 +65,41 @@ export default function ImageWithLightbox({
     }
   });
 
+  // Initialize visibleImages using sessionStorage where available.
+  const [visibleImages, setVisibleImages] = useState<string[]>(() => {
+    try {
+      const initial = (maxImages ? images.slice(0, maxImages) : images).filter((url) => {
+        const key = photoKey(url);
+        return !sessionStorage.getItem(key);
+      });
+      return initial;
+    } catch {
+      return (maxImages ? images.slice(0, maxImages) : images).slice();
+    }
+  });
+
   const handleImageClick = (index: number) => {
     setPhotoIndex(index);
     setLightboxOpen(true);
   };
 
+  // Called when a specific image is detected as broken in the browser
+  const markBroken = (url: string) => {
+    try {
+      sessionStorage.setItem(photoKey(url), '1');
+    } catch {}
+    setVisibleImages((prev) => prev.filter(u => u !== url));
+  };
+
   // Single image layout
   if (layout === 'single' || displayImages.length === 1) {
-    const imageUrl = displayImages[0];
+    // use the first visible image; if none visible, return null (hide entirely)
+    const imageUrl = visibleImages.length > 0 ? visibleImages[0] : null;
     const isResponsive = size === "responsive";
     const sizeStyle = isResponsive ? {} : (size ? { width: size.width, height: size.height } : {});
     const sizeClass = isResponsive ? "review-card-photo" : "";
-    
+    if (!imageUrl) return null;
+
     return (
       <>
         <div
@@ -81,11 +115,12 @@ export default function ImageWithLightbox({
           }}
         >
           <Image
-            src={imageUrl}
+            src={imageUrl as string}
             alt={alt}
             fill
             className={`object-cover ${imageClassName}`}
             sizes={size && typeof size !== 'string' ? `${size.width}px` : "100vw"}
+            onError={() => markBroken(imageUrl as string)}
           />
         </div>
 
@@ -105,15 +140,22 @@ export default function ImageWithLightbox({
   const sizeStyle = isResponsive ? {} : (size ? { width: size.width, height: size.height, flexShrink: 0 } : {});
   const sizeClass = isResponsive ? "review-card-photo" : "";
   
+  // Filter highResImages to correspond to visibleImages order
+  const visibleHighRes = visibleImages.map((url) => {
+    // find corresponding highRes image by original index
+    const idx = images.indexOf(url);
+    return idx >= 0 ? highResImages[idx] : url;
+  });
+
   return (
     <>
       <div
         className={`flex items-start ${className}`}
         style={{ gap: gridGap, ...style }}
       >
-        {displayImages.map((imageUrl, index) => (
+        {visibleImages.map((imageUrl, index) => (
           <div
-            key={index}
+            key={imageUrl}
             className={`relative cursor-pointer transition-opacity hover:opacity-80 overflow-hidden rounded-[10px] ${imageClassName} ${sizeClass}`}
             style={sizeStyle}
             onClick={() => handleImageClick(index)}
@@ -131,6 +173,7 @@ export default function ImageWithLightbox({
               fill
               className="object-cover"
               sizes={size && typeof size !== 'string' ? `${size.width}px` : "100vw"}
+              onError={() => markBroken(imageUrl)}
             />
           </div>
         ))}
@@ -140,7 +183,7 @@ export default function ImageWithLightbox({
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
         index={photoIndex}
-        slides={highResImages.map(url => ({ src: url }))}
+        slides={visibleHighRes.map(url => ({ src: url }))}
         carousel={{ finite: true }}
       />
     </>
