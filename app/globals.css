@@ -846,6 +846,23 @@ textarea::placeholder {
       gap: 10px;
     }
 
+    /* NewsSection indicator helpers */
+    .news-indicator {
+      width: 8px;
+      height: 8px;
+      background: #000;
+      opacity: 0.2;
+      border-radius: 9999px;
+      transition: all 200ms ease;
+      padding: 0;
+      border: none;
+    }
+    .news-indicator--active {
+      width: 30px;
+      background: #EA4148;
+      opacity: 1;
+    }
+
     /* Home store item image */
     .home-store-image {
       border-radius: min(0.521vw, 10px);
