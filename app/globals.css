@@ -2663,7 +2663,7 @@ textarea::placeholder {
 }
 
 .rating-text-bubble {
-  font-size: clamp(8px, calc(16 / 750 * 100vw), 16px);
+  font-size: clamp(10px, calc(16 / 750 * 100vw), 16px);
 }
 @media (min-width: 1024px) {
   .rating-text-bubble {
@@ -2707,7 +2707,7 @@ textarea::placeholder {
 }
 
 .rating-text-store {
-  font-size: clamp(10px, calc(18 / 750 * 100vw), 18px);
+  font-size: clamp(12px, calc(18 / 750 * 100vw), 18px);
 }
 @media (min-width: 1024px) {
   .rating-text-store {
