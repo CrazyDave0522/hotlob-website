@@ -2652,8 +2652,8 @@ textarea::placeholder {
 /* Rating Stars - Review Bubble Variant */
 .rating-star-bubble {
   aspect-ratio: 1;
-  width: clamp(10px, calc(12 / 750 * 100vw), 12px);
-  height: clamp(10px, calc(12 / 750 * 100vw), 12px);
+  width: clamp(10px, calc(16 / 750 * 100vw), 16px);
+  height: clamp(10px, calc(16 / 750 * 100vw), 16px);
 }
 @media (min-width: 1024px) {
   .rating-star-bubble {
@@ -2663,7 +2663,7 @@ textarea::placeholder {
 }
 
 .rating-text-bubble {
-  font-size: clamp(8px, calc(14 / 750 * 100vw), 14px);
+  font-size: clamp(8px, calc(16 / 750 * 100vw), 16px);
 }
 @media (min-width: 1024px) {
   .rating-text-bubble {
