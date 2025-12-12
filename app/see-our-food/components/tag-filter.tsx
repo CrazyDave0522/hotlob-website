@@ -40,20 +40,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
     : tags.slice(0, CONSTANTS.MAX_VISIBLE_TAGS);
 
   return (
-    <div
-      className="w-full flex flex-col justify-center bg-transparent md:bg-white"
-      style={{ 
-        minHeight: "min(6.042vw, 116px)", 
-        paddingTop: "clamp(20px, calc(40 / 750 * 100vw), 40px)" 
-      }}
-    >
-      <style jsx>{`
-        @media (min-width: 768px) {
-          div {
-            padding-top: 0 !important;
-          }
-        }
-      `}</style>
+    <div className="w-full flex flex-col justify-center bg-transparent md:bg-white tag-filter-root">
       {/* Width controlled by layout.tsx max-w-[1920px] wrapper */}
       <div
         className="flex flex-wrap items-center justify-center tag-filter-container tag-filter-group md:tag-filter-group-desktop mx-auto w-full"
@@ -64,17 +51,9 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
           onMouseDown={() => setPressedButton("all")}
           onMouseUp={() => setPressedButton(null)}
           onMouseLeave={() => setPressedButton(null)}
-          className={`button-click tag-button tag-button-all ${
-            selectedIds.length === 0
-              ? "tag-button--active"
-              : "tag-button--inactive"
-          }`}
-          style={{
-            border: selectedIds.length === 0 ? "2px solid #EA4148" : "2px solid #FFF",
-            background: selectedIds.length === 0 ? "#EA4148" : "rgba(255, 255, 255, 0.60)",
-            color: selectedIds.length === 0 ? "#FFF" : "#1D1E1F",
-            transform: pressedButton === "all" ? "scale(0.95)" : "scale(1)",
-          }}
+            className={`button-click tag-button tag-button-all ${
+              selectedIds.length === 0 ? "tag-button--active" : "tag-button--inactive"
+            } ${pressedButton === "all" ? "button-pressed" : ""}`}
         >
           {/* ALL icon (28x28), supports selected/unselected assets */}
           <Image
@@ -111,13 +90,7 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
               onMouseLeave={() => setPressedButton(null)}
               className={`button-click tag-button tag-button-item ${
                 isSelected ? "tag-button--active" : "tag-button--inactive"
-              }`}
-              style={{
-                border: isSelected ? "2px solid #EA4148" : "2px solid #FFF",
-                background: isSelected ? "#EA4148" : "rgba(255, 255, 255, 0.60)",
-                color: isSelected ? "#FFF" : "#1D1E1F",
-                transform: pressedButton === tag.id ? "scale(0.95)" : "scale(1)",
-              }}
+              } ${pressedButton === tag.id ? "button-pressed" : ""}`}
             >
               {iconUrl && (
                 <Image
@@ -142,10 +115,9 @@ export default function TagFilter({ tags, onChange }: TagFilterProps) {
             onMouseDown={() => setPressedButton("showAll")}
             onMouseUp={() => setPressedButton(null)}
             onMouseLeave={() => setPressedButton(null)}
-            className="button-click tag-button tag-button--inactive"
-            style={{
-              transform: pressedButton === "showAll" ? "scale(0.95)" : "scale(1)",
-            }}
+            className={`button-click tag-button tag-button--inactive ${
+              pressedButton === "showAll" ? "button-pressed" : ""
+            }`}
           >
             {showAll ? "▲" : "▼"}
           </button>

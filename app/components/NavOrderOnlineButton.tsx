@@ -11,12 +11,7 @@ export function NavOrderOnlineButton() {
       <button
         onClick={handleOrderClick}
         disabled={locating}
-        className="button-click flex items-center justify-center bg-[#EA4148] text-[clamp(11px,0.677vw,13px)] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#C71E25] disabled:opacity-60"
-        style={{
-          width: "min(6.25vw, 120px)",
-          height: "min(1.667vw, 32px)",
-          borderRadius: "min(1.042vw, 20px)",
-        }}
+        className="button-click flex items-center justify-center bg-[#EA4148] text-[clamp(11px,0.677vw,13px)] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#C71E25] disabled:opacity-60 nav-order-button-size"
         aria-label="Order Online"
       >
         {locating ? "Locating..." : "Order Online"}

@@ -353,7 +353,6 @@ export default function CateringForm() {
       <form
         onSubmit={handleSubmit}
         className="w-full flex flex-col md:flex-row md:flex-wrap md:items-start md:justify-start"
-        style={{ gap: "clamp(15px, calc(30/750*100vw), 30px)" }}
       >
         {/* Store selection - full width in mobile */}
         <div className="w-full md:block">
@@ -539,26 +538,16 @@ export default function CateringForm() {
         </div>
 
         {/* Submit button */}
-        <div className="w-full flex justify-center" style={{ marginTop: "clamp(20px, calc(40/750*100vw), 40px)" }}>
+        <div className="w-full flex justify-center catering-form-submit-wrapper">
           <button
             type="submit"
             disabled={isSubmitting}
             className="catering-form-submit order-button-base rounded-[40px] md:rounded-[30px]"
-            style={{ width: "clamp(280px, calc(600/750*100vw), 600px)", height: "clamp(40px, calc(80/750*100vw), 80px)", fontSize: "clamp(19px, calc(36/750*100vw), 36px)" }}
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </div>
       </form>
-      <style jsx>{`
-        @media (min-width: 1024px) {
-          button.catering-form-submit {
-            width: clamp(150px, calc(300/1920*100vw), 300px) !important;
-            height: clamp(23px, calc(46/1920*100vw), 46px) !important;
-            font-size: clamp(9px, calc(18/1920*100vw), 18px) !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

@@ -131,8 +131,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           alt=""
           width={70}
           height={70}
-          style={{ width: "100%", height: "100%" }}
-          className="absolute inset-0"
+          className="absolute inset-0 w-full h-full"
         />
 
         {/* Avatar image centered in ring */}
@@ -153,55 +152,23 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
               alt={review.author_name}
               width={46}
               height={46}
-              style={{ width: "100%", height: "100%" }}
-              className="rounded-full object-cover"
+              className="rounded-full object-cover w-full h-full"
             />
           ) : (
-            <div
-              className="rounded-full bg-gray-300"
-              style={{ width: "100%", height: "100%" }}
-            />
+            <div className="rounded-full bg-gray-300 w-full h-full" />
           )}
         </div>
       </div>
 
       {/* Bubble with content (higher z-index, covers avatar) */}
       {/* Stronger bubble scale on hover */}
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          zIndex: 3,
-        }}
-      >
+      <div className="review-bubble-panel">
         {/* Bubble background replaced by CSS (.review-bubble) to avoid using SVG asset */}
 
         {/* Content */}
-        <div
-          style={{
-            position: "absolute",
-            top: "clamp(6px, calc((12 / 750) * 100vw), 12px)",
-            left: "clamp(6px, calc((12 / 750) * 100vw), 12px)",
-            right: "clamp(6px, calc((12 / 750) * 100vw), 12px)",
-            bottom: "clamp(6px, calc((12 / 750) * 100vw), 12px)",
-            display: "flex",
-            flexDirection: "column",
-            gap: "min(0.521vw, 10px)", // 10/1920
-          }}
-        >
+        <div className="review-bubble-content">
           {/* Author name */}
-          <div
-            style={{
-              color: "#1D1E1F",
-              fontSize: isMobile
-                ? "clamp(11px, calc((22 / 750) * 100vw), 22px)"
-                : "clamp(11px, calc((20 / 1920) * 100vw), 20px)",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "normal",
-            }}
-          >
+          <div className="review-bubble-author">
             {review.author_name}
           </div>
 
@@ -209,23 +176,7 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
           <RatingStars rating={review.rating} variant="review-bubble" />
 
           {/* Review text (max 4 lines on mobile, 3 on desktop with ellipsis) */}
-          <div
-            style={{
-              color: "#4E5969",
-              fontSize: isMobile
-                ? "clamp(11px, calc((22 / 750) * 100vw), 22px)"
-                : "clamp(11px, calc((20 / 1920) * 100vw), 20px)",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "normal",
-              overflow: "hidden",
-              display: "-webkit-box",
-              /* Always clamp to 4 lines on both mobile (including 375px) and desktop */
-              WebkitLineClamp: 4,
-              WebkitBoxOrient: "vertical",
-              textOverflow: "ellipsis",
-            }}
-          >
+          <div className="review-bubble-text">
             {review.review_text}
           </div>
         </div>

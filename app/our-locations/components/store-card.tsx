@@ -52,21 +52,16 @@ export default function StoreCard({
   const mapSection = (
     <div 
       className="store-card-map shrink-0"
-      style={{ 
-        width: 'clamp(325px, calc(650/750*100vw), 650px)',
-        height: 'clamp(160px, calc(320/750*100vw), 320px)'
-      }}
     >
       {googleMapsEmbedUrl ? (
         <iframe
           src={googleMapsEmbedUrl}
           width="100%"
           height="100%"
-          style={{ border: 0 }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          className="rounded-[20px] md:rounded-[10px] w-full h-full"
+          className="rounded-[20px] md:rounded-[10px] w-full h-full border-0"
         />
       ) : (
         <div className="w-full h-full bg-gray-100 rounded-[10px] flex items-center justify-center">
@@ -84,13 +79,11 @@ export default function StoreCard({
 
   const infoSection = (
     <div 
-      className="inline-flex flex-col items-start w-full md:w-[38.596%]"
-      style={{ gap: 'clamp(8px, calc(16/750*100vw), 16px)' }}
+      className="inline-flex flex-col items-start w-full md:w-[38.596%] store-card-info"
     >
       {/* Store Name */}
       <h2 
-        className="text-[#1D1E1F] font-medium uppercase leading-normal"
-        style={{ fontSize: 'clamp(13px, calc(24/750*100vw), 24px)' }}
+        className="text-[#1D1E1F] font-medium uppercase leading-normal store-card-title-fs"
       >
         {name}
       </h2>
@@ -102,21 +95,16 @@ export default function StoreCard({
 
       {/* Address */}
       <div 
-        className="flex items-center"
-        style={{ gap: 'clamp(6px, calc(12/750*100vw), 12px)' }}
+        className="flex items-center store-card-address-gap"
       >
         <Image
           src="/images/icons/landmark.svg"
           alt=""
           width={20}
           height={20}
-          className="shrink-0 aspect-square"
-          style={{ width: 'clamp(10px, calc(20/750*100vw), 20px)', height: 'clamp(10px, calc(20/750*100vw), 20px)' }}
+          className="shrink-0 aspect-square store-card-icon-size"
         />
-        <span 
-          className="text-[#4E5969] font-normal leading-normal"
-          style={{ fontSize: 'clamp(11px, calc(20/750*100vw), 20px)' }}
-        >
+        <span className="text-[#4E5969] font-normal leading-normal store-card-address-fs">
           {fullAddress}
         </span>
       </div>
@@ -124,21 +112,16 @@ export default function StoreCard({
       {/* Opening Hours (today) - hide if missing */}
       {todayHoursText && (
         <div 
-          className="flex items-center"
-          style={{ gap: 'clamp(6px, calc(12/750*100vw), 12px)' }}
+          className="flex items-center store-card-address-gap"
         >
           <Image
             src="/images/icons/clock.svg"
             alt=""
             width={20}
             height={20}
-            className="shrink-0 aspect-square"
-            style={{ width: 'clamp(10px, calc(20/750*100vw), 20px)', height: 'clamp(10px, calc(20/750*100vw), 20px)' }}
+            className="shrink-0 aspect-square store-card-icon-size"
           />
-          <span 
-            className="text-[#4E5969] font-normal leading-normal"
-            style={{ fontSize: 'clamp(9px, calc(18/750*100vw), 18px)' }}
-          >
+          <span className="text-[#4E5969] font-normal leading-normal store-card-hours-fs">
             {todayHoursText}
           </span>
         </div>
@@ -147,8 +130,7 @@ export default function StoreCard({
       {/* Store Photos (scale with viewport baseline; clamp to prevent collapse) */}
       {hasPhotos && photoCount > 0 && (
         <div 
-          className="flex items-start"
-          style={{ gap: 'clamp(6px, calc(12/750*100vw), 12px)' }}
+          className="flex items-start store-card-photos-gap"
         >
           {photosToShow.map((photo, index) => (
             <div
@@ -170,26 +152,11 @@ export default function StoreCard({
 
   return (
     <>
-      <div className={`store-card-container flex flex-col md:flex-row md:items-start w-full ${isReversed ? 'store-card-reversed' : ''}`} style={{ gap: "clamp(10px, calc(20/750*100vw), 20px)" }}>
+      <div className={`store-card-container flex flex-col md:flex-row md:items-start w-full ${isReversed ? 'store-card-reversed' : ''}`}>
         {infoSection}
         {mapSection}
       </div>
-      <style jsx global>{`
-        @media (min-width: 768px) {
-          .store-card-reversed {
-            flex-direction: row-reverse;
-          }
-        }
-        @media (min-width: 1024px) {
-          .store-card-container {
-            gap: clamp(20px, calc(40/1920*100vw), 40px) !important;
-          }
-          .store-card-map {
-            width: clamp(400px, calc(800/1920*100vw), 800px) !important;
-            height: clamp(170px, calc(340/1920*100vw), 340px) !important;
-          }
-        }
-      `}</style>
+      
     </>
   );
 }

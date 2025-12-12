@@ -62,10 +62,7 @@ export default async function NewsDetailPage({
       headerExtras={
         news.cover_image_url ? (
           <div className="mt-5 flex justify-center">
-            <div
-              className="relative shrink-0 mb-4"
-              style={{ width: "clamp(345px, calc(690/750*100vw), 690px)", height: "clamp(160px, calc(320/750*100vw), 320px)" }}
-            >
+            <div className="relative shrink-0 mb-4 news-detail-cover">
               <Image
                 src={news.cover_image_url}
                 alt={news.title}

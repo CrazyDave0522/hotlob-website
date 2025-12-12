@@ -113,12 +113,7 @@ export default function NewsSection({ news }: NewsSectionProps) {
 					<button
 						key={index}
 						onClick={() => goToSlide(index)}
-						className="news-indicator button-click"
-						style={{
-							width: currentIndex === index ? "30px" : "8px",
-							background: currentIndex === index ? "#EA4148" : "#000",
-							opacity: currentIndex === index ? 1 : 0.2,
-						}}
+						className={`news-indicator button-click ${currentIndex === index ? 'news-indicator--active' : ''}`}
 						aria-label={`Go to news ${index + 1}`}
 					/>
 				))}
