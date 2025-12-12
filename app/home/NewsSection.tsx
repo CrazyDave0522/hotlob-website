@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import NewsCard from "../news/components/news-card";
@@ -45,15 +45,79 @@ export default function NewsSection({ news }: NewsSectionProps) {
 		};
 	}, [isPaused, news.length, currentIndex]);
 
-	const goToSlide = (index: number) => {
+	const goToSlide = useCallback((index: number) => {
 		if (index === currentIndex) return;
-    
+
 		setFadeOut(true);
 		setTimeout(() => {
 			setCurrentIndex(index);
 			setFadeOut(false);
 		}, 400);
-	};
+	}, [currentIndex]);
+
+	// Touch / swipe handling for mobile carousel (native listeners with passive:false)
+	const touchStartXRef = useRef<number | null>(null);
+	const touchStartYRef = useRef<number | null>(null);
+	const touchDeltaXRef = useRef<number>(0);
+	const carouselRef = useRef<HTMLDivElement | null>(null);
+
+	const handleTouchStart = useCallback((e: TouchEvent) => {
+		if (news.length <= 1) return;
+		touchStartXRef.current = e.touches[0].clientX;
+		touchStartYRef.current = e.touches[0].clientY;
+		touchDeltaXRef.current = 0;
+		setIsPaused(true);
+	}, [news.length]);
+
+	const handleTouchMove = useCallback((e: TouchEvent) => {
+		if (touchStartXRef.current === null) return;
+		const dx = e.touches[0].clientX - touchStartXRef.current;
+		const dy = e.touches[0].clientY - (touchStartYRef.current ?? 0);
+		touchDeltaXRef.current = dx;
+		// If horizontal swipe is dominant, prevent vertical page bounce
+		if (Math.abs(dx) > Math.abs(dy)) {
+			e.preventDefault();
+		}
+	}, []);
+
+	const handleTouchEnd = useCallback(() => {
+		if (touchStartXRef.current === null) {
+			setIsPaused(false);
+			return;
+		}
+		const dx = touchDeltaXRef.current;
+		const threshold = 50; // px required to consider a swipe
+		if (dx <= -threshold) {
+			goToSlide((currentIndex + 1) % news.length);
+		} else if (dx >= threshold) {
+			goToSlide((currentIndex - 1 + news.length) % news.length);
+		}
+		touchStartXRef.current = null;
+		touchStartYRef.current = null;
+		touchDeltaXRef.current = 0;
+		setIsPaused(false);
+	}, [currentIndex, goToSlide, news.length]);
+
+	useEffect(() => {
+		const el = carouselRef.current;
+		if (!el) return;
+
+		// Attach native listeners so we can call preventDefault on touchmove
+		const onStart = (ev: TouchEvent) => handleTouchStart(ev);
+		const onMove = (ev: TouchEvent) => handleTouchMove(ev);
+		const onEnd = () => handleTouchEnd();
+
+		el.addEventListener("touchstart", onStart, { passive: true });
+		// touchmove must be non-passive to allow preventDefault
+		el.addEventListener("touchmove", onMove as EventListener, { passive: false });
+		el.addEventListener("touchend", onEnd);
+
+		return () => {
+			el.removeEventListener("touchstart", onStart as EventListener);
+			el.removeEventListener("touchmove", onMove as EventListener);
+			el.removeEventListener("touchend", onEnd as EventListener);
+		};
+ 	}, [news.length, currentIndex, handleTouchStart, handleTouchMove, handleTouchEnd]);
 
 	const handleMouseEnter = () => {
 		setIsPaused(true);
@@ -75,7 +139,10 @@ export default function NewsSection({ news }: NewsSectionProps) {
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 			>
-				<div className="news-carousel-mobile">
+				<div
+					className="news-carousel-mobile"
+					ref={carouselRef}
+				>
 					<div
 						className="transition-opacity duration-700 ease-in-out"
 						style={{ opacity: fadeOut ? 0 : 1 }}

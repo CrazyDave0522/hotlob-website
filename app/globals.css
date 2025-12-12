@@ -5,8 +5,8 @@
   --background: #ffffff;
   --foreground: #171717;
   /* Accent colors */
-  --accent: #EA4148;
-  --accent-2: #FFA159;
+  --accent: #ea4148;
+  --accent-2: #ffa159;
   --accent-strong: #d51d24;
   --muted: #86909c;
   --muted-2: #919aa5;
@@ -17,12 +17,23 @@
   /* Mobile-first responsive typography (based on 750px baseline) */
   /* Using clamp to prevent too small on very small screens and too large on 750+ */
   --mobile-fs-xs: clamp(
-    11px,
+    12px,
     calc((20 / 750) * 100vw),
     20px
   ); /* 18px@750 -> 9px@375 */
+
+  /* AboutHotlob: unified two-scale variables (mobile = 750 baseline, desktop = 1920 baseline)
+     Mobile (default) values use the 750px baseline; desktop values override in the
+     @media (min-width:1024px) block below. */
+  --about-title-min: 20px;
+  --about-title-vw: calc((40 / 750) * 100vw);
+  --about-title-max: 40px;
+
+  --about-desc-min: 18px;
+  --about-desc-vw: calc((32 / 750) * 100vw);
+  --about-desc-max: 32px;
   --mobile-fs-sm: clamp(
-    13px,
+    14px,
     calc((24 / 750) * 100vw),
     24px
   ); /* 22px@750 -> 11px@375 */
@@ -37,7 +48,7 @@
     28px
   ); /* 26px@750 -> 13px@375 */
   --mobile-fs-xl: clamp(
-    15px,
+    16px,
     calc((30 / 750) * 100vw),
     30px
   ); /* 28px@750 -> 14px@375 */
@@ -104,7 +115,7 @@
   /* News card - mobile stacked variant */
   .news-card-mobile {
     border-radius: 20px;
-    height: clamp(345px, calc(690 / 750 * 100vw), 690px);
+    height: clamp(380px, calc(700 / 750 * 100vw), 700px);
     overflow: hidden;
   }
   .news-card-cover {
@@ -115,7 +126,10 @@
     overflow: hidden;
   }
   .news-card-content-padding {
-    padding: clamp(15px, calc(30 / 750 * 100vw), 30px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px);
+    padding: clamp(15px, calc(30 / 750 * 100vw), 30px)
+      clamp(10px, calc(20 / 750 * 100vw), 20px)
+      clamp(10px, calc(20 / 750 * 100vw), 20px)
+      clamp(10px, calc(20 / 750 * 100vw), 20px);
   }
   .mb-clamp-20 {
     margin-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
@@ -124,8 +138,16 @@
   /* Desktop news card helpers */
   .news-card-desktop-border {
     border-radius: min(1.042vw, 20px);
-    border: 1px solid #E1E4E9;
+    border: 1px solid #e1e4e9;
     overflow: hidden;
+  }
+  /* Desktop cover image (left column) for news cards */
+  .news-card-desktop-image {
+    width: 42.857%; /* 600/1400 ~= 42.857% used in component sizes */
+    height: 100%;
+    border-radius: min(1.042vw, 20px) 0 0 min(1.042vw, 20px);
+    overflow: hidden;
+    flex-shrink: 0;
   }
   .desktop-padding-40 {
     padding: min(2.083vw, 40px);
@@ -173,8 +195,8 @@
     height: min(1.25vw, 24px);
   }
   .mobile-menu-overlay-padding {
-    padding-top: clamp(114px, calc(220/750*100vw), 220px);
-    padding-bottom: clamp(25px, calc(50/750*100vw), 50px);
+    padding-top: clamp(114px, calc(220 / 750 * 100vw), 220px);
+    padding-bottom: clamp(25px, calc(50 / 750 * 100vw), 50px);
   }
   /* Footer helpers */
   .footer-gap-medium {
@@ -190,7 +212,7 @@
 
   /* Page helpers */
   .curve-section-bg {
-    background-color: #FDF7F0;
+    background-color: #fdf7f0;
   }
   .img-as-block {
     display: block;
@@ -199,8 +221,8 @@
 
   /* News detail cover image */
   .news-detail-cover {
-    width: clamp(345px, calc(690/750*100vw), 690px);
-    height: clamp(160px, calc(320/750*100vw), 320px);
+    width: clamp(345px, calc(690 / 750 * 100vw), 690px);
+    height: clamp(160px, calc(320 / 750 * 100vw), 320px);
   }
 
   /* Load more / list helpers for news page */
@@ -232,12 +254,12 @@
 
   /* Catering page: mobile form height helper */
   .catering-form-height {
-    height: clamp(760px, calc(1350/750*100vw), 1350px);
+    height: clamp(760px, calc(1350 / 750 * 100vw), 1350px);
   }
 
   /* Reviews section centralized styles */
   .reviews-section-bg {
-    background: linear-gradient(180deg, #FBF3F3 0%, #FFF 100%);
+    background: linear-gradient(180deg, #fbf3f3 0%, #fff 100%);
   }
   .reviews-container {
     gap: clamp(30px, calc(60 / 750 * 100vw), 60px);
@@ -251,7 +273,9 @@
 
 /* Accessibility helpers */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
@@ -263,7 +287,7 @@
   outline: none;
 }
 .focus-ring:focus-visible {
-  box-shadow: 0 0 0 3px rgba(234,65,72,0.18);
+  box-shadow: 0 0 0 3px rgba(234, 65, 72, 0.18);
   outline: none;
 }
 
@@ -425,9 +449,9 @@ textarea::placeholder {
     @apply bg-[#EA4148] text-white;
   }
   .tag-button--inactive {
-    border: 2px solid #FFF;
-    background: rgba(255, 255, 255, 0.60);
-    color: #1D1E1F;
+    border: 2px solid #fff;
+    background: rgba(255, 255, 255, 0.6);
+    color: #1d1e1f;
   }
 
   /* Nav Order Online button sizing (desktop-fluid with min caps) */
@@ -461,39 +485,73 @@ textarea::placeholder {
   }
   /* About Hotlob - mobile helpers */
   .about-mobile-rows-gap {
-    gap: clamp(10px, calc(20/750*100vw), 20px);
+    gap: clamp(14px, calc(22 / 750 * 100vw), 22px);
   }
   .about-mobile-active-card {
-    width: clamp(345px, calc(690/750*100vw), 690px);
-    height: clamp(150px, calc(300/750*100vw), 300px);
+    width: clamp(345px, calc(690 / 750 * 100vw), 690px);
+    height: clamp(150px, calc(300 / 750 * 100vw), 300px);
     flex-shrink: 0;
     max-width: 100%;
-    margin: 0 clamp(15px, calc(30/750*100vw), 30px);
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: scale(1);
+    margin: 0 clamp(15px, calc(30 / 750 * 100vw), 30px);
+    /* Avoid animating width/height (layout); animate transform/opacity instead */
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      margin 300ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 300ms ease;
+    transform: translateZ(0) scale(1.04);
     transform-origin: center;
+    will-change: transform, margin, opacity;
+    backface-visibility: hidden;
+    z-index: 2;
   }
   .about-mobile-inactive-card {
-    width: clamp(165px, calc(330/750*100vw), 330px);
-    height: clamp(150px, calc(300/750*100vw), 300px);
+    width: clamp(165px, calc(330 / 750 * 100vw), 330px);
+    height: clamp(150px, calc(300 / 750 * 100vw), 300px);
     flex-shrink: 0;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: scale(1);
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease;
+    transform: translateZ(0) scale(0.98);
     transform-origin: center;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    z-index: 1;
   }
   .about-mobile-card-content-padding {
-    padding-top: clamp(20px, calc(40/750*100vw), 40px);
-    padding-left: clamp(10px, calc(20/750*100vw), 20px);
-    padding-right: clamp(10px, calc(20/750*100vw), 20px);
-    padding-bottom: clamp(10px, calc(20/750*100vw), 20px);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    padding-top: clamp(20px, calc(40 / 750 * 100vw), 40px);
+    padding-left: clamp(10px, calc(20 / 750 * 100vw), 20px);
+    padding-right: clamp(10px, calc(20 / 750 * 100vw), 20px);
+    padding-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
+    transition: padding 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease;
+    will-change: padding, opacity;
   }
   .about-mobile-inactive-gap {
-    gap: clamp(15px, calc(30/750*100vw), 30px);
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    gap: clamp(15px, calc(30 / 750 * 100vw), 30px);
+    transition: gap 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: gap;
+  }
+  /* Mobile content entrance animations for smoother text entry */
+  @keyframes about-mobile-enter-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .about-mobile-title-anim {
+    animation: about-mobile-enter-up 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: 60ms;
+    will-change: transform, opacity;
+  }
+
+  .about-mobile-desc-anim {
+    animation: about-mobile-enter-up 340ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: 120ms;
+    will-change: transform, opacity;
   }
   .about-mobile-title-margin {
-    margin-bottom: clamp(10px, calc(20/750*100vw), 20px);
+    margin-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
   }
   .bg-cover-center {
     background-size: cover;
@@ -515,27 +573,72 @@ textarea::placeholder {
 
   .about-desc-clamp-mobile {
     display: -webkit-box;
-    -webkit-line-clamp: 7;
+    /* Adaptive mobile clamp: default (small screens) = 5 lines */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
+  /* Increase mobile clamp at intermediate breakpoints for smoother adaptation
+     375px -> 5 lines, ~525px -> 6 lines, 750px -> 7 lines (750 is our mobile baseline). */
+  @media (min-width: 525px) {
+    .about-desc-clamp-mobile {
+      -webkit-line-clamp: 4;
+    }
+  }
+
+  @media (min-width: 750px) {
+    .about-desc-clamp-mobile {
+      -webkit-line-clamp: 5;
+    }
+  }
+
   .about-mobile-desc-typography {
-    color: #FFF;
+    color: #fff;
     font-style: normal;
     font-weight: 400;
-    line-height: clamp(12px, calc(24/750*100vw), 24px);
-    font-size: clamp(12px, calc(18/750*100vw), 18px);
+    line-height: clamp(24px, calc(30 / 750 * 100vw), 30px);
+    font-size: clamp(
+      var(--about-desc-min),
+      var(--about-desc-vw),
+      var(--about-desc-max)
+    );
+    /* Allow explicit newlines to become line breaks on mobile and enable
+       breaking long/unbroken words to prevent overflow */
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     transition: font-size 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .about-mobile-inactive-desc-typography {
-    color: #4E5969;
-    font-style: normal;
-    font-weight: 400;
-    line-height: clamp(12px, calc(24/750*100vw), 24px);
-    font-size: clamp(12px, calc(18/750*100vw), 18px);
-    transition: font-size 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Centralized color/transition helpers for AboutHotlob text so components
+     avoid inline text styles. Default (inactive) tab text is dark; active
+     state becomes white. Descriptions toggle visibility via classes. */
+  .about-hotlob-tab-text {
+    color: var(--foreground);
+    transition: color 400ms cubic-bezier(0.4, 0, 0.2, 1);
   }
+  .about-hotlob-tab-text--active {
+    color: #fff;
+  }
+
+  .about-hotlob-card-title {
+    color: #333; /* default title color for mobile inactive state */
+  }
+  .about-hotlob-card-title--white {
+    color: #fff;
+  }
+
+  /* Description visibility/interaction state helpers (desktop) */
+  .about-card-desc {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms ease-in 280ms, font-size 400ms, line-height 400ms;
+  }
+  .about-card-desc--active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* .about-mobile-inactive-desc-typography removed — inactive mobile cards no longer show descriptions */
 
   /* Pressed state toggled via class when handling mouse/touch presses */
   .button-pressed {
@@ -596,7 +699,7 @@ textarea::placeholder {
   }
 
   .toast-message {
-    color: #4E5969;
+    color: #4e5969;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -605,306 +708,271 @@ textarea::placeholder {
 
   /* Type variants */
   .toast--success {
-    background: rgba(43, 164, 113, 0.10);
+    background: rgba(43, 164, 113, 0.1);
     border-radius: 6px;
   }
   .toast--error {
-    background: #FCF0F0;
+    background: #fcf0f0;
     border-radius: 4px;
   }
   .toast--warning {
-    background: rgba(240, 131, 27, 0.10);
+    background: rgba(240, 131, 27, 0.1);
     border-radius: 6px;
   }
   .toast--info {
-    background: rgba(87, 114, 255, 0.10);
+    background: rgba(87, 114, 255, 0.1);
     border-radius: 6px;
   }
 
-    /* News card centralized responsive helpers */
-    .news-card-mobile {
-      border-radius: 20px;
-      height: clamp(345px, calc(690 / 750 * 100vw), 690px);
-    }
+  /* Duplicate news-card block removed — consolidated above. */
 
-    .news-card-cover {
-      width: clamp(345px, calc(690 / 750 * 100vw), 690px);
-      height: clamp(170px, calc(340 / 750 * 100vw), 340px);
-      flex-shrink: 0;
-      border-radius: 20px 20px 0 0;
-    }
+  /* Store card helpers */
+  .store-card-container {
+    gap: clamp(10px, calc(20 / 750 * 100vw), 20px);
+  }
 
-    .news-card-content-padding {
-      padding: clamp(15px, calc(30 / 750 * 100vw), 30px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px) clamp(10px, calc(20 / 750 * 100vw), 20px);
-    }
+  .store-card-map {
+    width: clamp(325px, calc(650 / 750 * 100vw), 650px);
+    height: clamp(160px, calc(320 / 750 * 100vw), 320px);
+  }
 
-    .news-card-title-mobile {
-      margin-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
-    }
+  .store-card-info {
+    gap: clamp(8px, calc(16 / 750 * 100vw), 16px);
+  }
 
-    .news-card-date-mobile {
-      margin-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
-    }
+  .store-card-title-fs {
+    font-size: clamp(14px, calc(24 / 750 * 100vw), 24px);
+  }
 
-    .news-card-desktop-image {
-      width: 42.857%;
-      height: 100%;
-      border-radius: min(1.042vw, 20px) 0 0 min(1.042vw, 20px);
-    }
+  .store-card-address-gap {
+    gap: clamp(6px, calc(12 / 750 * 100vw), 12px);
+  }
 
-    .news-card-excerpt-desktop-margin {
-      margin-top: min(0.833vw, 16px);
-    }
+  .store-card-icon-size {
+    width: clamp(10px, calc(20 / 750 * 100vw), 20px);
+    height: clamp(10px, calc(20 / 750 * 100vw), 20px);
+  }
 
-    /* Store card helpers */
+  .store-card-address-fs {
+    font-size: clamp(12px, calc(20 / 750 * 100vw), 20px);
+  }
+
+  .store-card-hours-fs {
+    font-size: clamp(12px, calc(18 / 750 * 100vw), 18px);
+  }
+
+  .store-card-photos-gap {
+    gap: clamp(6px, calc(12 / 750 * 100vw), 12px);
+  }
+
+  @media (min-width: 768px) {
+    /* Ensure reversed layout overrides utility classes (e.g. md:flex-row) */
+    .store-card-container.store-card-reversed {
+      flex-direction: row-reverse !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
     .store-card-container {
-      gap: clamp(10px, calc(20 / 750 * 100vw), 20px);
+      gap: clamp(20px, calc(40 / 1920 * 100vw), 40px) !important;
     }
-
     .store-card-map {
-      width: clamp(325px, calc(650 / 750 * 100vw), 650px);
-      height: clamp(160px, calc(320 / 750 * 100vw), 320px);
+      width: clamp(400px, calc(800 / 1920 * 100vw), 800px) !important;
+      height: clamp(170px, calc(340 / 1920 * 100vw), 340px) !important;
     }
+  }
 
-    .store-card-info {
-      gap: clamp(8px, calc(16 / 750 * 100vw), 16px);
+  /* Hero centralized helpers */
+  .hero-mobile {
+    height: clamp(210px, calc(420 / 750 * 100vw), 420px);
+    background-size: cover;
+  }
+
+  /* Review bubble component helpers */
+  .review-bubble {
+    position: relative;
+    overflow: visible;
+    border-radius: 12px;
+  }
+
+  .review-bubble-avatar {
+    /* Positioning is controlled via inline config.avatarStyle per-placement */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 300ms ease-out;
+    z-index: 1;
+  }
+
+  .review-bubble-avatar-inner {
+    /* Positioning handled inline in component to avoid placement conflicts per-position */
+    border-radius: 9999px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .review-bubble-panel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+  }
+
+  .review-bubble-content {
+    position: absolute;
+    inset: clamp(6px, calc((12 / 750) * 100vw), 12px);
+    display: flex;
+    flex-direction: column;
+    gap: min(0.521vw, 10px);
+  }
+
+  /* Review card helpers */
+  .review-card-root {
+    gap: clamp(6.5px, calc(13 / 750 * 100vw), 13px);
+  }
+  .review-card-rating-margin {
+    margin-top: clamp(7px, calc(14 / 750 * 100vw), 14px);
+  }
+
+  .review-bubble-author {
+    color: #1d1e1f;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    /* Mobile-first: use 750px baseline so mobile can reach 24px max */
+    font-size: clamp(14px, calc((28 / 750) * 100vw), 28px);
+  }
+
+  .review-bubble-text {
+    color: #4e5969;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    /* Mobile-first: use 750px baseline so mobile can reach 24px max */
+    font-size: clamp(14px, calc((28 / 750) * 100vw), 28px);
+  }
+
+  @media (min-width: 768px) {
+    .review-bubble-author,
+    .review-bubble-text {
+      /* Desktop override: use 1920px baseline with slightly smaller max */
+      font-size: clamp(11px, calc((20 / 1920) * 100vw), 20px);
     }
-
-    .store-card-title-fs {
-      font-size: clamp(13px, calc(24 / 750 * 100vw), 24px);
+    .review-bubble-text {
+      -webkit-line-clamp: 4;
     }
+  }
 
-    .store-card-address-gap {
-      gap: clamp(6px, calc(12 / 750 * 100vw), 12px);
-    }
+  .hero-mobile-padding-left {
+    padding-left: calc(30 / 750 * 100vw);
+    padding-right: calc(30 / 750 * 100vw);
+  }
 
-    .store-card-icon-size {
-      width: clamp(10px, calc(20 / 750 * 100vw), 20px);
-      height: clamp(10px, calc(20 / 750 * 100vw), 20px);
-    }
+  .hero-content-max-width {
+    max-width: calc(684 / 750 * 100vw);
+  }
 
-    .store-card-address-fs {
-      font-size: clamp(11px, calc(20 / 750 * 100vw), 20px);
-    }
+  .hero-title-mobile-size {
+    font-size: clamp(28px, calc(40 / 750 * 100vw), 40px);
+  }
 
-    .store-card-hours-fs {
-      font-size: clamp(9px, calc(18 / 750 * 100vw), 18px);
-    }
+  .hero-body-mobile-size {
+    font-size: clamp(20px, calc(32 / 750 * 100vw), 32px);
+  }
 
-    .store-card-photos-gap {
-      gap: clamp(6px, calc(12 / 750 * 100vw), 12px);
-    }
+  /* .hero-footer-mobile-padding removed — hero footer note markup removed from component */
 
-    @media (min-width: 768px) {
-      /* Ensure reversed layout overrides utility classes (e.g. md:flex-row) */
-      .store-card-container.store-card-reversed {
-        flex-direction: row-reverse !important;
-      }
-    }
+  .hero-desktop-padding-left {
+    padding-left: min(13.542vw, 260px);
+    padding-right: min(13.542vw, 260px);
+  }
 
-    @media (min-width: 1024px) {
-      .store-card-container {
-        gap: clamp(20px, calc(40 / 1920 * 100vw), 40px) !important;
-      }
-      .store-card-map {
-        width: clamp(400px, calc(800 / 1920 * 100vw), 800px) !important;
-        height: clamp(170px, calc(340 / 1920 * 100vw), 340px) !important;
-      }
-    }
+  .hero-title-desktop-size {
+    font-size: clamp(24px, 2vw, 38px);
+    max-width: min(35.625vw, 684px);
+  }
 
-    /* Hero centralized helpers */
-    .hero-mobile {
-      height: clamp(210px, calc(420/750*100vw), 420px);
-      background-size: cover;
-    }
-    
-      /* Review bubble component helpers */
-      .review-bubble {
-        position: relative;
-        overflow: visible;
-        border-radius: 12px;
-      }
+  .hero-body-desktop-size {
+    font-size: clamp(18px, 1.563vw, 30px);
+    max-width: min(35.625vw, 684px);
+  }
 
-      .review-bubble-avatar {
-        /* Positioning is controlled via inline config.avatarStyle per-placement */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 300ms ease-out;
-        z-index: 1;
-      }
+  /* .hero-footer-desktop-padding removed — hero footer note markup removed from component */
 
-      .review-bubble-avatar-inner {
-        /* Positioning handled inline in component to avoid placement conflicts per-position */
-        border-radius: 9999px;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-      }
+  .hero-text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  }
 
-      .review-bubble-panel {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        z-index: 3;
-      }
+  /* Default gap for image grids in ImageWithLightbox */
+  .image-grid-gap-default {
+    gap: 10px;
+  }
 
-      .review-bubble-content {
-        position: absolute;
-        inset: clamp(6px, calc((12 / 750) * 100vw), 12px);
-        display: flex;
-        flex-direction: column;
-        gap: min(0.521vw, 10px);
-      }
+  /* Catering section helpers moved from inline component styles */
+  .catering-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 
-      /* Review card helpers */
-      .review-card-root {
-        gap: clamp(6.5px, calc(13/750*100vw), 13px);
-      }
-      .review-card-rating-margin {
-        margin-top: clamp(7px, calc(14/750*100vw), 14px);
-      }
-
-      .review-bubble-author {
-        color: #1D1E1F;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        /* Mobile-first: use 750px baseline so mobile can reach 22px max */
-        font-size: clamp(11px, calc((22 / 750) * 100vw), 22px);
-      }
-
-      .review-bubble-text {
-        color: #4E5969;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        text-overflow: ellipsis;
-        /* Mobile-first: use 750px baseline so mobile can reach 22px max */
-        font-size: clamp(11px, calc((22 / 750) * 100vw), 22px);
-      }
-
-      @media (min-width: 768px) {
-        .review-bubble-author,
-        .review-bubble-text {
-          /* Desktop override: use 1920px baseline with slightly smaller max */
-          font-size: clamp(11px, calc((20 / 1920) * 100vw), 20px);
-        }
-        .review-bubble-text {
-          -webkit-line-clamp: 4;
-        }
-      }
-
-    .hero-mobile-padding-left {
-      padding-left: calc(30/750*100vw);
-    }
-
-    .hero-content-max-width {
-      max-width: calc(684/750*100vw);
-    }
-
-    .hero-title-mobile-size {
-      font-size: clamp(22px, calc(38/750*100vw), 38px);
-    }
-
-    .hero-body-mobile-size {
-      font-size: clamp(16px, calc(30/750*100vw), 30px);
-    }
-
-    .hero-footer-mobile-padding {
-      padding-left: calc(30/750*100vw);
-    }
-
-    .hero-desktop-padding-left {
-      padding-left: min(13.542vw, 260px);
-    }
-
-    .hero-title-desktop-size {
-      font-size: clamp(24px, 2vw, 38px);
-      max-width: min(35.625vw, 684px);
-    }
-
-    .hero-body-desktop-size {
-      font-size: clamp(18px, 1.563vw, 30px);
-      max-width: min(35.625vw, 684px);
-    }
-
-    .hero-footer-desktop-padding {
-      padding-right: min(8.333vw, 160px);
-    }
-
-    .hero-text-shadow {
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-    }
-
-    /* Default gap for image grids in ImageWithLightbox */
-    .image-grid-gap-default {
-      gap: 10px;
-    }
-
-    /* Catering section helpers moved from inline component styles */
+  @media (max-width: 1023px) {
     .catering-top {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+      margin-top: clamp(32px, calc(108 / 750 * 100vw), 108px);
     }
+    .catering-subtitle {
+      margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px);
+    }
+    .catering-content {
+      margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px);
+    }
+  }
 
-    @media (max-width: 1023px) {
-      .catering-top {
-        margin-top: clamp(32px, calc(108 / 750 * 100vw), 108px);
-      }
-      .catering-subtitle {
-        margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px);
-      }
-      .catering-content {
-        margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px);
-      }
+  @media (min-width: 1024px) {
+    .catering-top {
+      margin-top: clamp(32px, 2vw + 20px, 120px);
     }
+    .catering-subtitle {
+      margin-top: 12px;
+    }
+    .catering-content {
+      margin-top: 12px;
+    }
+  }
 
-    @media (min-width: 1024px) {
-      .catering-top {
-        margin-top: clamp(32px, 2vw + 20px, 120px);
-      }
-      .catering-subtitle {
-        margin-top: 12px;
-      }
-      .catering-content {
-        margin-top: 12px;
-      }
-    }
+  /* NewsSection indicator helpers */
+  .news-indicator {
+    width: 8px;
+    height: 8px;
+    background: #000;
+    opacity: 0.2;
+    border-radius: 9999px;
+    transition: all 200ms ease;
+    padding: 0;
+    border: none;
+  }
+  .news-indicator--active {
+    width: 30px;
+    background: #ea4148;
+    opacity: 1;
+  }
 
-    /* NewsSection indicator helpers */
-    .news-indicator {
-      width: 8px;
-      height: 8px;
-      background: #000;
-      opacity: 0.2;
-      border-radius: 9999px;
-      transition: all 200ms ease;
-      padding: 0;
-      border: none;
-    }
-    .news-indicator--active {
-      width: 30px;
-      background: #EA4148;
-      opacity: 1;
-    }
+  /* Home store item image */
+  .home-store-image {
+    border-radius: min(0.521vw, 10px);
+    overflow: hidden;
+  }
 
-    /* Home store item image */
-    .home-store-image {
-      border-radius: min(0.521vw, 10px);
-      overflow: hidden;
-    }
-
-    .hero-desktop {
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
+  .hero-desktop {
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
   /* Order Now button base styles */
   .order-button-base {
@@ -1113,8 +1181,8 @@ textarea::placeholder {
   .home-store-item-row img,
   .home-store-item-row .object-contain,
   .home-store-item-row .aspect-square {
-    width: clamp(12px, calc(24 / 750 * 100vw), 20px);
-    height: clamp(12px, calc(24 / 750 * 100vw), 20px);
+    width: clamp(12px, calc(22 / 750 * 100vw), 22px);
+    height: clamp(12px, calc(22 / 750 * 100vw), 22px);
     min-width: 0; /* allow shrink-to-fit */
   }
   .home-store-item-text {
@@ -1122,10 +1190,13 @@ textarea::placeholder {
   }
 
   .home-store-image {
-    width: calc((220 / 750) * 100vw);
-    height: calc((160 / 750) * 100vw);
-    max-width: 220px;
-    max-height: clamp(120px, calc((160 / 750) * 100vw), 160px);
+    /* Mobile (750 baseline): keep original aspect ratio (220:160 => 1.375)
+       New mobile height at 750px baseline: 180px => width = 180 * 1.375 = 247.5px
+    */
+    width: calc((247.5 / 750) * 100vw);
+    height: calc((180 / 750) * 100vw);
+    max-width: 248px; /* rounded from 247.5 */
+    max-height: clamp(120px, calc((180 / 750) * 100vw), 180px);
   }
 
   .home-store-item-arrow {
@@ -1214,7 +1285,7 @@ textarea::placeholder {
     width: clamp(80px, calc(130 / 750 * 100vw), 130px);
     height: clamp(24px, calc(34 / 750 * 100vw), 34px);
     font-size: clamp(
-      13px,
+      14px,
       calc(26 / 750 * 100vw),
       26px
     ); /* 750 baseline: tier -> 26 */
@@ -1222,7 +1293,7 @@ textarea::placeholder {
   .dish-card-description {
     height: clamp(68px, calc(136 / 750 * 100vw), 136px);
     font-size: clamp(
-      13px,
+      14px,
       calc(26 / 750 * 100vw),
       26px
     ); /* 750 baseline: dish description -> 26 */
@@ -1281,7 +1352,7 @@ textarea::placeholder {
     }
     .dish-card-description {
       height: min(6.51vw, 125px);
-      font-size: clamp(14px, 0.938vw, 18px);
+      font-size: clamp(14px, 1.0417vw, 20px);
     }
     .dish-card-order-wrapper {
       margin-top: min(1.25vw, 24px);
@@ -1541,7 +1612,7 @@ textarea::placeholder {
     /* Allow the section to grow if its content (e.g., Learn More button) needs more space.
        Using min-height instead of a fixed height prevents child content from being visually
        cut off and avoids overlap with subsequent siblings such as the footer. */
-    min-height: clamp(540px, calc(1080 / 750 * 100vw), 1080px);
+    min-height: clamp(580px, calc(1080 / 750 * 100vw), 1080px);
     background: linear-gradient(180deg, #fbf3f3 0%, #fff 100%);
     display: flex;
     flex-direction: column;
@@ -1561,6 +1632,7 @@ textarea::placeholder {
     display: block;
     width: clamp(345px, calc(690 / 750 * 100vw), 690px);
     margin: 0 auto;
+    touch-action: pan-y;
   }
   .news-carousel-desktop {
     display: none;
@@ -2024,6 +2096,46 @@ textarea::placeholder {
   .about-hotlob-bg {
     background-image: url(/images/home-bg-about-hotlob.png);
   }
+
+  /* Desktop sizing for AboutHotlob is controlled via the desktop :root
+     variables (see bottom of this file). Avoid class-level font-size
+     overrides here so the variables remain the single source of truth. */
+}
+
+/* AboutHotlob (consolidated helpers: titles, descriptions, mobile/desktop scales) */
+.about-hotlob-tab-text {
+  /* Use unified AboutHotlob title variables so tab text and card titles share the same scale */
+  font-size: clamp(
+    var(--about-title-min),
+    var(--about-title-vw),
+    var(--about-title-max)
+  );
+}
+@media (min-width: 1024px) {
+  .about-hotlob-tab-text {
+    font-size: clamp(
+      var(--about-title-min),
+      var(--about-title-vw),
+      var(--about-title-max)
+    );
+  }
+}
+.about-hotlob-card-title {
+  /* Title size unified: mobile baseline (vars in :root) with desktop overrides in media query */
+  font-size: clamp(
+    var(--about-title-min),
+    var(--about-title-vw),
+    var(--about-title-max)
+  );
+}
+.about-hotlob-card-desc {
+  font-size: clamp(
+    var(--about-desc-min),
+    var(--about-desc-vw),
+    var(--about-desc-max)
+  );
+  /* Desktop-friendly line-height matching previous inline value */
+  line-height: clamp(24px, 1.6667vw, 32px);
 }
 
 /* Catering Form Container */
@@ -2362,13 +2474,13 @@ textarea::placeholder {
 .footer-logo-wrapper {
   margin-bottom: clamp(15px, calc(30 / 750 * 100vw), 30px);
 }
-  /* Mobile footer logo responsive sizing (match previous inline styles) */
-  .footer-logo-wrapper img,
-  .footer-logo-wrapper :where(img) {
-    width: clamp(96px, calc(192 / 750 * 100vw), 192px);
-    height: clamp(56px, calc(112 / 750 * 100vw), 112px);
-    object-fit: contain;
-  }
+/* Mobile footer logo responsive sizing (match previous inline styles) */
+.footer-logo-wrapper img,
+.footer-logo-wrapper :where(img) {
+  width: clamp(96px, calc(192 / 750 * 100vw), 192px);
+  height: clamp(56px, calc(112 / 750 * 100vw), 112px);
+  object-fit: contain;
+}
 @media (min-width: 1024px) {
   .footer-logo-wrapper {
     margin-bottom: 0;
@@ -2524,7 +2636,7 @@ textarea::placeholder {
 }
 @media (min-width: 768px) {
   .review-card-text {
-    font-size: clamp(9px, calc(18 / 1920 * 100vw), 18px) !important;
+    font-size: clamp(10px, calc(20 / 1920 * 100vw), 20px) !important;
   }
 }
 
@@ -2540,13 +2652,13 @@ textarea::placeholder {
 /* Rating Stars - Review Bubble Variant */
 .rating-star-bubble {
   aspect-ratio: 1;
-  width: clamp(6px, calc(12 / 750 * 100vw), 12px);
-  height: clamp(6px, calc(12 / 750 * 100vw), 12px);
+  width: clamp(10px, calc(12 / 750 * 100vw), 12px);
+  height: clamp(10px, calc(12 / 750 * 100vw), 12px);
 }
 @media (min-width: 1024px) {
   .rating-star-bubble {
-    width: clamp(6px, calc(12 / 1920 * 100vw), 12px);
-    height: clamp(6px, calc(12 / 1920 * 100vw), 12px);
+    width: clamp(10px, calc(12 / 1920 * 100vw), 12px);
+    height: clamp(10px, calc(12 / 1920 * 100vw), 12px);
   }
 }
 
@@ -2584,13 +2696,13 @@ textarea::placeholder {
 /* Rating Stars - Store Info Variant */
 .rating-star-store {
   aspect-ratio: 1;
-  width: clamp(9px, calc(18 / 750 * 100vw), 18px);
-  height: clamp(9px, calc(18 / 750 * 100vw), 18px);
+  width: clamp(12px, calc(18 / 750 * 100vw), 18px);
+  height: clamp(12px, calc(18 / 750 * 100vw), 18px);
 }
 @media (min-width: 1024px) {
   .rating-star-store {
-    width: clamp(9px, calc(18 / 1920 * 100vw), 18px);
-    height: clamp(9px, calc(18 / 1920 * 100vw), 18px);
+    width: clamp(12px, calc(18 / 1920 * 100vw), 18px);
+    height: clamp(12px, calc(18 / 1920 * 100vw), 18px);
   }
 }
 
@@ -2604,17 +2716,6 @@ textarea::placeholder {
 }
 
 /* Legacy rating styles - kept for backward compatibility */
-.rating-star-responsive {
-  aspect-ratio: 1;
-  width: clamp(8px, calc(28 / 750 * 100vw), 28px);
-  height: clamp(8px, calc(28 / 750 * 100vw), 28px);
-}
-@media (min-width: 768px) {
-  .rating-star-responsive {
-    width: 12px !important;
-    height: 12px !important;
-  }
-}
 
 .rating-star-review-bubble {
   aspect-ratio: 1;
@@ -2643,7 +2744,7 @@ textarea::placeholder {
 }
 
 .responsive-review-rating-text {
-  font-size: clamp(10px, calc(24 / 750 * 100vw), 24px);
+  font-size: clamp(12px, calc(24 / 750 * 100vw), 24px);
 }
 @media (min-width: 768px) {
   .responsive-review-rating-text {
@@ -2766,11 +2867,12 @@ textarea::placeholder {
 
 /* News Card */
 .news-card-title-mobile {
-  font-size: clamp(
-    19px,
-    calc(38 / 750 * 100vw),
-    38px
-  ); /* 750 baseline: news title -> 38 */
+    font-size: clamp(
+      19px,
+      calc(38 / 750 * 100vw),
+      38px
+    ); /* 750 baseline: news title -> 38 */
+    margin-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
 }
 .news-card-date-mobile {
   font-size: clamp(
@@ -2778,6 +2880,7 @@ textarea::placeholder {
     calc(30 / 750 * 100vw),
     30px
   ); /* 750 baseline: news date -> 30 */
+  margin-bottom: clamp(10px, calc(20 / 750 * 100vw), 20px);
 }
 .news-card-excerpt-mobile {
   font-size: clamp(
@@ -2788,28 +2891,28 @@ textarea::placeholder {
 }
 
 /* AboutHotlob */
-.about-hotlob-tab-text {
-  font-size: var(--mobile-fs-lg);
-}
-@media (min-width: 1024px) {
-  .about-hotlob-tab-text {
-    font-size: clamp(20px, 1.354vw, 26px); /* 26/1920 = 1.354% */
-  }
-}
-.about-hotlob-card-title {
-  font-size: clamp(20px, calc(26 / 750 * 100vw), 26px);
-}
-.about-hotlob-card-desc {
-  font-size: clamp(17px, calc(20 / 750 * 100vw), 20px);
-}
+/* removed: moved earlier to consolidate AboutHotlob helpers */
 
 /* CateringSection */
 .catering-section-title {
   font-size: var(--mobile-fs-3xl);
 }
 
+@media (min-width: 1024px) {
+  /* Desktop overrides for AboutHotlob unified variables (1920 baseline approximations) */
+  :root {
+    --about-title-min: 22px;
+    --about-title-vw: 1.9791vw; /* ~32/1920 */
+    --about-title-max: 38px;
+
+    --about-desc-min: 20px;
+    --about-desc-vw: 1.6667vw; /* ~24/1920 */
+    --about-desc-max: 32px;
+  }
+}
+
 .catering-content-text {
-  font-size: clamp(12px, calc(24 / 750 * 100vw), 24px);
+  font-size: clamp(14px, calc(24 / 750 * 100vw), 24px);
   line-height: clamp(26px, calc(52 / 750 * 100vw), 52px);
 }
 

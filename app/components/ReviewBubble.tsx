@@ -24,8 +24,8 @@ export default function ReviewBubble({ review, position }: ReviewBubbleProps) {
   // Responsive sizes: mobile based on 750px, desktop 1024+ based on 1920px
   const isMobile = !isDesktop;
   const bubbleWidth = isMobile
-    ? "clamp(210px, calc((440 / 750) * 100vw), 440px)"
-    : "clamp(224px, calc((440 / 1920) * 100vw), 440px)";
+    ? "clamp(280px, calc((560 / 750) * 100vw), 560px)"
+    : "clamp(240px, calc((480 / 1920) * 100vw), 480px)";
   const bubbleHeight = isMobile
     ? "clamp(80px, calc((220 / 750) * 100vw), 220px)"
     : "clamp(85px, calc((220 / 1920) * 100vw), 220px)";

@@ -45,24 +45,15 @@ export default function HomeStoreItem({
     const parts = line.split(": ");
     const text = parts.length > 1 ? parts.slice(1).join(": ") : "";
     if (text) {
-      todayHoursText = `Today: ${text}`;
+        todayHoursText = `Today: ${text}`;
+      }
     }
-  }
-
-  const handleStoreClick = () => {
-    if (google_url) {
-      window.open(google_url, "_blank", "noopener,noreferrer");
-    }
-  };
 
   return (
     <div
       className={`home-store-item flex justify-between items-center ${
         isLast ? "last-item" : ""
-      } ${index === 0 ? "first-item" : ""} ${index === 1 ? "second-item" : ""} ${
-        google_url ? "cursor-pointer hover:opacity-80 transition-opacity" : ""
-      }`}
-      onClick={handleStoreClick}
+      } ${index === 0 ? "first-item" : ""} ${index === 1 ? "second-item" : ""}`}
     >
       {/* Store image (left) */}
       <div className="relative shrink-0 bg-gray-100 overflow-hidden home-store-image">
@@ -125,15 +116,21 @@ export default function HomeStoreItem({
 
       {/* Arrow icon (right) - only show if google_url exists */}
       {google_url && (
-        <div className="shrink-0 ml-4">
+        <a
+          href={google_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 ml-4 cursor-pointer hover:opacity-80 transition-opacity"
+          aria-label={`Open ${name} in Google Maps`}
+        >
           <Image
             src="/images/icons/angle-right-black.svg"
-            alt=""
+            alt="Open in Google Maps"
             width={32}
             height={32}
             className="home-store-item-arrow"
           />
-        </div>
+        </a>
       )}
     </div>
   );

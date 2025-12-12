@@ -10,7 +10,6 @@ interface HeroProps {
   imageUrl: string;
   mobileImageUrl?: string; // optional mobile-specific image
   size?: "home" | "large" | "medium"; // home = 820px, large = 820px, medium = 420px
-  footerNote?: string; // optional small text at the bottom-left inside hero
   backgroundPositionY?: string; // optional vertical position (default "center")
   backgroundPositionX?: string; // optional horizontal position (default "center")
   showOverlay?: boolean; // optional overlay toggle (default true)
@@ -23,7 +22,6 @@ export default function Hero({
   imageUrl,
   mobileImageUrl,
   size = "medium",
-  footerNote,
   backgroundPositionY = "center",
   backgroundPositionX = "center",
   showOverlay = true,
@@ -73,14 +71,7 @@ export default function Hero({
           </div>
         </div>
 
-        {/* Footer note (optional) */}
-        {footerNote && (
-          <div className="absolute z-10 bottom-2.5 left-0 hero-footer-mobile-padding">
-            <p className="text-[#C9CDD4] text-[14px] font-normal leading-none text-left">
-              {footerNote}
-            </p>
-          </div>
-        )}
+        {/* footerNote removed */}
       </section>
 
       {/* Desktop Hero — visible at 1024px and above */}
@@ -120,14 +111,7 @@ export default function Hero({
           </div>
         </div>
 
-        {/* Footer note (optional) */}
-        {footerNote && (
-          <div className="absolute z-10 bottom-2.5 right-0 hero-footer-desktop-padding">
-            <p className="text-[#C9CDD4] text-[12px] font-normal leading-none text-right">
-              {footerNote}
-            </p>
-          </div>
-        )}
+        {/* footerNote removed */}
       </section>
     </>
   );
