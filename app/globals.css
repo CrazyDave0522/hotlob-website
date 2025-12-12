@@ -2711,7 +2711,7 @@ textarea::placeholder {
 }
 @media (min-width: 1024px) {
   .rating-text-store {
-    font-size: clamp(8px, calc(16 / 1920 * 100vw), 16px);
+    font-size: clamp(10px, calc(18 / 1920 * 100vw), 18px);
   }
 }
 
