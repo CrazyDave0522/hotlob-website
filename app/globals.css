@@ -846,6 +846,38 @@ textarea::placeholder {
       gap: 10px;
     }
 
+    /* Catering section helpers moved from inline component styles */
+    .catering-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    @media (max-width: 1023px) {
+      .catering-top {
+        margin-top: clamp(32px, calc(108 / 750 * 100vw), 108px);
+      }
+      .catering-subtitle {
+        margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px);
+      }
+      .catering-content {
+        margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .catering-top {
+        margin-top: clamp(32px, 2vw + 20px, 120px);
+      }
+      .catering-subtitle {
+        margin-top: 12px;
+      }
+      .catering-content {
+        margin-top: 12px;
+      }
+    }
+
     /* NewsSection indicator helpers */
     .news-indicator {
       width: 8px;

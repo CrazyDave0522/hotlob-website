@@ -26,51 +26,18 @@ export default function CateringSection() {
 				sizes="(max-width:1023px) 0vw, 100vw"
 			/>
 
-			<div
-				className="catering-top"
-				style={{ position: "absolute", top: 0, left: 0, width: "100%" }}
-			>
-				<style>{`
-					/* Mobile: clamp margin-top, Desktop: responsive spacing */
-					@media (max-width: 1023px) {
-						.catering-top { margin-top: clamp(32px, calc(108 / 750 * 100vw), 108px); }
-						.catering-subtitle { margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px); }
-						.catering-content { margin-top: clamp(8px, calc(16 / 750 * 100vw), 16px); }
-					}
-					@media (min-width: 1024px) {
-						.catering-top { margin-top: clamp(32px, 2vw + 20px, 120px); }
-						.catering-subtitle { margin-top: 12px; }
-						.catering-content { margin-top: 12px; }
-					}
-				`}</style>
-				<h1
-					className="catering-section-title text-[#FFD632] text-center font-semibold leading-normal"
-					style={{ fontWeight: 600 }}
-				>
+			<div className="catering-top">
+				<h1 className="catering-section-title text-[#FFD632] text-center font-semibold leading-normal">
 					The ULTIMATE Catering Pack!
 				</h1>
 
-				<h2
-					className="catering-section-title text-white text-center font-semibold leading-normal catering-subtitle"
-					style={{ fontWeight: 600 }}
-				>
+				<h2 className="catering-section-title text-white text-center font-semibold leading-normal catering-subtitle">
 					Leave as what you have
 				</h2>
 
 				<div className="catering-content">
-					<div
-						className="catering-content-text text-white text-center font-normal"
-						style={{
-							width: "72.917%",
-							maxWidth: 1400,
-							marginLeft: "auto",
-							marginRight: "auto",
-							display: "flex",
-							flexDirection: "column",
-							alignItems: "center",
-						}}
-					>
-						<div style={{ textAlign: "left" }}>
+					<div className="catering-content-text text-white text-center font-normal w-[72.917%] max-w-[1400px] mx-auto flex flex-col items-center">
+						<div className="text-left">
 							<p className="font-semibold">MIX 16 ROLL SET PAX 4-6</p>
 							<p>6 x Lobster Roll</p>
 							<p>5 x Soft Shell Crab Roll</p>
