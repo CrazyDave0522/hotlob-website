@@ -98,6 +98,13 @@ export default async function SeeOurFoodPage() {
     { id: 'dessert', name: 'Dessert', icon_url: '/images/icons/food-category/desert.svg', icon_url_active: '/images/icons/food-category/desert-active.svg' },
   ];
 
+  // Only show category options actually used by currently displayable dishes
+  const activeCategoryIds = new Set<string>();
+  for (const d of dishes) {
+    if (d.category) activeCategoryIds.add(d.category);
+  }
+  const filteredCategoryOptions = categoryOptions.filter((c) => activeCategoryIds.has(c.id));
+
   /* ========== Render page ========== */
   return (
     <>
@@ -111,7 +118,7 @@ export default async function SeeOurFoodPage() {
         footerNote="Our menu is subject to availability and seasons."
       />
       {/* Pass filtered allergen tags and category options to FoodSection */}
-      <FoodSection allergenTags={filteredAllergenTags} categoryOptions={categoryOptions} dishes={dishes} />
+      <FoodSection allergenTags={filteredAllergenTags} categoryOptions={filteredCategoryOptions} dishes={dishes} />
     </>
   );
 }
