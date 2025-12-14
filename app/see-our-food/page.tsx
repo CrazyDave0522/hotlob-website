@@ -115,7 +115,6 @@ export default async function SeeOurFoodPage() {
         }
         imageUrl="/images/see-our-food-hero.jpg"
         size="medium"
-        footerNote="Our menu is subject to availability and seasons."
       />
       {/* Pass filtered allergen tags and category options to FoodSection */}
       <FoodSection allergenTags={filteredAllergenTags} categoryOptions={filteredCategoryOptions} dishes={dishes} />
