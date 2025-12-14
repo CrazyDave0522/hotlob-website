@@ -17,9 +17,9 @@
   /* Mobile-first responsive typography (based on 750px baseline) */
   /* Using clamp to prevent too small on very small screens and too large on 750+ */
   --mobile-fs-xs: clamp(
-    12px,
-    calc((20 / 750) * 100vw),
-    20px
+    14px,
+    calc((24 / 750) * 100vw),
+    24px
   ); /* 18px@750 -> 9px@375 */
 
   /* AboutHotlob: unified two-scale variables (mobile = 750 baseline, desktop = 1920 baseline)
@@ -33,9 +33,9 @@
   --about-desc-vw: calc((32 / 750) * 100vw);
   --about-desc-max: 32px;
   --mobile-fs-sm: clamp(
-    14px,
-    calc((24 / 750) * 100vw),
-    24px
+    16px,
+    calc((26 / 750) * 100vw),
+    26px
   ); /* 22px@750 -> 11px@375 */
   --mobile-fs-base: clamp(
     14px,
@@ -115,7 +115,7 @@
   /* News card - mobile stacked variant */
   .news-card-mobile {
     border-radius: 20px;
-    height: clamp(380px, calc(700 / 750 * 100vw), 700px);
+    height: clamp(380px, calc(730 / 750 * 100vw), 730px);
     overflow: hidden;
   }
   .news-card-cover {
@@ -741,7 +741,7 @@ textarea::placeholder {
   }
 
   .store-card-title-fs {
-    font-size: clamp(14px, calc(24 / 750 * 100vw), 24px);
+    font-size: clamp(16px, calc(26 / 750 * 100vw), 26px);
   }
 
   .store-card-address-gap {
@@ -749,16 +749,16 @@ textarea::placeholder {
   }
 
   .store-card-icon-size {
-    width: clamp(10px, calc(20 / 750 * 100vw), 20px);
-    height: clamp(10px, calc(20 / 750 * 100vw), 20px);
+    width: clamp(16px, calc(26 / 750 * 100vw), 26px);
+    height: clamp(16px, calc(26 / 750 * 100vw), 26px);
   }
 
   .store-card-address-fs {
-    font-size: clamp(12px, calc(20 / 750 * 100vw), 20px);
+    font-size: clamp(14px, calc(24 / 750 * 100vw), 24px);
   }
 
   .store-card-hours-fs {
-    font-size: clamp(12px, calc(18 / 750 * 100vw), 18px);
+    font-size: clamp(14px, calc(24 / 750 * 100vw), 24px);
   }
 
   .store-card-photos-gap {
@@ -1181,8 +1181,8 @@ textarea::placeholder {
   .home-store-item-row img,
   .home-store-item-row .object-contain,
   .home-store-item-row .aspect-square {
-    width: clamp(12px, calc(22 / 750 * 100vw), 22px);
-    height: clamp(12px, calc(22 / 750 * 100vw), 22px);
+    width: clamp(16px, calc(26 / 750 * 100vw), 26px);
+    height: clamp(16px, calc(26 / 750 * 100vw), 26px);
     min-width: 0; /* allow shrink-to-fit */
   }
   .home-store-item-text {
@@ -1190,13 +1190,13 @@ textarea::placeholder {
   }
 
   .home-store-image {
-    /* Mobile (750 baseline): keep original aspect ratio (220:160 => 1.375)
-       New mobile height at 750px baseline: 180px => width = 180 * 1.375 = 247.5px
-    */
-    width: calc((247.5 / 750) * 100vw);
-    height: calc((180 / 750) * 100vw);
-    max-width: 248px; /* rounded from 247.5 */
-    max-height: clamp(120px, calc((180 / 750) * 100vw), 180px);
+     /* Mobile (750 baseline): keep original aspect ratio (220:160 => 1.375)
+       New mobile height at 750px baseline: 160px => width = 160 * 1.375 = 220px
+     */
+     width: calc((220 / 750) * 100vw);
+     height: calc((160 / 750) * 100vw);
+     max-width: 220px; /* rounded from 220 */
+     max-height: clamp(107px, calc((160 / 750) * 100vw), 160px);
   }
 
   .home-store-item-arrow {
@@ -1255,11 +1255,11 @@ textarea::placeholder {
     width: calc(50% - 15px);
   }
   .dish-card-height {
-    height: clamp(320px, calc(600 / 750 * 100vw), 600px);
+    height: clamp(320px, calc(620 / 750 * 100vw), 620px);
     max-width: 330px;
   }
   .dish-card-height:hover {
-    height: clamp(382px, calc(730 / 750 * 100vw), 730px);
+    height: clamp(385px, calc(730 / 750 * 100vw), 730px);
   }
   .dish-card-image {
     width: calc((230 / 750) * 100vw);
@@ -1294,13 +1294,18 @@ textarea::placeholder {
     ); /* 750 baseline: tier -> 26 */
   }
   .dish-card-description {
-    height: clamp(92px, calc(184 / 750 * 100vw), 184px);
+    height: clamp(96px, calc(180 / 750 * 100vw), 180px);
     font-size: clamp(
       14px,
       calc(26 / 750 * 100vw),
       26px
     ); /* 750 baseline: dish description -> 26 */
     color: #86909c;
+    /* Limit description to max 5 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .dish-card-order-wrapper {
     margin-top: clamp(16px, calc(24 / 750 * 100vw), 24px);
@@ -1313,7 +1318,7 @@ textarea::placeholder {
    */
   .dish-card-inner {
     padding-top: 0;
-    padding-bottom: clamp(12px, calc(20 / 750 * 100vw), 20px);
+    padding-bottom: clamp(12px, calc(24 / 750 * 100vw), 24px);
     padding-left: clamp(10px, calc(20 / 750 * 100vw), 20px);
     padding-right: clamp(10px, calc(20 / 750 * 100vw), 20px);
   }
@@ -1339,7 +1344,7 @@ textarea::placeholder {
       gap: min(0.729vw, 14px);
     }
     .dish-card-title {
-      font-size: 20px;
+      font-size: 22px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1357,8 +1362,13 @@ textarea::placeholder {
       font-size: 16px;
     }
     .dish-card-description {
-      height: min(7.0833vw, 136px);
+      height: min(6.667vw,128px);
       font-size: clamp(14px, 1.0417vw, 20px);
+      /* Limit description to max 5 lines on desktop */
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .dish-card-order-wrapper {
       margin-top: min(1.25vw, 24px);
@@ -1399,7 +1409,7 @@ textarea::placeholder {
   /* Dish grid container - mobile-first */
   .dish-grid-container {
     width: 100%;
-    padding-top: 40px;
+    padding-top: clamp(20px, calc(40 / 750 * 100vw), 40px);
     padding-left: clamp(15px, calc(30 / 750 * 100vw), 30px);
     padding-right: clamp(15px, calc(30 / 750 * 100vw), 30px);
   }
@@ -1429,7 +1439,7 @@ textarea::placeholder {
 
   /* Dish grid item - mobile-first */
   .dish-grid-item {
-    height: clamp(382px, calc(730 / 750 * 100vw), 730px);
+    height: clamp(385px, calc(730 / 750 * 100vw), 730px);
   }
 
   @media (min-width: 1024px) {
@@ -1445,7 +1455,7 @@ textarea::placeholder {
   }
   .see-our-food-bg-mobile {
     display: block;
-    aspect-ratio: 750/1750;
+    aspect-ratio: 750/1812;
   }
   .see-our-food-bg-desktop {
     display: none;
@@ -1472,7 +1482,7 @@ textarea::placeholder {
   .see-our-food-card-wrapper {
     width: calc(50% - 15px);
     min-width: 160px;
-    height: clamp(382px, calc(730 / 750 * 100vw), 730px);
+    height: clamp(385px, calc(730 / 750 * 100vw), 730px);
     margin-bottom: 0;
     display: flex;
     align-items: end;

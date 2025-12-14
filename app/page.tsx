@@ -105,7 +105,7 @@ export default async function Home() {
   return (
     <main>
       <Hero
-        title="Rollin' with us"
+        title="Rollin' with us !"
         description={
           "Premium Aussie lobster rolls — plus prawn, crab, meat & vegetarian favorites, all packed in buttery brioche."
         }

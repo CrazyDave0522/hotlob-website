@@ -24,7 +24,7 @@ export default function SeeOurFoodSection({ dishes }: SeeOurFoodSectionProps) {
 				src="/images/home-bg-see-our-food-mb.png"
 				alt="See our food background"
 				width={750}
-				height={1750}
+				height={1812}
 				className="see-our-food-bg-mobile w-full h-auto"
 				priority
 				sizes="(max-width:750px) 100vw, 750px"

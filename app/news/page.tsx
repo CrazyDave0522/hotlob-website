@@ -54,7 +54,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key`}
         showOverlay={false}
       />
 
-      <div className="pt-7">
+      <div className="pt-7 pb-20">
         {error && (
           <div className="max-w-[1400px] mx-auto text-sm text-red-600 mb-4">
             Failed to load news list: {error.message || String(error)}
