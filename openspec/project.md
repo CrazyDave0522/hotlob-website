@@ -31,12 +31,31 @@ Hotlob Website is a Next.js-based web application for the Hotlob food service pl
 - **Styling**: Utility-first CSS with Tailwind classes
 - **File Organization**:
   - app/ for pages and layouts
+  - components/ for shared React components
+  - utils/ for utility functions
   - public/ for static assets (fonts, images)
   - openspec/ for project documentation
 
 ### Testing Strategy
 
-[No testing framework configured yet - consider adding Jest or Vitest for unit tests]
+- **Framework**: Vitest 4.0.18 with React Testing Library 16.3.2
+- **Setup File**: `__tests__/setup.ts` loads @testing-library/jest-dom matchers globally
+- **Test Organization**:
+  - Unit tests: `__tests__/unit/` - individual components and functions
+  - Integration tests: `__tests__/integration/` - multi-component workflows
+  - Snapshot tests: `__tests__/snapshots/` - UI regression detection
+- **Configuration**: `vitest.config.ts` with jsdom environment and @/ path aliases
+- **Current Status**: Unit testing infrastructure complete with Button component example
+- **Validation**: Run `pnpm test` after each feature implementation
+- **Coverage**: Optional - can be added later with `@vitest/coverage-v8`
+- **File Pattern**: `*.test.tsx` or `*.test.ts` in `__tests__` directory
+
+### Development Workflow
+
+- **Spec Implementation**: For each capability in `openspec/specs/`, implement corresponding tests
+- **Test-First**: Write tests before or alongside feature implementation
+- **Validation**: Run `npm test` after implementing each spec requirement
+- **Coverage**: Ensure new code maintains or improves test coverage
 
 ### Git Workflow
 
@@ -64,3 +83,5 @@ This is a food service website with categories like food items, potentially incl
 - **Tailwind CSS**: Styling framework
 - **TypeScript**: Type checking
 - **ESLint**: Code linting
+- **Vitest**: Testing framework
+- **React Testing Library**: Component testing utilities
