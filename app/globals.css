@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* Project CSS layers in deterministic order */
+@import "../styles/token.css" layer(tokens);
+@import "../styles/base.css" layer(base);
+@import "../styles/components/index.css" layer(components);
+@import "../styles/utilities.css" layer(utilities);

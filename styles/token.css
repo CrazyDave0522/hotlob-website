@@ -1,0 +1,55 @@
+/* Design Tokens - CSS custom properties for consistent styling */
+
+:root {
+  /* Color tokens */
+  --color-primary: #ea4148;
+  --color-black: #1d1e1f;
+  --color-gray: #4e5969;
+  --color-white: #fff;
+
+  /* Font size tokens - responsive clamp values */
+  --font-size-h1: clamp(32px, 4vw, 48px);
+  --font-size-h2: clamp(24px, 3vw, 36px);
+  --font-size-h3: clamp(20px, 2.5vw, 30px);
+  --font-size-h4: clamp(18px, 2vw, 24px);
+  --font-size-h5: clamp(16px, 1.5vw, 20px);
+  --font-size-h6: clamp(14px, 1vw, 18px);
+  --font-size-body-lg: clamp(18px, 2vw, 20px);
+  --font-size-body: clamp(16px, 1.5vw, 18px);
+  --font-size-body-sm: clamp(14px, 1vw, 16px);
+  --font-size-body-xs: clamp(12px, 0.8vw, 14px);
+
+  /* Font weight tokens */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line height tokens */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
+
+  /* Border radius tokens */
+  --radius-10: 10px;
+  --radius-20: 20px;
+  --radius-30: 30px;
+
+  /* Spacing scale tokens - 4px-based scale */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-128: 128px;
+  --space-160: 160px;
+  --space-192: 192px;
+  --space-256: 256px;
+}
