@@ -28,13 +28,30 @@ Hotlob Website is a Next.js-based web application for the Hotlob food service pl
 
 - **App Router**: Uses Next.js 13+ App Router structure (app/ directory)
 - **Component Structure**: Standard React functional components with hooks
-- **Styling**: Utility-first CSS with Tailwind classes
+- **Styling**: Utility-first CSS with Tailwind classes combined with custom component styles
 - **File Organization**:
   - app/ for pages and layouts
   - components/ for shared React components
   - utils/ for utility functions
   - public/ for static assets (fonts, images)
+  - styles/ for CSS architecture (tokens, base, components, utilities)
   - openspec/ for project documentation
+
+### CSS Architecture
+
+- **Global Entrypoint**: `app/globals.css` imports Tailwind and project CSS layers in deterministic order
+- **Layer Order**: Tokens → Base → Components → Utilities (follows CSS cascade)
+- **Design Tokens**: CSS custom properties defined in `styles/token.css` with group prefixes:
+  - Colors: `--color-primary`, `--color-black`, `--color-gray`, `--color-white`
+  - Font sizes: `--font-size-[h1-h6, body-lg, body, body-sm, body-xs]` with responsive clamp values
+  - Font weights: `--font-weight-[normal, medium, semibold, bold]`
+  - Line heights: `--line-height-[tight, normal, relaxed]`
+  - Spacing: `--space-[4...256]` - 4px-based scale with 16 values
+  - Border radius: `--radius-[10, 20, 30]`
+- **Component Styles**: Organized in `styles/components/` with component-prefixed naming (e.g., `.ComponentName-root`) to avoid collisions
+- **Base Styles**: `styles/base.css` for foundational HTML element styling
+- **Utilities**: `styles/utilities.css` for custom utility classes extending Tailwind
+- **Specification**: Defined in `openspec/specs/css-architecture/spec.md`
 
 ### Testing Strategy
 
