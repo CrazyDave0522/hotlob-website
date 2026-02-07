@@ -3,27 +3,34 @@ import { ReactNode } from 'react'
 interface ButtonProps {
   children: ReactNode
   onClick?: () => void
-  variant?: 'primary' | 'secondary'
   disabled?: boolean
+  className?: string
 }
 
 export function Button({
   children,
   onClick,
-  variant = 'primary',
-  disabled = false
+  disabled = false,
+  className
 }: ButtonProps) {
-  const baseClasses = 'px-4 py-2 rounded font-medium transition-colors'
-  const variantClasses = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-300',
-    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 disabled:bg-gray-100'
-  }
+  const baseClasses = 'inline-block font-medium transition-colors cursor-pointer border-none'
 
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant]}`}
+      className={`${baseClasses}${className ? ` ${className}` : ''}`}
       onClick={onClick}
       disabled={disabled}
+      style={{
+        width: 'clamp(80px, 10vw, 120px)',
+        height: 'clamp(20px, 2.5vw, 32px)',
+        padding: 'var(--space-12) var(--space-24)',
+        borderRadius: 'var(--radius-20)',
+        backgroundColor: 'var(--color-primary)',
+        color: 'var(--color-white)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
     >
       {children}
     </button>

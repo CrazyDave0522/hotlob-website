@@ -6,6 +6,8 @@
   --color-black: #1d1e1f;
   --color-gray: #4e5969;
   --color-white: #fff;
+  --color-dark-brown: #1f1f1c;
+  --color-taupe: #665f5b;
 
   /* Font size tokens - responsive clamp values */
   --font-size-h1: clamp(32px, 4vw, 48px);
@@ -18,6 +20,9 @@
   --font-size-body: clamp(16px, 1.5vw, 18px);
   --font-size-body-sm: clamp(14px, 1vw, 16px);
   --font-size-body-xs: clamp(12px, 0.8vw, 14px);
+
+  /* Font family tokens */
+  --font-family-primary: "Ghoust Solid", "Ghoust Outline", "Helvetica Neue", Arial, sans-serif;
 
   /* Font weight tokens */
   --font-weight-normal: 400;

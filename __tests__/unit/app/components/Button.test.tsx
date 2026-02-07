@@ -18,16 +18,18 @@ describe('Button', () => {
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
-  it('applies primary variant by default', () => {
-    render(<Button>Primary</Button>)
-    const button = screen.getByRole('button', { name: /primary/i })
-    expect(button).toHaveClass('bg-blue-600')
+  it('applies design token styling', () => {
+    render(<Button>Styled Button</Button>)
+    const button = screen.getByRole('button', { name: /styled button/i })
+    expect(button).toHaveStyle('border-radius: var(--radius-20)')
+    expect(button).toHaveStyle('background-color: var(--color-primary)')
+    expect(button).toHaveStyle('color: var(--color-white)')
   })
 
-  it('applies secondary variant when specified', () => {
-    render(<Button variant="secondary">Secondary</Button>)
-    const button = screen.getByRole('button', { name: /secondary/i })
-    expect(button).toHaveClass('bg-gray-200')
+  it('accepts and applies custom className', () => {
+    render(<Button className="custom-class">Custom</Button>)
+    const button = screen.getByRole('button', { name: /custom/i })
+    expect(button).toHaveClass('custom-class')
   })
 
   it('is disabled when disabled prop is true', () => {

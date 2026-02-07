@@ -1,0 +1,85 @@
+/* Header component styles */
+
+.Header-root {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #fff;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+}
+
+.Header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+  padding: 0 var(--space-32);
+}
+
+.Header-logoLink {
+  display: inline-flex;
+  align-items: center;
+}
+
+.Header-logo {
+  height: auto;
+  width: clamp(64px, 5vw, 96px);
+}
+
+.Header-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-80);
+}
+
+.Header-navLink {
+  color: var(--color-taupe);
+  font-size: var(--font-size-h5);
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  padding: var(--space-8) var(--space-12);
+  border-bottom: 4px solid transparent;
+  border-radius: var(--radius-10);
+}
+
+.Header-navLink--active {
+  color: var(--color-primary);
+  border-bottom: 4px solid var(--color-primary);
+}
+
+.Header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+.Header-socialIcons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.Header-socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Header-ctaButton {
+  align-self: center;
+}
+
+@media (max-width: 900px) {
+  .Header-inner {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .Header-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-24);
+  }
+}
