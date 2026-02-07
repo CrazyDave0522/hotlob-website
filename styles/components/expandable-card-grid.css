@@ -1,0 +1,110 @@
+/* Expandable Card Grid Component - Mobile First */
+
+.ExpandableCardGrid-root {
+  width: 100%;
+}
+
+.ExpandableCardGrid-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+.ExpandableCardGrid-card {
+  /* Mobile: stacked, full width, always expanded (active) */
+  width: 100%;
+  aspect-ratio: 2.3;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: var(--mobile-bg);
+  border-radius: var(--radius-10);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-20);
+  box-sizing: border-box;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.ExpandableCardGrid-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--space-20);
+}
+
+.ExpandableCardGrid-title {
+  font-size: var(--font-size-card-title-mobile);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+  margin: 0;
+  line-height: var(--line-height-normal);
+}
+
+.ExpandableCardGrid-description {
+  font-size: var(--font-size-card-description-mobile);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-white);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Desktop: 768px+ */
+@media (min-width: 768px) {
+  .ExpandableCardGrid-container {
+    flex-direction: row;
+    gap: var(--space-20);
+  }
+
+  .ExpandableCardGrid-card {
+    /* Base: inactive state (collapsed) */
+    flex: 1;
+    aspect-ratio: 0.95;
+    padding: var(--space-32);
+    background-image: var(--desktop-bg);
+    cursor: pointer;
+    align-items: flex-start;
+  }
+
+  /* Inactive: title only, dark text */
+  .ExpandableCardGrid-title {
+    color: var(--color-charcoal);
+    font-size: var(--font-size-card-title-desktop);
+  }
+
+  .ExpandableCardGrid-description {
+    display: none;
+    font-size: var(--font-size-card-description-desktop);
+  }
+
+  /* Hover/Active: expanded state, white text, description visible with fade-in */
+  .ExpandableCardGrid-card--active,
+  .ExpandableCardGrid-card:hover {
+    flex: 2;
+    aspect-ratio: 1.3333;
+  }
+
+  .ExpandableCardGrid-card--active .ExpandableCardGrid-title,
+  .ExpandableCardGrid-card:hover .ExpandableCardGrid-title {
+    color: var(--color-white);
+  }
+
+  .ExpandableCardGrid-card--active .ExpandableCardGrid-description,
+  .ExpandableCardGrid-card:hover .ExpandableCardGrid-description {
+    display: block;
+    animation: fadeIn 0.3s ease 0.1s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

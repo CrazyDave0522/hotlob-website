@@ -9,6 +9,7 @@
   --color-dark-brown: #1f1f1c;
   --color-taupe: #665f5b;
   --color-dark-gray: #242424;
+  --color-charcoal: #333;
   --color-medium-gray: #999;
 
   /* Font size tokens - responsive clamp values */
@@ -19,6 +20,12 @@
   --font-size-h5: clamp(16px, 1.5vw, 20px);
   --font-size-h6: clamp(14px, 1vw, 18px);
   --font-size-body-lg: clamp(18px, 2vw, 20px);
+
+  /* ExpandableCardGrid font sizes - responsive behavior per viewport */
+  --font-size-card-title-mobile: clamp(18px, 4.17vw, 32px);
+  --font-size-card-title-desktop: clamp(18px, 1.67vw, 32px);
+  --font-size-card-description-mobile: clamp(14px, 3.13vw, 24px);
+  --font-size-card-description-desktop: clamp(14px, 1.25vw, 24px);
   --font-size-body: clamp(16px, 1.5vw, 18px);
   --font-size-body-sm: clamp(14px, 1vw, 16px);
   --font-size-body-xs: clamp(12px, 0.8vw, 14px);
