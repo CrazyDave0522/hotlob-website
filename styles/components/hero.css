@@ -1,5 +1,109 @@
-/* Hero component styles */
+/* Hero Section Component Styles */
 
 .Hero-root {
-  /* Component class stub - no styling required for infrastructure phase */
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Desktop Variants */
+.Hero-root--tall {
+  aspect-ratio: 1920 / 820;
+}
+
+.Hero-root--short {
+  aspect-ratio: 1920 / 500;
+}
+
+/* Background Image Layer */
+.Hero-bgImage {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 1 !important;
+}
+
+/* Overlay Layer (optional) */
+.Hero-overlay {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 2 !important;
+}
+
+/* Content Container - Text positioning and vertical centering */
+.Hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  --hero-pad-x: clamp(16px, 13.33vw, 256px);
+  padding-left: var(--hero-pad-x);
+  padding-right: calc(var(--hero-pad-x) * 2);
+}
+
+/* Text Container */
+.Hero-textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+/* Hero Title */
+.Hero-title {
+  font-size: var(--font-size-hero-title);
+  font-weight: 600;
+  color: var(--color-white);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+/* Hero Title without Overlay */
+.Hero-root--no-overlay .Hero-title {
+  color: var(--color-dark-gray);
+}
+
+/* Hero Subtitle */
+.Hero-subtitle {
+  font-size: var(--font-size-hero-subtitle);
+  font-weight: 400;
+  color: var(--color-white);
+  margin: 0;
+  line-height: var(--line-height-normal);
+  white-space: pre-line;
+}
+
+/* Hero Subtitle without Overlay */
+.Hero-root--no-overlay .Hero-subtitle {
+  color: var(--color-medium-gray);
+}
+
+/* Mobile Responsive Layout */
+@media (max-width: 767px) {
+  /* Both tall and short variants use same mobile aspect ratio */
+  .Hero-root--tall,
+  .Hero-root--short {
+    aspect-ratio: 750 / 420;
+  }
+
+  /* Adjust padding for mobile */
+  .Hero-content {
+    --hero-pad-x: clamp(8px, 4.17vw, 32px);
+    padding-left: var(--hero-pad-x);
+    padding-right: calc(var(--hero-pad-x) * 1.5);
+  }
+
+  .Hero-title {
+    font-size: clamp(24px, 4.17vw, 32px);
+  }
+
+  .Hero-subtitle {
+    font-size: clamp(16px, 2.61vw, 20px);
+  }
 }

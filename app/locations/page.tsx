@@ -1,8 +1,16 @@
+import Hero from "@/components/Hero";
+
 export default function LocationsPage() {
   return (
-    <div>
-      <h1>Our Locations</h1>
-      <p>Coming soon...</p>
-    </div>
-  )
+    <main>
+      <Hero
+        variant="short"
+        bgImage="/images/hero-bg/our-locations-hero.png"
+        title="Find Hotlob near you"
+        subtitle={`We're serving up the rolls everyone's talking about — now in Perth and Melbourne.\nGrab one on your lunch break, between uni lectures, or on your way home.`}
+        overlay={true}
+      />
+    </main>
+  );
 }
+
