@@ -3,9 +3,7 @@
 .Header-root {
   position: sticky;
   top: 0;
-  z-index: 10;
-  background-color: #fff;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+  z-index: 10000;
 }
 
 .Header-inner {
@@ -14,6 +12,10 @@
   justify-content: space-between;
   gap: var(--space-24);
   padding: 0 var(--space-32);
+  position: relative;
+  z-index: 10001;
+  background-color: #fff;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
 }
 
 .Header-logoLink {
@@ -71,7 +73,104 @@
   align-self: center;
 }
 
-@media (max-width: 900px) {
+/* Mobile hamburger icon - hidden on desktop */
+.Header-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-taupe);
+  width: clamp(32px, 6.5vw, 50px);
+  height: clamp(32px, 6.5vw, 50px);
+}
+
+.Header-hamburger svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile overlay */
+.Header-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.90);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.Header-overlayNav {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 12.52vw, 96px);
+  align-items: center;
+  padding-top: clamp(48px, 33.38vw, 256px);
+  padding-bottom: clamp(24px, 16.69vw, 128px);
+}
+
+.Header-overlayNavLink {
+  color: var(--color-white);
+  font-size: var(--font-size-h2);
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  padding: var(--space-16);
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Header-overlayNavLink--active {
+  color: var(--color-primary);
+}
+
+/* Mobile styles (< 768px) */
+@media (max-width: 767px) {
+  .Header-inner {
+    padding: 0 clamp(16px, 4.17vw, 32px);
+  }
+
+  .Header-logo {
+    width: clamp(80px, 18.25vw, 140px);
+  }
+
+  /* Hide desktop navigation and actions on mobile */
+  .Header-nav,
+  .Header-actions {
+    display: none;
+  }
+
+  /* Show hamburger on mobile */
+  .Header-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Tablet and larger screens */
+@media (min-width: 768px) {
+  /* Hide overlay elements on desktop */
+  .Header-overlay {
+    display: none !important;
+  }
+
+  .Header-hamburger {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 768px) {
   .Header-inner {
     flex-wrap: wrap;
     justify-content: center;

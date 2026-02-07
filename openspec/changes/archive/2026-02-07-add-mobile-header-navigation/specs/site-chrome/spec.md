@@ -1,8 +1,7 @@
-# site-chrome Specification
+# site-chrome Specification Delta
 
-## Purpose
-TBD - created by archiving change add-header-footer-components. Update Purpose after archive.
-## Requirements
+## MODIFIED Requirements
+
 ### Requirement: Header Component Structure
 
 The application SHALL provide a Header component that renders a horizontal layout with three distinct sections on desktop (≥ 768px): logo on the left, navigation links in the middle, and social icons with a call-to-action button on the right. On mobile (< 768px), the header SHALL display only the logo on the left (with responsive sizing: max 140px width, 116px height maintaining 1.21 aspect ratio) and a hamburger menu icon on the right. The header SHALL have no y-padding on mobile (same as desktop) and responsive x-padding with maximum `--space-32`. The logo SHALL be loaded from `public/images/logo/logo-lg.png` (8500×7000px, aspect ratio 1.21) and linked to the homepage using Next.js Image and Link components.
@@ -104,114 +103,7 @@ The Header component SHALL display social media icons and a call-to-action butto
 - **THEN** social icons are not visible
 - **AND** CTA button is not visible
 
-### Requirement: Footer Component Structure
-
-The application SHALL provide a Footer component that renders a two-tier vertical layout: a top section with logo and legal links arranged horizontally, and a bottom section with copyright notice aligned to the left and social icons aligned to the right. The logo SHALL be loaded from `public/images/logo/logo-lg.png` (8500×7000px, aspect ratio 1.21) using Next.js Image component. The Footer SHALL use background color `--color-dark-brown` (#1f1f1c) with white text (`--color-white`) for all content. A separator line SHALL appear between the top and bottom sections with `border-top: 1px solid rgba(255, 255, 255, 0.20)` and a width of 80% of the footer content area.
-
-#### Scenario: Rendering the footer layout
-
-- **GIVEN** the application is rendering any page
-- **WHEN** the Footer component is displayed
-- **THEN** the top section displays the logo on the left
-- **AND** the top section displays Privacy Policy, Terms & Conditions, and Contact Us links to the right of the logo
-- **AND** the bottom section displays the copyright notice on the left
-- **AND** the bottom section displays social media icons on the right
-
-### Requirement: Footer Legal Links
-
-The Footer component SHALL display links for Privacy Policy, Terms & Conditions, and Contact Us in the top section. Legal links SHALL use the font size token `--font-size-body-xs` with a gap of `--space-64` between each link. The actual link destinations will be configured in a future update. Links SHALL use Next.js Link component.
-
-#### Scenario: Navigating to legal pages
-
-- **GIVEN** a user is viewing any page with the Footer
-- **WHEN** the user clicks on a legal link placeholder
-- **THEN** the link structure is ready for destination configuration
-- **AND** the Footer remains visible at the bottom of the page
-
-### Requirement: Footer Copyright and Social Icons
-
-The Footer component SHALL display a copyright notice in the bottom left and social media icons in the bottom right. The copyright notice SHALL display the dynamic current year (e.g., `© 2026 Hotlob`) and use the font size token `--font-size-body-xs`. Social media icons SHALL link to: Facebook (`public/images/icons/fb.svg` → https://www.facebook.com/hotlob/) and Instagram (`public/images/icons/ins.svg` → https://www.instagram.com/hotlobaustralia/). Social icons SHALL open in new browser tabs with proper security attributes (target="_blank" rel="noopener noreferrer").
-
-#### Scenario: Viewing footer brand information
-
-- **GIVEN** a user scrolls to the bottom of any page
-- **WHEN** the Footer is visible
-- **THEN** the copyright notice displays the current year and company name
-- **AND** social media icons are visible and clickable
-
-#### Scenario: Clicking footer social media icons
-
-- **GIVEN** a user views the Footer
-- **WHEN** the user clicks a social media icon in the bottom section
-- **THEN** a new browser tab opens to the corresponding social media platform
-- **AND** the current page remains unchanged
-
-### Requirement: Site-wide Integration
-
-The Header and Footer components SHALL be integrated into the root layout to appear consistently across all pages of the application. The Header SHALL stick to the top of the page, and the Footer SHALL stick to the bottom of the page.
-
-#### Scenario: Consistent site chrome across all pages
-
-- **GIVEN** a user navigates between different pages (home, catering, locations, etc.)
-- **WHEN** each page loads
-- **THEN** the Header appears at the top of every page
-- **AND** the Footer appears at the bottom of every page
-- **AND** the page content renders between the Header and Footer
-
-### Requirement: Custom Font Configuration
-
-The application SHALL configure custom fonts from `public/fonts` directory as the site-wide typography system, loading font files via @font-face declarations in `styles/base.css` and defining a `--font-family-primary` font-family token in `styles/token.css`. Custom fonts SHALL be applied to all HTML/body elements to ensure universal coverage, with proper fallback system font stacks to maintain readability if custom fonts fail to load.
-
-#### Scenario: Loading custom fonts site-wide
-
-- **GIVEN** the application is rendering any page
-- **WHEN** the page loads
-- **THEN** custom font files from `public/fonts` are loaded via @font-face declarations
-- **AND** a font-family design token (e.g., `--font-family-primary`) references the custom font
-- **AND** all components including Header and Footer use the custom font through the token
-
-#### Scenario: Font fallbacks
-
-- **GIVEN** custom fonts are configured
-- **WHEN** a custom font file fails to load or is still loading
-- **THEN** the browser falls back to a system font stack defined in the font-family declaration
-- **AND** the layout remains functional and readable
-
-### Requirement: CSS Architecture Compliance
-
-The Header and Footer components SHALL follow the project's CSS architecture patterns defined in the `css-architecture` specification, using component-prefixed class names and design tokens from `styles/token.css`.
-
-#### Scenario: Styling with design tokens
-
-- **GIVEN** the Header or Footer component is being styled
-- **WHEN** the component CSS is authored
-- **THEN** class names use component prefixes (e.g., `.Header-root`, `.Footer-topSection`)
-- **AND** colors reference design tokens (e.g., `var(--color-primary)`, `var(--color-dark-brown)`, `var(--color-taupe)`, `var(--color-white)`)
-- **AND** spacing uses design tokens (e.g., `var(--space-16)`, `var(--space-24)`)
-- **AND** typography uses design tokens (e.g., `var(--font-size-body)`, `var(--font-weight-medium)`)
-
-### Requirement: Component Testing
-
-The Header and Footer components SHALL include unit tests that verify their structure, rendering behavior, and user interactions according to the `testing-capabilities` specification.
-
-#### Scenario: Testing Header component
-
-- **GIVEN** the Header component is implemented
-- **WHEN** unit tests are executed
-- **THEN** tests verify the logo renders in the left section
-- **AND** tests verify all navigation links render in the center section
-- **AND** tests verify social icons and CTA button render in the right section
-- **AND** tests verify navigation links have correct href attributes
-- **AND** tests verify social icons open in new tabs (target="_blank")
-
-#### Scenario: Testing Footer component
-
-- **GIVEN** the Footer component is implemented
-- **WHEN** unit tests are executed
-- **THEN** tests verify the top section renders with logo and legal link placeholders
-- **AND** tests verify the bottom section renders with copyright and social icons
-- **AND** tests verify the copyright notice includes the current year
-- **AND** tests verify social icons open in new tabs (target="\_blank")
+## ADDED Requirements
 
 ### Requirement: Mobile Hamburger Menu Icon
 
