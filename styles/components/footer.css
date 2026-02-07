@@ -11,12 +11,13 @@
 .Footer-inner {
   display: flex;
   flex-direction: column;
-  gap: var(--space-24);
-  padding: var(--space-20) clamp(32px, 13.33vw, 256px);
+  gap: var(--space-20);
+  padding: var(--space-20) clamp(16px, 4.17vw, 32px);
 }
 
 .Footer-top {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: var(--space-32);
@@ -29,13 +30,15 @@
 
 .Footer-logo {
   height: auto;
-  width: clamp(64px, 5vw, 96px);
+  width: clamp(64px, 25vw, 192px);
 }
 
 .Footer-legal {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: var(--space-64);
+  justify-content: center;
+  gap: clamp(16px, 8.33vw, 64px);
 }
 
 .Footer-legalLink {
@@ -46,10 +49,11 @@
 
 .Footer-bottom {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-24);
-  padding: var(--space-32) 0 0;
+  justify-content: center;
+  gap: var(--space-20);
+  padding: var(--space-12) 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -69,33 +73,28 @@
   justify-content: center;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .Footer-inner {
-    gap: var(--space-20);
-    padding: var(--space-20) clamp(16px, 4.17vw, 32px);
+    gap: var(--space-24);
+    padding: var(--space-20) clamp(32px, 13.33vw, 256px);
   }
 
   .Footer-top {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
   }
 
   .Footer-logo {
-    width: clamp(64px, 25vw, 192px);
+    width: clamp(64px, 5vw, 96px);
   }
 
   .Footer-legal {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(16px, 8.33vw, 64px);
+    gap: var(--space-64);
   }
 
   .Footer-bottom {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-20);
-    padding-top: var(--space-12);
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--space-24);
+    padding: var(--space-32) 0 0;
   }
 }

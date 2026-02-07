@@ -41,6 +41,7 @@ Hotlob Website is a Next.js-based web application for the Hotlob food service pl
 
 - **Global Entrypoint**: `app/globals.css` imports Tailwind and project CSS layers in deterministic order
 - **Layer Order**: Tokens → Base → Components → Utilities (follows CSS cascade)
+- **Mobile-First Responsive Design**: All component styles default to mobile layouts with desktop enhancements applied via `@media (min-width: 768px)` breakpoint
 - **Design Tokens**: CSS custom properties defined in `styles/token.css` with group prefixes:
   - Colors: `--color-primary`, `--color-black`, `--color-gray`, `--color-white`
   - Font sizes: `--font-size-[h1-h6, body-lg, body, body-sm, body-xs]` with responsive clamp values
