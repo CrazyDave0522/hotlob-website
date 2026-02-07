@@ -1,9 +1,6 @@
 /* Footer component styles */
 
 .Footer-root {
-  position: sticky;
-  bottom: 0;
-  z-index: 9;
   background-color: var(--color-dark-brown);
   color: var(--color-white);
 }
