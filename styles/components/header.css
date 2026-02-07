@@ -31,7 +31,7 @@
 .Header-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-80);
+  gap: var(--gap-nav);
 }
 
 .Header-navLink {

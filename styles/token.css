@@ -25,6 +25,9 @@
   --font-size-hero-title: clamp(32px, 2.08vw, 40px);
   --font-size-hero-subtitle: clamp(24px, 1.67vw, 32px);
 
+  /* Responsive gap tokens */
+  --gap-nav: clamp(32px, 4.17vw, 80px);
+
   /* Font family tokens */
   --font-family-primary: "Ghoust Solid", "Ghoust Outline", "Helvetica Neue", Arial, sans-serif;
 
