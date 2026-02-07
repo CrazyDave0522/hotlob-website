@@ -30,8 +30,6 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="Footer-separator" aria-hidden="true" />
-
         <div className="Footer-bottom">
           <span className="Footer-copyright">
             ©{currentYear} by Ocean Food Group Pty Ltd. All Rights Reserved.
