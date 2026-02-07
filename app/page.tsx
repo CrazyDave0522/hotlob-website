@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
+import { SectionTitle } from "@/components/SectionTitle";
 
 export default function Home() {
   const cardItems = [
@@ -29,7 +30,8 @@ export default function Home() {
         subtitle="Premium Aussie lobster rolls — plus prawn, crab, meat & vegetarian favorites, all packed in buttery brioche."
         overlay={true}
       />
-      <section style={{ padding: "var(--space-64) var(--space-32)" }}>
+      <section>
+        <SectionTitle text="About Hotlob" />
         <ExpandableCardGrid items={cardItems} />
       </section>
     </main>

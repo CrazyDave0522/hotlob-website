@@ -1,0 +1,19 @@
+section {
+  /* Mobile: responsive horizontal padding from 16px to 32px */
+  padding-left: var(--section-padding-x-mobile);
+  padding-right: var(--section-padding-x-mobile);
+  /* Mobile: responsive vertical padding from 24px to 48px */
+  padding-top: var(--section-padding-y-mobile);
+  padding-bottom: var(--section-padding-y-mobile);
+}
+
+@media (min-width: 768px) {
+  section {
+    /* Desktop: responsive horizontal padding from 32px to 256px */
+    padding-left: var(--section-padding-x-desktop);
+    padding-right: var(--section-padding-x-desktop);
+    /* Desktop: responsive vertical padding from 48px to 64px */
+    padding-top: var(--section-padding-y-desktop);
+    padding-bottom: var(--section-padding-y-desktop);
+  }
+}

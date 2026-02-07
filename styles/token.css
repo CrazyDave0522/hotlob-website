@@ -26,6 +26,16 @@
   --font-size-card-title-desktop: clamp(18px, 1.67vw, 32px);
   --font-size-card-description-mobile: clamp(14px, 3.13vw, 24px);
   --font-size-card-description-desktop: clamp(14px, 1.25vw, 24px);
+  
+  /* SectionTitle font sizes - responsive to reach 36px at specified breakpoints */
+  --font-size-section-title-mobile: clamp(18px, 4.69vw, 36px);
+  --font-size-section-title-desktop: clamp(18px, 1.875vw, 36px);
+  
+  /* Section wrapper padding tokens */
+  --section-padding-x-mobile: clamp(16px, 3.125vw, 32px);
+  --section-padding-y-mobile: clamp(24px, 3.125vw, 48px);
+  --section-padding-x-desktop: clamp(32px, 11.67vw, 256px);
+  --section-padding-y-desktop: clamp(48px, 0.833vw, 64px);
   --font-size-body: clamp(16px, 1.5vw, 18px);
   --font-size-body-sm: clamp(14px, 1vw, 16px);
   --font-size-body-xs: clamp(12px, 0.8vw, 14px);
@@ -36,7 +46,8 @@
   --gap-nav: clamp(32px, 4.17vw, 80px);
 
   /* Font family tokens */
-  --font-family-primary: "Ghoust Solid", "Ghoust Outline", "Helvetica Neue", Arial, sans-serif;
+  --font-family-primary:
+    "Ghoust Solid", "Ghoust Outline", "Helvetica Neue", Arial, sans-serif;
 
   /* Font weight tokens */
   --font-weight-normal: 400;
