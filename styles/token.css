@@ -1,7 +1,9 @@
 /* Design Tokens - CSS custom properties for consistent styling */
 
 :root {
-  /* Color tokens */
+  /* ========================================
+     COLOR TOKENS
+     ======================================== */
   --color-primary: #ea4148;
   --color-black: #1d1e1f;
   --color-gray: #4e5969;
@@ -12,60 +14,58 @@
   --color-charcoal: #333;
   --color-medium-gray: #999;
 
-  /* Font size tokens - responsive clamp values */
+  /* ========================================
+     TYPOGRAPHY TOKENS
+     ======================================== */
+  
+  /* Font Families */
+  --font-family-primary:
+    "Ghoust Solid", "Ghoust Outline", "Helvetica Neue", Arial, sans-serif;
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
+
+  /* Base Font Sizes - Semantic headings */
   --font-size-h1: clamp(32px, 4vw, 48px);
   --font-size-h2: clamp(24px, 3vw, 36px);
   --font-size-h3: clamp(20px, 2.5vw, 30px);
   --font-size-h4: clamp(18px, 2vw, 24px);
   --font-size-h5: clamp(16px, 1.5vw, 20px);
   --font-size-h6: clamp(14px, 1vw, 18px);
-  --font-size-body-lg: clamp(18px, 2vw, 20px);
 
-  /* ExpandableCardGrid font sizes - responsive behavior per viewport */
+  /* Body Font Sizes */
+  --font-size-body-lg: clamp(18px, 2vw, 20px);
+  --font-size-body: clamp(16px, 1.5vw, 18px);
+  --font-size-body-sm: clamp(14px, 1vw, 16px);
+  --font-size-body-xs: clamp(12px, 0.8vw, 14px);
+
+  /* Component Font Sizes - Hero */
+  --font-size-hero-title: clamp(32px, 2.08vw, 40px);
+  --font-size-hero-subtitle: clamp(24px, 1.67vw, 32px);
+
+  /* Component Font Sizes - SectionTitle */
+  --font-size-section-title-mobile: clamp(20px, 5.208vw, 40px);
+  --font-size-section-title-desktop: clamp(18px, 1.875vw, 36px);
+
+  /* Component Font Sizes - ExpandableCardGrid */
   --font-size-card-title-mobile: clamp(18px, 4.17vw, 32px);
   --font-size-card-title-desktop: clamp(18px, 1.67vw, 32px);
   --font-size-card-description-mobile: clamp(14px, 3.13vw, 24px);
   --font-size-card-description-desktop: clamp(14px, 1.25vw, 24px);
-  
-  /* SectionTitle font sizes - responsive to reach 36px at specified breakpoints */
-  --font-size-section-title-mobile: clamp(18px, 4.69vw, 36px);
-  --font-size-section-title-desktop: clamp(18px, 1.875vw, 36px);
-  
-  /* Section wrapper padding tokens */
-  --section-padding-x-mobile: clamp(16px, 3.125vw, 32px);
-  --section-padding-y-mobile: clamp(24px, 3.125vw, 48px);
-  --section-padding-x-desktop: clamp(32px, 11.67vw, 256px);
-  --section-padding-y-desktop: clamp(48px, 0.833vw, 64px);
-  --font-size-body: clamp(16px, 1.5vw, 18px);
-  --font-size-body-sm: clamp(14px, 1vw, 16px);
-  --font-size-body-xs: clamp(12px, 0.8vw, 14px);
-  --font-size-hero-title: clamp(32px, 2.08vw, 40px);
-  --font-size-hero-subtitle: clamp(24px, 1.67vw, 32px);
 
-  /* Responsive gap tokens */
-  --gap-nav: clamp(32px, 4.17vw, 80px);
+  /* ========================================
+     SPACING TOKENS
+     ======================================== */
 
-  /* Font family tokens */
-  --font-family-primary:
-    "Ghoust Solid", "Ghoust Outline", "Helvetica Neue", Arial, sans-serif;
-
-  /* Font weight tokens */
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-
-  /* Line height tokens */
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.4;
-  --line-height-relaxed: 1.6;
-
-  /* Border radius tokens */
-  --radius-10: 10px;
-  --radius-20: 20px;
-  --radius-30: 30px;
-
-  /* Spacing scale tokens - 4px-based scale */
+  /* Base Spacing Scale - 4px-based */
   --space-4: 4px;
   --space-8: 8px;
   --space-12: 12px;
@@ -82,4 +82,20 @@
   --space-160: 160px;
   --space-192: 192px;
   --space-256: 256px;
+
+  /* Component Spacing - Navigation */
+  --gap-nav: clamp(32px, 4.17vw, 80px);
+
+  /* Component Spacing - Section Wrapper */
+  --section-padding-x-mobile: clamp(16px, 3.125vw, 32px);
+  --section-padding-y-mobile: clamp(24px, 3.125vw, 48px);
+  --section-padding-x-desktop: clamp(32px, 13.33vw, 256px);
+  --section-padding-y-desktop: clamp(48px, 0.833vw, 64px);
+
+  /* ========================================
+     BORDER TOKENS
+     ======================================== */
+  --radius-10: 10px;
+  --radius-20: 20px;
+  --radius-30: 30px;
 }

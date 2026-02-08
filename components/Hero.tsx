@@ -36,15 +36,20 @@ export default function Hero({
   }, []);
 
   // Use mobile image if available and viewport is mobile
-  const backgroundImageUrl = isMobile && mobileBgImage ? mobileBgImage : bgImage;
+  const backgroundImageUrl =
+    isMobile && mobileBgImage ? mobileBgImage : bgImage;
 
   // Determine if overlay should be shown (varies by viewport)
-  const showOverlay = overlay ? (isMobile ? "overlay-mb.png" : "overlay.png") : null;
+  const showOverlay = overlay
+    ? isMobile
+      ? "overlay-mb.png"
+      : "overlay.png"
+    : null;
 
   const rootClass = `Hero-root Hero-root--${variant}${!overlay ? " Hero-root--no-overlay" : ""}`;
 
   return (
-    <section className={rootClass}>
+    <div className={rootClass}>
       {/* Background Image */}
       <Image
         src={backgroundImageUrl}
@@ -80,7 +85,6 @@ export default function Hero({
           <p className="Hero-subtitle">{subtitle}</p>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
-
