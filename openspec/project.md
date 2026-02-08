@@ -53,6 +53,15 @@ Hotlob Website is a Next.js-based web application for the Hotlob food service pl
 - **Base Styles**: `styles/base.css` for foundational HTML element styling
 - **Utilities**: `styles/utilities.css` for custom utility classes extending Tailwind
 - **Specification**: Defined in `openspec/specs/css-architecture/spec.md`
+- **Styling Principle**: Only use CSS files when necessary. Prefer Tailwind utility classes for:
+  - Simple responsive utilities (spacing, colors, sizing, backgrounds)
+  - One-off component variants
+  - Standard layouts and alignments
+  - Use CSS files ONLY when:
+    - Adding complex selectors (hover states on children, pseudo-elements)
+    - Component-specific animations/transitions
+    - Tailwind becomes too verbose (5+ utility classes for one property)
+    - Reusable component styling that benefits from organization
 
 ### Testing Strategy
 

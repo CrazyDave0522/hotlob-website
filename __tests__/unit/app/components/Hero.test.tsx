@@ -88,8 +88,8 @@ describe("Hero Component", () => {
           overlay={true}
         />
       );
-      const section = container.querySelector("section.Hero-root");
-      expect(section).toBeInTheDocument();
+      const heroRoot = container.querySelector("div.Hero-root");
+      expect(heroRoot).toBeInTheDocument();
     });
   });
 
@@ -210,7 +210,7 @@ describe("Hero Component", () => {
   });
 
   describe("Responsive Behavior", () => {
-    it("renders Hero section with proper structure", () => {
+    it("renders Hero div with proper structure", () => {
       const { container } = render(
         <Hero
           variant="tall"
@@ -220,8 +220,8 @@ describe("Hero Component", () => {
           overlay={true}
         />
       );
-      const section = container.querySelector("section.Hero-root");
-      expect(section).toBeInTheDocument();
+      const heroRoot = container.querySelector("div.Hero-root");
+      expect(heroRoot).toBeInTheDocument();
     });
 
     it("applies correct classes for tall variant", () => {
@@ -254,7 +254,7 @@ describe("Hero Component", () => {
   });
 
   describe("Accessibility", () => {
-    it("renders semantic section element", () => {
+    it("renders root div element with Hero-root class", () => {
       const { container } = render(
         <Hero
           variant="short"
@@ -264,8 +264,8 @@ describe("Hero Component", () => {
           overlay={true}
         />
       );
-      const section = container.querySelector("section");
-      expect(section).toBeInTheDocument();
+      const heroRoot = container.querySelector(".Hero-root");
+      expect(heroRoot).toBeInTheDocument();
     });
 
     it("background image has empty alt text (decorative)", () => {
@@ -321,8 +321,8 @@ describe("Hero Component", () => {
           overlay={true}
         />
       );
-      const section = container.querySelector("section");
-      expect(section).toBeInTheDocument();
+      const heroRoot = container.querySelector(".Hero-root");
+      expect(heroRoot).toBeInTheDocument();
     });
   });
 });

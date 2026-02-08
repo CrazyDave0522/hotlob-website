@@ -30,7 +30,7 @@ export default function Home() {
         subtitle="Premium Aussie lobster rolls — plus prawn, crab, meat & vegetarian favorites, all packed in buttery brioche."
         overlay={true}
       />
-      <section>
+      <section className="bg-[url('/images/section-bg/home-bg-about-hotlob-mb.png')] md:bg-[url('/images/section-bg/home-bg-about-hotlob.png')] bg-cover bg-center bg-no-repeat">
         <SectionTitle text="About Hotlob" />
         <ExpandableCardGrid items={cardItems} />
       </section>
