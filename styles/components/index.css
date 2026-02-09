@@ -2,6 +2,7 @@
 
 /* Import individual component stylesheets */
 @import "./card-grid.css";
+@import "./dish-card.css";
 @import "./expandable-card-grid.css";
 @import "./hero.css";
 @import "./header.css";

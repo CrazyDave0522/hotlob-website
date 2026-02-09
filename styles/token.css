@@ -5,6 +5,7 @@
      COLOR TOKENS
      ======================================== */
   --color-primary: #ea4148;
+  --color-secondary: #416bea;
   --color-black: #1d1e1f;
   --color-gray: #4e5969;
   --color-white: #fff;
@@ -17,7 +18,7 @@
   /* ========================================
      TYPOGRAPHY TOKENS
      ======================================== */
-  
+
   /* Font Families */
   --font-family-primary:
     "Ghoust Solid", "Ghoust Outline", "Helvetica Neue", Arial, sans-serif;
@@ -69,7 +70,9 @@
   --space-4: 4px;
   --space-8: 8px;
   --space-12: 12px;
+  --space-15: 15px;
   --space-16: 16px;
+  --space-18: 18px;
   --space-20: 20px;
   --space-24: 24px;
   --space-32: 32px;
@@ -98,4 +101,16 @@
   --radius-10: 10px;
   --radius-20: 20px;
   --radius-30: 30px;
+
+  /* ========================================
+     SHADOW TOKENS
+     ======================================== */
+  --shadow-card: 0 0 20px 0 rgba(0, 0, 0, 0.12);
+  --shadow-button: 3px 3px 0 0 rgba(175, 23, 23, 0.16);
+
+  /* ========================================
+     GRADIENT TOKENS
+     ======================================== */
+  --gradient-button-default: linear-gradient(90deg, #ea4148 0%, #ffa159 100%);
+  --gradient-button-hover: linear-gradient(180deg, #fb8225 0%, #d51d24 100%);
 }

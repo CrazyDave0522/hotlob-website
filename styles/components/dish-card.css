@@ -1,0 +1,296 @@
+/* DishCardGrid component styles */
+
+.DishCardGrid {
+  display: flex;
+  flex-wrap: wrap;
+  --dishcard-column-gap: clamp(8px, calc(0.37px + 2.036vw), 16px);
+  column-gap: var(--dishcard-column-gap);
+  row-gap: clamp(16px, calc(21.34px + 0.694vw), var(--space-24));
+  width: 100%;
+}
+
+.DishCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 calc(50% - (var(--dishcard-column-gap) / 2));
+  aspect-ratio: 330 / 570;
+}
+
+.DishCard::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0 auto;
+  aspect-ratio: 330 / 570;
+  background: var(--color-white);
+  border-radius: var(--radius-20);
+  box-shadow: var(--shadow-card);
+  transition: aspect-ratio 0.3s ease-out, box-shadow 0.3s ease-out;
+  z-index: 0;
+}
+
+.DishCard-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+}
+
+.DishCard-image {
+  width: clamp(115px, 15vw, 230px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.3s ease-out;
+}
+
+.DishCard-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(10px, calc(7.33px + 0.347vw), 14px);
+  padding: 0 clamp(10px, calc(2.77px + 1.929vw), 20px);
+  margin-top: clamp(10px, calc(10px + 1.302vw), 20px);
+  box-sizing: border-box;
+}
+
+.DishCard-title {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-black);
+  font-size: clamp(14px, calc(0.64px + 3.563vw), 28px);
+  transition: color 0.3s ease-out;
+}
+
+.DishCard-icons {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, calc(0.27px + 1.527vw), 12px);
+  flex-wrap: nowrap;
+}
+
+.DishCard-icon {
+  width: clamp(25px, calc(1.15px + 6.361vw), 50px);
+  height: clamp(25px, calc(1.15px + 6.361vw), 50px);
+  object-fit: contain;
+}
+
+.DishCard-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(clamp(65px, calc(2.97px + 16.54vw), 130px), 100%);
+  aspect-ratio: 100 / 26;
+  border-radius: var(--radius-10) 0;
+  font-size: clamp(12px, calc(0.55px + 3.054vw), 24px);
+  font-weight: var(--font-weight-medium);
+}
+
+.DishCard-tag--premium {
+  background: rgba(234, 65, 72, 0.1);
+  color: var(--color-primary);
+}
+
+.DishCard-tag--standard {
+  background: rgba(28, 67, 241, 0.1);
+  color: var(--color-secondary);
+}
+
+.DishCard-description {
+  margin: 0;
+  color: var(--color-gray);
+  font-weight: var(--font-weight-normal);
+  font-size: clamp(13px, calc(0.6px + 3.307vw), 26px);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.DishCard-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: clamp(12px, calc(12px + 1.563vw), var(--space-24));
+  width: clamp(115px, calc(5.3px + 29.26vw), 230px);
+  height: clamp(30px, calc(1.38px + 7.63vw), 60px);
+  border: none;
+  border-radius: var(--radius-30) var(--radius-30) 0 var(--radius-30);
+  background: var(--gradient-button-default);
+  color: var(--color-white);
+  font-size: clamp(13px, calc(0.6px + 3.307vw), 26px);
+  font-weight: var(--font-weight-medium);
+  box-shadow: var(--shadow-button);
+  transition: background 0.3s ease-out;
+  cursor: pointer;
+}
+
+.DishCard-button:hover,
+.DishCard-button:active {
+  background: var(--gradient-button-hover);
+}
+
+@media (min-width: 768px) {
+  .DishCardGrid {
+    --dishcard-column-gap: clamp(16px, calc(21.34px + 0.694vw), var(--space-24));
+  }
+
+  .DishCard {
+    flex: 0 0 calc(25% - ((var(--dishcard-column-gap) * 3) / 4));
+    aspect-ratio: 332 / 480;
+  }
+
+  .DishCard::before {
+    aspect-ratio: 332 / 480;
+  }
+
+  .DishCard-image {
+    width: clamp(115px, calc(38px + 10vw), 230px);
+  }
+
+  .DishCard-tag {
+    font-size: clamp(8px, calc(2.667px + 0.694vw), 16px);
+  }
+
+  .DishCard-content {
+    margin-top: clamp(10px, calc(10px + 0.521vw), 20px);
+    padding: 0 clamp(10px, calc(10px + 0.521vw), 20px);
+  }
+
+  .DishCard-icons {
+    gap: clamp(8px, calc(8px + 0.417vw), 16px);
+  }
+
+  .DishCard-icon {
+    width: clamp(20px, calc(6.67px + 1.736vw), 40px);
+    height: clamp(20px, calc(6.67px + 1.736vw), 40px);
+  }
+
+  .DishCard-title {
+    font-size: clamp(10px, calc(10px + 0.521vw), 20px);
+  }
+
+  .DishCard-tag {
+    width: min(clamp(50px, calc(50px + 2.604vw), 100px), 100%);
+    font-size: clamp(8px, calc(2.667px + 0.694vw), 16px);
+  }
+
+  .DishCard-description {
+    font-size: clamp(9px, calc(9px + 0.469vw), 18px);
+  }
+
+  .DishCard-button {
+    width: clamp(100px, calc(100px + 5.208vw), 200px);
+    height: clamp(20px, calc(20px + 1.042vw), 40px);
+    font-size: clamp(8px, calc(8px + 0.417vw), 16px);
+    margin-bottom: clamp(12px, calc(12px + 0.625vw), var(--space-24));
+  }
+
+  .DishCard--expanded::before {
+    aspect-ratio: 332 / 590;
+    box-shadow: 0 0 20px 0 rgba(234, 65, 72, 0.20);
+  }
+
+  .DishCard--expanded {
+    aspect-ratio: 332 / 590;
+  }
+
+  .DishCard--expanded .DishCard-image {
+    transform: translateY(6px);
+  }
+
+  .DishCard--expanded .DishCard-title {
+    color: var(--color-primary);
+  }
+}
+/* Skeleton/Loading states */
+
+.DishCard--skeleton {
+  pointer-events: none;
+}
+
+.DishCard--skeleton::before {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-100) 0%,
+    var(--color-gray-50) 50%,
+    var(--color-gray-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.DishCard-image--skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-100) 0%,
+    var(--color-gray-50) 50%,
+    var(--color-gray-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: var(--radius-8);
+}
+
+.DishCard-title--skeleton {
+  height: 24px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-100) 0%,
+    var(--color-gray-50) 50%,
+    var(--color-gray-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: var(--radius-4);
+  width: 80%;
+}
+
+.DishCard-description--skeleton {
+  height: 16px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-100) 0%,
+    var(--color-gray-50) 50%,
+    var(--color-gray-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: var(--radius-4);
+  width: 90%;
+  margin-top: var(--space-12);
+}
+
+.DishCard-button--skeleton {
+  height: 40px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-100) 0%,
+    var(--color-gray-50) 50%,
+    var(--color-gray-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: var(--radius-8);
+  width: 230px;
+  margin-top: var(--space-16);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}

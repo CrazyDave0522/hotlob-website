@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
+import { DishCardGrid } from "@/components/DishCardGrid";
 import { SectionTitle } from "@/components/SectionTitle";
 
 export default function Home() {
@@ -34,7 +35,9 @@ export default function Home() {
         <SectionTitle text="About Hotlob" />
         <ExpandableCardGrid items={cardItems} />
       </section>
+      <section>
+        <DishCardGrid limit={4} />
+      </section>
     </main>
   );
 }
-

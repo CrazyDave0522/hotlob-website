@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import { DishCardGrid } from "@/components/DishCardGrid";
 
 export default function SeeOurFoodPage() {
   return (
@@ -10,7 +11,9 @@ export default function SeeOurFoodPage() {
         subtitle={`You have to try their lobster rolls — they're addictive. And their other rolls are so good, I want to go back for more.\n— Google Review ⭐⭐⭐⭐⭐`}
         overlay={true}
       />
+      <section>
+        <DishCardGrid pageSize={10} />
+      </section>
     </main>
   );
 }
-
