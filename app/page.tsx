@@ -35,7 +35,8 @@ export default function Home() {
         <SectionTitle text="About Hotlob" />
         <ExpandableCardGrid items={cardItems} />
       </section>
-      <section>
+      <section className="bg-[url('/images/section-bg/home-bg-see-our-food-mb.png')] md:bg-[url('/images/section-bg/home-bg-see-our-food.png')] bg-cover bg-center bg-no-repeat">
+        <SectionTitle text="See Our Food" />
         <DishCardGrid limit={4} />
       </section>
     </main>
