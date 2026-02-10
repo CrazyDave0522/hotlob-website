@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
 import { DishCardGrid } from "@/components/DishCardGrid";
+import { MoreButton } from "@/components/MoreButton";
 import { SectionTitle } from "@/components/SectionTitle";
 
 export default function Home() {
@@ -38,6 +39,9 @@ export default function Home() {
       <section className="bg-[url('/images/section-bg/home-bg-see-our-food-mb.png')] md:bg-[url('/images/section-bg/home-bg-see-our-food.png')] bg-cover bg-center bg-no-repeat">
         <SectionTitle text="See Our Food" />
         <DishCardGrid limit={4} />
+        <div className="flex justify-center pt-7.5">
+          <MoreButton href="/see-our-food" />
+        </div>
       </section>
     </main>
   );

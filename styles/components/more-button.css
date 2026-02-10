@@ -1,0 +1,75 @@
+/* More Button component styles */
+
+.more-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Circle wrapper around arrow icon */
+.more-button__circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-peach-100);
+  border-radius: 30px;
+  /* Mobile: reaches 50px at 768px */
+  width: clamp(32px, calc(32px + 2.34vw), 50px);
+  height: clamp(32px, calc(32px + 2.34vw), 50px);
+  transition: background-color 0.2s ease-out;
+}
+
+.more-button:hover .more-button__circle,
+.more-button:active .more-button__circle {
+  background-color: #f5d4c6;
+}
+
+/* Arrow icon - responsive sizing with background image */
+.more-button__arrow {
+  /* Mobile: reaches 36px at 768px */
+  width: clamp(24px, calc(24px + 1.56vw), 36px);
+  height: clamp(24px, calc(24px + 1.56vw), 36px);
+  flex-shrink: 0;
+  background-image: url('/images/icons/arrow-right.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: background-image 0.2s ease-out;
+}
+
+.more-button:hover .more-button__arrow,
+.more-button:active .more-button__arrow {
+  background-image: url('/images/icons/arrow-right-active.svg');
+}
+
+/* Label styling */
+.more-button__label {
+  color: var(--color-muted);
+  font-weight: 400;
+  line-height: normal;
+  /* Mobile: reaches 26px at 768px */
+  font-size: clamp(16px, calc(16px + 1.30vw), 26px);
+}
+
+/* Desktop overrides at 768px breakpoint */
+@media (min-width: 768px) {
+  /* Circle: separate formula reaches 32px at 1920px */
+  .more-button__circle {
+    width: clamp(24px, calc(24px + 0.42vw), 32px);
+    height: clamp(24px, calc(24px + 0.42vw), 32px);
+  }
+
+  /* Arrow: separate formula reaches 20px at 1920px */
+  .more-button__arrow {
+    width: clamp(16px, calc(16px + 0.21vw), 20px);
+    height: clamp(16px, calc(16px + 0.21vw), 20px);
+  }
+
+  /* Label: separate formula reaches 16px at 1920px */
+  .more-button__label {
+    font-size: clamp(12px, calc(12px + 0.21vw), 16px);
+  }
+}
