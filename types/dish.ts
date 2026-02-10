@@ -8,6 +8,7 @@ export interface Dish {
     is_available: boolean
     created_at?: string
     updated_at?: string
+    category?: string | null
 }
 
 export interface MediaAsset {

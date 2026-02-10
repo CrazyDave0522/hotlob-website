@@ -1,0 +1,18 @@
+/* See Our Food page styles */
+
+.SeeOurFoodPage-background {
+  /* Mobile: background image */
+  background-image: url('/images/section-bg/see-our-food-bg-mb.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #F7F8FA; /* Fallback color */
+}
+
+@media (min-width: 768px) {
+  .SeeOurFoodPage-background {
+    /* Desktop: solid background color */
+    background-image: none;
+    background-color: #F7F8FA;
+  }
+}

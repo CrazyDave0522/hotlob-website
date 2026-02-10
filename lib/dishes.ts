@@ -10,6 +10,7 @@ export async function fetchVisibleDishes(): Promise<DishWithRelations[]> {
       name,
       description,
       tier,
+      category,
       is_visible,
       is_available,
       created_at,

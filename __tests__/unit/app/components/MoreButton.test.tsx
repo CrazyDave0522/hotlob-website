@@ -29,7 +29,7 @@ describe('MoreButton', () => {
   })
 
   it('applies responsive classes for styling', () => {
-    const { container } = render(<MoreButton href="/menu" />)
+    render(<MoreButton href="/menu" />)
     const link = screen.getByRole('link')
     expect(link).toHaveClass('more-button')
   })

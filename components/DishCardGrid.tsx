@@ -12,9 +12,10 @@ const DEFAULT_PAGE_SIZE = 10;
 interface DishCardGridProps {
   limit?: number;
   pageSize?: number;
+  categoryFilter?: string | null;
 }
 
-export function DishCardGrid({ limit, pageSize }: DishCardGridProps) {
+export function DishCardGrid({ limit, pageSize, categoryFilter }: DishCardGridProps) {
   const usePagination =
     typeof pageSize === "number" && typeof limit !== "number";
   const resolvedPageSize = pageSize ?? DEFAULT_PAGE_SIZE;
@@ -107,16 +108,23 @@ export function DishCardGrid({ limit, pageSize }: DishCardGridProps) {
   }, [dishes.length, resolvedPageSize, usePagination, visibleCount]);
 
   const displayedDishes = useMemo(() => {
+    let filteredDishes = dishes;
+
+    // Apply category filtering
+    if (categoryFilter && categoryFilter !== "all") {
+      filteredDishes = dishes.filter(dish => dish.category === categoryFilter);
+    }
+
     if (typeof limit === "number") {
-      return dishes.slice(0, limit);
+      return filteredDishes.slice(0, limit);
     }
 
     if (usePagination) {
-      return dishes.slice(0, visibleCount);
+      return filteredDishes.slice(0, visibleCount);
     }
 
-    return dishes;
-  }, [dishes, limit, usePagination, visibleCount]);
+    return filteredDishes;
+  }, [dishes, limit, usePagination, visibleCount, categoryFilter]);
 
   const handleHover = (index: number) => {
     if (!isDesktop) {

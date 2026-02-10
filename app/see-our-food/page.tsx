@@ -1,7 +1,42 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+
 import Hero from "@/components/Hero";
+import CategoryFilter from "@/components/CategoryFilter";
 import { DishCardGrid } from "@/components/DishCardGrid";
+import { fetchVisibleDishes } from "@/lib/dishes";
+import type { DishWithRelations } from "@/types/dish";
+import "@/styles/components/see-our-food.css";
 
 export default function SeeOurFoodPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [dishes, setDishes] = useState<DishWithRelations[]>([]);
+
+  // Derive available categories from dish data
+  const availableCategories = useMemo(() => {
+    const categories = new Set<string>();
+    dishes.forEach((dish) => {
+      if (dish.category) {
+        categories.add(dish.category);
+      }
+    });
+    return Array.from(categories).sort();
+  }, [dishes]);
+
+  useEffect(() => {
+    const loadDishes = async () => {
+      const data = await fetchVisibleDishes();
+      setDishes(data);
+    };
+
+    loadDishes();
+  }, []);
+
+  const handleCategoryChange = (category: string | null) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <main>
       <Hero
@@ -11,9 +46,16 @@ export default function SeeOurFoodPage() {
         subtitle={`You have to try their lobster rolls — they're addictive. And their other rolls are so good, I want to go back for more.\n— Google Review ⭐⭐⭐⭐⭐`}
         overlay={true}
       />
-      <section>
-        <DishCardGrid pageSize={10} />
-      </section>
+      <div className="SeeOurFoodPage-background">
+        <CategoryFilter
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
+          availableCategories={availableCategories}
+        />
+        <section >
+          <DishCardGrid pageSize={10} categoryFilter={selectedCategory} />
+        </section>
+      </div>
     </main>
   );
 }

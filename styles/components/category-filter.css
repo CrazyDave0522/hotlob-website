@@ -1,0 +1,117 @@
+/* CategoryFilter component styles */
+
+.CategoryFilter-wrapper {
+  /* Mobile: transparent wrapper with standard section padding */
+  background-color: transparent;
+  padding-left: var(--section-padding-x-mobile);
+  padding-right: var(--section-padding-x-mobile);
+  padding-top: var(--section-padding-y-mobile);
+  padding-bottom: var(--section-padding-y-mobile);
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  justify-content: space-evenly;
+  gap: clamp(10px, calc(10px + 0.00647 * (100vw - 375px)), 20px);
+}
+
+.CategoryFilter-button {
+  /* Mobile: button styles */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-10);
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  color: var(--color-black);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  flex-shrink: 0;
+  height: clamp(60px, calc(60px + 0.02071 * (100vw - 375px)), 92px);
+  padding: clamp(
+    8px 12px,
+    calc(8px + 0.00259 * (100vw - 375px)) calc(12px + 0.00518 * (100vw - 375px)),
+    12px 20px
+  );
+  min-width: clamp(60px, calc(60px + 0.02071 * (100vw - 375px)), 92px);
+}
+
+.CategoryFilter-button-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.CategoryFilter-button img {
+  width: clamp(25px, calc(25px + 0.01618 * (100vw - 375px)), 50px);
+  height: clamp(25px, calc(25px + 0.01618 * (100vw - 375px)), 50px);
+}
+
+.CategoryFilter-button span {
+  font-size: clamp(13px, calc(13px + 0.00841 * (100vw - 375px)), 26px);
+  line-height: var(--line-height-tight);
+}
+
+.CategoryFilter-button--active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: 0 4px 8px 0 rgba(234, 65, 72, 0.2);
+}
+
+@media (min-width: 768px) {
+  .CategoryFilter-wrapper {
+    /* Desktop: full width wrapper with custom responsive padding */
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: clamp(32px, 2.5vw, 40px);
+    padding-bottom: clamp(24px, 1.875vw, 30px);
+    background-color: var(--color-white);
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+    height: clamp(80px, calc(80px + 0.0233 * (100vw - 375px)), 116px);
+    justify-content: center;
+    overflow-x: visible;
+    gap: clamp(20px, calc(20px + 0.01294 * (100vw - 375px)), 40px);
+  }
+
+  .CategoryFilter-button {
+    /* Desktop: button styles */
+    flex-direction: row;
+    border-radius: var(--radius-30);
+    border: none;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    height: clamp(30px, calc(30px + 0.01036 * (100vw - 375px)), 46px);
+    padding: clamp(
+      8px 12px,
+      calc(8px + 0.00259 * (100vw - 375px))
+        calc(12px + 0.00518 * (100vw - 375px)),
+      12px 20px
+    );
+    min-width: clamp(100px, calc(100px + 0.02071 * (100vw - 375px)), 140px);
+    box-shadow: none;
+  }
+
+  .CategoryFilter-button-content {
+    flex-direction: row;
+    gap: var(--space-8);
+  }
+
+  .CategoryFilter-button img {
+    width: clamp(24px, calc(24px + 0.01036 * (100vw - 375px)), 40px);
+    height: clamp(24px, calc(24px + 0.01036 * (100vw - 375px)), 40px);
+  }
+
+  .CategoryFilter-button span {
+    font-size: clamp(12px, calc(12px + 0.00388 * (100vw - 375px)), 18px);
+  }
+
+  .CategoryFilter-button--active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+}
