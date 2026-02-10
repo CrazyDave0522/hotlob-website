@@ -1,0 +1,10 @@
+/* DishCardGrid component styles */
+
+.DishCardGrid {
+  display: flex;
+  flex-wrap: wrap;
+  --dishcard-column-gap: clamp(8px, calc(0.37px + 2.036vw), 16px);
+  column-gap: var(--dishcard-column-gap);
+  row-gap: clamp(16px, calc(21.34px + 0.694vw), var(--space-24));
+  width: 100%;
+}

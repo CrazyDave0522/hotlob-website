@@ -3,7 +3,9 @@
 /* Import individual component stylesheets */
 @import "./card-grid.css";
 @import "./category-filter.css";
+@import "./dish-card-grid.css";
 @import "./dish-card.css";
+@import "./dish-card-skeleton.css";
 @import "./expandable-card-grid.css";
 @import "./hero.css";
 @import "./header.css";

@@ -1,20 +1,11 @@
-/* DishCardGrid component styles */
-
-.DishCardGrid {
-  display: flex;
-  flex-wrap: wrap;
-  --dishcard-column-gap: clamp(8px, calc(0.37px + 2.036vw), 16px);
-  column-gap: var(--dishcard-column-gap);
-  row-gap: clamp(16px, calc(21.34px + 0.694vw), var(--space-24));
-  width: 100%;
-}
+/* DishCard component styles */
 
 .DishCard {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 0 0 calc(50% - (var(--dishcard-column-gap) / 2));
+  width: calc(50% - (var(--dishcard-column-gap) / 2));
   aspect-ratio: 330 / 570;
 }
 
@@ -140,12 +131,8 @@
 }
 
 @media (min-width: 768px) {
-  .DishCardGrid {
-    --dishcard-column-gap: clamp(16px, calc(21.34px + 0.694vw), var(--space-24));
-  }
-
   .DishCard {
-    flex: 0 0 calc(25% - ((var(--dishcard-column-gap) * 3) / 4));
+    width: calc(25% - ((var(--dishcard-column-gap) * 3) / 4));
     aspect-ratio: 332 / 480;
   }
 
@@ -210,87 +197,5 @@
 
   .DishCard--expanded .DishCard-title {
     color: var(--color-primary);
-  }
-}
-/* Skeleton/Loading states */
-
-.DishCard--skeleton {
-  pointer-events: none;
-}
-
-.DishCard--skeleton::before {
-  background: linear-gradient(
-    90deg,
-    var(--color-gray-100) 0%,
-    var(--color-gray-50) 50%,
-    var(--color-gray-100) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-.DishCard-image--skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--color-gray-100) 0%,
-    var(--color-gray-50) 50%,
-    var(--color-gray-100) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-  border-radius: var(--radius-8);
-}
-
-.DishCard-title--skeleton {
-  height: 24px;
-  background: linear-gradient(
-    90deg,
-    var(--color-gray-100) 0%,
-    var(--color-gray-50) 50%,
-    var(--color-gray-100) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-  border-radius: var(--radius-4);
-  width: 80%;
-}
-
-.DishCard-description--skeleton {
-  height: 16px;
-  background: linear-gradient(
-    90deg,
-    var(--color-gray-100) 0%,
-    var(--color-gray-50) 50%,
-    var(--color-gray-100) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-  border-radius: var(--radius-4);
-  width: 90%;
-  margin-top: var(--space-12);
-}
-
-.DishCard-button--skeleton {
-  height: 40px;
-  background: linear-gradient(
-    90deg,
-    var(--color-gray-100) 0%,
-    var(--color-gray-50) 50%,
-    var(--color-gray-100) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-  border-radius: var(--radius-8);
-  width: 230px;
-  margin-top: var(--space-16);
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-
-  100% {
-    background-position: -200% 0;
   }
 }
