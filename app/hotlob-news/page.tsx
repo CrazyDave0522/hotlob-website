@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import { NewsList } from "@/components/NewsList";
 
 export default function HotlobNewsPage() {
   return (
@@ -11,6 +12,7 @@ export default function HotlobNewsPage() {
         subtitle="Check out our latest news and stay tuned"
         overlay={false}
       />
+      <NewsList />
     </main>
   );
 }

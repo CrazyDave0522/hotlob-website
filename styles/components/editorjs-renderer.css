@@ -1,0 +1,165 @@
+/* EditorJSRenderer component styles */
+
+.EditorJS-content {
+  font-size: 16px;
+  line-height: var(--line-height-normal);
+  color: var(--color-gray);
+}
+
+.EditorJS-content > * + * {
+  margin-top: 1.5em;
+}
+
+/* Paragraph styling */
+.EditorJS-paragraph {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Header styling */
+.EditorJS-header {
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-gray);
+}
+
+.EditorJS-header--1 {
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+
+.EditorJS-header--2 {
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+}
+
+.EditorJS-header--3 {
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.EditorJS-header--4 {
+  font-size: 1em;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+}
+
+.EditorJS-header--5 {
+  font-size: 0.83em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+}
+
+.EditorJS-header--6 {
+  font-size: 0.67em;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+}
+
+/* List styling */
+.EditorJS-list {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.EditorJS-list-item {
+  margin: 0.5em 0;
+  line-height: 1.6;
+}
+
+/* Image styling */
+.EditorJS-image {
+  margin: 2em 0;
+  text-align: center;
+}
+
+.EditorJS-image-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-10);
+  margin-bottom: 0.5em;
+}
+
+.EditorJS-image-caption {
+  font-size: 0.9em;
+  color: var(--color-gray);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Quote styling */
+.EditorJS-quote {
+  margin: 2em 0;
+  padding: 1.5em;
+  border-left: 4px solid var(--color-primary);
+  background: var(--color-gray-50);
+  border-radius: 0 var(--radius-10) var(--radius-10) 0;
+}
+
+.EditorJS-quote-text {
+  margin: 0 0 1em 0;
+  font-size: 1.1em;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.EditorJS-quote-caption {
+  margin: 0;
+  font-size: 0.9em;
+  color: var(--color-gray-600);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Delimiter styling */
+.EditorJS-delimiter {
+  margin: 2em auto;
+  width: 30%;
+  height: 1px;
+  background: var(--color-gray-300);
+  border: none;
+}
+
+/* Unsupported block styling */
+.EditorJS-unsupported {
+  margin: 1em 0;
+  padding: 1em;
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-10);
+}
+
+.EditorJS-unsupported-label {
+  margin: 0 0 0.5em 0;
+  font-size: 0.9em;
+  color: var(--color-gray-600);
+  font-weight: var(--font-weight-medium);
+}
+
+.EditorJS-unsupported-content {
+  font-size: 0.9em;
+  color: var(--color-gray-700);
+  opacity: 0.8;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .EditorJS-content {
+    font-size: 16px;
+  }
+
+  .EditorJS-header--1 {
+    font-size: 1.75em;
+  }
+
+  .EditorJS-header--2 {
+    font-size: 1.25em;
+  }
+
+  .EditorJS-quote {
+    padding: 1em;
+  }
+}

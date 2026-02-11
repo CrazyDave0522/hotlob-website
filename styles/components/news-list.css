@@ -1,0 +1,116 @@
+/* NewsList component styles */
+
+.NewsList-section {
+  /* Default: no background */
+}
+
+/* Mobile-specific styling (<768px) */
+@media (max-width: 767px) {
+  .NewsList-section {
+    background-image: url('/images/section-bg/our-locations-bg-stores-mb.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.NewsList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Gap spacing between news items */
+.NewsList > * + * {
+  /* Desktop gap: max 60px at 1920px */
+  margin-top: clamp(20px, calc(3.125vw - 0.625px), 60px);
+}
+
+/* Loading and end states */
+.NewsList-loading,
+.NewsList-end,
+.NewsList-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.NewsList-loading {
+  gap: 16px;
+}
+
+.NewsList-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-medium-gray);
+  border-top: 3px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.NewsList-loading span,
+.NewsList-end p,
+.NewsList-empty p {
+  font-size: 16px;
+  color: var(--color-gray-600);
+  margin: 0;
+}
+
+/* Mobile-specific styling (<768px) */
+@media (max-width: 767px) {
+  .NewsList {
+    /* Mobile: No wrapper styling on list container */
+    gap: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  /* Mobile gap: max 20px at 768px */
+  .NewsList > * + * {
+    margin-top: clamp(12px, calc(2.6vw - 0.33px), 20px);
+  }
+}
+
+/* Desktop-specific styling (≥768px) */
+@media (min-width: 768px) {
+  .NewsList-section {
+    background-color: #F7F8FA;
+  }
+
+  .NewsList {
+    /* Desktop: List container has card styling */
+    background: var(--color-white);
+    border-radius: var(--radius-10);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+    padding: 40px;
+  }
+
+  /* Desktop item separators */
+  .NewsList > * + * {
+    position: relative;
+  }
+
+  .NewsList > * + *:before {
+    content: '';
+    position: absolute;
+    top: -30px; /* Half of max gap */
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #E1E4E9;
+  }
+}

@@ -1,0 +1,101 @@
+/* NewsItem component styles */
+
+.NewsItem {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.NewsItem-wrapper {
+  display: flex;
+  gap: clamp(16px, 4vw, 32px);
+  align-items: center;
+  width: 100%;
+  /* Mobile first: card styling by default */
+  background: var(--color-white);
+  border-radius: var(--radius-20);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.12);
+  padding: clamp(12px, 3.2vw, 20px);
+}
+
+/* Image container and responsive sizing */
+.NewsItem-image-container {
+  flex-shrink: 0;
+}
+
+.NewsItem-image {
+  /* Mobile first: max 200px×200px at 768px */
+  width: clamp(120px, calc(26.04vw - 8.33px), 200px);
+  height: clamp(120px, calc(26.04vw - 8.33px), 200px);
+  object-fit: cover;
+  border-radius: var(--radius-10);
+}
+
+/* Content area */
+.NewsItem-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 2vw, 12px);
+  min-width: 0; /* Allow text to wrap */
+}
+
+.NewsItem-title {
+  /* Title: Desktop max 18px, Mobile max 18px */
+  font-size: clamp(16px, 2.5vw, 18px);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin: 0;
+  color: var(--color-black);
+  transition: color 0.2s ease;
+}
+
+.NewsItem-excerpt {
+  /* Excerpt: Desktop max 16px, Mobile max 18px */
+  font-size: clamp(14px, calc(14px + 0.5vw), 18px);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  color: var(--color-gray);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.NewsItem-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(12px, calc(12px + 0.5vw), 16px);
+  color: var(--color-muted);
+}
+
+.NewsItem-author {
+  font-weight: var(--font-weight-medium);
+}
+
+.NewsItem-date {
+  opacity: 0.8;
+}
+
+/* Hover states */
+.NewsItem:hover .NewsItem-title {
+  color: var(--color-primary);
+}
+
+/* Desktop-specific styling (≥768px) */
+@media (min-width: 768px) {
+  .NewsItem-wrapper {
+    /* Desktop: Individual items don't have wrapper styling */
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .NewsItem-image {
+    /* Desktop formula: max 280px×160px at 1920px */
+    width: clamp(140px, calc(14.58vw - 0.42px), 280px);
+    height: clamp(80px, calc(8.33vw - 0.42px), 160px);
+  }
+}

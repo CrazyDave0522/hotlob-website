@@ -6,6 +6,7 @@
 @import "./dish-card-grid.css";
 @import "./dish-card.css";
 @import "./dish-card-skeleton.css";
+@import "./editorjs-renderer.css";
 @import "./expandable-card-grid.css";
 @import "./hero.css";
 @import "./header.css";
@@ -14,3 +15,7 @@
 @import "./section.css";
 @import "./section-title.css";
 @import "./more-button.css";
+@import "./news-detail.css";
+@import "./news-item.css";
+@import "./news-list.css";
+@import "./not-found.css";
