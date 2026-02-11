@@ -15,6 +15,7 @@ export function NewsList({ initialItems = [] }: NewsListProps) {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
+  const [shouldLoadInitial, setShouldLoadInitial] = useState(initialItems.length === 0);
 
   const loadMoreItems = useCallback(async () => {
     if (loading || !hasMore) return;
@@ -25,7 +26,12 @@ export function NewsList({ initialItems = [] }: NewsListProps) {
       if (newItems.length === 0) {
         setHasMore(false);
       } else {
-        setItems(prev => [...prev, ...newItems]);
+        setItems(prev => {
+          // Prevent duplicate items by checking existing IDs
+          const existingIds = new Set(prev.map(item => item.id));
+          const uniqueNewItems = newItems.filter(item => !existingIds.has(item.id));
+          return [...prev, ...uniqueNewItems];
+        });
         setPage(prev => prev + 1);
       }
     } catch (error) {
@@ -37,10 +43,11 @@ export function NewsList({ initialItems = [] }: NewsListProps) {
 
   // Load initial items if not provided
   useEffect(() => {
-    if (initialItems.length === 0) {
+    if (shouldLoadInitial) {
+      setShouldLoadInitial(false);
       loadMoreItems();
     }
-  }, [initialItems.length, loadMoreItems]);
+  }, [shouldLoadInitial, loadMoreItems]);
 
   // Infinite scroll handler
   useEffect(() => {
