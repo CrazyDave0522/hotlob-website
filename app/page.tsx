@@ -3,8 +3,10 @@ import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
 import { DishCardGrid } from "@/components/DishCardGrid";
 import { MoreButton } from "@/components/MoreButton";
 import { SectionTitle } from "@/components/SectionTitle";
+import { NewsCarousel } from "@/components/NewsCarousel";
+import { fetchNewsListItems } from "@/lib/news";
 
-export default function Home() {
+export default async function Home() {
   const cardItems = [
     {
       title: "Our Story",
@@ -22,6 +24,9 @@ export default function Home() {
         "✨ Truffle & Cheese Lobster Roll\n✨ Lemon & Dill Lobster Roll\n✨ Soft Shell Crab Roll",
     },
   ];
+
+  // Fetch up to 5 recent published news items
+  const newsItems = await fetchNewsListItems(5);
 
   return (
     <main>
@@ -42,6 +47,10 @@ export default function Home() {
         <div className="flex justify-center pt-7.5">
           <MoreButton href="/see-our-food" />
         </div>
+      </section>
+      <section className="news-section">
+        <SectionTitle text="Hot News" />
+        <NewsCarousel news={newsItems} />
       </section>
     </main>
   );

@@ -1,0 +1,198 @@
+/* News Carousel Component Styles */
+
+.news-section {
+  background: linear-gradient(180deg, #fbf3f3 0%, #fff 100%);
+}
+
+.news-carousel {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.news-carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.news-carousel-track {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+}
+
+.news-carousel-item {
+  flex: 0 0 100%;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  display: flex;
+  min-height: 200px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile Layout (default) */
+.news-carousel-item.mobile-layout {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.news-carousel-item.mobile-layout .news-carousel-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.news-carousel-item.mobile-layout .news-carousel-content {
+  padding: 0 1rem 1rem 1rem;
+  text-align: center;
+}
+
+/* Desktop Layout */
+@media (min-width: 768px) {
+  .news-carousel-item.desktop-layout {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .news-carousel-item.desktop-layout .news-carousel-image {
+    flex: 0 0 auto;
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
+
+  .news-carousel-item.desktop-layout .news-carousel-content {
+    flex: 1;
+    padding: 0;
+    text-align: left;
+  }
+}
+
+.news-carousel-image img {
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+.news-carousel-title {
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+  margin: 0 0 0.5rem 0;
+  color: #000;
+  transition: color 0.2s ease;
+}
+
+.news-carousel-title:hover {
+  color: #ea4148;
+}
+
+.news-carousel-excerpt {
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+  color: #86909c;
+  margin: 0;
+}
+
+/* Navigation Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.carousel-arrow:hover {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.carousel-arrow-left {
+  left: 1rem;
+}
+
+.carousel-arrow-right {
+  right: 1rem;
+}
+
+/* Indicators */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.carousel-indicator.active {
+  width: 1.875rem; /* 30px at 16px base */
+  height: 0.5rem; /* 8px at 16px base */
+  background: #ea4148;
+}
+
+.carousel-indicator.inactive {
+  width: 0.5rem; /* 8px at 16px base */
+  height: 0.5rem; /* 8px at 16px base */
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+.carousel-indicator.inactive:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Focus states for accessibility */
+.carousel-arrow:focus,
+.carousel-indicator:focus {
+  outline: 2px solid #ea4148;
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .carousel-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel-indicators {
+    margin-top: 0.75rem;
+  }
+
+  .carousel-indicator.active {
+    width: 1.5rem; /* Smaller active indicator on mobile */
+    height: 0.4rem;
+  }
+
+  .carousel-indicator.inactive {
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+}
