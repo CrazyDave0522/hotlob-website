@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
 import { fetchNewsBySlug } from '@/lib/news';
-import { NewsDetail } from '@/components/NewsDetail';
+import { ContentDetail } from '@/components/ContentDetail';
 
 interface NewsDetailPageProps {
   params: {
@@ -89,7 +89,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <NewsDetail news={news} />
+      <ContentDetail news={news} />
     </>
   );
 }

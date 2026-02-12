@@ -19,13 +19,24 @@ vi.mock('next/link', () => ({
 }))
 
 describe('Footer', () => {
-  it('renders legal link placeholders and logo', () => {
+  it('renders legal links with correct destinations and behavior', () => {
     render(<Footer />)
 
     expect(screen.getByAltText(/hotlob logo/i)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /privacy policy/i })).toHaveAttribute('href', '#')
-    expect(screen.getByRole('link', { name: /terms & conditions/i })).toHaveAttribute('href', '#')
-    expect(screen.getByRole('link', { name: /contact us/i })).toHaveAttribute('href', '#')
+
+    const privacyLink = screen.getByRole('link', { name: /privacy policy/i })
+    const termsLink = screen.getByRole('link', { name: /terms & conditions/i })
+    const contactLink = screen.getByRole('link', { name: /contact us/i })
+
+    expect(privacyLink).toHaveAttribute('href', '/privacy-policy')
+    expect(privacyLink).toHaveAttribute('target', '_blank')
+    expect(privacyLink).toHaveAttribute('rel', 'noopener noreferrer')
+
+    expect(termsLink).toHaveAttribute('href', '/terms-and-conditions')
+    expect(termsLink).toHaveAttribute('target', '_blank')
+    expect(termsLink).toHaveAttribute('rel', 'noopener noreferrer')
+
+    expect(contactLink).toHaveAttribute('href', '#')
   })
 
   it('renders copyright notice and social icons', () => {

@@ -44,6 +44,10 @@
   text-decoration: none;
 }
 
+.Footer-legalLink:hover {
+  color: #EA4148;
+}
+
 .Footer-bottom {
   display: flex;
   flex-direction: column;

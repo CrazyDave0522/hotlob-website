@@ -85,7 +85,7 @@ describe("NewsCarouselItem", () => {
     fireEvent.click(item);
 
     expect(mockOpen).toHaveBeenCalledWith(
-      "/news/test-news-article",
+      "/hotlob-news/test-news-article",
       "_blank",
       "noopener,noreferrer",
     );
@@ -104,7 +104,7 @@ describe("NewsCarouselItem", () => {
     // Test Enter key
     fireEvent.keyDown(item, { key: "Enter" });
     expect(mockOpen).toHaveBeenCalledWith(
-      "/news/test-news-article",
+      "/hotlob-news/test-news-article",
       "_blank",
       "noopener,noreferrer",
     );
@@ -115,7 +115,7 @@ describe("NewsCarouselItem", () => {
     // Test Space key
     fireEvent.keyDown(item, { key: " " });
     expect(mockOpen).toHaveBeenCalledWith(
-      "/news/test-news-article",
+      "/hotlob-news/test-news-article",
       "_blank",
       "noopener,noreferrer",
     );

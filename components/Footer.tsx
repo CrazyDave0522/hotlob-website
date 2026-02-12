@@ -18,10 +18,10 @@ export function Footer() {
             />
           </Link>
           <nav className="Footer-legal" aria-label="Footer">
-            <Link className="Footer-legalLink" href="#">
+            <Link className="Footer-legalLink" href="/privacy-policy" target="_blank" rel="noopener noreferrer">
               Privacy Policy
             </Link>
-            <Link className="Footer-legalLink" href="#">
+            <Link className="Footer-legalLink" href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">
               Terms &amp; Conditions
             </Link>
             <Link className="Footer-legalLink" href="#">
