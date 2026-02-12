@@ -73,6 +73,14 @@
   align-self: center;
 }
 
+.Header-ctaButton:hover {
+  background-color: #C71E25 !important;
+}
+
+.Header-ctaButton:active {
+  background-color: #C71E25 !important;
+}
+
 /* Mobile hamburger icon - hidden on desktop */
 .Header-hamburger {
   display: flex;
