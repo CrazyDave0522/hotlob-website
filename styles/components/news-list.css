@@ -34,19 +34,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: clamp(30px, 7.5vw, 50px) clamp(15px, 5vw, 25px);
   text-align: center;
 }
 
 .NewsList-loading {
-  gap: 16px;
+  gap: clamp(12px, 3.2vw, 20px);
 }
 
 .NewsList-spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid var(--color-medium-gray);
-  border-top: 3px solid var(--color-primary);
+  width: clamp(24px, 6.4vw, 40px);
+  height: clamp(24px, 6.4vw, 40px);
+  border: clamp(2px, 0.533vw, 4px) solid var(--color-medium-gray);
+  border-top: clamp(2px, 0.533vw, 4px) solid var(--color-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }

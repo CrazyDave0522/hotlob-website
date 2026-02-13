@@ -13,8 +13,13 @@
 @import "./header.css";
 @import "./footer.css";
 @import "./primary-button.css";
+@import "./rating.css";
 @import "./section.css";
 @import "./section-title.css";
+@import "./store-info.css";
+@import "./store-item.css";
+@import "./store-list.css";
+@import "./store-skeleton.css";
 @import "./more-button.css";
 @import "./content-detail.css";
 @import "./news-item.css";

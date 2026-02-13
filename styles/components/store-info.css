@@ -1,0 +1,104 @@
+.store-info {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.store-info-header {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.375rem, 1vw, 0.625rem);
+}
+
+.store-info-title {
+  font-size: clamp(16px, 3vw, 24px);
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  color: #1d1e1f;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .store-info-title {
+    font-size: clamp(18px, 2vw, 24px);
+  }
+}
+
+.store-info-details {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5625rem, 1.5vw, 0.9375rem);
+}
+
+.store-info-address,
+.store-info-hours {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.375rem, 1vw, 0.625rem);
+  font-size: clamp(12px, 2vw, 18px);
+  color: #4e5969;
+}
+
+@media (min-width: 768px) {
+  .store-info-address,
+  .store-info-hours {
+    font-size: clamp(12px, 1.5vw, 18px);
+  }
+}
+
+.store-info-icon {
+  width: clamp(1rem, 2vw, 1.125rem);
+  height: clamp(1rem, 2vw, 1.125rem);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.store-info-status {
+  font-weight: 500;
+  margin-right: 0.25rem;
+}
+
+.store-info-address-link {
+  color: #4e5969;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.store-info-address-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.store-info-photos {
+  display: flex;
+  gap: clamp(0.375rem, 1vw, 0.625rem);
+  margin-top: clamp(0.375rem, 1vw, 0.625rem);
+}
+
+.store-info-photo-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.store-info-photo {
+  width: clamp(90px, 25vw, 120px);
+  height: clamp(75px, 20vw, 100px);
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.store-info-photo:hover {
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .store-info-photo {
+    width: clamp(120px, 15vw, 140px);
+    height: clamp(100px, 12.5vw, 120px);
+  }
+}

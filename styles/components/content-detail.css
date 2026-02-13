@@ -11,7 +11,7 @@
   padding: clamp(20px, 5vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(18px, 4.8vw, 30px);
 }
 
 .ContentDetail-title {
@@ -23,7 +23,7 @@
 }
 
 .ContentDetail-date {
-  font-size: 16px;
+  font-size: clamp(14px, 2.5vw, 18px);
   color: var(--color-medium-gray);
   margin: 0;
 }
@@ -31,12 +31,12 @@
 .ContentDetail-meta {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin: 16px 0;
+  gap: clamp(12px, 3.2vw, 20px);
+  margin: clamp(12px, 3.2vw, 20px) 0;
 }
 
 .ContentDetail-author {
-  font-size: 16px;
+  font-size: clamp(14px, 2.5vw, 18px);
   color: var(--color-medium-gray);
   font-weight: var(--font-weight-medium);
 }
@@ -86,7 +86,7 @@
   color: var(--color-black);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
-  margin: 24px 0 16px 0;
+  margin: clamp(18px, 4.8vw, 30px) 0 clamp(12px, 3.2vw, 20px) 0;
 }
 
 .ContentDetail-content--html h1 {
@@ -103,22 +103,22 @@
 
 .ContentDetail-content--html p {
   color: var(--color-black);
-  font-size: 16px;
+  font-size: clamp(14px, 2.5vw, 18px);
   line-height: var(--line-height-relaxed);
-  margin: 16px 0;
+  margin: clamp(12px, 3.2vw, 20px) 0;
 }
 
 .ContentDetail-content--html ul,
 .ContentDetail-content--html ol {
-  margin: 16px 0;
-  padding-left: 24px;
+  margin: clamp(12px, 3.2vw, 20px) 0;
+  padding-left: clamp(18px, 4.8vw, 30px);
 }
 
 .ContentDetail-content--html li {
   color: var(--color-black);
-  font-size: 16px;
+  font-size: clamp(14px, 2.5vw, 18px);
   line-height: var(--line-height-relaxed);
-  margin: 8px 0;
+  margin: clamp(6px, 1.6vw, 10px) 0;
 }
 
 .ContentDetail-content--html strong,
@@ -133,8 +133,8 @@
 
 .ContentDetail-content--html blockquote {
   border-left: 4px solid var(--color-primary);
-  padding-left: 16px;
-  margin: 20px 0;
+  padding-left: clamp(12px, 3.2vw, 20px);
+  margin: clamp(15px, 4vw, 25px) 0;
   font-style: italic;
   color: var(--color-medium-gray);
 }
