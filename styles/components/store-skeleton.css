@@ -2,8 +2,9 @@
 
 .store-skeleton {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.5rem, 4vw, 2.5rem);
+  /* Mobile: single column */
+  grid-template-columns: 1fr;
+  gap: clamp(1.125rem, 3vw, 1.875rem);
   align-items: start;
   pointer-events: none;
 }
@@ -12,12 +13,7 @@
   width: 100%;
   height: 0;
   padding-bottom: 42.5%;
-  background: linear-gradient(
-    90deg,
-    #f3f4f6 0%,
-    #e5e7eb 50%,
-    #f3f4f6 100%
-  );
+  background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
   border-radius: 0.5rem;
@@ -31,12 +27,7 @@
 
 .store-skeleton-title {
   height: clamp(18px, 5vw, 30px);
-  background: linear-gradient(
-    90deg,
-    #f3f4f6 0%,
-    #e5e7eb 50%,
-    #f3f4f6 100%
-  );
+  background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
   border-radius: 0.25rem;
@@ -45,12 +36,7 @@
 
 .store-skeleton-rating {
   height: clamp(12px, 3vw, 20px);
-  background: linear-gradient(
-    90deg,
-    #f3f4f6 0%,
-    #e5e7eb 50%,
-    #f3f4f6 100%
-  );
+  background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
   border-radius: 0.25rem;
@@ -59,12 +45,7 @@
 
 .store-skeleton-address {
   height: clamp(14px, 4vw, 23px);
-  background: linear-gradient(
-    90deg,
-    #f3f4f6 0%,
-    #e5e7eb 50%,
-    #f3f4f6 100%
-  );
+  background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
   border-radius: 0.25rem;
@@ -73,12 +54,7 @@
 
 .store-skeleton-hours {
   height: clamp(14px, 4vw, 23px);
-  background: linear-gradient(
-    90deg,
-    #f3f4f6 0%,
-    #e5e7eb 50%,
-    #f3f4f6 100%
-  );
+  background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
   border-radius: 0.25rem;
@@ -94,9 +70,11 @@
   }
 }
 
-@media (max-width: 767px) {
+/* Desktop enhancements */
+@media (min-width: 768px) {
   .store-skeleton {
-    grid-template-columns: 1fr;
-    gap: clamp(1.125rem, 3vw, 1.875rem);
+    /* Desktop: two columns */
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
   }
 }

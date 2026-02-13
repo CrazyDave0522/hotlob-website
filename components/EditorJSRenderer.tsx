@@ -53,6 +53,7 @@ export function EditorJSRenderer({ content }: EditorJSRendererProps) {
               width={800}
               height={600}
               className="EditorJS-image-img"
+              sizes="(max-width: 768px) 100vw, 800px"
             />
             {block.data.caption && (
               <figcaption

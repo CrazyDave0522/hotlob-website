@@ -1,7 +1,7 @@
 .store-item {
   width: 100%;
   border-radius: 20px;
-  background: #FFF;
+  background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.12);
   padding: clamp(1rem, 3vw, 1.5rem);
 }
@@ -24,7 +24,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
-  
+
   .store-item {
     border-radius: 0;
     background: transparent;

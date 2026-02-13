@@ -38,14 +38,11 @@ import {
  * ```
  */
 export function NewsCarouselItem({ newsItem }: NewsCarouselItemProps) {
-  const [viewportWidth, setViewportWidth] = useState(768); // Default to desktop
-  const [isDesktop, setIsDesktop] = useState(true);
+  const [viewportWidth, setViewportWidth] = useState(375); // Default to mobile
 
   useEffect(() => {
     const updateViewport = () => {
-      const width = window.innerWidth;
-      setViewportWidth(width);
-      setIsDesktop(width >= 768);
+      setViewportWidth(window.innerWidth);
     };
 
     updateViewport();
@@ -53,25 +50,32 @@ export function NewsCarouselItem({ newsItem }: NewsCarouselItemProps) {
     return () => window.removeEventListener("resize", updateViewport);
   }, []);
 
-  const imageSize = isDesktop
-    ? getDesktopImageSize(viewportWidth)
-    : getMobileImageSize(viewportWidth);
+  const imageSize =
+    viewportWidth >= 768
+      ? getDesktopImageSize(viewportWidth)
+      : getMobileImageSize(viewportWidth);
 
-  const titleFontSize = isDesktop
-    ? getDesktopTitleFontSize(viewportWidth)
-    : getMobileTitleFontSize(viewportWidth);
+  const titleFontSize =
+    viewportWidth >= 768
+      ? getDesktopTitleFontSize(viewportWidth)
+      : getMobileTitleFontSize(viewportWidth);
 
-  const excerptFontSize = isDesktop
-    ? getDesktopExcerptFontSize(viewportWidth)
-    : getMobileExcerptFontSize(viewportWidth);
+  const excerptFontSize =
+    viewportWidth >= 768
+      ? getDesktopExcerptFontSize(viewportWidth)
+      : getMobileExcerptFontSize(viewportWidth);
 
   const handleClick = () => {
-    window.open(`/hotlob-news/${newsItem.slug}`, "_blank", "noopener,noreferrer");
+    window.open(
+      `/hotlob-news/${newsItem.slug}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   return (
     <article
-      className={`news-carousel-item ${isDesktop ? "desktop-layout" : "mobile-layout"}`}
+      className="news-carousel-item"
       onClick={handleClick}
       role="button"
       tabIndex={0}

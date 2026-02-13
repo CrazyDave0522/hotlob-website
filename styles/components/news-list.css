@@ -1,29 +1,29 @@
 /* NewsList component styles */
 
 .NewsList-section {
-  /* Default: no background */
-}
-
-/* Mobile-specific styling (<768px) */
-@media (max-width: 767px) {
-  .NewsList-section {
-    background-image: url('/images/section-bg/our-locations-bg-stores-mb.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+  /* Mobile: background image */
+  background-image: url("/images/section-bg/our-locations-bg-stores-mb.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .NewsList {
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* Mobile: No wrapper styling */
+  gap: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 }
 
 /* Gap spacing between news items */
 .NewsList > * + * {
-  /* Desktop gap: max 60px at 1920px */
-  margin-top: clamp(20px, calc(3.125vw - 0.625px), 60px);
+  /* Mobile gap: max 20px at 768px */
+  margin-top: clamp(12px, calc(2.6vw - 0.33px), 20px);
 }
 
 /* Loading and end states */
@@ -68,27 +68,11 @@
   margin: 0;
 }
 
-/* Mobile-specific styling (<768px) */
-@media (max-width: 767px) {
-  .NewsList {
-    /* Mobile: No wrapper styling on list container */
-    gap: 0;
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0;
-  }
-
-  /* Mobile gap: max 20px at 768px */
-  .NewsList > * + * {
-    margin-top: clamp(12px, calc(2.6vw - 0.33px), 20px);
-  }
-}
-
-/* Desktop-specific styling (≥768px) */
+/* Desktop enhancements */
 @media (min-width: 768px) {
   .NewsList-section {
-    background-color: #F7F8FA;
+    background-color: #f7f8fa;
+    background-image: none;
   }
 
   .NewsList {
@@ -99,18 +83,23 @@
     padding: 40px;
   }
 
+  /* Desktop gap: max 60px at 1920px */
+  .NewsList > * + * {
+    margin-top: clamp(20px, calc(3.125vw - 0.625px), 60px);
+  }
+
   /* Desktop item separators */
   .NewsList > * + * {
     position: relative;
   }
 
   .NewsList > * + *:before {
-    content: '';
+    content: "";
     position: absolute;
     top: -30px; /* Half of max gap */
     left: 0;
     right: 0;
     height: 1px;
-    background-color: #E1E4E9;
+    background-color: #e1e4e9;
   }
 }
