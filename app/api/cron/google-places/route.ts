@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { supabaseServer } from '@/lib/supabaseServer'
 import { fetchPlaceDetails, extractRating, extractTradingHours } from '@/lib/google-places'
 import { Store } from '@/types/store'
 
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     const thirtyDaysAgo = new Date()
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
 
-    const { data: storesToSync, error: fetchError } = await supabase
+    const { data: storesToSync, error: fetchError } = await supabaseServer
       .from('store')
       .select('id, google_place_id')
       .not('google_place_id', 'is', null)
@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
             updateData.google_trading_hours = tradingHours
           }
 
-          const { error: updateError } = await supabase
+          const { error: updateError } = await supabaseServer
             .from('store')
             .update(updateData)
             .eq('id', store.id)
@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
           }
         } else {
           // Mark as synced even if API failed, to avoid repeated failures
-          await supabase
+          await supabaseServer
             .from('store')
             .update({ google_last_synced_at: new Date().toISOString() })
             .eq('id', store.id)

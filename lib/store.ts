@@ -1,5 +1,5 @@
 import type { Store, StorePhoto } from '@/types/store'
-import { supabase } from './supabase'
+import { supabase } from './supabaseClient'
 
 export async function fetchStores(): Promise<Store[]> {
   const { data, error } = await supabase

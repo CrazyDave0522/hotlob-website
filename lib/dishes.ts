@@ -1,5 +1,5 @@
 import type { DishWithRelations } from '@/types/dish'
-import { supabase } from './supabase'
+import { supabase } from './supabaseClient'
 
 export async function fetchVisibleDishes(): Promise<DishWithRelations[]> {
     const { data, error } = await supabase

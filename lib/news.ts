@@ -3,7 +3,7 @@ import type {
   NewsListItem,
   NewsFilters
 } from '@/types/news'
-import { supabase } from './supabase'
+import { supabase } from './supabaseClient'
 
 export async function fetchPublishedNews(filters: NewsFilters = {}): Promise<NewsArticle[]> {
   const {

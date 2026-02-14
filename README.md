@@ -1,5 +1,27 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+This project requires the following environment variables to be set:
+
+### Required Variables
+
+- `NEXT_PUBLIC_SUPABASE_PROJECT_URL` - Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` - Your Supabase publishable (anon) key
+- `SUPABASE_SECRET_KEY` - Your Supabase secret key (server-side only)
+
+### Supabase Client Usage
+
+This project uses two separate Supabase clients for security:
+
+- **Client-side**: `lib/supabaseClient.ts` - Uses publishable key, safe for browser
+- **Server-side**: `lib/supabaseServer.ts` - Uses secret key, for server operations only
+
+Import the appropriate client based on your context:
+
+- Client components: `import { supabase } from '@/lib/supabaseClient'`
+- Server components/actions/routes: `import { supabaseServer } from '@/lib/supabaseServer'`
+
 ## Getting Started
 
 First, run the development server:
