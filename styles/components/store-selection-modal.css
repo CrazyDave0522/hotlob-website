@@ -18,6 +18,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   max-height: calc(100vh - 48px);
   overflow: auto;
+  color: var(--color-black);
 }
 
 .StoreSelectionModal-header {
@@ -31,6 +32,7 @@
 .StoreSelectionModal-title {
   font-size: var(--font-size-h4);
   margin: 0;
+  color: var(--color-black);
 }
 
 .StoreSelectionModal-closeButton {
@@ -38,6 +40,7 @@
   border: none;
   padding: 6px;
   cursor: pointer;
+  color: var(--color-black);
 }
 
 .StoreSelectionModal-closeButton {

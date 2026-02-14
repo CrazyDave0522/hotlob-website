@@ -1,8 +1,52 @@
+"use client";
+
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { fetchStores } from '@/lib/store'
+import { tryGetQuickLocation } from '@/utils/geolocation'
+import { calculateDistance } from '@/utils/distance'
+import type { StoreWithDistance } from '@/utils/dishOrdering'
+import { StoreSelectionModal } from './StoreSelectionModal'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [stores, setStores] = useState<StoreWithDistance[]>([])
+
+  useEffect(() => {
+    const loadStores = async () => {
+      try {
+        const fetchedStores = await fetchStores()
+        const userLocation = await tryGetQuickLocation({ timeoutMs: 2000 })
+
+        const storesWithDistance: StoreWithDistance[] = fetchedStores.map(store => {
+          let distance: number | undefined
+
+          if (userLocation && store.latitude && store.longitude) {
+            distance = calculateDistance(
+              userLocation.lat,
+              userLocation.lon,
+              store.latitude,
+              store.longitude
+            )
+          }
+
+          return {
+            ...store,
+            distance
+          }
+        })
+
+        setStores(storesWithDistance)
+      } catch (error) {
+        console.error('Failed to load stores:', error)
+        setStores([])
+      }
+    }
+
+    loadStores()
+  }, [])
 
   return (
     <footer className="Footer-root">
@@ -24,7 +68,14 @@ export function Footer() {
             <Link className="Footer-legalLink" href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">
               Terms &amp; Conditions
             </Link>
-            <Link className="Footer-legalLink" href="#">
+            <Link
+              className="Footer-legalLink"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                setIsModalOpen(true)
+              }}
+            >
               Contact Us
             </Link>
           </nav>
@@ -66,6 +117,15 @@ export function Footer() {
           </div>
         </div>
       </div>
+      <StoreSelectionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onStoreSelect={(store) => {
+          window.location.href = `mailto:${store.email}`
+          setIsModalOpen(false)
+        }}
+        stores={stores}
+      />
     </footer>
   )
 }
