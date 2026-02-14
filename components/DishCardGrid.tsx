@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 
 import type { AllergenTag, DishWithRelations, MediaAsset } from "@/types/dish";
 import { fetchVisibleDishes } from "@/lib/dishes";
+import { getAvailableStoresForDish, type StoreWithDistance } from "@/utils/dishOrdering";
 import { DishCard } from "./DishCard";
 import { DishCardSkeleton } from "./DishCardSkeleton";
+import { StoreSelectionModal } from "./StoreSelectionModal";
 
 const DEFAULT_PAGE_SIZE = 10;
 
@@ -27,6 +29,8 @@ export function DishCardGrid({ limit, pageSize, categoryFilter }: DishCardGridPr
   );
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [availableStores, setAvailableStores] = useState<StoreWithDistance[]>([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -142,6 +146,22 @@ export function DishCardGrid({ limit, pageSize, categoryFilter }: DishCardGridPr
     setExpandedIndex(null);
   };
 
+  const handleOrder = async (dishId: string) => {
+    const stores = await getAvailableStoresForDish(dishId);
+    setAvailableStores(stores);
+    setIsModalOpen(true);
+  };
+
+  const handleStoreSelect = (store: StoreWithDistance) => {
+    // Open the dish-specific Uber URL in a new tab
+    window.open(store.dishUberUrl, '_blank');
+    setIsModalOpen(false);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   if (isLoading) {
     return (
       <div className="DishCardGrid">
@@ -159,29 +179,38 @@ export function DishCardGrid({ limit, pageSize, categoryFilter }: DishCardGridPr
   }
 
   return (
-    <div className="DishCardGrid">
-      {displayedDishes.map((dish, index) => {
-        const primaryImage: MediaAsset | null =
-          dish.media_asset?.find((asset) => asset.position === 1) ??
-          dish.media_asset?.[0] ??
-          null;
+    <>
+      <div className="DishCardGrid">
+        {displayedDishes.map((dish, index) => {
+          const primaryImage: MediaAsset | null =
+            dish.media_asset?.find((asset) => asset.position === 1) ??
+            dish.media_asset?.[0] ??
+            null;
 
-        const allergens: AllergenTag[] = (dish.dish_allergen ?? [])
-          .flatMap((item) => item.allergen_tag ?? [])
-          .filter((tag): tag is AllergenTag => Boolean(tag));
+          const allergens: AllergenTag[] = (dish.dish_allergen ?? [])
+            .flatMap((item) => item.allergen_tag ?? [])
+            .filter((tag): tag is AllergenTag => Boolean(tag));
 
-        return (
-          <DishCard
-            key={dish.id}
-            dish={dish}
-            image={primaryImage}
-            allergens={allergens}
-            expanded={expandedIndex === index}
-            onHover={() => handleHover(index)}
-            onLeave={handleLeave}
-          />
-        );
-      })}
-    </div>
+          return (
+            <DishCard
+              key={dish.id}
+              dish={dish}
+              image={primaryImage}
+              allergens={allergens}
+              expanded={expandedIndex === index}
+              onHover={() => handleHover(index)}
+              onLeave={handleLeave}
+              onOrder={() => handleOrder(dish.id)}
+            />
+          );
+        })}
+      </div>
+      <StoreSelectionModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onStoreSelect={handleStoreSelect}
+        stores={availableStores}
+      />
+    </>
   );
 }

@@ -1,3 +1,5 @@
+import type { Store } from './store'
+
 export interface Dish {
     id: string
     name: string
@@ -35,7 +37,23 @@ export interface DishAllergen {
     allergen_tag?: AllergenTag[] | null
 }
 
+export interface DishStore {
+    id: string
+    dish_id: string
+    store_id: string
+    price_override: number | null
+    available: boolean
+    uber_url: string
+    created_at: string
+    updated_at: string
+}
+
+export interface DishStoreWithStore extends DishStore {
+    store: Store | null
+}
+
 export interface DishWithRelations extends Dish {
     media_asset?: MediaAsset[] | null
     dish_allergen?: DishAllergen[] | null
+    dish_store?: DishStore[] | null
 }

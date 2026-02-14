@@ -1,31 +1,30 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { X } from "lucide-react";
-import type { Store } from "@/types/store";
+import { X, MapPin } from "lucide-react";
+import type { StoreWithDistance } from "@/utils/dishOrdering";
 
 /**
  * Props for `StoreSelectionModal`.
  *
  * @property isOpen - Controls modal visibility. When `false` the component renders `null`.
  * @property onClose - Called when the modal should be closed (backdrop, close button, or Escape key).
- * @property onStoreSelect - Called with the selected `Store` when a store item is clicked.
- * @property stores - Array of `Store` objects to display. The modal renders name and address only.
+ * @property onStoreSelect - Called with the selected `StoreWithDistance` when a store item is clicked.
+ * @property stores - Array of `StoreWithDistance` objects to display. The modal renders name, address, optional distance, and handles ordering via dishUberUrl.
  */
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  onStoreSelect: (store: Store) => void;
-  stores: Store[];
+  onStoreSelect: (store: StoreWithDistance) => void;
+  stores: StoreWithDistance[];
 }
 
 /**
  * `StoreSelectionModal`
  *
- * A lightweight, accessible modal used for manual store selection. Per project spec the
- * modal MUST NOT initiate geolocation requests or render distance information. Callers
- * (for example `Header`) are responsible for any quick-location probes and automatic
- * nearest-store selection.
+ * A lightweight, accessible modal used for manual store selection. The modal can display
+ * distance information when provided by the caller. Callers are responsible for location
+ * detection and distance calculation.
  *
  * Behavior:
  * - Renders nothing when `isOpen` is `false`.
@@ -173,10 +172,18 @@ export function StoreSelectionModal({
                 role="listitem"
               >
                 <div className="StoreSelectionModal-storeName">{s.name}</div>
-                <div className="StoreSelectionModal-storeAddress">
-                  {[s.street, s.suburb, s.state, s.postcode]
-                    .filter(Boolean)
-                    .join(", ")}
+                <div className="StoreSelectionModal-storeDetails">
+                  <div className="StoreSelectionModal-storeAddress">
+                    {[s.street, s.suburb, s.state, s.postcode]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </div>
+                  {s.distance !== undefined && (
+                    <div className="StoreSelectionModal-storeDistance">
+                      <MapPin size={14} />
+                      {s.distance.toFixed(1)} km away
+                    </div>
+                  )}
                 </div>
               </button>
             ))

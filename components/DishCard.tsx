@@ -9,6 +9,7 @@ interface DishCardProps {
   expanded: boolean;
   onHover?: () => void;
   onLeave?: () => void;
+  onOrder?: () => void;
 }
 
 export function DishCard({
@@ -18,6 +19,7 @@ export function DishCard({
   expanded,
   onHover,
   onLeave,
+  onOrder,
 }: DishCardProps) {
   const tierLabel = dish.tier
     ? `${dish.tier.charAt(0).toUpperCase()}${dish.tier.slice(1)}`
@@ -66,6 +68,7 @@ export function DishCard({
           className="DishCard-button"
           type="button"
           aria-label={`Order Now for ${dish.name}`}
+          onClick={onOrder}
         >
           Order Now
         </button>
