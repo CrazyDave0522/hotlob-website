@@ -59,8 +59,3 @@ export async function getAvailableStoresForDish(dishId: string): Promise<StoreWi
   })
 }
 
-export async function handleDishOrder(dishId: string): Promise<void> {
-  // This will be implemented when we update the components
-  // For now, it's a placeholder that will open the modal
-  console.log('Ordering dish:', dishId)
-}

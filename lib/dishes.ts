@@ -2,10 +2,10 @@ import type { DishWithRelations, DishStoreWithStore } from '@/types/dish'
 import { supabase } from './supabaseClient'
 
 export async function fetchVisibleDishes(): Promise<DishWithRelations[]> {
-    const { data, error } = await supabase
-        .from('dish')
-        .select(
-            `
+  const { data, error } = await supabase
+    .from('dish')
+    .select(
+      `
       id,
       name,
       description,
@@ -46,26 +46,25 @@ export async function fetchVisibleDishes(): Promise<DishWithRelations[]> {
         updated_at
       )
     `
-        )
-        .eq('is_visible', true)
-        .eq('is_available', true)
-        .eq('dish_store.available', true)
-        .order('created_at', { ascending: false })
+    )
+    .eq('is_visible', true)
+    .eq('is_available', true)
+    .eq('dish_store.available', true)
+    .order('created_at', { ascending: false })
 
-    if (error) {
-        console.error('Failed to fetch dishes', error)
-        return []
-    }
+  if (error) {
+    console.error('Failed to fetch dishes', error)
+    return []
+  }
 
-    return data ?? []
+  return data ?? []
 }
 
 export async function fetchDishStores(dishId: string): Promise<DishStoreWithStore[]> {
-    console.log('🔍 fetchDishStores called with dishId:', dishId)
-    const { data, error } = await supabase
-        .from('dish_store')
-        .select(
-            `
+  const { data, error } = await supabase
+    .from('dish_store')
+    .select(
+      `
       id,
       dish_id,
       store_id,
@@ -96,16 +95,14 @@ export async function fetchDishStores(dishId: string): Promise<DishStoreWithStor
         google_last_synced_at
       )
     `
-        )
-        .eq('dish_id', dishId)
-        .eq('available', true)
+    )
+    .eq('dish_id', dishId)
+    .eq('available', true)
 
-    if (error) {
-        console.error('❌ Failed to fetch dish stores:', error)
-        return []
-    }
+  if (error) {
+    console.error('❌ Failed to fetch dish stores:', error)
+    return []
+  }
 
-    console.log('🔍 fetchDishStores result:', data)
-    console.log('🔍 Result length:', data?.length)
-    return (data ?? []) as unknown as DishStoreWithStore[]
+  return (data ?? []) as unknown as DishStoreWithStore[]
 }
