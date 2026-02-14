@@ -38,7 +38,9 @@ import {
  * ```
  */
 export function NewsCarouselItem({ newsItem }: NewsCarouselItemProps) {
-  const [viewportWidth, setViewportWidth] = useState(375); // Default to mobile
+  // Use a stable default during SSR/hydration to avoid markup mismatches.
+  // The real viewport width will be set in useEffect on the client.
+  const [viewportWidth, setViewportWidth] = useState<number>(375);
 
   useEffect(() => {
     const updateViewport = () => {
@@ -73,9 +75,11 @@ export function NewsCarouselItem({ newsItem }: NewsCarouselItemProps) {
     );
   };
 
+  const layoutClass = viewportWidth >= 768 ? "desktop-layout" : "mobile-layout";
+
   return (
     <article
-      className="news-carousel-item"
+      className={`news-carousel-item ${layoutClass}`}
       onClick={handleClick}
       role="button"
       tabIndex={0}

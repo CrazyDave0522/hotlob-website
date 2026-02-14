@@ -156,7 +156,11 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
           }}
         >
           {displayNews.map((newsItem) => (
-            <NewsCarouselItem key={newsItem.id} newsItem={newsItem} />
+            <NewsCarouselItem
+              key={newsItem.id}
+              newsItem={newsItem}
+              // pass index to help with any focus/aria needs in tests
+            />
           ))}
         </div>
 

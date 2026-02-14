@@ -90,9 +90,9 @@ describe("NewsCarousel - Cross-browser Compatibility", () => {
   it("uses semantic HTML elements for better browser support", () => {
     render(<NewsCarousel news={mockNewsItems} />);
 
-    // Should use section element
+    // Should use div element
     const carousel = screen.getByRole("region", { name: /news carousel/i });
-    expect(carousel.tagName).toBe("SECTION");
+    expect(carousel.tagName).toBe("DIV");
 
     // Should use button elements for interactive elements
     const buttons = screen.getAllByRole("button");

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { NewsCarousel } from "../../../../components/NewsCarousel";
-import { NewsListItem } from "../../../types/news";
+import { NewsListItem } from "../../../../types/news";
 
 // Mock the carousel sizing utilities
 vi.mock("../../../utils/carousel-sizing", () => ({
@@ -106,9 +106,9 @@ describe("NewsCarousel - Home Page Integration", () => {
 
     // Should open in new tab
     expect(mockOpen).toHaveBeenCalledWith(
-      "/news/first-news-article",
+      "/hotlob-news/first-news-article",
       "_blank",
-      "noopener,noreferrer"
+      "noopener,noreferrer",
     );
   });
 

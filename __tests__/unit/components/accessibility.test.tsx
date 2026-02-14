@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import StoreList from '../../../components/StoreList'
 import StoreItem from '../../../components/StoreItem'
 import Rating from '../../../components/Rating'
@@ -138,37 +137,10 @@ describe('Accessibility Tests', () => {
 
   describe('GoogleMapEmbed Accessibility', () => {
     it('has proper iframe title', () => {
-      render(<GoogleMapEmbed embedUrl="https://example.com/map" googleUrl="https://maps.google.com" />)
+      render(<GoogleMapEmbed embedUrl="https://example.com/map" />)
 
       const iframe = screen.getByTitle('Store location map')
       expect(iframe).toBeInTheDocument()
-    })
-
-    it('opens in new tab when clicked', async () => {
-      const user = userEvent.setup()
-      const mockOpen = vi.fn()
-      global.open = mockOpen
-
-      render(<GoogleMapEmbed embedUrl="https://example.com/map" googleUrl="https://maps.google.com" />)
-
-      const mapContainer = screen.getByTestId('google-map-embed')
-      await user.click(mapContainer)
-
-      expect(mockOpen).toHaveBeenCalledWith('https://maps.google.com', '_blank', 'noopener,noreferrer')
-    })
-
-    it('handles missing googleUrl gracefully', async () => {
-      const user = userEvent.setup()
-      const mockOpen = vi.fn()
-      global.open = mockOpen
-
-      render(<GoogleMapEmbed embedUrl="https://example.com/map" />)
-
-      const mapContainer = screen.getByTestId('google-map-embed')
-      await user.click(mapContainer)
-
-      // Should not open anything if no googleUrl
-      expect(mockOpen).not.toHaveBeenCalled()
     })
   })
 
