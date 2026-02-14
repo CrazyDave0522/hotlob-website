@@ -6,6 +6,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { Button } from './Button'
+import StoreSelectionModal from './StoreSelectionModal'
+import { fetchStores } from '@/lib/store'
+import type { Store } from '@/types/store'
+import { tryGetQuickLocation } from '@/utils/geolocation'
+import { findClosestStore } from '@/utils/distance'
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -18,6 +23,8 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isStoreModalOpen, setIsStoreModalOpen] = useState(false)
+  const [stores, setStores] = useState<Store[]>([])
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const closeMenu = () => setIsMenuOpen(false)
@@ -33,6 +40,16 @@ export function Header() {
       document.body.style.overflow = ''
     }
   }, [isMenuOpen])
+
+  // Fetch stores on mount
+  useEffect(() => {
+    let mounted = true
+    fetchStores().then((data) => {
+      if (!mounted) return
+      setStores(data || [])
+    })
+    return () => { mounted = false }
+  }, [])
 
   // Close menu on Escape key
   useEffect(() => {
@@ -106,7 +123,21 @@ export function Header() {
               />
             </a>
           </div>
-          <Button className="Header-ctaButton">Order Online</Button>
+          <Button className="Header-ctaButton" onClick={async () => {
+            try {
+              const loc = await tryGetQuickLocation({ timeoutMs: 2000 })
+              if (loc && stores.length > 0) {
+                const closest = findClosestStore(loc, stores)
+                if (closest) {
+                  window.open(closest.uber_url, '_blank')
+                  return
+                }
+              }
+              } catch {
+                // ignore and fallback to modal
+              }
+            setIsStoreModalOpen(true)
+          }}>Order Online</Button>
         </div>
 
         {/* Mobile Hamburger Icon */}
@@ -147,6 +178,16 @@ export function Header() {
           </nav>
         </div>
       )}
+
+      <StoreSelectionModal
+        isOpen={isStoreModalOpen}
+        onClose={() => setIsStoreModalOpen(false)}
+        onStoreSelect={(store: Store) => {
+          window.open(store.uber_url, '_blank')
+          setIsStoreModalOpen(false)
+        }}
+        stores={stores}
+      />
     </header>
   )
 }

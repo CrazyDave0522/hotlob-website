@@ -39,6 +39,46 @@ Loading skeleton for store items.
 ### ErrorBoundary
 Error boundary for catching component errors.
 
+### StoreSelectionModal
+Reusable modal component for selecting a store when automatic location-based selection isn't available.
+
+Usage:
+```tsx
+import StoreSelectionModal from '@/components/StoreSelectionModal'
+
+function HeaderExample() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [stores, setStores] = useState<Store[]>([])
+
+  const handleSelect = (store: Store) => {
+    window.open(store.uber_url, '_blank')
+    setIsOpen(false)
+  }
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>Order Online</button>
+      <StoreSelectionModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onStoreSelect={handleSelect}
+        stores={stores}
+      />
+    </>
+  )
+}
+```
+
+Props:
+- `isOpen: boolean` — controls visibility
+- `onClose: () => void` — called when modal should close
+- `onStoreSelect: (store: Store) => void` — called when user selects a store
+- `stores: Store[]` — list of stores to render
+
+Geolocation behavior:
+- The modal is a manual-selection UI and SHALL NOT request location permissions or render distances.
+- Callers (e.g., `Header`) may attempt a quick location probe (`tryGetQuickLocation`) and auto-select the closest store using `utils/distance` helpers. If that fails or times out, open this modal as a fallback.
+
 ## Google Places API Setup
 
 The components use Google Places API (New) for store ratings and hours. Required environment variables:
