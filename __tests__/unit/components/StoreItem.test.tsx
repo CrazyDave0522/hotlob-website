@@ -25,13 +25,13 @@ describe('StoreItem', () => {
     google_trading_hours: {
       open_now: true,
       weekday_text: [
-        'Sunday: 10:00 AM – 6:00 PM',
-        'Monday: 9:00 AM – 5:00 PM',
-        'Tuesday: 9:00 AM – 5:00 PM',
-        'Wednesday: 9:00 AM – 5:00 PM',
-        'Thursday: 9:00 AM – 5:00 PM',
-        'Friday: 9:00 AM – 5:00 PM',
-        'Saturday: 10:00 AM – 6:00 PM'
+        'Monday: 9:00 AM – 5:00 PM',     // index 0
+        'Tuesday: 9:00 AM – 5:00 PM',    // index 1
+        'Wednesday: 9:00 AM – 5:00 PM',  // index 2
+        'Thursday: 9:00 AM – 5:00 PM',   // index 3
+        'Friday: 9:00 AM – 5:00 PM',     // index 4
+        'Saturday: 10:00 AM – 6:00 PM',  // index 5
+        'Sunday: 10:00 AM – 6:00 PM'     // index 6
       ]
     },
     google_last_synced_at: '2024-01-01T00:00:00Z',
@@ -129,8 +129,8 @@ describe('StoreItem', () => {
 
       render(<StoreItem store={mockStore} layout="stacked" />)
 
-      // For Monday (getDay() = 1), index = 1 - 1 = 0, so we get Sunday's hours
-      expect(screen.getByText('Sunday: 10:00 AM – 6:00 PM')).toBeInTheDocument()
+      // For Monday (getDay() = 1), we should get Monday's hours
+      expect(screen.getByText('Monday: 9:00 AM – 5:00 PM')).toBeInTheDocument()
 
       vi.useRealTimers()
     })
