@@ -78,7 +78,7 @@
 
 .customer-review-author {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 20px;
   line-height: normal;
   text-transform: uppercase;
   color: var(--color-black);
@@ -87,7 +87,7 @@
 }
 
 .customer-review-date {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: normal;
   color: var(--color-gray);
@@ -101,7 +101,7 @@
 
 /* Review text */
 .customer-review-text {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   line-height: normal;
   color: var(--color-gray);
