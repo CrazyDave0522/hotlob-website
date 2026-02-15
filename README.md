@@ -22,6 +22,81 @@ Import the appropriate client based on your context:
 - Client components: `import { supabase } from '@/lib/supabaseClient'`
 - Server components/actions/routes: `import { supabaseServer } from '@/lib/supabaseServer'`
 
+## Database Schema
+
+This project uses Supabase (PostgreSQL) as the database. The schema includes the following key tables:
+
+### Store Table
+
+```sql
+CREATE TABLE store (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  street TEXT,
+  suburb TEXT,
+  state TEXT,
+  postcode TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  latitude DOUBLE PRECISION,
+  longitude DOUBLE PRECISION,
+  google_place_id TEXT,
+  google_maps_embed_url TEXT,
+  uber_url TEXT NOT NULL,
+  email TEXT NOT NULL,
+  google_url TEXT NOT NULL,
+  google_rating DOUBLE PRECISION,
+  google_user_ratings_total INTEGER,
+  google_trading_hours JSONB,
+  google_last_synced_at TIMESTAMP WITH TIME ZONE
+);
+```
+
+### Curated Reviews Table
+
+```sql
+CREATE TABLE curated_reviews (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  store_id UUID NOT NULL REFERENCES store(id) ON DELETE CASCADE,
+  google_review_id TEXT NOT NULL,
+  author_name TEXT NOT NULL,
+  author_photo_url TEXT,
+  rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+  review_text TEXT NOT NULL,
+  review_time TIMESTAMP WITH TIME ZONE NOT NULL,
+  language TEXT,
+  fetched_at TIMESTAMP WITH TIME ZONE NOT NULL,
+  expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  author_uri TEXT,
+  text_length INTEGER GENERATED ALWAYS AS (char_length(review_text)) STORED,
+  UNIQUE(store_id, google_review_id)
+);
+```
+
+#### Indexes
+
+```sql
+CREATE INDEX idx_curated_reviews_store_id ON curated_reviews(store_id);
+CREATE INDEX idx_curated_reviews_expires_at ON curated_reviews(expires_at);
+CREATE INDEX idx_curated_reviews_google_review_id ON curated_reviews(google_review_id);
+```
+
+#### Triggers
+
+```sql
+CREATE TRIGGER update_updated_at
+  BEFORE UPDATE ON curated_reviews
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+```
+
+### Other Tables
+
+- `news` - News articles and content
+- `dish` - Food menu items
+- Additional tables for carousel and other features
+
 ## Getting Started
 
 First, run the development server:

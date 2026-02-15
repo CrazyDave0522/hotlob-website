@@ -3,7 +3,7 @@ import { describe, expect, it, vi, beforeEach } from 'vitest'
 // Define the interface for testing
 interface GooglePlaceDetails {
   id: string
-  displayName: { text: string }
+  displayName: { text: string; languageCode: string }
   rating?: number
   userRatingCount?: number
   currentOpeningHours?: {
@@ -54,7 +54,7 @@ describe('Google Places API', () => {
     it('fetches place details successfully', async () => {
       const mockResponse: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         rating: 4.5,
         userRatingCount: 100,
         currentOpeningHours: {
@@ -100,7 +100,7 @@ describe('Google Places API', () => {
     it('includes correct API parameters', async () => {
       const mockResponse: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' }
+        displayName: { text: 'Test Place', languageCode: 'en' }
       }
 
       vi.mocked(fetchPlaceDetails).mockResolvedValueOnce(mockResponse)
@@ -115,7 +115,7 @@ describe('Google Places API', () => {
     it('extracts rating and total from place details', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         rating: 4.5,
         userRatingCount: 100
       }
@@ -131,7 +131,7 @@ describe('Google Places API', () => {
     it('returns null when rating is missing', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         userRatingCount: 100
         // rating is missing
       }
@@ -144,7 +144,7 @@ describe('Google Places API', () => {
     it('returns null when user_ratings_total is missing', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         rating: 4.5
         // userRatingCount is missing
       }
@@ -157,7 +157,7 @@ describe('Google Places API', () => {
     it('handles zero ratings', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         rating: 0,
         userRatingCount: 50
       }
@@ -173,7 +173,7 @@ describe('Google Places API', () => {
     it('handles decimal ratings', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         rating: 4.7,
         userRatingCount: 25
       }
@@ -191,7 +191,7 @@ describe('Google Places API', () => {
     it('extracts opening hours from place details', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         currentOpeningHours: {
           openNow: true,
           weekdayDescriptions: [
@@ -216,7 +216,7 @@ describe('Google Places API', () => {
     it('returns null when opening_hours is missing', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' }
+        displayName: { text: 'Test Place', languageCode: 'en' }
         // currentOpeningHours is missing
       }
 
@@ -228,7 +228,7 @@ describe('Google Places API', () => {
     it('handles closed status', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         currentOpeningHours: {
           openNow: false,
           weekdayDescriptions: ['Monday: Closed']
@@ -247,7 +247,7 @@ describe('Google Places API', () => {
     it('handles missing open_now', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         currentOpeningHours: {
           weekdayDescriptions: ['Monday: 9:00 AM – 5:00 PM']
         }
@@ -265,7 +265,7 @@ describe('Google Places API', () => {
     it('handles missing weekday_text', () => {
       const placeDetails: GooglePlaceDetails = {
         id: 'place123',
-        displayName: { text: 'Test Place' },
+        displayName: { text: 'Test Place', languageCode: 'en' },
         currentOpeningHours: {
           openNow: true
         }
