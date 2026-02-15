@@ -30,6 +30,21 @@ import Rating from '@/components/Rating'
 <Rating value={4.5} size="md" />
 ```
 
+### CustomerReviews
+Component that displays customer reviews fetched from Supabase.
+
+```tsx
+import CustomerReviews from '@/components/CustomerReviews'
+
+function LocationsPage() {
+  return (
+    <section>
+      <CustomerReviews />
+    </section>
+  )
+}
+```
+
 ### GoogleMapEmbed
 Embedded Google Maps component.
 

@@ -1,0 +1,233 @@
+/* Customer Reviews component styles
+ *
+ * CSS classes:
+ * - .customer-reviews: Main container for the reviews list (white background, rounded corners, shadow)
+ * - .customer-review-item: Individual review item container
+ * - .customer-review-header: Header section with avatar and author info
+ * - .customer-review-avatar: Avatar container (icon or image)
+ * - .customer-review-meta: Container for author name, date, and rating (right side of header)
+ * - .customer-review-author: Author name text
+ * - .customer-review-date: Review date text
+ * - .customer-review-rating: Rating stars container
+ * - .customer-review-text: Review content text (justified alignment)
+ * - .customer-reviews-loading: Loading state container
+ * - .customer-reviews-error: Error state container
+ * - .locations-reviews-section: Page-level section wrapper with gradient background
+ * - .reviews-disclaimer: Disclaimer text for Google reviews attribution
+ */
+
+.customer-reviews {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.12);
+  padding: 0;
+}
+
+/* Review item */
+.customer-review-item {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 5vw, 30px) clamp(15px, 4vw, 25px);
+  border-bottom: 1px solid #e1e4e9;
+}
+
+.customer-review-item:last-child {
+  border-bottom: none;
+}
+
+/* Review header (avatar + name/date) */
+.customer-review-header {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(12px, 3vw, 16px);
+  margin-bottom: clamp(8px, 2vw, 12px);
+}
+
+/* Avatar */
+.customer-review-avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--color-light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.customer-review-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.customer-review-avatar-icon {
+  color: var(--color-gray);
+}
+
+/* Meta information (name and date) */
+.customer-review-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.customer-review-author {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: normal;
+  text-transform: uppercase;
+  color: var(--color-black);
+  margin: 0 0 4px 0;
+  word-break: break-word;
+}
+
+.customer-review-date {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--color-gray);
+  margin: 0;
+}
+
+/* Rating */
+.customer-review-rating {
+  margin-top: 4px;
+}
+
+/* Review text */
+.customer-review-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--color-gray);
+  margin: 12px 0 0 0;
+  word-break: break-word;
+  text-align: justify;
+}
+
+/* Loading state */
+.customer-reviews-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(30px, 7.5vw, 50px) clamp(15px, 5vw, 25px);
+  text-align: center;
+  gap: clamp(12px, 3.2vw, 20px);
+}
+
+.customer-reviews-spinner {
+  width: clamp(24px, 6.4vw, 40px);
+  height: clamp(24px, 6.4vw, 40px);
+  border: clamp(2px, 0.533vw, 4px) solid var(--color-medium-gray);
+  border-top: clamp(2px, 0.533vw, 4px) solid var(--color-primary);
+  border-radius: 50%;
+  animation: customer-reviews-spin 1s linear infinite;
+}
+
+@keyframes customer-reviews-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.customer-reviews-loading span {
+  font-size: 16px;
+  color: var(--color-gray-600);
+  margin: 0;
+}
+
+/* Error state */
+.customer-reviews-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(30px, 7.5vw, 50px) clamp(15px, 5vw, 25px);
+  text-align: center;
+  gap: clamp(16px, 4vw, 24px);
+}
+
+.customer-reviews-error p {
+  font-size: 16px;
+  color: var(--color-gray-600);
+  margin: 0;
+}
+
+.customer-reviews-retry {
+  padding: 12px 24px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-5);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.customer-reviews-retry:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Desktop enhancements */
+@media (min-width: 768px) {
+  .customer-reviews {
+    background: var(--color-white);
+    border-radius: var(--radius-10);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+    padding: 40px;
+  }
+
+  .customer-review-item {
+    padding: 30px 0;
+  }
+
+  .customer-review-item:first-child {
+    padding-top: 0;
+  }
+
+  .customer-review-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  /* Desktop separators */
+  .customer-review-item:not(:last-child) {
+    position: relative;
+  }
+
+  .customer-review-item:not(:last-child):after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #e1e4e9;
+  }
+}
+
+/* Page-level section styling */
+.locations-reviews-section {
+  background: linear-gradient(180deg, #fbf3f3 0%, #fff 100%);
+}
+/* Reviews disclaimer */
+.reviews-disclaimer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-gray);
+  margin: 20px 0 0 0;
+  font-weight: 400;
+  border-top: 1px dashed var(--color-medium-gray);
+  border-bottom: 1px dashed var(--color-medium-gray);
+  padding: 10px 0;
+}

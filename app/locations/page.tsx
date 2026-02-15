@@ -1,5 +1,7 @@
 import Hero from "@/components/Hero";
 import StoreList from "@/components/StoreList";
+import CustomerReviews from "@/components/CustomerReviews";
+import { SectionTitle } from "@/components/SectionTitle";
 
 export default function LocationsPage() {
   return (
@@ -13,6 +15,13 @@ export default function LocationsPage() {
       />
       <section className="locations-stores-section">
         <StoreList />
+      </section>
+      <section className="locations-reviews-section">
+        <SectionTitle text="See what people say about us" />
+        <CustomerReviews />
+        <p className="reviews-disclaimer">
+          Reviews provided by Google
+        </p>
       </section>
     </main>
   );
