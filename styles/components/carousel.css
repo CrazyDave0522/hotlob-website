@@ -68,6 +68,14 @@
     text-align: left;
   }
 
+  .news-carousel-title {
+    padding: 0 1rem;
+  }
+
+  .news-carousel-excerpt {
+    padding: 0 1rem;
+  }
+
   .carousel-arrow {
     width: 48px;
     height: 48px;
