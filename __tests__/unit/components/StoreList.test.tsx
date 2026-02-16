@@ -124,6 +124,20 @@ describe('StoreList', () => {
       // Should have 3 store items
       expect(screen.getAllByRole('region', { name: /store item/i })).toHaveLength(3)
     })
+
+    it('renders carousel-left variant', async () => {
+      mockFetchStoresWithPhotos.mockResolvedValue([mockStore])
+
+      render(<StoreList variant="carousel-left" />)
+
+      await waitFor(() => {
+        expect(screen.getByText('Hotlob Sydney')).toBeInTheDocument()
+      })
+
+      // Check that StoreItem is rendered with carousel-left layout
+      const storeItem = screen.getByRole('region', { name: /store item/i })
+      expect(storeItem).toHaveClass('store-item-carousel-left')
+    })
   })
 
   describe('Responsive Layout', () => {

@@ -32,3 +32,31 @@
     padding: 0;
   }
 }
+
+/* Carousel Left Variant */
+.store-item-carousel-left {
+  display: grid;
+  grid-template-columns: clamp(120px, 28.65vw, 220px) 1fr auto;
+  gap: 1rem; /* Mobile-first: base gap for mobile */
+  align-items: center;
+  border-top: 1px solid #b9b7b7;
+  padding-top: clamp(1rem, 3vw, 1.5rem);
+  padding-bottom: clamp(1rem, 3vw, 1.5rem);
+  padding-left: 0;
+  padding-right: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.store-item-carousel-left:last-child {
+  border-bottom: 1px solid #b9b7b7;
+}
+
+/* Desktop enhancement for carousel-left */
+@media (min-width: 768px) {
+  .store-item-carousel-left {
+    grid-template-columns: clamp(160px, 11.46vw, 220px) 1fr auto;
+    gap: 2rem; /* Increase gap for desktop */
+  }
+}

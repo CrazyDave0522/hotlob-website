@@ -11,7 +11,7 @@
 }
 
 .store-info-title {
-  font-size: clamp(16px, 3vw, 24px);
+  font-size: clamp(16px, 3.125vw, 24px);
   font-weight: 500;
   line-height: normal;
   text-transform: uppercase;
@@ -21,7 +21,7 @@
 
 @media (min-width: 768px) {
   .store-info-title {
-    font-size: clamp(18px, 2vw, 24px);
+    font-size: clamp(18px, 1.25vw, 24px);
   }
 }
 
@@ -29,6 +29,7 @@
   display: flex;
   flex-direction: column;
   gap: clamp(0.5625rem, 1.5vw, 0.9375rem);
+  position: relative;
 }
 
 .store-info-address,
@@ -36,14 +37,14 @@
   display: flex;
   align-items: flex-start;
   gap: clamp(0.375rem, 1vw, 0.625rem);
-  font-size: clamp(12px, 2vw, 18px);
+  font-size: clamp(14px, 2vw, 18px);
   color: #4e5969;
 }
 
 @media (min-width: 768px) {
   .store-info-address,
   .store-info-hours {
-    font-size: clamp(12px, 1.5vw, 18px);
+    font-size: clamp(16px, 0.9375vw, 18px);
   }
 }
 
@@ -101,4 +102,37 @@
     width: clamp(120px, 15vw, 140px);
     height: clamp(100px, 12.5vw, 120px);
   }
+}
+
+/* Uber navigation icon */
+.store-info-uber-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  position: static;
+}
+
+.store-info-uber-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.store-info-uber-icon {
+  width: clamp(16px, 4vw, 32px);
+  height: clamp(16px, 4vw, 32px);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .store-info-uber-icon {
+    width: clamp(24px, 1.67vw, 32px);
+    height: clamp(24px, 1.67vw, 32px);
+  }
+}
+
+.store-info-uber-link:hover .store-info-uber-icon {
+  opacity: 1;
 }

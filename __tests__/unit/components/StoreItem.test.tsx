@@ -87,6 +87,20 @@ describe('StoreItem', () => {
       // Second child should be the map (GoogleMapEmbed)
       expect(children[1]).toHaveAttribute('data-testid', 'google-map-embed')
     })
+
+    it('renders carousel-left layout with three columns', () => {
+      render(<StoreItem store={mockStore} layout="carousel-left" variant="carousel-left" />)
+
+      const item = screen.getByTestId('store-item')
+      expect(item).toHaveClass('store-item-carousel-left')
+
+      // Should have three columns: carousel, info, angle icon
+      const children = item.children
+      expect(children).toHaveLength(3)
+      expect(children[0]).toHaveClass('store-item-carousel')
+      expect(children[1]).toHaveClass('store-item-info')
+      expect(children[2]).toHaveClass('store-item-angle')
+    })
   })
 
   describe('Store Data Display', () => {

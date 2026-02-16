@@ -5,6 +5,10 @@
   gap: 3rem;
 }
 
+.store-list-carousel-left {
+  gap: 0; /* Remove gap for seamless borders */
+}
+
 .store-list-error,
 .store-list-empty {
   text-align: center;

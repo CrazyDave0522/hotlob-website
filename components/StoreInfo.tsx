@@ -15,6 +15,8 @@ interface StoreInfoProps {
   todaysHours?: string;
   photos?: Array<{ photo_url: string }>;
   googleUrl?: string;
+  uberUrl?: string;
+  variant?: 'alternating' | 'carousel-left';
   className?: string;
 }
 
@@ -26,6 +28,8 @@ export default function StoreInfo({
   todaysHours,
   photos = [],
   googleUrl,
+  uberUrl,
+  variant,
   className,
 }: StoreInfoProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -111,7 +115,7 @@ export default function StoreInfo({
           </div>
         )}
 
-        {displayPhotos.length > 0 && (
+        {displayPhotos.length > 0 && variant !== 'carousel-left' && (
           <div className="store-info-photos">
             {displayPhotos.map((photo, index) => (
               <button

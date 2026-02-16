@@ -10,7 +10,11 @@ import "@/styles/components/store-list.css";
 
 type StoreWithPhotos = Store & { photos: StorePhoto[] };
 
-export default function StoreList() {
+interface StoreListProps {
+  variant?: 'alternating' | 'carousel-left';
+}
+
+export default function StoreList({ variant = 'alternating' }: StoreListProps) {
   const [stores, setStores] = useState<StoreWithPhotos[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -75,16 +79,18 @@ export default function StoreList() {
 
   return (
     <ErrorBoundary>
-      <div className="store-list">
+      <div className={`store-list ${variant === 'carousel-left' ? 'store-list-carousel-left' : ''}`}>
         {stores.map((store, index) => {
-          // Determine layout based on screen size and index
-          let layout: "left" | "right" | "stacked" = "stacked";
+          // Determine layout based on variant and screen size
+          let layout: "left" | "right" | "stacked" | "carousel-left" = "stacked";
 
-          if (isDesktop) {
+          if (variant === 'carousel-left') {
+            layout = "carousel-left";
+          } else if (isDesktop) {
             layout = index % 2 === 0 ? "left" : "right";
           }
 
-          return <StoreItem key={store.id} store={store} layout={layout} />;
+          return <StoreItem key={store.id} store={store} layout={layout} variant={variant} />;
         })}
       </div>
     </ErrorBoundary>
