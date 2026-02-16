@@ -42,7 +42,6 @@ export default function StoreItem({
       todaysHours={todaysHours}
       photos={store.photos}
       googleUrl={store.google_url}
-      uberUrl={store.uber_url}
       variant={variant}
     />
   );
