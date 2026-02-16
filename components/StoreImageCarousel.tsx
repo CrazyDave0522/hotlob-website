@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { CarouselIndicator } from "./CarouselIndicator";
 import { Store } from "lucide-react";
+import ImageLightbox from "./ImageLightbox";
 import "@/styles/components/store-image-carousel.css";
 
 interface StoreImageCarouselProps {
@@ -36,6 +37,9 @@ export function StoreImageCarousel({
   const hasImages = sortedPhotos.length > 0;
   const hasMultipleImages = sortedPhotos.length > 1;
 
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
   // Pause auto-play on user interaction
   const handleUserInteraction = useCallback(() => {
     setIsAutoPlaying(false);
@@ -50,10 +54,13 @@ export function StoreImageCarousel({
     handleUserInteraction();
   }, [sortedPhotos.length, handleUserInteraction]);
 
-  const goToSlide = useCallback((index: number) => {
-    setCurrentIndex(index);
-    handleUserInteraction();
-  }, [handleUserInteraction]);
+  const goToSlide = useCallback(
+    (index: number) => {
+      setCurrentIndex(index);
+      handleUserInteraction();
+    },
+    [handleUserInteraction],
+  );
 
   // Auto-advance functionality
   useEffect(() => {
@@ -100,6 +107,20 @@ export function StoreImageCarousel({
               index === currentIndex ? "active" : ""
             }`}
             aria-hidden={index !== currentIndex}
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              setLightboxIndex(index);
+              setLightboxOpen(true);
+              handleUserInteraction();
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                setLightboxIndex(index);
+                setLightboxOpen(true);
+                handleUserInteraction();
+              }
+            }}
           >
             <Image
               src={photo.photo_url}
@@ -121,6 +142,14 @@ export function StoreImageCarousel({
             onClick={goToSlide}
           />
         </div>
+      )}
+
+      {lightboxOpen && (
+        <ImageLightbox
+          images={sortedPhotos.map((p) => p.photo_url)}
+          initialIndex={lightboxIndex}
+          onClose={() => setLightboxOpen(false)}
+        />
       )}
     </div>
   );

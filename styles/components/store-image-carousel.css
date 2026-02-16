@@ -31,8 +31,23 @@
   transition: opacity 0.3s ease;
 }
 
+.store-image-carousel-slide {
+  cursor: pointer;
+}
 .store-image-carousel-slide.active {
   opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+/* Prevent invisible slides from intercepting hover/clicks */
+.store-image-carousel-slide:not(.active) {
+  pointer-events: none;
+}
+
+/* Ensure hovering anywhere on the slide triggers the image hover effect */
+.store-image-carousel-slide:hover .store-image-carousel-image {
+  opacity: 0.8;
 }
 
 .store-image-carousel-image {
@@ -41,6 +56,14 @@
   height: 100%;
 }
 
+.store-image-carousel-image {
+  transition: opacity 0.2s ease;
+  pointer-events: auto;
+}
+
+.store-image-carousel-image:hover {
+  opacity: 0.8;
+}
 /* Placeholder styles */
 .store-image-carousel-placeholder {
   display: flex;

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
+import React, { useState } from "react";
+import ImageLightbox from "./ImageLightbox";
 import Link from "next/link";
 import Image from "next/image";
 import Rating from "./Rating";
@@ -15,7 +15,6 @@ interface StoreInfoProps {
   todaysHours?: string;
   photos?: Array<{ photo_url: string }>;
   googleUrl?: string;
-  uberUrl?: string;
   variant?: 'alternating' | 'carousel-left';
   className?: string;
 }
@@ -28,26 +27,11 @@ export default function StoreInfo({
   todaysHours,
   photos = [],
   googleUrl,
-  uberUrl,
   variant,
   className,
 }: StoreInfoProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
-
-  // Prevent background scrolling when lightbox is open
-  useEffect(() => {
-    if (lightboxOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    // Cleanup on unmount
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [lightboxOpen]);
 
   const displayPhotos = photos.slice(0, 3);
   const lightboxImages = photos.map((p) => p.photo_url);
@@ -61,15 +45,7 @@ export default function StoreInfo({
     setLightboxOpen(false);
   };
 
-  const goToPrevious = () => {
-    setPhotoIndex(
-      (photoIndex + lightboxImages.length - 1) % lightboxImages.length,
-    );
-  };
-
-  const goToNext = () => {
-    setPhotoIndex((photoIndex + 1) % lightboxImages.length);
-  };
+  // Navigation is handled inside ImageLightbox
 
   return (
     <div className={`store-info ${className || ""}`} data-testid="store-info">
@@ -139,151 +115,13 @@ export default function StoreInfo({
         )}
       </div>
 
-      {lightboxOpen &&
-        createPortal(
-          <div
-            style={{
-              position: "fixed",
-              inset: 0,
-              backgroundColor: "rgba(0, 0, 0, 0.9)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              zIndex: 10000,
-            }}
-            onClick={closeLightbox}
-          >
-            {/* Close button */}
-            <button
-              onClick={closeLightbox}
-              style={{
-                position: "absolute",
-                top: "20px",
-                right: "20px",
-                background: "rgba(255, 255, 255, 0.2)",
-                border: "none",
-                borderRadius: "50%",
-                width: "40px",
-                height: "40px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                color: "white",
-                fontSize: "24px",
-                zIndex: 10001,
-              }}
-              aria-label="Close lightbox"
-            >
-              ×
-            </button>
-
-            {/* Previous button */}
-            {lightboxImages.length > 1 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  goToPrevious();
-                }}
-                style={{
-                  position: "absolute",
-                  left: "20px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  background: "rgba(255, 255, 255, 0.2)",
-                  border: "none",
-                  borderRadius: "50%",
-                  width: "50px",
-                  height: "50px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  color: "white",
-                  fontSize: "24px",
-                  zIndex: 10001,
-                }}
-                aria-label="Previous image"
-              >
-                ‹
-              </button>
-            )}
-
-            {/* Next button */}
-            {lightboxImages.length > 1 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  goToNext();
-                }}
-                style={{
-                  position: "absolute",
-                  right: "20px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  background: "rgba(255, 255, 255, 0.2)",
-                  border: "none",
-                  borderRadius: "50%",
-                  width: "50px",
-                  height: "50px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  color: "white",
-                  fontSize: "24px",
-                  zIndex: 10001,
-                }}
-                aria-label="Next image"
-              >
-                ›
-              </button>
-            )}
-
-            {/* Image container */}
-            <div
-              style={{
-                maxWidth: "90vw",
-                maxHeight: "90vh",
-                width: "auto",
-                height: "auto",
-              }}
-            >
-              <Image
-                src={lightboxImages[photoIndex]}
-                alt={`${name} store photo ${photoIndex + 1}`}
-                width={1200}
-                height={800}
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "90vh",
-                  objectFit: "contain",
-                }}
-              />
-            </div>
-
-            {/* Image counter */}
-            {lightboxImages.length > 1 && (
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "20px",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  color: "white",
-                  background: "rgba(0, 0, 0, 0.5)",
-                  padding: "8px 16px",
-                  borderRadius: "20px",
-                  fontSize: "14px",
-                  zIndex: 10001,
-                }}
-              >
-                {photoIndex + 1} / {lightboxImages.length}
-              </div>
-            )}
-          </div>,
-          document.body,
-        )}
+      {lightboxOpen && (
+        <ImageLightbox
+          images={lightboxImages}
+          initialIndex={photoIndex}
+          onClose={closeLightbox}
+        />
+      )}
     </div>
   );
 }
