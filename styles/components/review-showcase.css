@@ -1,0 +1,221 @@
+/* Styles for ReviewShowcase component
+   Purpose: centralize repeated inline styles (shadows, blur,
+   avatar sizing/positions, typography)
+*/
+
+:root {
+  --rs-shadow: 0 4px 4px 0 rgba(95, 65, 65, 0.2);
+  --rs-shadow-elevated: 0 18px 40px rgba(95, 65, 65, 0.12);
+  --rs-bubble-hover-translate: -0.375rem;
+  --rs-bubble-hover-scale: 1.015;
+  --rs-bubble-bg: rgba(255, 255, 255, 0.5);
+  --rs-avatar-bg: #f3f4f6;
+}
+
+.rs-bubble {
+  position: relative;
+  z-index: 0;
+  border-radius: 0.375rem;
+  box-shadow: var(--rs-shadow);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  color: #1f2937; /* text-gray-800 */
+
+  /* smoother transition for hover (longer + gentler easing) */
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, box-shadow;
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+
+/* Hover/interaction styles (apply only on devices that support hover) */
+@media (hover: hover) and (pointer: fine) {
+  .rs-bubble:hover {
+    transform: translateY(var(--rs-bubble-hover-translate))
+      scale(var(--rs-bubble-hover-scale));
+    box-shadow: var(--rs-shadow-elevated);
+  }
+
+  /* tactile feedback for pointer down */
+  .rs-bubble:active {
+    transform: translateY(0) scale(0.997);
+    box-shadow: var(--rs-shadow);
+    transition-duration: 120ms;
+  }
+
+  /* if bubble is ever made keyboard-focusable, provide visible focus outline */
+  .rs-bubble:focus-visible {
+    outline: 2px solid rgba(59, 130, 246, 0.12);
+    outline-offset: 4px;
+    box-shadow: var(--rs-shadow-elevated);
+  }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .rs-bubble {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Padding variants to match existing mobile/desktop spacing */
+.rs-bubble--sm {
+  padding: 0.5rem;
+}
+
+.rs-bubble--md {
+  padding: 1rem;
+}
+
+.rs-text {
+  margin-top: 0.25rem;
+  line-height: normal;
+  color: #4E5969; /* review text color */
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Author name styling */
+.rs-author {
+  color: #1D1E1F; /* author name color */
+  font-weight: 400;
+}
+
+/* Explicit clamp utility (used by `Bubble`) - MOBILE FIRST: default = 1 line */
+.rs-text--clamp {
+  /* mobile (default): single line with ellipsis */
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1; /* fallback for webkit */
+}
+
+/* Desktop and up: allow 2 lines */
+@media (min-width: 768px) {
+  .rs-text--clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    /* ensure wrapping is allowed on desktop (override mobile 'nowrap') */
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Avatar base */
+.rs-avatar {
+  border-radius: 9999px;
+  overflow: hidden;
+  background: var(--rs-avatar-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563; /* gray-600 */
+}
+
+/* Sizes: mobile (32px) and desktop (40px) */
+.rs-avatar--sm {
+  width: 2rem;
+  height: 2rem;
+}
+.rs-avatar--md {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.rs-avatar img,
+.rs-avatar > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mobile avatar position helpers (offset -18px final tuning) */
+.rs-avatar-pos-left-top {
+  left: -18px;
+  top: -18px;
+}
+.rs-avatar-pos-right-bottom {
+  right: -18px;
+  bottom: -18px;
+}
+.rs-avatar-pos-left-bottom {
+  left: -18px;
+  bottom: -18px;
+}
+
+/* right-top */
+.rs-avatar-pos-right-top {
+  right: -18px;
+  top: -18px;
+}
+
+/* Desktop avatar position helpers (offset -0.75rem == -12px) */
+.rs-avatar-desktop-top-left {
+  left: -1.125rem; /* increased overlap: ~ -18px */
+  top: -1.125rem;
+}
+.rs-avatar-desktop-bottom-left {
+  left: -1.125rem;
+  bottom: -1.125rem;
+}
+.rs-avatar-desktop-bottom-right {
+  right: -1.125rem;
+  bottom: -1.125rem;
+}
+
+/* Utility: ensure the avatar is absolutely positioned inside a relative unit */
+.rs-avatar--abs {
+  position: absolute;
+  z-index: 10; /* ensure avatar overlays the bubble */
+}
+
+/* Limit bubble width similar to original max-w-xs */
+.rs-bubble-wrap {
+  max-width: 20rem;
+}
+
+/* Right-aligned bubble text variant */
+.rs-bubble--right {
+  text-align: right;
+}
+
+/* Ensure justified text in bubbles while keeping right-bubble last-line right-aligned */
+.rs-bubble--right .rs-text {
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
+  -webkit-text-align-last: left;
+}
+
+/* Ensure pointer events settings when used as overlay */
+.rs-overlay-auto {
+  pointer-events: auto;
+}
+
+/* Small helper spacing preservation */
+.rs-gap-2 {
+  gap: 0.5rem;
+}
+
+/* Responsive tweaks if needed (kept minimal) */
+@media (min-width: 768px) {
+  .rs-text {
+    font-size: 1.25rem;
+  }
+
+  /* Desktop: increase bubble max width for improved legibility */
+  .rs-bubble-wrap {
+    max-width: 28rem; /* 448px on desktop (was 20rem / 320px on mobile) */
+  }
+}
+
+/* XS text for mobile compact bubbles */
+.rs-text--xs {
+  font-size: 0.75rem;
+}

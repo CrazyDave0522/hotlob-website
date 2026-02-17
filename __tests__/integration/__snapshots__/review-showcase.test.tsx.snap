@@ -1,0 +1,332 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ReviewShowcase integration snapshot > renders mobile-first bubbles and matches snapshot 1`] = `
+<div>
+  <div
+    class="relative md:hidden aspect-4/3"
+  >
+    <img
+      alt="Locations and reviews background mobile"
+      class="object-contain"
+      data-nimg="fill"
+      decoding="async"
+      loading="lazy"
+      sizes="100vw"
+      src="/_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review-mb.png&w=3840&q=75"
+      srcset="/_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review-mb.png&w=640&q=75 640w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review-mb.png&w=750&q=75 750w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review-mb.png&w=828&q=75 828w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review-mb.png&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review-mb.png&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review-mb.png&w=1920&q=75 1920w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review-mb.png&w=2048&q=75 2048w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review-mb.png&w=3840&q=75 3840w"
+      style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+    />
+    <div
+      class="absolute inset-0 flex items-end px-4 pb-4 pointer-events-none"
+    >
+      <div
+        class="w-full flex gap-3 justify-between pointer-events-auto"
+      >
+          <div
+            class="relative flex-1 flex items-center"
+          >
+            <div
+              class="rs-avatar rs-avatar--sm rs-avatar--abs rs-avatar-pos-left-top shrink-0"
+            >
+            <div
+              class="w-full h-full flex items-center justify-center text-xs text-gray-600"
+            >
+              A
+            </div>
+          </div>
+            <div
+              class="rs-bubble rs-bubble--sm w-full"
+            >
+            <div
+              class="flex items-center gap-2"
+            >
+                <p
+                  class="rs-author"
+                >
+                Alice
+              </p>
+              <div
+                class="ml-auto"
+              >
+                <div
+                  class="rating rating-sm "
+                  data-size="sm"
+                >
+                  <div
+                    class="rating-stars"
+                  >
+                    <img
+                      alt="Full star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-filled.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                    <img
+                      alt="Full star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-filled.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                    <img
+                      alt="Full star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-filled.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                    <img
+                      alt="Full star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-filled.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                    <img
+                      alt="Full star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-filled.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                  </div>
+                  <span
+                    class="rating-value"
+                  >
+                    5.0
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p
+              class="rs-text rs-text--xs rs-text--clamp mt-1"
+            >
+              Great food
+            </p>
+          </div>
+        </div>
+        <div
+          class="relative flex-1 flex items-center"
+        >
+          <div
+            class="rs-avatar rs-avatar--sm rs-avatar--abs rs-avatar-pos-right-top shrink-0"
+          >
+            <div
+              class="w-full h-full flex items-center justify-center text-xs text-gray-600"
+            >
+              B
+            </div>
+          </div>
+          <div
+            class="rs-bubble rs-bubble--sm w-full"
+          >
+            <div
+              class="flex items-center gap-2"
+            >
+                <p
+                  class="rs-author"
+                >
+                Bob
+              </p>
+              <div
+                class="ml-auto"
+              >
+                <div
+                  class="rating rating-sm "
+                  data-size="sm"
+                >
+                  <div
+                    class="rating-stars"
+                  >
+                    <img
+                      alt="Full star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-filled.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                    <img
+                      alt="Full star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-filled.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                    <img
+                      alt="Full star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-filled.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                    <img
+                      alt="Full star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-filled.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                    <img
+                      alt="Half star"
+                      class="rating-star"
+                      data-nimg="1"
+                      decoding="async"
+                      height="16"
+                      loading="lazy"
+                      src="/images/icons/star-half.svg"
+                      style="color: transparent;"
+                      width="16"
+                    />
+                  </div>
+                  <span
+                    class="rating-value"
+                  >
+                    4.5
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p
+              class="rs-text rs-text--xs rs-text--clamp mt-1"
+            >
+              Nice
+            </p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  <div
+    class="hidden md:block relative"
+  >
+    <img
+      alt="Locations and reviews background"
+      class="object-contain"
+      data-nimg="fill"
+      decoding="async"
+      loading="lazy"
+      sizes="100vw"
+      src="/_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review.png&w=3840&q=75"
+      srcset="/_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review.png&w=640&q=75 640w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review.png&w=750&q=75 750w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review.png&w=828&q=75 828w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review.png&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review.png&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review.png&w=1920&q=75 1920w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review.png&w=2048&q=75 2048w, /_next/image?url=%2Fimages%2Fsection-bg%2Fhome-bg-locations-review.png&w=3840&q=75 3840w"
+      style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+    />
+    <div
+      class="absolute inset-0 pointer-events-none"
+    >
+      <div
+        class="absolute top-8 left-6 pointer-events-auto rs-bubble-wrap"
+      >
+        <div
+          class="relative"
+        >
+          <div class="rs-avatar rs-avatar--md rs-avatar--abs rs-avatar-desktop-top-left">
+            <div class="w-full h-full flex items-center justify-center text-sm text-gray-600">A</div>
+          </div>
+          <div class="rs-bubble rs-bubble--md">
+            <div class="flex items-center gap-2">
+              <p class="rs-author">Alice</p>
+              <div class="ml-auto">
+                <div class="rating rating-sm " data-size="sm">
+                  <div class="rating-stars">
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                  </div>
+                  <span class="rating-value">5.0</span>
+                </div>
+              </div>
+            </div>
+            <p class="rs-text rs-text--clamp mt-1">Great food</p>
+          </div>
+        </div>
+      </div>
+      <div class="absolute top-1/2 right-8 transform -translate-y-1/2 pointer-events-auto rs-bubble-wrap">
+        <div class="relative">
+          <div class="rs-avatar rs-avatar--md rs-avatar--abs rs-avatar-desktop-bottom-right"><div class="w-full h-full flex items-center justify-center text-sm text-gray-600">B</div></div>
+          <div class="rs-bubble rs-bubble--md rs-bubble--right">
+            <div class="flex items-center gap-2 justify-end">
+              <p class="rs-author">Bob</p>
+              <div class="ml-2">
+                <div class="rating rating-sm " data-size="sm">
+                  <div class="rating-stars">
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Half star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-half.svg" style="color: transparent;" width="16" />
+                  </div>
+                  <span class="rating-value">4.5</span>
+                </div>
+              </div>
+            </div>
+            <p class="rs-text rs-text--clamp mt-1">Nice</p>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-8 left-6 pointer-events-auto rs-bubble-wrap">
+        <div class="relative">
+          <div class="rs-avatar rs-avatar--md rs-avatar--abs rs-avatar-desktop-bottom-left"><div class="w-full h-full flex items-center justify-center text-sm text-gray-600">C</div></div>
+          <div class="rs-bubble rs-bubble--md">
+            <div class="flex items-center gap-2">
+              <p class="rs-author">Cara</p>
+              <div class="ml-auto">
+                <div class="rating rating-sm " data-size="sm">
+                  <div class="rating-stars">
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Full star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-filled.svg" style="color: transparent;" width="16" />
+                    <img alt="Empty star" class="rating-star" data-nimg="1" decoding="async" height="16" loading="lazy" src="/images/icons/star-empty.svg" style="color: transparent;" width="16" />
+                  </div>
+                  <span class="rating-value">4.2</span>
+                </div>
+              </div>
+            </div>
+            <p class="rs-text rs-text--clamp mt-1">Lovely</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
