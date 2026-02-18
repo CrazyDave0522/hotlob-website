@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import { User } from "lucide-react";
+import Avatar from "@/components/Avatar";
 import Rating from "@/components/Rating";
 import type { CuratedReview } from "@/types/review";
 import { fetchReviews } from "@/lib/reviews";
@@ -73,19 +72,12 @@ export default function CustomerReviews() {
       {reviews.map((review) => (
         <div key={review.id} className="customer-review-item">
           <div className="customer-review-header">
-            <div className="customer-review-avatar">
-              {review.author_photo_url ? (
-                <Image
-                  src={review.author_photo_url}
-                  alt={`${review.author_name} avatar`}
-                  width={40}
-                  height={40}
-                  className="customer-review-avatar-image"
-                />
-              ) : (
-                <User size={40} className="customer-review-avatar-icon" />
-              )}
-            </div>
+            <Avatar
+              photoUrl={review.author_photo_url}
+              name={review.author_name}
+              size="md"
+              className="customer-review-avatar"
+            />
             <div className="customer-review-meta">
               <h4 className="customer-review-author">{review.author_name}</h4>
               <time

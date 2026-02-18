@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { User } from "lucide-react";
+
 type AvatarProps = {
   photoUrl?: string | null;
   name?: string | null;
@@ -11,20 +14,21 @@ export default function Avatar({
   size = "md",
   className = "",
 }: AvatarProps) {
-  const fallbackTextSize = size === "sm" ? "text-xs" : "text-sm";
+  const imageSize = size === "sm" ? 32 : 40;
 
   return (
     <div className={`rs-avatar rs-avatar--${size} ${className}`.trim()}>
       {photoUrl ? (
-        // use img to avoid remote next/image config
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={photoUrl} alt={name ?? "Reviewer"} />
+        <Image
+          src={photoUrl}
+          alt={name ?? "Reviewer"}
+          width={imageSize}
+          height={imageSize}
+          sizes={`${imageSize}px`}
+          className="object-cover"
+        />
       ) : (
-        <div
-          className={`w-full h-full flex items-center justify-center ${fallbackTextSize} text-gray-600`}
-        >
-          {name?.charAt(0) ?? "?"}
-        </div>
+        <User size={imageSize} aria-hidden="true" focusable="false" />
       )}
     </div>
   );

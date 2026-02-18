@@ -30,7 +30,7 @@ export default async function ReviewShowcase() {
 
         {topTwo.length > 0 && (
           <div className="absolute inset-0 pointer-events-none rs-overlay-frame">
-            <div className="absolute inset-0 flex flex-col items-center justify-evenly gap-4 pointer-events-auto">
+            <div className="absolute inset-0 flex flex-col items-center justify-evenly pointer-events-auto">
               {topTwo.map((r) => (
                 <div
                   key={r.id}
@@ -63,8 +63,8 @@ export default async function ReviewShowcase() {
 
         {topThree.length > 0 && (
           <div className="absolute inset-0 pointer-events-none rs-overlay-frame">
-            {/* Full-height column with evenly spaced, centered reviews */}
-            <div className="absolute inset-0 pointer-events-none flex flex-col justify-evenly items-center">
+            {/* Full-height column with evenly spaced, right-aligned reviews */}
+            <div className="absolute inset-0 pointer-events-none flex flex-col justify-evenly items-end">
               {topThree.map((r, idx) => {
                 if (!r) return null;
 

@@ -73,25 +73,26 @@
 .rs-text {
   margin-top: 0.25rem;
   line-height: normal;
-  color: #4E5969; /* review text color */
+  color: #4e5969; /* review text color */
   text-align: justify;
   text-justify: inter-word;
 }
 
 /* Author name styling */
 .rs-author {
-  color: #1D1E1F; /* author name color */
+  color: #1d1e1f; /* author name color */
   font-weight: 400;
 }
 
-/* Explicit clamp utility (used by `Bubble`) - MOBILE FIRST: default = 1 line */
+/* Explicit clamp utility (used by `Bubble`) - MOBILE FIRST: default = 2 lines */
 .rs-text--clamp {
-  /* mobile (default): single line with ellipsis */
-  display: block;
-  white-space: nowrap;
+  /* mobile (default): two lines with ellipsis */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1; /* fallback for webkit */
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 /* Desktop and up: allow 2 lines */
@@ -101,7 +102,6 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    /* ensure wrapping is allowed on desktop (override mobile 'nowrap') */
     white-space: normal;
     overflow-wrap: anywhere;
   }
