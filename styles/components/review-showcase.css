@@ -63,11 +63,11 @@
 
 /* Padding variants to match existing mobile/desktop spacing */
 .rs-bubble--sm {
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 .rs-bubble--md {
-  padding: 1rem;
+  padding: 0.75rem;
 }
 
 .rs-text {
@@ -118,6 +118,27 @@
   color: #4b5563; /* gray-600 */
 }
 
+/* Bubble header layout */
+.rs-bubble-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.rs-bubble-header-left {
+  flex: 1 1 auto;
+}
+
+/* Avatar inside bubble header (top-right area) */
+.rs-avatar--bubble {
+  flex: 0 0 auto;
+  align-self: flex-start;
+}
+
+.rs-bubble-text {
+  margin-top: 0.5rem;
+}
 /* Sizes: mobile (32px) and desktop (40px) */
 .rs-avatar--sm {
   width: 2rem;
@@ -169,6 +190,18 @@
   bottom: -1.125rem;
 }
 
+/* Overlay padding to keep entire review group inside the frame */
+.rs-overlay-frame {
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .rs-overlay-frame {
+    padding: 16px;
+  }
+}
+
 /* Utility: ensure the avatar is absolutely positioned inside a relative unit */
 .rs-avatar--abs {
   position: absolute;
@@ -177,7 +210,7 @@
 
 /* Limit bubble width similar to original max-w-xs */
 .rs-bubble-wrap {
-  max-width: 20rem;
+  width: 90%;
 }
 
 /* Right-aligned bubble text variant */
@@ -191,6 +224,11 @@
   text-justify: inter-word;
   text-align-last: left;
   -webkit-text-align-last: left;
+}
+
+.rs-bubble--right .rs-bubble-header-left {
+  align-items: flex-end;
+  text-align: right;
 }
 
 /* Ensure pointer events settings when used as overlay */
@@ -211,7 +249,7 @@
 
   /* Desktop: increase bubble max width for improved legibility */
   .rs-bubble-wrap {
-    max-width: 28rem; /* 448px on desktop (was 20rem / 320px on mobile) */
+    width: 90%;
   }
 }
 
