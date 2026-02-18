@@ -6,7 +6,11 @@
   flex-direction: column;
   align-items: center;
   width: calc(50% - (var(--dishcard-column-gap) / 2));
-  aspect-ratio: 330 / 570;
+  --dishcard-aspect-width: 330;
+  --dishcard-aspect-base: 570;
+  --dishcard-aspect-layout: var(--dishcard-aspect-base);
+  aspect-ratio: var(--dishcard-aspect-width) / var(--dishcard-aspect-layout);
+  z-index: 0;
 }
 
 .DishCard::before {
@@ -17,11 +21,14 @@
   right: 0;
   width: 100%;
   margin: 0 auto;
-  aspect-ratio: 330 / 570;
+  aspect-ratio: var(--dishcard-aspect-width) / var(--dishcard-aspect-base);
   background: var(--color-white);
   border-radius: var(--radius-20);
   box-shadow: var(--shadow-card);
-  transition: aspect-ratio 0.3s ease-out, box-shadow 0.3s ease-out;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  transform: scaleY(1);
+  transform-origin: bottom center;
+  will-change: transform, box-shadow;
   z-index: 0;
 }
 
@@ -133,11 +140,14 @@
 @media (min-width: 768px) {
   .DishCard {
     width: calc(25% - ((var(--dishcard-column-gap) * 3) / 4));
-    aspect-ratio: 332 / 480;
+    --dishcard-aspect-width: 332;
+    --dishcard-aspect-base: 480;
+    --dishcard-aspect-expanded: 590;
+    --dishcard-aspect-layout: var(--dishcard-aspect-expanded);
   }
 
   .DishCard::before {
-    aspect-ratio: 332 / 480;
+    aspect-ratio: var(--dishcard-aspect-width) / var(--dishcard-aspect-base);
   }
 
   .DishCard-image {
@@ -182,13 +192,15 @@
     margin-bottom: clamp(12px, calc(12px + 0.625vw), var(--space-24));
   }
 
-  .DishCard--expanded::before {
-    aspect-ratio: 332 / 590;
-    box-shadow: 0 0 20px 0 rgba(234, 65, 72, 0.20);
+  .DishCard--expanded {
+    z-index: 1;
   }
 
-  .DishCard--expanded {
-    aspect-ratio: 332 / 590;
+  .DishCard--expanded::before {
+    transform: scaleY(
+      calc(var(--dishcard-aspect-expanded) / var(--dishcard-aspect-base))
+    );
+    box-shadow: 0 0 20px 0 rgba(234, 65, 72, 0.20);
   }
 
   .DishCard--expanded .DishCard-image {
