@@ -1,0 +1,243 @@
+.CateringPage-root {
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+}
+
+.CateringPage-top {
+  background-image: url('/images/section-bg/catering-bg-mb.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+}
+
+.CateringPage-bottom {
+  background-image: url('/images/section-bg/catering-form-bg-mb.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+  padding-top: 0;
+}
+
+.CateringPage-top .catering-set-content {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.CateringPage-topContent {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1;
+}
+
+.CateringPage-topTitle {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+.CateringPage-topTitle--mobile {
+  display: block;
+}
+
+.CateringPage-bottomTitle {
+  display: none;
+  width: 100%;
+}
+
+.CateringPage-bottomContent {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-24);
+  --field-width: min(630px, 82.03125vw);
+  --form-width: var(--field-width);
+}
+
+.CateringPage-emptyColumn {
+  display: none;
+}
+
+.CateringPage-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-16) var(--space-24);
+  width: var(--form-width);
+  max-width: 100%;
+  justify-items: center;
+  justify-self: center;
+}
+
+.CateringPage-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.CateringPage-label {
+  color: #1D1E1F;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+}
+
+.CateringPage-control {
+  width: var(--field-width);
+  aspect-ratio: 630 / 70;
+  position: relative;
+}
+
+.CateringPage-input {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #CCCFD7;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: var(--font-size-body);
+  line-height: 1.2;
+  color: #1D1E1F;
+  background: #FFF;
+  box-sizing: border-box;
+  min-height: 0;
+}
+
+.CateringPage-input::placeholder {
+  color: #919AA5;
+  font-size: calc(var(--font-size-body) - 2px);
+}
+
+.CateringPage-select:invalid {
+  color: #919AA5;
+  font-size: calc(var(--font-size-body) - 2px);
+}
+
+.CateringPage-select:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  color: #919AA5;
+  font-size: calc(var(--font-size-body) - 2px);
+}
+
+.CateringPage-helper {
+  color: #919AA5;
+  font-size: var(--font-size-body-sm);
+}
+
+.CateringPage-fieldSpacer {
+  display: none;
+}
+
+.CateringPage-formActions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+}
+
+.CateringPage-top {
+  min-height: calc(100vw * 830 / 750);
+  padding-bottom: 0;
+  padding-top: var(--space-48);
+  display: flex;
+}
+
+.CateringPage-submit {
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #EA4148 0%, #FFA159 100%);
+  box-shadow: 3px 3px 0 0 rgba(175, 23, 23, 0.16);
+  color: #FFFFFF;
+  font-weight: var(--font-weight-medium);
+  font-size: min(34px, 4.427vw);
+  width: 78.125vw;
+  height: 10.4167vw;
+  max-width: 600px;
+  max-height: 80px;
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .CateringPage-submit:hover {
+    background: linear-gradient(180deg, #FB8225 0%, #D51D24 100%);
+  }
+}
+
+@media (min-width: 768px) {
+  .CateringPage-root {
+    background-image: url('/images/section-bg/catering-bg.png');
+  }
+
+  .CateringPage-top,
+  .CateringPage-bottom {
+    background-image: none;
+  }
+
+  .CateringPage-bottomContent {
+    --field-width: min(340px, 17.708vw);
+    --form-width: calc(var(--field-width) * 2 + var(--space-24));
+    grid-template-columns: minmax(0, var(--form-width)) 1fr;
+    align-items: start;
+  }
+
+  .CateringPage-emptyColumn {
+    display: block;
+  }
+
+  .CateringPage-bottom {
+    padding-top: clamp(
+      80px,
+      calc(104px + (100vw - 1440px) * 0.29),
+      288px
+    );
+  }
+
+  .CateringPage-top {
+    min-height: auto;
+    padding-top: var(--space-48);
+    display: block;
+  }
+
+  .CateringPage-topContent {
+    min-height: auto;
+    flex: 0 0 auto;
+  }
+
+  .CateringPage-topTitle--mobile {
+    display: none;
+  }
+
+  .CateringPage-bottomTitle {
+    display: block;
+    margin-top: var(--space-48);
+  }
+
+  .CateringPage-form {
+    width: var(--form-width);
+    max-width: 100%;
+    grid-template-columns: repeat(2, var(--field-width));
+    justify-items: start;
+    justify-self: start;
+  }
+
+  .CateringPage-control {
+    width: var(--field-width);
+    aspect-ratio: 340 / 40;
+  }
+
+  .CateringPage-fieldSpacer {
+    display: block;
+    visibility: hidden;
+  }
+
+  .CateringPage-formActions {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 769px) {
+  .CateringPage-submit {
+    font-size: min(18px, 0.9375vw);
+    width: 15.625vw;
+    height: 2.3958vw;
+    max-width: 300px;
+    max-height: 46px;
+  }
+}
