@@ -7,6 +7,7 @@ import { NewsCarousel } from "@/components/NewsCarousel";
 import StoreList from "@/components/StoreList";
 import { ReviewShowcase } from "@/components/ReviewShowcase";
 import { fetchNewsListItems } from "@/lib/news";
+import { CateringSetContent } from "@/components/CateringSetContent";
 
 export default async function Home() {
   const cardItems = [
@@ -49,6 +50,9 @@ export default async function Home() {
         <div className="flex justify-center pt-7.5">
           <MoreButton href="/see-our-food" />
         </div>
+      </section>
+      <section className="catering-set-section bg-[url('/images/section-bg/home-bg-catering-mb.png')] md:bg-[url('/images/section-bg/home-bg-catering.png')]">
+        <CateringSetContent />
       </section>
       <section className="store-showcase-section grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-y-0 md:bg-[url('/images/section-bg/home-bg-locations.png')] md:bg-cover md:bg-center md:bg-no-repeat">
         <div>

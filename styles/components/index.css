@@ -2,6 +2,7 @@
 
 /* Import individual component stylesheets */
 @import "./card-grid.css";
+@import "./catering-set.css";
 @import "./carousel.css";
 @import "./category-filter.css";
 @import "./content-detail.css";
