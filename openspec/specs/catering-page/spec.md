@@ -193,7 +193,7 @@ The pickup time dropdown SHALL be disabled until a store is selected and SHALL r
 
 ### Requirement: Catering Form Submit Button
 
-The form SHALL include a submit button labeled "SUBMIT" with no functional behavior beyond being present as a placeholder.
+The form SHALL include a submit button labeled "SUBMIT".
 
 #### Scenario: Submit button rendered
 

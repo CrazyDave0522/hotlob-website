@@ -92,9 +92,9 @@
   border: 1px solid #CCCFD7;
   border-radius: 4px;
   padding: 6px 12px;
-  font-size: var(--font-size-body);
+  font-size: calc(var(--font-size-body) - 2px);
   line-height: 1.2;
-  color: #1D1E1F;
+  color: #4E5969;
   background: #FFF;
   box-sizing: border-box;
   min-height: 0;
@@ -152,6 +152,53 @@
   max-width: 600px;
   max-height: 80px;
   cursor: pointer;
+}
+
+.CateringToast {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  padding: 12px 16px;
+  width: max-content;
+  color: #4E5969;
+  font-size: 16px;
+  line-height: 1.2;
+  box-sizing: content-box;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 50;
+}
+
+.CateringToast--success {
+  border-radius: 6px;
+  background: rgba(43, 164, 113, 0.10);
+}
+
+.CateringToast--error {
+  border-radius: 4px;
+  background: #FCF0F0;
+}
+
+.CateringToast--fade {
+  opacity: 0;
+}
+
+.CateringToast-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.CateringToast-icon--success {
+  color: #1C7C55;
+}
+
+.CateringToast-icon--error {
+  color: #D92D20;
 }
 
 @media (hover: hover) and (pointer: fine) {
