@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import '@/styles/components/rating.css'
+import '@/styles/components/reviews/rating.css'
 
 interface RatingProps {
   value: number

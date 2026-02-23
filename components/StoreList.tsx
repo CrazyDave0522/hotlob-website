@@ -6,7 +6,7 @@ import StoreSkeleton from "./StoreSkeleton";
 import ErrorBoundary from "./ErrorBoundary";
 import { fetchStoresWithPhotos } from "@/lib/store";
 import type { Store, StorePhoto } from "@/types/store";
-import "@/styles/components/store-list.css";
+import "@/styles/components/store/store-list.css";
 
 type StoreWithPhotos = Store & { photos: StorePhoto[] };
 

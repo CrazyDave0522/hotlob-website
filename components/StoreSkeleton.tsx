@@ -1,5 +1,5 @@
 import React from 'react'
-import '@/styles/components/store-skeleton.css'
+import '@/styles/components/store/store-skeleton.css'
 
 export default function StoreSkeleton() {
   return (

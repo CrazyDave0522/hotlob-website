@@ -1,5 +1,5 @@
 import React from "react";
-import "@/styles/components/google-map-embed.css";
+import "@/styles/components/store/google-map-embed.css";
 
 interface GoogleMapEmbedProps {
   embedUrl: string;

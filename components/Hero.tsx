@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import "@/styles/components/hero.css";
+import "@/styles/components/layout/hero.css";
 
 interface HeroProps {
   variant: "tall" | "short";

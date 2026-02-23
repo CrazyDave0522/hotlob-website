@@ -4,7 +4,7 @@ import GoogleMapEmbed from "./GoogleMapEmbed";
 import StoreInfo from "./StoreInfo";
 import { StoreImageCarousel } from "./StoreImageCarousel";
 import type { Store, StorePhoto } from "@/types/store";
-import "@/styles/components/store-item.css";
+import "@/styles/components/store/store-item.css";
 
 interface StoreItemProps {
   store: Store & { photos?: StorePhoto[] };

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CarouselIndicator } from "./CarouselIndicator";
 import { Store } from "lucide-react";
 import ImageLightbox from "./ImageLightbox";
-import "@/styles/components/store-image-carousel.css";
+import "@/styles/components/store/store-image-carousel.css";
 
 interface StoreImageCarouselProps {
   photos: Array<{ photo_url: string; display_order: number }>;

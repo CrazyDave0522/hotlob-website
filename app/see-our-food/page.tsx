@@ -7,7 +7,7 @@ import CategoryFilter from "@/components/CategoryFilter";
 import { DishCardGrid } from "@/components/DishCardGrid";
 import { fetchVisibleDishes } from "@/lib/dishes";
 import type { DishWithRelations } from "@/types/dish";
-import "@/styles/components/see-our-food.css";
+import "@/styles/components/food/see-our-food.css";
 
 export default function SeeOurFoodPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
