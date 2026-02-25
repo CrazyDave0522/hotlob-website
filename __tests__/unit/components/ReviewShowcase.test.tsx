@@ -24,7 +24,7 @@ describe('ReviewShowcase unit', () => {
 
     ;(fetchReviews as unknown as any).mockResolvedValue(reviews)
 
-    const mod = await import('../../../components/ReviewShowcase')
+    const mod = await import('../../../components/reviews/ReviewShowcase')
     // call async server component to obtain element tree
     // @ts-ignore
     const element = await mod.default()

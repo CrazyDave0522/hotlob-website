@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { promises as fs } from 'fs';
 import path from 'path';
 
-import { ContentDetail } from '@/components/ContentDetail';
+import { ContentDetail } from '@/components/news/ContentDetail';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

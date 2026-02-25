@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import StoreList from '../../../components/StoreList'
-import StoreItem from '../../../components/StoreItem'
-import Rating from '../../../components/Rating'
-import GoogleMapEmbed from '../../../components/GoogleMapEmbed'
-import StoreInfo from '../../../components/StoreInfo'
+import StoreList from '../../../components/store/StoreList'
+import StoreItem from '../../../components/store/StoreItem'
+import Rating from '../../../components/reviews/Rating'
+import GoogleMapEmbed from '../../../components/store/GoogleMapEmbed'
+import StoreInfo from '../../../components/store/StoreInfo'
 import type { Store, StorePhoto } from '../../../types/store'
 
 // Mock the store library

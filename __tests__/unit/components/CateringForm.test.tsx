@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { CateringForm, buildTimeOptions } from '@/components/CateringForm';
+import { CateringForm, buildTimeOptions } from '@/components/catering/CateringForm';
 import type { Store } from '@/types/store';
 
 const fetchStoresMock = vi.fn();

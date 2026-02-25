@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { Header } from '../../../components/Header'
+import { Header } from '../../../components/layout/Header'
 
 vi.mock('next/image', () => ({
   default: (props: Record<string, unknown>) => {

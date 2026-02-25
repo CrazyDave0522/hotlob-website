@@ -1,13 +1,13 @@
-import Hero from "@/components/Hero";
-import { ExpandableCardGrid } from "@/components/ExpandableCardGrid";
-import { DishCardGrid } from "@/components/DishCardGrid";
-import { MoreButton } from "@/components/MoreButton";
-import { SectionTitle } from "@/components/SectionTitle";
-import { NewsCarousel } from "@/components/NewsCarousel";
-import StoreList from "@/components/StoreList";
-import { ReviewShowcase } from "@/components/ReviewShowcase";
+import Hero from "@/components/layout/Hero";
+import { ExpandableCardGrid } from "@/components/cards/ExpandableCardGrid";
+import { DishCardGrid } from "@/components/cards/DishCardGrid";
+import { MoreButton } from "@/components/buttons/MoreButton";
+import { SectionTitle } from "@/components/layout/SectionTitle";
+import { NewsCarousel } from "@/components/news/NewsCarousel";
+import StoreList from "@/components/store/StoreList";
+import { ReviewShowcase } from "@/components/reviews/ReviewShowcase";
 import { fetchNewsListItems } from "@/lib/news";
-import { CateringSetContent } from "@/components/CateringSetContent";
+import { CateringSetContent } from "@/components/catering/CateringSetContent";
 
 export default async function Home() {
   const cardItems = [

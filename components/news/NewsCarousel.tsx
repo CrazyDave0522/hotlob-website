@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { NewsCarouselProps } from "@/types/carousel";
 import { NewsCarouselItem } from "./NewsCarouselItem";
-import { CarouselIndicator } from "./CarouselIndicator";
+import { CarouselIndicator } from "@/components/carousel/CarouselIndicator";
 
 /**
  * NewsCarousel - A responsive carousel component for displaying news articles
@@ -22,7 +22,7 @@ import { CarouselIndicator } from "./CarouselIndicator";
  *
  * @examples
  * ```tsx
- * import { NewsCarousel } from '@/components/NewsCarousel';
+ * import { NewsCarousel } from '@/components/news/NewsCarousel';
  * import { fetchNewsListItems } from '@/lib/news';
  *
  * // In an async component

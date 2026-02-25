@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { fetchReviews } from "../lib/reviews";
-import type { CuratedReview } from "../types/review";
+import { fetchReviews } from "@/lib/reviews";
+import type { CuratedReview } from "@/types/review";
 import Bubble from "./Bubble";
 
 // Server component: fetch reviews server-side and render mobile-first layout

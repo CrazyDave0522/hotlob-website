@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import StoreItem from '../../../components/StoreItem'
+import StoreItem from '../../../components/store/StoreItem'
 import type { Store, StorePhoto } from '../../../types/store'
 
 describe('StoreItem', () => {

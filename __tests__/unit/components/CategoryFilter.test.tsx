@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import CategoryFilter from "../../../components/CategoryFilter";
+import CategoryFilter from "../../../components/food/CategoryFilter";
 
 describe("CategoryFilter", () => {
   const mockOnCategoryChange = vi.fn();

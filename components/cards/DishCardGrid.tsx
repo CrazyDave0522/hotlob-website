@@ -7,7 +7,7 @@ import { fetchVisibleDishes } from "@/lib/dishes";
 import { getAvailableStoresForDish, type StoreWithDistance } from "@/utils/dishOrdering";
 import { DishCard } from "./DishCard";
 import { DishCardSkeleton } from "./DishCardSkeleton";
-import { StoreSelectionModal } from "./StoreSelectionModal";
+import { StoreSelectionModal } from "@/components/store/StoreSelectionModal";
 
 const DEFAULT_PAGE_SIZE = 10;
 

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-import { DishCardGrid } from "../../../components/DishCardGrid";
+import { DishCardGrid } from "../../../components/cards/DishCardGrid";
 import type { DishWithRelations } from "../../../types/dish";
 
 const mockFetchVisibleDishes = vi.fn();

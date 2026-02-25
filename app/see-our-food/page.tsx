@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import Hero from "@/components/Hero";
-import CategoryFilter from "@/components/CategoryFilter";
-import { DishCardGrid } from "@/components/DishCardGrid";
+import Hero from "@/components/layout/Hero";
+import CategoryFilter from "@/components/food/CategoryFilter";
+import { DishCardGrid } from "@/components/cards/DishCardGrid";
 import { fetchVisibleDishes } from "@/lib/dishes";
 import type { DishWithRelations } from "@/types/dish";
 import "@/styles/components/food/see-our-food.css";

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
 
-import { DishCard } from '../../../components/DishCard'
+import { DishCard } from '../../../components/cards/DishCard'
 import type { AllergenTag, Dish, MediaAsset } from '../../../types/dish'
 
 describe('DishCard', () => {

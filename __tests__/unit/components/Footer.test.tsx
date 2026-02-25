@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import { Footer } from '../../../components/Footer'
+import { Footer } from '../../../components/layout/Footer'
 
 // Mock the store fetching and geolocation utilities
 vi.mock('@/lib/store', () => ({
@@ -31,7 +31,7 @@ vi.mock('@/utils/distance', () => ({
   calculateDistance: vi.fn().mockReturnValue(5.2)
 }))
 
-vi.mock('../../../components/StoreSelectionModal', () => ({
+vi.mock('../../../components/store/StoreSelectionModal', () => ({
   StoreSelectionModal: ({ isOpen }: { isOpen: boolean }) => 
     isOpen ? <div data-testid="store-modal">Store Modal</div> : null
 }))

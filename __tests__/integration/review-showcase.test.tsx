@@ -20,7 +20,7 @@ describe('ReviewShowcase integration snapshot', () => {
 
     ;(fetchReviews as unknown as any).mockResolvedValue(reviews)
 
-    const mod = await import('../../components/ReviewShowcase')
+    const mod = await import('../../components/reviews/ReviewShowcase')
     // @ts-ignore
     const element = await mod.default()
 

@@ -7,7 +7,7 @@ import { fetchStores } from '@/lib/store'
 import { tryGetQuickLocation } from '@/utils/geolocation'
 import { calculateDistance } from '@/utils/distance'
 import type { StoreWithDistance } from '@/utils/dishOrdering'
-import { StoreSelectionModal } from './StoreSelectionModal'
+import { StoreSelectionModal } from '@/components/store/StoreSelectionModal'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()

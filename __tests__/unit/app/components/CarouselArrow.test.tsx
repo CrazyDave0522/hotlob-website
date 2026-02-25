@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { CarouselArrow } from "../../../../components/CarouselArrow";
+import { CarouselArrow } from "../../../../components/carousel/CarouselArrow";
 
 describe("CarouselArrow", () => {
   it("renders left arrow with correct icon and label", () => {

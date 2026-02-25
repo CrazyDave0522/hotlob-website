@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import ImageLightbox from "./ImageLightbox";
 import Link from "next/link";
 import Image from "next/image";
-import Rating from "./Rating";
+import Rating from "@/components/reviews/Rating";
 import "@/styles/components/store/store-info.css";
 
 interface StoreInfoProps {

@@ -1,7 +1,7 @@
-import Hero from "@/components/Hero";
-import StoreList from "@/components/StoreList";
-import CustomerReviews from "@/components/CustomerReviews";
-import { SectionTitle } from "@/components/SectionTitle";
+import Hero from "@/components/layout/Hero";
+import StoreList from "@/components/store/StoreList";
+import CustomerReviews from "@/components/reviews/CustomerReviews";
+import { SectionTitle } from "@/components/layout/SectionTitle";
 
 export default function LocationsPage() {
   return (

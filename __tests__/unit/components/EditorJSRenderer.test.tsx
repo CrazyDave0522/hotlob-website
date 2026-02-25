@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { EditorJSRenderer } from '@/components/EditorJSRenderer';
+import { EditorJSRenderer } from '@/components/news/EditorJSRenderer';
 
 const mockContent = {
   time: 1234567890,

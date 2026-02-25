@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { SectionTitle } from '@/components/SectionTitle';
+import { SectionTitle } from '@/components/layout/SectionTitle';
 
 describe('SectionTitle Component', () => {
   it('renders an h2 element', () => {

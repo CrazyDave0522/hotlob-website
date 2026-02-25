@@ -23,7 +23,7 @@ import {
  *
  * @example
  * ```tsx
- * import { NewsCarouselItem } from '@/components/NewsCarouselItem';
+ * import { NewsCarouselItem } from '@/components/news/NewsCarouselItem';
  * import type { NewsListItem } from '@/types/news';
  *
  * const newsItem: NewsListItem = {

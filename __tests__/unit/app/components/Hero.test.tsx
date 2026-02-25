@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Hero from "@/components/Hero";
+import Hero from "@/components/layout/Hero";
 import { describe, it, expect, vi } from "vitest";
 
 interface MockImageProps {

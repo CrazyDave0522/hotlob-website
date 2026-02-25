@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, vi, beforeEach } from "vitest";
 import type { Mock } from "vitest";
-import { Header } from "../../components/Header";
+import { Header } from "../../components/layout/Header";
 import type { Store } from "../../types/store";
 
 vi.mock("../../lib/store", () => ({

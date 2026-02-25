@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { MoreButton } from '../../../../components/MoreButton'
+import { MoreButton } from '../../../../components/buttons/MoreButton'
 
 describe('MoreButton', () => {
   it('renders with correct label text', () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import StoreSelectionModal from '../../../components/StoreSelectionModal'
+import StoreSelectionModal from '../../../components/store/StoreSelectionModal'
 import type { Store } from '../../../types/store'
 
 describe('StoreSelectionModal accessibility', () => {

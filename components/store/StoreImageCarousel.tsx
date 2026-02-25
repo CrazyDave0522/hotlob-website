@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { CarouselIndicator } from "./CarouselIndicator";
+import { CarouselIndicator } from "@/components/carousel/CarouselIndicator";
 import { Store } from "lucide-react";
 import ImageLightbox from "./ImageLightbox";
 import "@/styles/components/store/store-image-carousel.css";

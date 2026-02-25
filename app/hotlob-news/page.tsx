@@ -1,5 +1,5 @@
-import Hero from "@/components/Hero";
-import { NewsList } from "@/components/NewsList";
+import Hero from "@/components/layout/Hero";
+import { NewsList } from "@/components/news/NewsList";
 
 export default function HotlobNewsPage() {
   return (

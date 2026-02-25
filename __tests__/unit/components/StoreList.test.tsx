@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
-import StoreList from '../../../components/StoreList'
+import StoreList from '../../../components/store/StoreList'
 import { fetchStoresWithPhotos } from '../../../lib/store'
 import type { Store, StorePhoto } from '../../../types/store'
 

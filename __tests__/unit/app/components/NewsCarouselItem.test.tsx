@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import { NewsCarouselItem } from "../../../../components/NewsCarouselItem";
+import { NewsCarouselItem } from "../../../../components/news/NewsCarouselItem";
 import { NewsListItem } from "../../../../types/news";
 
 // Mock the carousel sizing utilities

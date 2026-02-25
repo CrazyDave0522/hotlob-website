@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { vi, Mock } from 'vitest';
-import { NewsList } from '@/components/NewsList';
+import { NewsList } from '@/components/news/NewsList';
 
 // Mock the news utilities
 vi.mock('@/lib/news', () => ({

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Avatar from "@/components/Avatar";
-import Rating from "@/components/Rating";
+import Avatar from "@/components/reviews/Avatar";
+import Rating from "@/components/reviews/Rating";
 import type { CuratedReview } from "@/types/review";
 import { fetchReviews } from "@/lib/reviews";
 

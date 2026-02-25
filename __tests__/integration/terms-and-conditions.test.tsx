@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import { ContentDetail } from '../../components/ContentDetail'
+import { ContentDetail } from '../../components/news/ContentDetail'
 
 describe('Terms and Conditions Page Integration', () => {
   it('renders terms and conditions content', () => {

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
 import { fetchNewsBySlug } from '@/lib/news';
-import { ContentDetail } from '@/components/ContentDetail';
+import { ContentDetail } from '@/components/news/ContentDetail';
 
 interface NewsDetailPageProps {
   params: {

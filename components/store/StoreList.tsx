@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import StoreItem from "./StoreItem";
 import StoreSkeleton from "./StoreSkeleton";
-import ErrorBoundary from "./ErrorBoundary";
+import ErrorBoundary from "@/components/common/ErrorBoundary";
 import { fetchStoresWithPhotos } from "@/lib/store";
 import type { Store, StorePhoto } from "@/types/store";
 import "@/styles/components/store/store-list.css";

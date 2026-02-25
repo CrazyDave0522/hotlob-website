@@ -1,5 +1,5 @@
-import { SectionTitle } from "@/components/SectionTitle";
-import { CateringForm } from "@/components/CateringForm";
+import { SectionTitle } from "@/components/layout/SectionTitle";
+import { CateringForm } from "@/components/catering/CateringForm";
 
 export default function CateringPage() {
   return (

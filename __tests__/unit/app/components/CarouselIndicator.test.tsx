@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { CarouselIndicator } from "../../../../components/CarouselIndicator";
+import { CarouselIndicator } from "../../../../components/carousel/CarouselIndicator";
 
 describe("CarouselIndicator", () => {
   it("renders nothing when total is 1 or less", () => {

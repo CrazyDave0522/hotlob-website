@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import Hero from '@/components/Hero'
-import StoreList from '@/components/StoreList'
+import Hero from '@/components/layout/Hero'
+import StoreList from '@/components/store/StoreList'
 
 // Mock the store fetching function
 vi.mock('@/lib/store', () => ({

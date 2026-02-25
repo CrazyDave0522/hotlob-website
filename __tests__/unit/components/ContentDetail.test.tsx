@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import { ContentDetail } from '../../../components/ContentDetail'
+import { ContentDetail } from '../../../components/news/ContentDetail'
 import type { NewsArticle } from '../../../types/news'
 
 vi.mock('next/image', () => ({
@@ -10,7 +10,7 @@ vi.mock('next/image', () => ({
   }
 }))
 
-vi.mock('../../../components/EditorJSRenderer', () => ({
+vi.mock('../../../components/news/EditorJSRenderer', () => ({
   EditorJSRenderer: ({ content }: { content: unknown }) => (
     <div data-testid="editorjs-renderer">{JSON.stringify(content)}</div>
   )

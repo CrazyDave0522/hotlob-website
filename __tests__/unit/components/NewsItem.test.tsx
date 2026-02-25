@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { NewsItem } from '@/components/NewsItem';
+import { NewsItem } from '@/components/news/NewsItem';
 
 const mockNewsItem = {
   id: '1',
